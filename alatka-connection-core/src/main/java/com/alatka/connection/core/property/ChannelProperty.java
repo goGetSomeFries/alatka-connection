@@ -1,13 +1,12 @@
 package com.alatka.connection.core.property;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ChannelProperty extends Property {
 
     private ChannelName name;
     private Class<?>[] dataTypes;
-    private Map<String, Object> params = new HashMap<>(0);
+    private Map<String, Object> params;
 
     public enum ChannelName {
         direct(ChannelType.SUBSCRIBABLE),
@@ -26,6 +25,12 @@ public class ChannelProperty extends Property {
 
     public enum ChannelType {
         POLLABLE, SUBSCRIBABLE;
+    }
+
+    @Override
+    public Property defaultProperty() {
+        this.name = ChannelName.direct;
+        return this;
     }
 
     public ChannelName getName() {

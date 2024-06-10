@@ -4,6 +4,10 @@ public class Property {
 
     private String id;
 
+    public Property defaultProperty() {
+        throw new UnsupportedOperationException("");
+    }
+
     public String getId() {
         return id;
     }
