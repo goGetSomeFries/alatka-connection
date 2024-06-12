@@ -1,13 +1,14 @@
-package com.alatka.connection.core.model;
+package com.alatka.connection.config.model;
 
-import com.alatka.connection.core.property.PollerMetadataProperty;
+
+import com.alatka.connection.config.property.PollerMetadataProperty;
 
 import java.util.List;
 
 /**
  * @author ybliu
  */
-public class PollerMetadatasModel extends DefinitionModel {
+public class PollerMetadatasModel implements DefinitionModel {
 
     private List<PollerMetadataProperty> pollerMetadatas;
 

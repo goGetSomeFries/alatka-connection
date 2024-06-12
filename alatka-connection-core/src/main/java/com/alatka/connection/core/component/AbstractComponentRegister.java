@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component;
 
-import com.alatka.connection.core.property.Property;
+import com.alatka.connection.config.property.Property;
 import com.alatka.connection.core.util.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

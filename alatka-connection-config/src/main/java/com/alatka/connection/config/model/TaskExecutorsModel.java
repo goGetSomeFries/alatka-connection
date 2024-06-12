@@ -1,10 +1,11 @@
-package com.alatka.connection.core.model;
+package com.alatka.connection.config.model;
 
-import com.alatka.connection.core.property.TaskExecutorProperty;
+
+import com.alatka.connection.config.property.TaskExecutorProperty;
 
 import java.util.List;
 
-public class TaskExecutorsModel extends DefinitionModel {
+public class TaskExecutorsModel implements DefinitionModel {
 
     private List<TaskExecutorProperty> taskExecutors;
 

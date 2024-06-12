@@ -1,4 +1,4 @@
-package com.alatka.connection.core.model;
+package com.alatka.connection.config.model;
 
 import java.util.Map;
 
@@ -6,7 +6,10 @@ public class ConnectionModel {
 
     private RouteModel route;
 
-    private Map<String, Object> definition;
+    /**
+     * {@link DefinitionModel}
+     */
+    private Map<DefinitionModel.Model, Object> definition;
 
     public RouteModel getRoute() {
         return route;
@@ -16,11 +19,11 @@ public class ConnectionModel {
         this.route = route;
     }
 
-    public Map<String, Object> getDefinition() {
+    public Map<DefinitionModel.Model, Object> getDefinition() {
         return definition;
     }
 
-    public void setDefinition(Map<String, Object> definition) {
+    public void setDefinition(Map<DefinitionModel.Model, Object> definition) {
         this.definition = definition;
     }
 }

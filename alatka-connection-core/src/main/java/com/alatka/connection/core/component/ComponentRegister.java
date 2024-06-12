@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component;
 
-import com.alatka.connection.core.property.Property;
+import com.alatka.connection.config.property.Property;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 /**

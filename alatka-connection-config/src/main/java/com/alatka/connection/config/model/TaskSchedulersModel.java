@@ -1,10 +1,11 @@
-package com.alatka.connection.core.model;
+package com.alatka.connection.config.model;
 
-import com.alatka.connection.core.property.TaskSchedulerProperty;
+
+import com.alatka.connection.config.property.TaskSchedulerProperty;
 
 import java.util.List;
 
-public class TaskSchedulersModel extends DefinitionModel {
+public class TaskSchedulersModel implements DefinitionModel {
 
     private List<TaskSchedulerProperty> taskSchedulers;
 

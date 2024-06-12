@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
+import com.alatka.connection.config.property.PollerMetadataProperty;
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.PollerMetadataProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.scheduling.Trigger;
