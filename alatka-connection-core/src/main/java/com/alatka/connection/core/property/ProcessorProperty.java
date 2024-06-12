@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class ProcessorProperty extends Property {
+
     private boolean enabled = true;
     private ProcessorType type = ProcessorType.all;
     @Valid

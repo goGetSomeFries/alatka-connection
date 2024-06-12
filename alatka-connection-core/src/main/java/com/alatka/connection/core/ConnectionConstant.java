@@ -7,6 +7,8 @@ import org.springframework.integration.context.IntegrationContextUtils;
  */
 public final class ConnectionConstant {
 
+    public static final String PARENT_PACKAGE = "com.alatka.connection";
+
     /**
      * 默认{@link org.springframework.integration.scheduling.PollerMetadata}
      */
