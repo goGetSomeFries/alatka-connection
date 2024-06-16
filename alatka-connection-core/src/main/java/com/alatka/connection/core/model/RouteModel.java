@@ -1,7 +1,7 @@
-package com.alatka.connection.config.model;
+package com.alatka.connection.core.model;
 
 
-import com.alatka.connection.config.property.ProcessorProperty;
+import com.alatka.connection.core.property.ProcessorProperty;
 
 import java.util.List;
 import java.util.Map;

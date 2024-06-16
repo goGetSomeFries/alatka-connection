@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.channel;
 
-import com.alatka.connection.config.property.ChannelProperty;
+import com.alatka.connection.core.property.ChannelProperty;
 import com.alatka.connection.core.component.AbstractComponentRegister;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 

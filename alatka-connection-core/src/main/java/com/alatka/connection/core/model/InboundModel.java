@@ -1,4 +1,4 @@
-package com.alatka.connection.config.model;
+package com.alatka.connection.core.model;
 
 public interface InboundModel {
 

@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>com.alatka.connection</groupId>
-            <artifactId>alatka-connection-config</artifactId>
+            <artifactId>alatka-connection-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.integration</groupId>

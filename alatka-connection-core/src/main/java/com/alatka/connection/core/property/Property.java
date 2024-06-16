@@ -1,4 +1,4 @@
-package com.alatka.connection.config.property;
+package com.alatka.connection.core.property;
 
 public class Property {
 

@@ -14,7 +14,6 @@
 
     <modules>
         <module>alatka-connection-core</module>
-        <module>alatka-connection-config</module>
         <module>alatka-connection-spring-boot-starter</module>
         <module>alatka-connection-socket</module>
         <module>alatka-connection-rabbitmq</module>
