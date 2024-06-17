@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 
 public class ProcessorProperty extends Property {
 
-    private boolean enabled = true;
     private ProcessorType type = ProcessorType.all;
     @Valid
     private ChannelProperty channel;
@@ -17,14 +16,6 @@ public class ProcessorProperty extends Property {
 
     public enum ProcessorType {
         all, request, reply
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public ProcessorType getType() {

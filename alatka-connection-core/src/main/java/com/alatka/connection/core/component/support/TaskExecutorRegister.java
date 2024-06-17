@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.property.TaskExecutorProperty;
 import com.alatka.connection.core.component.AbstractComponentRegister;
+import com.alatka.connection.core.property.TaskExecutorProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -13,10 +13,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class TaskExecutorRegister extends AbstractComponentRegister<TaskExecutorProperty> {
 
     @Override
-    protected BeanDefinitionBuilder doRegister(TaskExecutorProperty property) {
-        return BeanDefinitionBuilder
-                .genericBeanDefinition(beanClass(), ThreadPoolTaskExecutor::new)
-                .addPropertyValue("corePoolSize", property.getCorePoolSize())
+    protected void doRegister(BeanDefinitionBuilder builder, TaskExecutorProperty property) {
+        builder.addPropertyValue("corePoolSize", property.getCorePoolSize())
                 .addPropertyValue("maxPoolSize", property.getMaxPoolSize())
                 .addPropertyValue("queueCapacity", property.getQueueCapacity())
                 .addPropertyValue("keepAliveSeconds", property.getKeepAliveSeconds())

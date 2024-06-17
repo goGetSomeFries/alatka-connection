@@ -7,8 +7,7 @@ import org.springframework.integration.channel.DirectChannel;
 public class DirectChannelRegister extends SubscribableChannelRegister<ChannelProperty> {
 
     @Override
-    protected BeanDefinitionBuilder doRegister(ChannelProperty property) {
-        return BeanDefinitionBuilder.genericBeanDefinition(beanClass(), DirectChannel::new);
+    protected void doRegister(BeanDefinitionBuilder builder, ChannelProperty property) {
     }
 
     @Override

@@ -11,13 +11,12 @@ public class QueueChannelRegister extends PollableChannelBeanDefinitionRegister<
     private static final String KEY_CAPACITY = "capacity";
 
     @Override
-    protected BeanDefinitionBuilder doRegister(ChannelProperty param) {
-        Map<String, Object> params = param.getParams();
+    protected void doRegister(BeanDefinitionBuilder builder, ChannelProperty property) {
+        Map<String, Object> params = property.getParams();
         int capacity = params.get(KEY_CAPACITY) == null ?
                 Integer.MAX_VALUE : Integer.parseInt(params.get(KEY_CAPACITY).toString());
 
-        return BeanDefinitionBuilder.genericBeanDefinition(beanClass(), () -> new QueueChannel(capacity))
-                .addConstructorArgValue(capacity);
+        builder.addConstructorArgValue(capacity);
     }
 
     @Override

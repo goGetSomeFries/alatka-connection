@@ -4,6 +4,9 @@ import com.alatka.connection.core.property.ChannelProperty;
 import com.alatka.connection.core.component.AbstractComponentRegister;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
+/**
+ * @author ybliu
+ */
 public abstract class ChannelRegister<T extends ChannelProperty> extends AbstractComponentRegister<T> {
 
     @Override

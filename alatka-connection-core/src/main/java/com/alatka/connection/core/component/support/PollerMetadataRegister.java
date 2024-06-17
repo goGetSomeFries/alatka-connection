@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.property.PollerMetadataProperty;
 import com.alatka.connection.core.component.AbstractComponentRegister;
+import com.alatka.connection.core.property.PollerMetadataProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.scheduling.Trigger;
@@ -17,10 +17,8 @@ public class PollerMetadataRegister extends AbstractComponentRegister<PollerMeta
 
 
     @Override
-    protected BeanDefinitionBuilder doRegister(PollerMetadataProperty property) {
-        return BeanDefinitionBuilder
-                .genericBeanDefinition(beanClass(), PollerMetadata::new)
-                .addPropertyReference("taskExecutor", property.getTaskExecutor())
+    protected void doRegister(BeanDefinitionBuilder builder, PollerMetadataProperty property) {
+        builder.addPropertyReference("taskExecutor", property.getTaskExecutor())
                 .addPropertyValue("maxMessagesPerPoll", property.getMaxMessagesPerPoll())
                 .addPropertyValue("trigger", this.map.get(property.getTrigger()).apply(property));
     }

@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.property.TaskSchedulerProperty;
 import com.alatka.connection.core.component.AbstractComponentRegister;
+import com.alatka.connection.core.property.TaskSchedulerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
@@ -11,10 +11,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 public class TaskSchedulerRegister extends AbstractComponentRegister<TaskSchedulerProperty> {
 
     @Override
-    protected BeanDefinitionBuilder doRegister(TaskSchedulerProperty property) {
-        return BeanDefinitionBuilder
-                .genericBeanDefinition(beanClass(), ThreadPoolTaskScheduler::new)
-                .addPropertyValue("poolSize", property.getPoolSize())
+    protected void doRegister(BeanDefinitionBuilder builder, TaskSchedulerProperty property) {
+        builder.addPropertyValue("poolSize", property.getPoolSize())
                 .addPropertyValue("threadNamePrefix", property.getThreadNamePrefix());
     }
 
