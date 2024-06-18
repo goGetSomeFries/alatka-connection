@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.TaskExecutorProperty;
+import com.alatka.connection.core.property.support.TaskExecutorProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 

@@ -13,7 +13,7 @@ public abstract class GatewayRegister<T extends ChannelAdapterProperty> extends 
     private static final String REPLY_CHANNEL = "replyChannelName";
 
     @Override
-    protected void postRegister(BeanDefinitionBuilder builder, ChannelAdapterProperty property) {
+    protected void postDoRegister(BeanDefinitionBuilder builder, ChannelAdapterProperty property) {
         builder.addPropertyValue(REQUEST_CHANNEL, property.getOutputChannel());
         builder.addPropertyValue(REPLY_CHANNEL, property.getInputChannel());
     }

@@ -3,7 +3,7 @@ package com.alatka.connection.core.property;
 /**
  * @author ybliu
  */
-public class Property {
+public abstract class Property {
 
     private String id;
 

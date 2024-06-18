@@ -1,7 +1,7 @@
 package com.alatka.connection.core.model;
 
 
-import com.alatka.connection.core.property.PollerMetadataProperty;
+import com.alatka.connection.core.property.support.PollerMetadataProperty;
 
 import java.util.List;
 

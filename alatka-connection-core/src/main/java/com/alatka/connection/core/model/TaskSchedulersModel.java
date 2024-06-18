@@ -1,7 +1,7 @@
 package com.alatka.connection.core.model;
 
 
-import com.alatka.connection.core.property.TaskSchedulerProperty;
+import com.alatka.connection.core.property.support.TaskSchedulerProperty;
 
 import java.util.List;
 

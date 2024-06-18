@@ -1,7 +1,7 @@
 package com.alatka.connection.socket.component.support;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.SerializerProperty;
+import com.alatka.connection.core.property.support.SerializerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.serializer.ByteArraySingleTerminatorSerializer;
 

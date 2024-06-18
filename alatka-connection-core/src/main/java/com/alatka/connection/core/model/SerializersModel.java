@@ -1,6 +1,6 @@
 package com.alatka.connection.core.model;
 
-import com.alatka.connection.core.property.SerializerProperty;
+import com.alatka.connection.core.property.support.SerializerProperty;
 
 import java.util.List;
 

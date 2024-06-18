@@ -1,7 +1,7 @@
 package com.alatka.connection.core.model;
 
 
-import com.alatka.connection.core.property.TaskExecutorProperty;
+import com.alatka.connection.core.property.support.TaskExecutorProperty;
 
 import java.util.List;
 

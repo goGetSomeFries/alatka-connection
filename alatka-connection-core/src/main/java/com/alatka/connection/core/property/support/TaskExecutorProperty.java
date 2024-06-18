@@ -1,8 +1,13 @@
-package com.alatka.connection.core.property;
+package com.alatka.connection.core.property.support;
+
+import com.alatka.connection.core.property.Property;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author ybliu
+ */
 public class TaskExecutorProperty extends Property {
 
     @NotNull

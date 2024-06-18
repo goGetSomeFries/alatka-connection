@@ -1,9 +1,13 @@
 package com.alatka.connection.core.model;
 
+/**
+ * @author ybliu
+ */
 public interface DefinitionModel {
 
     enum Model {
 
+        serializers(SerializersModel.class),
         pollerMetadatas(PollerMetadatasModel.class),
         taskSchedulers(TaskSchedulersModel.class),
         taskExecutors(TaskExecutorsModel.class);

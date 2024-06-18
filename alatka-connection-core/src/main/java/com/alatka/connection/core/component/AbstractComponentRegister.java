@@ -21,9 +21,9 @@ public abstract class AbstractComponentRegister<T extends Property> implements C
     public final String register(T property, String beanNamePrefix, boolean custom) {
         Validator.validateByException(property);
 
-        BeanDefinitionBuilder builder = this.preRegister();
+        BeanDefinitionBuilder builder = this.preDoRegister();
         this.doRegister(builder, property);
-        this.postRegister(builder, property);
+        this.postDoRegister(builder, property);
 
         String beanName = this.resolveBeanName(beanNamePrefix, custom);
         if (!property.isEnabled()) {
@@ -40,18 +40,21 @@ public abstract class AbstractComponentRegister<T extends Property> implements C
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
+        if (this.registry == null) {
+            throw new IllegalArgumentException("BeanDefinitionRegistry must not be null");
+        }
         this.init();
     }
 
     protected void init() {
     }
 
-    protected BeanDefinitionBuilder preRegister() {
+    protected BeanDefinitionBuilder preDoRegister() {
         return BeanDefinitionBuilder.genericBeanDefinition(this.beanClass());
     }
 
-    protected void postRegister(BeanDefinitionBuilder builder, T property) {
+    protected void postDoRegister(BeanDefinitionBuilder builder, T property) {
     }
 
     protected String resolveBeanName(String beanNamePrefix, boolean custom) {
