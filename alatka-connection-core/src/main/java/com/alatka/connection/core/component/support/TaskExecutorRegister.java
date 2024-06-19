@@ -1,6 +1,5 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.property.support.TaskExecutorProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -10,7 +9,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  *
  * @author ybliu
  */
-public class TaskExecutorRegister extends AbstractComponentRegister<TaskExecutorProperty> {
+public class TaskExecutorRegister extends SupportComponentRegister<TaskExecutorProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TaskExecutorProperty property) {
@@ -24,5 +23,10 @@ public class TaskExecutorRegister extends AbstractComponentRegister<TaskExecutor
     @Override
     protected Class<ThreadPoolTaskExecutor> beanClass() {
         return ThreadPoolTaskExecutor.class;
+    }
+
+    @Override
+    public Class<TaskExecutorProperty> propertyClass() {
+        return TaskExecutorProperty.class;
     }
 }

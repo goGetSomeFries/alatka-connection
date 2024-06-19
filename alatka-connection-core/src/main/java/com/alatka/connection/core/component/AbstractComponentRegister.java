@@ -4,14 +4,18 @@ import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 /**
  * @author ybliu
  */
-public abstract class AbstractComponentRegister<T extends Property> implements ComponentRegister<T>, InitializingBean {
+public abstract class AbstractComponentRegister<T extends Property> implements ComponentRegister<T>, BeanFactoryAware, InitializingBean {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -35,8 +39,11 @@ public abstract class AbstractComponentRegister<T extends Property> implements C
     }
 
     @Override
-    public void setBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
-        this.registry = registry;
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        if (!(beanFactory instanceof DefaultListableBeanFactory)) {
+            throw new IllegalArgumentException("beanFactory is not subclass of DefaultListableBeanFactory");
+        }
+        this.registry = (DefaultListableBeanFactory) beanFactory;
     }
 
     @Override

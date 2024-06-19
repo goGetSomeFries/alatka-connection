@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author ybliu
  */
-public class PollerMetadatasModel implements DefinitionModel {
+public class PollerMetadatasModel implements DefinitionModel<PollerMetadataProperty> {
 
     private List<PollerMetadataProperty> pollerMetadatas;
 
@@ -18,5 +18,15 @@ public class PollerMetadatasModel implements DefinitionModel {
 
     public void setPollerMetadatas(List<PollerMetadataProperty> pollerMetadatas) {
         this.pollerMetadatas = pollerMetadatas;
+    }
+
+    @Override
+    public Class<PollerMetadataProperty> propertyClass() {
+        return PollerMetadataProperty.class;
+    }
+
+    @Override
+    public List<PollerMetadataProperty> obtainProperties() {
+        return pollerMetadatas;
     }
 }

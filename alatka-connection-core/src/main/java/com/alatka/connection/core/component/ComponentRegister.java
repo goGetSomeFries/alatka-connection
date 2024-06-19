@@ -1,7 +1,6 @@
 package com.alatka.connection.core.component;
 
 import com.alatka.connection.core.property.Property;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 /**
  * 组件注册器
@@ -20,12 +19,5 @@ public interface ComponentRegister<T extends Property> {
      * @return spring bean name
      */
     String register(T property, String beanNamePrefix, boolean custom);
-
-    /**
-     * {@link BeanDefinitionRegistry} 对象赋值
-     *
-     * @param registry {@link BeanDefinitionRegistry}
-     */
-    void setBeanDefinitionRegistry(BeanDefinitionRegistry registry);
 
 }

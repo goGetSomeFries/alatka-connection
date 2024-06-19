@@ -2,14 +2,17 @@ package com.alatka.connection.core.model;
 
 import java.util.Map;
 
-public class ConnectionModel {
+/**
+ * @author ybliu
+ */
+public class RootModel {
 
     private RouteModel route;
 
     /**
      * {@link DefinitionModel}
      */
-    private Map<DefinitionModel.Model, Object> definition;
+    private Map<DefinitionModel.Model, Map<String, Object>> definition;
 
     public RouteModel getRoute() {
         return route;
@@ -19,11 +22,11 @@ public class ConnectionModel {
         this.route = route;
     }
 
-    public Map<DefinitionModel.Model, Object> getDefinition() {
+    public Map<DefinitionModel.Model, Map<String, Object>> getDefinition() {
         return definition;
     }
 
-    public void setDefinition(Map<DefinitionModel.Model, Object> definition) {
+    public void setDefinition(Map<DefinitionModel.Model, Map<String, Object>> definition) {
         this.definition = definition;
     }
 }

@@ -1,9 +1,13 @@
 package com.alatka.connection.core.model;
 
+import com.alatka.connection.core.property.Property;
+import com.alatka.connection.core.property.PropertyObtained;
+import com.alatka.connection.core.property.ReferencePropertyClass;
+
 /**
  * @author ybliu
  */
-public interface DefinitionModel {
+public interface DefinitionModel<T extends Property> extends ReferencePropertyClass<T>, PropertyObtained<T> {
 
     enum Model {
 
@@ -18,7 +22,7 @@ public interface DefinitionModel {
             this.type = type;
         }
 
-        public Class<? extends DefinitionModel> getType() {
+        public Class<? extends DefinitionModel> type() {
             return type;
         }
     }

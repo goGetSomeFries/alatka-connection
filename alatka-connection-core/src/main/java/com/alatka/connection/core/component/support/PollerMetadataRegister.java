@@ -1,6 +1,5 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.property.support.PollerMetadataProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.scheduling.PollerMetadata;
@@ -15,7 +14,7 @@ import java.util.function.Function;
 /**
  * @author ybliu
  */
-public class PollerMetadataRegister extends AbstractComponentRegister<PollerMetadataProperty> {
+public class PollerMetadataRegister extends SupportComponentRegister<PollerMetadataProperty> {
 
     private Map<PollerMetadataProperty.Trigger.Type, Function<? extends PollerMetadataProperty.Trigger, Trigger>> map = new HashMap<>();
 
@@ -44,5 +43,10 @@ public class PollerMetadataRegister extends AbstractComponentRegister<PollerMeta
             CronTrigger trigger = new CronTrigger(property.getExpression());
             return trigger;
         });
+    }
+
+    @Override
+    public Class<PollerMetadataProperty> propertyClass() {
+        return PollerMetadataProperty.class;
     }
 }
