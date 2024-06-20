@@ -1,31 +1,38 @@
 package com.alatka.connection.core.model;
 
 import com.alatka.connection.core.property.Property;
-import com.alatka.connection.core.property.PropertyObtained;
-import com.alatka.connection.core.property.ReferencePropertyClass;
+import com.alatka.connection.core.property.support.PollerMetadataProperty;
+import com.alatka.connection.core.property.support.SerializerProperty;
+import com.alatka.connection.core.property.support.TaskExecutorProperty;
+import com.alatka.connection.core.property.support.TaskSchedulerProperty;
 
 /**
  * @author ybliu
  */
-public interface DefinitionModel<T extends Property> extends ReferencePropertyClass<T>, PropertyObtained<T> {
+public enum DefinitionModel {
 
-    enum Model {
+    serializers(SerializerProperty.class, true),
+    pollerMetadatas(PollerMetadataProperty.class, true),
+    taskSchedulers(TaskSchedulerProperty.class, true),
+    taskExecutors(TaskExecutorProperty.class, true);
 
-        serializers(SerializersModel.class),
-        pollerMetadatas(PollerMetadatasModel.class),
-        taskSchedulers(TaskSchedulersModel.class),
-        taskExecutors(TaskExecutorsModel.class);
+    private Class<? extends Property> type;
+    /**
+     * 是否是集合类型
+     */
+    private boolean collection;
 
-        private Class<? extends DefinitionModel> type;
-
-        Model(Class<? extends DefinitionModel> type) {
-            this.type = type;
-        }
-
-        public Class<? extends DefinitionModel> type() {
-            return type;
-        }
+    DefinitionModel(Class<? extends Property> type, boolean collection) {
+        this.type = type;
+        this.collection = collection;
     }
 
+    public Class<?> getType() {
+        return type;
+    }
+
+    public boolean isCollection() {
+        return collection;
+    }
 
 }

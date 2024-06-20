@@ -8,11 +8,7 @@ import java.util.Map;
 public class RootModel {
 
     private RouteModel route;
-
-    /**
-     * {@link DefinitionModel}
-     */
-    private Map<DefinitionModel.Model, Map<String, Object>> definition;
+    private Map<DefinitionModel, Object> definition;
 
     public RouteModel getRoute() {
         return route;
@@ -22,11 +18,11 @@ public class RootModel {
         this.route = route;
     }
 
-    public Map<DefinitionModel.Model, Map<String, Object>> getDefinition() {
+    public Map<DefinitionModel, Object> getDefinition() {
         return definition;
     }
 
-    public void setDefinition(Map<DefinitionModel.Model, Map<String, Object>> definition) {
+    public void setDefinition(Map<DefinitionModel, Object> definition) {
         this.definition = definition;
     }
 }

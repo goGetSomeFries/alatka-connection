@@ -1,3 +1,4 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.alatka.connection.Init
 org.springframework.boot.env.EnvironmentPostProcessor=\
-com.alatka.connection.ConnectionConfigEnvironmentPostProcessor
+  com.alatka.connection.ConnectionConfigEnvironmentPostProcessor

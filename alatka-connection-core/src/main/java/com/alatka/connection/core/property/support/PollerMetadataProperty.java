@@ -5,6 +5,7 @@ import com.alatka.connection.core.property.Property;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Map;
 
 /**
@@ -17,11 +18,22 @@ public class PollerMetadataProperty extends Property {
     @NotNull
     private Long maxMessagesPerPoll;
     @NotEmpty
-    private Map<Trigger.Type, Map<String, Object>> trigger;
+    @Size(min = 1, max = 1)
+    private Map<Trigger.Type, Object> trigger;
 
     public interface Trigger {
         enum Type {
-            periodic, cron;
+            periodic(Periodic.class), cron(Cron.class);
+
+            private Class<? extends Trigger> clazz;
+
+            Type(Class<? extends Trigger> clazz) {
+                this.clazz = clazz;
+            }
+
+            public Class<? extends Trigger> getClazz() {
+                return clazz;
+            }
         }
     }
 
@@ -85,11 +97,11 @@ public class PollerMetadataProperty extends Property {
         this.maxMessagesPerPoll = maxMessagesPerPoll;
     }
 
-    public Map<Trigger.Type, Map<String, Object>> getTrigger() {
+    public Map<Trigger.Type, Object> getTrigger() {
         return trigger;
     }
 
-    public void setTrigger(Map<Trigger.Type, Map<String, Object>> trigger) {
+    public void setTrigger(Map<Trigger.Type, Object> trigger) {
         this.trigger = trigger;
     }
 }

@@ -27,4 +27,5 @@ public class TaskSchedulerProperty extends Property {
     public void setThreadNamePrefix(String threadNamePrefix) {
         this.threadNamePrefix = threadNamePrefix;
     }
+
 }
