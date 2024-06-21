@@ -9,8 +9,6 @@ public class ChannelAdapterProperty extends Property {
 
     private String outputChannel;
 
-    private String source;
-
     public String getInputChannel() {
         return inputChannel;
     }
@@ -25,13 +23,5 @@ public class ChannelAdapterProperty extends Property {
 
     public void setOutputChannel(String outputChannel) {
         this.outputChannel = outputChannel;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
     }
 }

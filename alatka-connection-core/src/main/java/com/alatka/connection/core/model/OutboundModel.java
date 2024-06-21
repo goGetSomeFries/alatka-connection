@@ -1,15 +1,5 @@
 package com.alatka.connection.core.model;
 
-public interface OutboundModel {
+public enum OutboundModel {
 
-    enum Model {
-
-        http(HttpClientModel.class);
-
-        private Class<? extends OutboundModel> type;
-
-        Model(Class<? extends OutboundModel> type) {
-            this.type = type;
-        }
-    }
 }

@@ -1,15 +1,15 @@
 package com.alatka.connection.core.property;
 
-import com.alatka.connection.core.model.InboundModel;
-
 /**
  * @author ybliu
  */
-public class TcpInboundProperty extends ChannelAdapterProperty implements InboundModel {
+public class TcpInboundProperty extends ChannelAdapterProperty {
 
     private boolean clientMode = false;
 
     private Long retryInterval;
+
+    private String connectionFactory;
 
     public boolean isClientMode() {
         return clientMode;
@@ -25,5 +25,13 @@ public class TcpInboundProperty extends ChannelAdapterProperty implements Inboun
 
     public void setRetryInterval(Long retryInterval) {
         this.retryInterval = retryInterval;
+    }
+
+    public String getConnectionFactory() {
+        return connectionFactory;
+    }
+
+    public void setConnectionFactory(String connectionFactory) {
+        this.connectionFactory = connectionFactory;
     }
 }

@@ -13,7 +13,7 @@ public class TcpInboundGatewayRegister extends GatewayRegister<TcpInboundPropert
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpInboundProperty property) {
         builder.addPropertyValue("clientMode", property.isClientMode())
-                .addPropertyReference("connectionFactory", property.getSource());
+                .addPropertyReference("connectionFactory", property.getConnectionFactory());
         if (property.getRetryInterval() != null) {
             builder.addPropertyValue("retryInterval", property.getRetryInterval());
         }

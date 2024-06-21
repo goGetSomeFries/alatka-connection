@@ -14,7 +14,7 @@ public class SerializerProperty extends Property {
     private Map<String, Object> params;
 
     public enum Type {
-        byteArraySingleTerminatorSerializer(),
+        byteArraySingleTerminatorSerializer,
 
     }
 

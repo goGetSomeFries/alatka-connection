@@ -1,18 +1,23 @@
 package com.alatka.connection.core.model;
 
+import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.property.TcpInboundProperty;
 
-public interface InboundModel {
+/**
+ * @author ybliu
+ */
+public enum InboundModel {
 
-    enum Model {
 
-        tcp(TcpInboundProperty.class),
-        http(HttpServerModel.class);
+    tcp(TcpInboundProperty.class);
 
-        private Class<? extends InboundModel> type;
+    private Class<? extends Property> type;
 
-        Model(Class<? extends InboundModel> type) {
-            this.type = type;
-        }
+    InboundModel(Class<? extends Property> type) {
+        this.type = type;
+    }
+
+    public Class<? extends Property> getType() {
+        return type;
     }
 }

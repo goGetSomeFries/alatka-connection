@@ -8,17 +8,17 @@ import java.util.Map;
 
 public class RouteModel {
 
-    private Map<InboundModel.Model, Object> inbound;
+    private Map<InboundModel, Object> inbound;
 
     private List<ProcessorProperty> processors;
 
-    private Map<OutboundModel.Model, Object> outbound;
+    private Map<OutboundModel, Object> outbound;
 
-    public Map<InboundModel.Model, Object> getInbound() {
+    public Map<InboundModel, Object> getInbound() {
         return inbound;
     }
 
-    public void setInbound(Map<InboundModel.Model, Object> inbound) {
+    public void setInbound(Map<InboundModel, Object> inbound) {
         this.inbound = inbound;
     }
 
@@ -30,11 +30,11 @@ public class RouteModel {
         this.processors = processors;
     }
 
-    public Map<OutboundModel.Model, Object> getOutbound() {
+    public Map<OutboundModel, Object> getOutbound() {
         return outbound;
     }
 
-    public void setOutbound(Map<OutboundModel.Model, Object> outbound) {
+    public void setOutbound(Map<OutboundModel, Object> outbound) {
         this.outbound = outbound;
     }
 }
