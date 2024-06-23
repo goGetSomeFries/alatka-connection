@@ -19,6 +19,7 @@
         <module>alatka-connection-rabbitmq</module>
         <module>alatka-connection-http</module>
         <module>alatka-connection-websocket</module>
+        <module>alatka-connection-test</module>
     </modules>
     <properties>
         <revision>0.1.0-SNAPSHOT</revision>
