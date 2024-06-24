@@ -1,6 +1,7 @@
 package com.alatka.connection.core.component;
 
 import com.alatka.connection.core.property.Property;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 /**
  * 组件注册器
@@ -20,4 +21,5 @@ public interface ComponentRegister<T extends Property> {
      */
     String register(T property, String beanNamePrefix, boolean custom);
 
+    void setBeanFactory(DefaultListableBeanFactory beanFactory);
 }

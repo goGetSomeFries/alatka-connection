@@ -6,7 +6,7 @@ import org.springframework.integration.channel.QueueChannel;
 
 import java.util.Map;
 
-public class QueueChannelRegister extends PollableChannelBeanDefinitionRegister<ChannelProperty> {
+public class QueueChannelRegister extends PollableChannelRegister<ChannelProperty> {
 
     private static final String KEY_CAPACITY = "capacity";
 

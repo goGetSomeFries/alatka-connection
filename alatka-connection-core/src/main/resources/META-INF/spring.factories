@@ -1,0 +1,11 @@
+com.alatka.connection.core.module.ModuleBuilder=\
+  com.alatka.connection.core.module.DefinitionModuleBuilder,\
+  
+com.alatka.connection.core.component.channel.ChannelComponentRegister=\
+  com.alatka.connection.core.component.channel.DirectChannelRegister,\
+  com.alatka.connection.core.component.channel.QueueChannelRegister
+
+com.alatka.connection.core.component.SupportComponentRegister=\
+  com.alatka.connection.core.component.support.PollerMetadataRegister,\
+  com.alatka.connection.core.component.support.TaskExecutorRegister,\
+  com.alatka.connection.core.component.support.TaskSchedulerRegister

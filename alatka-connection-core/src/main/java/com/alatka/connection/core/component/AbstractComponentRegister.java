@@ -4,22 +4,21 @@ import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 /**
  * @author ybliu
  */
-public abstract class AbstractComponentRegister<T extends Property> implements ComponentRegister<T>, BeanFactoryAware, InitializingBean {
+public abstract class AbstractComponentRegister<T extends Property> implements ComponentRegister<T> {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private BeanDefinitionRegistry registry;
+    private DefaultListableBeanFactory beanFactory;
+
+    protected AbstractComponentRegister() {
+        init();
+    }
 
     @Override
     public final String register(T property, String beanNamePrefix, boolean custom) {
@@ -34,24 +33,17 @@ public abstract class AbstractComponentRegister<T extends Property> implements C
             this.logger.debug("bean [" + beanName + "] is disabled.");
             return null;
         }
-        this.registry.registerBeanDefinition(beanName, builder.getBeanDefinition());
+        this.beanFactory.registerBeanDefinition(beanName, builder.getBeanDefinition());
         return beanName;
     }
 
     @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        if (!(beanFactory instanceof DefaultListableBeanFactory)) {
-            throw new IllegalArgumentException("beanFactory is not subclass of DefaultListableBeanFactory");
-        }
-        this.registry = (DefaultListableBeanFactory) beanFactory;
+    public void setBeanFactory(DefaultListableBeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
     }
 
-    @Override
-    public void afterPropertiesSet() {
-        if (this.registry == null) {
-            throw new IllegalArgumentException("BeanDefinitionRegistry must not be null");
-        }
-        this.init();
+    protected DefaultListableBeanFactory getBeanFactory() {
+        return this.beanFactory;
     }
 
     protected void init() {

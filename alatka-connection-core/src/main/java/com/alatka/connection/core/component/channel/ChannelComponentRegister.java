@@ -7,7 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 /**
  * @author ybliu
  */
-public abstract class ChannelRegister<T extends ChannelProperty> extends AbstractComponentRegister<T> {
+public abstract class ChannelComponentRegister<T extends ChannelProperty> extends AbstractComponentRegister<T> {
 
     @Override
     protected void postDoRegister(BeanDefinitionBuilder builder, T property) {

@@ -20,7 +20,7 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     @Override
     protected void doBuild(List<? extends Property> models) {
         Map<Class<Property>, ComponentRegister> mapping =
-                getApplicationContext().getBeansOfType(SupportComponentRegister.class).values()
+                getBeanFactory().getBeansOfType(SupportComponentRegister.class).values()
                         .stream()
                         .collect(Collectors.toMap(SupportComponentRegister::propertyClass, Function.identity()));
 
