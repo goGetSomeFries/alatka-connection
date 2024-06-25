@@ -21,5 +21,4 @@ public interface ComponentRegister<T extends Property> {
      */
     String register(T property, String beanNamePrefix, boolean custom);
 
-    void setBeanFactory(DefaultListableBeanFactory beanFactory);
 }

@@ -14,7 +14,7 @@ public abstract class AbstractComponentRegister<T extends Property> implements C
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private DefaultListableBeanFactory beanFactory;
+    private static DefaultListableBeanFactory beanFactory;
 
     protected AbstractComponentRegister() {
         init();
@@ -33,17 +33,16 @@ public abstract class AbstractComponentRegister<T extends Property> implements C
             this.logger.debug("bean [" + beanName + "] is disabled.");
             return null;
         }
-        this.beanFactory.registerBeanDefinition(beanName, builder.getBeanDefinition());
+        beanFactory.registerBeanDefinition(beanName, builder.getBeanDefinition());
         return beanName;
     }
 
-    @Override
-    public void setBeanFactory(DefaultListableBeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
+    public static void init(DefaultListableBeanFactory beanFactory) {
+        AbstractComponentRegister.beanFactory = beanFactory;
     }
 
     protected DefaultListableBeanFactory getBeanFactory() {
-        return this.beanFactory;
+        return beanFactory;
     }
 
     protected void init() {

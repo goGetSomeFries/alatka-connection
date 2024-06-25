@@ -29,7 +29,7 @@ public class TriggerProperty {
         }
     }
 
-    public class PeriodicProperty {
+    public static class PeriodicProperty {
         @NotNull
         private Long period;
         private boolean fixedRate = false;
@@ -60,7 +60,7 @@ public class TriggerProperty {
         }
     }
 
-    public class CronProperty {
+    public static class CronProperty {
         @NotBlank
         private String expression;
 
