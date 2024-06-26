@@ -1,6 +1,6 @@
 package com.alatka.connection;
 
-import com.alatka.connection.core.ConnectionInit;
+import com.alatka.connection.core.AlatkaConnectionInitializer;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -9,8 +9,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.Ordered;
 
 /**
- * 注册{@link ConnectionInit}<br>
- * 保证{@link ConnectionInit}先{@link org.springframework.context.annotation.ConfigurationClassPostProcessor}执行，TODO
+ * 注册{@link AlatkaConnectionInitializer}<br>
+ * 保证{@link AlatkaConnectionInitializer}先{@link org.springframework.context.annotation.ConfigurationClassPostProcessor}执行，TODO
  *
  * @author ybliu
  */
@@ -25,8 +25,8 @@ public class ConnectionApplicationContextInitializer implements ApplicationConte
         }
         DefaultListableBeanFactory registry = (DefaultListableBeanFactory) beanFactory;
 
-        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ConnectionInit.class, ConnectionInit::new);
-        registry.registerBeanDefinition(ConnectionInit.BEAN_NAME, builder.getBeanDefinition());
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(AlatkaConnectionInitializer.class, AlatkaConnectionInitializer::new);
+        registry.registerBeanDefinition(AlatkaConnectionInitializer.BEAN_NAME, builder.getBeanDefinition());
     }
 
     @Override

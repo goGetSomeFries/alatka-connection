@@ -1,6 +1,6 @@
 package com.alatka.connection.test.component.inbound;
 
-import com.alatka.connection.core.component.AbstractComponentRegister;
+import com.alatka.connection.core.component.InboundComponentRegister;
 import com.alatka.connection.core.property.test.MockerProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -11,7 +11,7 @@ import org.springframework.integration.scheduling.PollerMetadata;
 /**
  * @author ybliu
  */
-public class MockerRegister extends AbstractComponentRegister<MockerProperty> {
+public class MockerRegister extends InboundComponentRegister<MockerProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, MockerProperty property) {
@@ -39,4 +39,8 @@ public class MockerRegister extends AbstractComponentRegister<MockerProperty> {
         return SourcePollingChannelAdapter.class;
     }
 
+    @Override
+    public Class<MockerProperty> propertyClass() {
+        return MockerProperty.class;
+    }
 }

@@ -1,0 +1,2 @@
+com.alatka.connection.core.component.InboundComponentRegister=\
+  com.alatka.connection.test.component.inbound.MockerRegister
