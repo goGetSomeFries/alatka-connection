@@ -8,9 +8,11 @@ import com.alatka.connection.core.util.YamlUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.integration.config.IntegrationConfigurationInitializer;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -20,18 +22,41 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
 
     public static final String BEAN_NAME = AlatkaConnectionInitializer.class.getName();
 
+    private static final String FILE_PREFIX = "alatka-connection";
+
+    private static final String FILE_SUFFIX = ".yml";
+
     @Override
     public void initialize(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         AbstractComponentRegister.init((DefaultListableBeanFactory) beanFactory);
 
         try {
-            ClassPathResource resource = new ClassPathResource("connection.yml");
-            RootModel model = YamlUtil.getObject(resource.getFile(), "alatka.connection", RootModel.class);
-
-            new DefinitionModuleBuilder().build(model.getDefinition());
-            new InboundModuleBuilder().build(model.getRoute().getInbound());
+            Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(null)
+                    .getResources(FILE_PREFIX + "*" + FILE_SUFFIX);
+            for (Resource resource : resources) {
+                System.out.println(resource);
+                File file = resource.getFile();
+                RootModel model = YamlUtil.getObject(file, "alatka.connection", RootModel.class);
+                new DefinitionModuleBuilder().build(model.getDefinition());
+                new InboundModuleBuilder().build(model.getRoute().getInbound());
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
+    /**
+     * alatka-connection-channel2.yml -> channel2<br>
+     * alatka-connection-cpsfe.yml -> cpsfe<br>
+     * alatka-connection-app.yml -> app<br>
+     * alatka-connection.yml -> default<br>
+     *
+     * @param fileName
+     * @return
+     */
+    private String identity(String fileName) {
+        String str = fileName.substring(fileName.indexOf(FILE_PREFIX) + FILE_PREFIX.length(), fileName.indexOf(FILE_SUFFIX));
+        return str.isEmpty() ? "default" : str.substring(1);
+    }
+
 }
