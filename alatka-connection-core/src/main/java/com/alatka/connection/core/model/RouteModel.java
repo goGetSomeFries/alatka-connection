@@ -6,13 +6,15 @@ import com.alatka.connection.core.property.ProcessorProperty;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author ybliu
+ */
 public class RouteModel {
 
     private Map<InboundModel, Object> inbound;
-
     private List<ProcessorProperty> processors;
-
     private Map<OutboundModel, Object> outbound;
+    private Map<OutboundModel, Object> bypass;
 
     public Map<InboundModel, Object> getInbound() {
         return inbound;
@@ -36,5 +38,13 @@ public class RouteModel {
 
     public void setOutbound(Map<OutboundModel, Object> outbound) {
         this.outbound = outbound;
+    }
+
+    public Map<OutboundModel, Object> getBypass() {
+        return bypass;
+    }
+
+    public void setBypass(Map<OutboundModel, Object> bypass) {
+        this.bypass = bypass;
     }
 }

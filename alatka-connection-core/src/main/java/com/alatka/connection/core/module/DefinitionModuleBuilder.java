@@ -18,6 +18,10 @@ import java.util.stream.Stream;
  */
 public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<DefinitionModel, Object>, List<? extends Property>> {
 
+    public DefinitionModuleBuilder(String identity) {
+        super(identity);
+    }
+
     @Override
     protected void doBuild(List<? extends Property> models) {
         Map<Class<Property>, ComponentRegister> mapping =

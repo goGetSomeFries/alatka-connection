@@ -4,6 +4,8 @@ import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.model.RootModel;
 import com.alatka.connection.core.module.DefinitionModuleBuilder;
 import com.alatka.connection.core.module.InboundModuleBuilder;
+import com.alatka.connection.core.module.OutboundModuleBuilder;
+import com.alatka.connection.core.module.ProcessorModuleBuilder;
 import com.alatka.connection.core.util.YamlUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -12,7 +14,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.integration.config.IntegrationConfigurationInitializer;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -33,12 +34,26 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         try {
             Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(null)
                     .getResources(FILE_PREFIX + "*" + FILE_SUFFIX);
+
             for (Resource resource : resources) {
-                System.out.println(resource);
-                File file = resource.getFile();
-                RootModel model = YamlUtil.getObject(file, "alatka.connection", RootModel.class);
-                new DefinitionModuleBuilder().build(model.getDefinition());
-                new InboundModuleBuilder().build(model.getRoute().getInbound());
+                RootModel rootModel = YamlUtil.getObject(resource.getFile(), "alatka.connection", RootModel.class);
+                String identity = this.identity(resource.getFilename());
+
+                // alatka.connection.definition
+                DefinitionModuleBuilder definitionModuleBuilder = new DefinitionModuleBuilder(identity);
+                definitionModuleBuilder.build(rootModel.getDefinition());
+
+                // alatka.connection.route.processor
+                ProcessorModuleBuilder processorModuleBuilder = new ProcessorModuleBuilder(identity);
+                processorModuleBuilder.build(rootModel.getRoute().getProcessors());
+
+                // alatka.connection.route.inbound
+                InboundModuleBuilder inboundModuleBuilder = new InboundModuleBuilder(identity);
+                inboundModuleBuilder.inputChannel(null).outputChannel(null).build(rootModel.getRoute().getInbound());
+
+                // alatka.connection.route.outbound
+                OutboundModuleBuilder outboundModuleBuilder = new OutboundModuleBuilder(identity);
+                outboundModuleBuilder.inputChannel(null).outputChannel(null).build(rootModel.getRoute().getOutbound());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

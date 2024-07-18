@@ -5,6 +5,12 @@ package com.alatka.connection.core.module;
  */
 public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
+    private String identity;
+
+    public AbstractModuleBuilder(String identity) {
+        this.identity = identity;
+    }
+
     @Override
     public final void build(T model) {
         S convert = this.convert(model);
