@@ -9,16 +9,22 @@ import com.alatka.connection.core.property.test.MockerProperty;
  */
 public enum InboundModel {
 
-    mocker(MockerProperty.class),
-    tcp(TcpInboundProperty.class);
+    mocker(MockerProperty.class, true),
+    tcp(TcpInboundProperty.class, true);
 
     private Class<? extends Property> type;
+    private boolean duplex;
 
-    InboundModel(Class<? extends Property> type) {
+    InboundModel(Class<? extends Property> type, boolean duplex) {
         this.type = type;
+        this.duplex = duplex;
     }
 
     public Class<? extends Property> getType() {
         return type;
+    }
+
+    public boolean isDuplex() {
+        return duplex;
     }
 }
