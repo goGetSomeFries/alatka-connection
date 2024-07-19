@@ -7,6 +7,7 @@ import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.JsonUtil;
 import org.springframework.core.io.support.SpringFactoriesLoader;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -25,8 +26,7 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     @Override
     protected void doBuild(List<? extends Property> models) {
         Map<Class<Property>, ComponentRegister> mapping =
-                SpringFactoriesLoader.loadFactories(SupportComponentRegister.class, null)
-                        .stream()
+                SpringFactoriesLoader.loadFactories(SupportComponentRegister.class, null).stream()
                         .collect(Collectors.toMap(SupportComponentRegister::propertyClass, Function.identity()));
 
         models.forEach(property -> {
@@ -37,6 +37,9 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
 
     @Override
     protected List<? extends Property> convert(Map<DefinitionModel, Object> map) {
+        if (map == null) {
+            return Collections.emptyList();
+        }
         return map.entrySet()
                 .stream()
                 .flatMap(entry -> entry.getKey().isCollection() ?

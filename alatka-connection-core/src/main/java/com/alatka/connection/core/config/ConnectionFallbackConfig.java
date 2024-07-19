@@ -24,8 +24,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class ConnectionFallbackConfig {
 
-    @Bean(ConnectionConstant.DEFAULT_POLLER_METADATA)
-    @ConditionalOnMissingBean(name = ConnectionConstant.DEFAULT_POLLER_METADATA)
+    @Bean(ConnectionConstant.FALLBACK_POLLER_METADATA)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_POLLER_METADATA)
     public PollerMetadata pollerMetadata(
             @Value("${alatka.connection.fallback.pollerMetadata.period}") long period,
             @Value("${alatka.connection.fallback.pollerMetadata.maxPerPoll}") long maxPerPoll) {
@@ -38,8 +38,8 @@ public class ConnectionFallbackConfig {
         return pollerMetadata;
     }
 
-    @Bean(ConnectionConstant.DEFAULT_TASK_EXECUTOR)
-    @ConditionalOnMissingBean(name = ConnectionConstant.DEFAULT_TASK_EXECUTOR)
+    @Bean(ConnectionConstant.FALLBACK_TASK_EXECUTOR)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_TASK_EXECUTOR)
     public ThreadPoolTaskExecutor taskExecutor(
             @Value("${alatka.connection.fallback.taskExecutor.corePoolSize}") Integer corePoolSize,
             @Value("${alatka.connection.fallback.taskExecutor.maxPoolSize}") Integer maxPoolSize,
@@ -56,8 +56,8 @@ public class ConnectionFallbackConfig {
         return taskExecutor;
     }
 
-    @Bean(ConnectionConstant.DEFAULT_TASK_SCHEDULER)
-    @ConditionalOnMissingBean(name = ConnectionConstant.DEFAULT_TASK_SCHEDULER)
+    @Bean(ConnectionConstant.FALLBACK_TASK_SCHEDULER)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_TASK_SCHEDULER)
     public ThreadPoolTaskScheduler taskScheduler(
             @Value("${alatka.connection.fallback.taskScheduler.corePoolSize}") int schedulerCorePoolSize,
             @Value("${alatka.connection.fallback.taskScheduler.threadNamePrefix}") String schedulerThreadNamePrefix) {
@@ -68,15 +68,15 @@ public class ConnectionFallbackConfig {
         return taskScheduler;
     }
 
-    @Bean(ConnectionConstant.DEFAULT_LOGGER_INFO_CHANNEL)
-    @ConditionalOnMissingBean(name = ConnectionConstant.DEFAULT_LOGGER_INFO_CHANNEL)
+    @Bean(ConnectionConstant.FALLBACK_LOGGER_INFO_CHANNEL)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_INFO_CHANNEL)
     public MessageChannel infoLoggerChannel() {
         return new DirectChannel();
     }
 
-    @Bean(ConnectionConstant.DEFAULT_LOGGER_INFO)
-    @ConditionalOnMissingBean(name = ConnectionConstant.DEFAULT_LOGGER_INFO)
-    @ServiceActivator(inputChannel = ConnectionConstant.DEFAULT_LOGGER_INFO_CHANNEL)
+    @Bean(ConnectionConstant.FALLBACK_LOGGER_INFO)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_INFO)
+    @ServiceActivator(inputChannel = ConnectionConstant.FALLBACK_LOGGER_INFO_CHANNEL)
     public LoggingHandler infoLoggingHandler(
             @Value("${alatka.connection.fallback.logger.info}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.INFO);
@@ -84,15 +84,15 @@ public class ConnectionFallbackConfig {
         return handler;
     }
 
-    @Bean(ConnectionConstant.DEFAULT_LOGGER_ERROR_CHANNEL)
-    @ConditionalOnMissingBean(name = ConnectionConstant.DEFAULT_LOGGER_ERROR_CHANNEL)
+    @Bean(ConnectionConstant.FALLBACK_LOGGER_ERROR_CHANNEL)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_ERROR_CHANNEL)
     public MessageChannel errorLoggerChannel() {
         return new DirectChannel();
     }
 
-    @Bean(ConnectionConstant.DEFAULT_LOGGER_ERROR)
-    @ConditionalOnMissingBean(name = ConnectionConstant.DEFAULT_LOGGER_ERROR)
-    @ServiceActivator(inputChannel = ConnectionConstant.DEFAULT_LOGGER_ERROR_CHANNEL)
+    @Bean(ConnectionConstant.FALLBACK_LOGGER_ERROR)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_ERROR)
+    @ServiceActivator(inputChannel = ConnectionConstant.FALLBACK_LOGGER_ERROR_CHANNEL)
     public LoggingHandler errorLoggingHandler(
             @Value("${alatka.connection.fallback.logger.error}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.ERROR);

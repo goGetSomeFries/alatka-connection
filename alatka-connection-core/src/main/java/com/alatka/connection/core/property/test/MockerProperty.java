@@ -7,19 +7,10 @@ import com.alatka.connection.core.property.ChannelAdapterProperty;
  */
 public class MockerProperty extends ChannelAdapterProperty {
 
-    private boolean duplex;
     private String poller;
 
     private String className;
     private String methodName;
-
-    public boolean isDuplex() {
-        return duplex;
-    }
-
-    public void setDuplex(boolean duplex) {
-        this.duplex = duplex;
-    }
 
     public String getPoller() {
         return poller;

@@ -1,5 +1,6 @@
 package com.alatka.connection.core.module;
 
+import com.alatka.connection.core.ConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
@@ -17,9 +18,6 @@ import java.util.stream.Collectors;
  */
 public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel, Object>, List<? extends ChannelAdapterProperty>> {
 
-    private String inputChannel;
-    private String outputChannel;
-
     public InboundModuleBuilder(String identity) {
         super(identity);
     }
@@ -27,8 +25,7 @@ public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel
     @Override
     protected void doBuild(List<? extends ChannelAdapterProperty> models) {
         Map<Class<ChannelAdapterProperty>, ComponentRegister> mapping =
-                SpringFactoriesLoader.loadFactories(InboundComponentRegister.class, null)
-                        .stream()
+                SpringFactoriesLoader.loadFactories(InboundComponentRegister.class, null).stream()
                         .collect(Collectors.toMap(InboundComponentRegister::propertyClass, Function.identity()));
 
         models.forEach(property -> {
@@ -43,18 +40,9 @@ public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel
                 .stream()
                 .map(entry -> JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType()))
                 .map(entity -> (ChannelAdapterProperty) entity)
-                .peek(property -> property.setInputChannel(this.inputChannel))
-                .peek(property -> property.setOutputChannel(this.outputChannel))
+                .peek(property -> property.setInputChannel(ConnectionConstant.INBOUND_INPUT_CHANNEL))
+                .peek(property -> property.setOutputChannel(ConnectionConstant.INBOUND_OUTPUT_CHANNEL))
                 .collect(Collectors.toList());
     }
 
-    public InboundModuleBuilder inputChannel(String inputChannel) {
-        this.inputChannel = inputChannel;
-        return this;
-    }
-
-    public InboundModuleBuilder outputChannel(String outputChannel) {
-        this.outputChannel = outputChannel;
-        return this;
-    }
 }

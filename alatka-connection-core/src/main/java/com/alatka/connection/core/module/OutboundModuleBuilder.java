@@ -11,9 +11,6 @@ import java.util.Map;
  */
 public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundModel, Object>, List<? extends ChannelAdapterProperty>> {
 
-    private String inputChannel;
-    private String outputChannel;
-
     public OutboundModuleBuilder(String identity) {
         super(identity);
     }
@@ -27,13 +24,4 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
         return null;
     }
 
-    public OutboundModuleBuilder inputChannel(String inputChannel) {
-        this.inputChannel = inputChannel;
-        return this;
-    }
-
-    public OutboundModuleBuilder outputChannel(String outputChannel) {
-        this.outputChannel = outputChannel;
-        return this;
-    }
 }

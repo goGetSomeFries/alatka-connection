@@ -1,9 +1,6 @@
 org.springframework.integration.config.IntegrationConfigurationInitializer=\
   com.alatka.connection.core.AlatkaConnectionInitializer
-com.alatka.connection.core.module.ModuleBuilder=\
-  com.alatka.connection.core.module.DefinitionModuleBuilder,\
-  com.alatka.connection.core.module.InboundModuleBuilder,\
-  
+
 com.alatka.connection.core.component.channel.ChannelComponentRegister=\
   com.alatka.connection.core.component.channel.DirectChannelRegister,\
   com.alatka.connection.core.component.channel.QueueChannelRegister

@@ -2,43 +2,46 @@ package com.alatka.connection.core.property;
 
 import java.util.Map;
 
+/**
+ * @author ybliu
+ */
 public class ChannelProperty extends Property {
 
-    private ChannelName name;
+    private Type type;
     private Class<?>[] dataTypes;
     private Map<String, Object> params;
 
-    public enum ChannelName {
-        direct(ChannelType.SUBSCRIBABLE),
-        queue(ChannelType.POLLABLE);
+    public enum Type {
+        direct(Kind.SUBSCRIBABLE),
+        queue(Kind.POLLABLE);
 
-        private ChannelType channelType;
+        private Kind kind;
 
-        ChannelName(ChannelType channelType) {
-            this.channelType = channelType;
+        Type(Kind kind) {
+            this.kind = kind;
         }
 
-        public ChannelType getChannelType() {
-            return channelType;
+        public Kind getKind() {
+            return kind;
         }
     }
 
-    public enum ChannelType {
+    public enum Kind {
         POLLABLE, SUBSCRIBABLE;
     }
 
     @Override
     public Property defaultProperty() {
-        this.name = ChannelName.direct;
+        this.type = Type.direct;
         return this;
     }
 
-    public ChannelName getName() {
-        return name;
+    public Type getType() {
+        return type;
     }
 
-    public void setName(ChannelName name) {
-        this.name = name;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Map<String, Object> getParams() {

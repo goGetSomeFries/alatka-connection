@@ -9,10 +9,18 @@ import com.alatka.connection.core.property.test.MockerProperty;
  */
 public enum InboundModel {
 
-    mocker(MockerProperty.class, true),
-    tcp(TcpInboundProperty.class, true);
+    mocker_duplex(MockerProperty.class, true),
+    mocker_simplex(MockerProperty.class, false),
+    tcp_duplex(TcpInboundProperty.class, true),
+    http(TcpInboundProperty.class, true);
 
+    /**
+     * {@link Property} {@link Class} 类型
+     */
     private Class<? extends Property> type;
+    /**
+     * 双向通信
+     */
     private boolean duplex;
 
     InboundModel(Class<? extends Property> type, boolean duplex) {

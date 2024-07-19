@@ -3,11 +3,20 @@ package com.alatka.connection.core.model;
 import java.util.Map;
 
 /**
+ * alatka.connection
+ *
  * @author ybliu
  */
 public class RootModel {
 
+    /**
+     * alatka.connection.route
+     */
     private RouteModel route;
+
+    /**
+     * alatka.connection.definition
+     */
     private Map<DefinitionModel, Object> definition;
 
     public RouteModel getRoute() {

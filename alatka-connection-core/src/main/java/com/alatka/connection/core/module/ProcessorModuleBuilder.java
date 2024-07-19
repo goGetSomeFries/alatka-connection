@@ -17,4 +17,20 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
     protected void doBuild(List<ProcessorProperty> models) {
     }
 
+    @Override
+    protected List<ProcessorProperty> convert(List<ProcessorProperty> models) {
+        if (models == null) {
+
+        }
+        return null;
+    }
+
+    private List<String> registerChannels(List<ProcessorProperty> models, ProcessorProperty.Type type) {
+/*
+        models.stream()
+                .filter(processor -> processor.getType() == ProcessorProperty.Type.all || processor.getType() == type)
+                .map(ProcessorProperty::getChannel)
+*/
+        return null;
+    }
 }

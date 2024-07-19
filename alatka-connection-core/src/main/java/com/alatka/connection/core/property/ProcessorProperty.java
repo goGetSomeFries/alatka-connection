@@ -3,9 +3,12 @@ package com.alatka.connection.core.property;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author ybliu
+ */
 public class ProcessorProperty extends Property {
 
-    private ProcessorType type = ProcessorType.all;
+    private Type type = Type.all;
     @Valid
     private ChannelProperty channel;
     @NotNull
@@ -14,15 +17,15 @@ public class ProcessorProperty extends Property {
     private String pollerMetadata;
     private String taskScheduler;
 
-    public enum ProcessorType {
+    public enum Type {
         all, request, reply
     }
 
-    public ProcessorType getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(ProcessorType type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

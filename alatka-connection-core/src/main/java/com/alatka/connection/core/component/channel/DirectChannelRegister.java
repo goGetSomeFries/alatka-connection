@@ -15,4 +15,8 @@ public class DirectChannelRegister extends SubscribableChannelRegister<ChannelPr
         return DirectChannel.class;
     }
 
+    @Override
+    public Class<ChannelProperty> propertyClass() {
+        return null;
+    }
 }
