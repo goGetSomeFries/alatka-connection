@@ -40,7 +40,7 @@ public class MockerRegister extends InboundComponentRegister<MockerProperty> {
     }
 
     @Override
-    public Class<MockerProperty> propertyClass() {
+    public Class<MockerProperty> reference() {
         return MockerProperty.class;
     }
 }

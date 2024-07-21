@@ -27,7 +27,7 @@ public class TaskExecutorRegister extends SupportComponentRegister<TaskExecutorP
     }
 
     @Override
-    public Class<TaskExecutorProperty> propertyClass() {
+    public Class<TaskExecutorProperty> reference() {
         return TaskExecutorProperty.class;
     }
 }

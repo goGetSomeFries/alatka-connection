@@ -1,10 +1,13 @@
 package com.alatka.connection.core.property;
 
+import com.alatka.connection.core.annotation.BeanProperty;
+
 /**
  * @author ybliu
  */
 public abstract class Property {
 
+    @BeanProperty
     private String id;
 
     private boolean enabled = true;

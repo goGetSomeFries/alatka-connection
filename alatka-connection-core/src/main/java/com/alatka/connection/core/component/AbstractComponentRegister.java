@@ -10,7 +10,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 /**
  * @author ybliu
  */
-public abstract class AbstractComponentRegister<T extends Property> implements ComponentRegister<T> {
+public abstract class AbstractComponentRegister<T extends Property, S> implements ComponentRegister<T, S> {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 

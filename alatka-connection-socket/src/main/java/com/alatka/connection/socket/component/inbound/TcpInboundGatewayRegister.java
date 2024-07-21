@@ -1,6 +1,6 @@
 package com.alatka.connection.socket.component.inbound;
 
-import com.alatka.connection.core.component.inbound.GatewayRegister;
+import com.alatka.connection.core.component.InboundComponentRegister;
 import com.alatka.connection.core.property.TcpInboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpInboundGateway;
@@ -8,7 +8,7 @@ import org.springframework.integration.ip.tcp.TcpInboundGateway;
 /**
  * @author ybliu
  */
-public class TcpInboundGatewayRegister extends GatewayRegister<TcpInboundProperty> {
+public class TcpInboundGatewayRegister extends InboundComponentRegister<TcpInboundProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpInboundProperty property) {
@@ -22,5 +22,10 @@ public class TcpInboundGatewayRegister extends GatewayRegister<TcpInboundPropert
     @Override
     protected Class<TcpInboundGateway> beanClass() {
         return TcpInboundGateway.class;
+    }
+
+    @Override
+    public Class<TcpInboundProperty> reference() {
+        return TcpInboundProperty.class;
     }
 }

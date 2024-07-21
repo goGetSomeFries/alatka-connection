@@ -1,5 +1,7 @@
 package com.alatka.connection.core.property;
 
+import com.alatka.connection.core.property.channel.ChannelProperty;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 

@@ -6,11 +6,9 @@ import com.alatka.connection.core.component.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.ChannelAdapterProperty;
 import com.alatka.connection.core.util.JsonUtil;
-import org.springframework.core.io.support.SpringFactoriesLoader;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -23,11 +21,7 @@ public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel
     }
 
     @Override
-    protected void doBuild(List<? extends ChannelAdapterProperty> models) {
-        Map<Class<ChannelAdapterProperty>, ComponentRegister> mapping =
-                SpringFactoriesLoader.loadFactories(InboundComponentRegister.class, null).stream()
-                        .collect(Collectors.toMap(InboundComponentRegister::propertyClass, Function.identity()));
-
+    protected void doBuild(List<? extends ChannelAdapterProperty> models, Map<Object, ComponentRegister> mapping) {
         models.forEach(property -> {
             ComponentRegister componentRegister = mapping.get(property.getClass());
             componentRegister.register(property, property.getId(), true);
@@ -43,6 +37,11 @@ public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel
                 .peek(property -> property.setInputChannel(ConnectionConstant.INBOUND_INPUT_CHANNEL))
                 .peek(property -> property.setOutputChannel(ConnectionConstant.INBOUND_OUTPUT_CHANNEL))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    protected Class<InboundComponentRegister> componentRegisterClass() {
+        return InboundComponentRegister.class;
     }
 
 }

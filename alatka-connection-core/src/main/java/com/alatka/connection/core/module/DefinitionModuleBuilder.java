@@ -5,12 +5,10 @@ import com.alatka.connection.core.component.SupportComponentRegister;
 import com.alatka.connection.core.model.DefinitionModel;
 import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.JsonUtil;
-import org.springframework.core.io.support.SpringFactoriesLoader;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,11 +22,7 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     }
 
     @Override
-    protected void doBuild(List<? extends Property> models) {
-        Map<Class<Property>, ComponentRegister> mapping =
-                SpringFactoriesLoader.loadFactories(SupportComponentRegister.class, null).stream()
-                        .collect(Collectors.toMap(SupportComponentRegister::propertyClass, Function.identity()));
-
+    protected void doBuild(List<? extends Property> models, Map<Object, ComponentRegister> mapping) {
         models.forEach(property -> {
             ComponentRegister componentRegister = mapping.get(property.getClass());
             componentRegister.register(property, property.getId(), true);
@@ -47,5 +41,10 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
                         Stream.of(JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType())))
                 .map(model -> (Property) model)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    protected Class<SupportComponentRegister> componentRegisterClass() {
+        return SupportComponentRegister.class;
     }
 }

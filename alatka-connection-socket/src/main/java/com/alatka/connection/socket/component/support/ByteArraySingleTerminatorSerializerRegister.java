@@ -1,6 +1,6 @@
 package com.alatka.connection.socket.component.support;
 
-import com.alatka.connection.core.component.AbstractComponentRegister;
+import com.alatka.connection.core.component.SupportComponentRegister;
 import com.alatka.connection.core.property.support.SerializerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.serializer.ByteArraySingleTerminatorSerializer;
@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author ybliu
  */
-public class ByteArraySingleTerminatorSerializerRegister extends AbstractComponentRegister<SerializerProperty> {
+public class ByteArraySingleTerminatorSerializerRegister extends SupportComponentRegister<SerializerProperty> {
 
     private static final String KEY_DELIMITER = "delimiter";
 
@@ -23,5 +23,10 @@ public class ByteArraySingleTerminatorSerializerRegister extends AbstractCompone
     @Override
     protected Class<?> beanClass() {
         return ByteArraySingleTerminatorSerializer.class;
+    }
+
+    @Override
+    public Class<SerializerProperty> reference() {
+        return SerializerProperty.class;
     }
 }

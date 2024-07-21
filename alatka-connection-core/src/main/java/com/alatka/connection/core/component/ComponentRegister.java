@@ -1,7 +1,6 @@
 package com.alatka.connection.core.component;
 
 import com.alatka.connection.core.property.Property;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 /**
  * 组件注册器
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
  * @param <T> {@link Property}
  * @author ybliu
  */
-public interface ComponentRegister<T extends Property> {
+public interface ComponentRegister<T extends Property, S> extends ReferenceProperty<S> {
 
     /**
      * 注册组件为{@link org.springframework.beans.factory.config.BeanDefinition}

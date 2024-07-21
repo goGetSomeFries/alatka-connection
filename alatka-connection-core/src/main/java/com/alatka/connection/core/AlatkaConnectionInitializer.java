@@ -74,6 +74,7 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
     }
 
     /**
+     * alatka-connection-[identity].yml<br><br>
      * alatka-connection-channel2.yml -> channel2<br>
      * alatka-connection-cpsfe.yaml -> cpsfe<br>
      * alatka-connection-app.yaml -> app<br>

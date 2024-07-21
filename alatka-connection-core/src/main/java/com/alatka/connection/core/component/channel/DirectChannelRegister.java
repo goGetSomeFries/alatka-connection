@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.channel;
 
-import com.alatka.connection.core.property.ChannelProperty;
+import com.alatka.connection.core.property.channel.ChannelProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.channel.DirectChannel;
 
@@ -16,7 +16,7 @@ public class DirectChannelRegister extends SubscribableChannelRegister<ChannelPr
     }
 
     @Override
-    public Class<ChannelProperty> propertyClass() {
-        return null;
+    public ChannelProperty.Type reference() {
+        return ChannelProperty.Type.direct;
     }
 }

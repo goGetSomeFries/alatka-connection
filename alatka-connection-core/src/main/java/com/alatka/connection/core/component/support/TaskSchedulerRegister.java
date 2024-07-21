@@ -22,7 +22,7 @@ public class TaskSchedulerRegister extends SupportComponentRegister<TaskSchedule
     }
 
     @Override
-    public Class<TaskSchedulerProperty> propertyClass() {
+    public Class<TaskSchedulerProperty> reference() {
         return TaskSchedulerProperty.class;
     }
 }

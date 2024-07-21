@@ -1,8 +1,10 @@
 package com.alatka.connection.core.module;
 
+import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.property.ProcessorProperty;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ybliu
@@ -14,7 +16,7 @@ public class BypassModuleBuilder extends AbstractModuleBuilder<List<ProcessorPro
     }
 
     @Override
-    protected void doBuild(List<ProcessorProperty> models) {
+    protected void doBuild(List<ProcessorProperty> models, Map<Object, ComponentRegister> mapping) {
     }
 
     @Override
@@ -22,6 +24,11 @@ public class BypassModuleBuilder extends AbstractModuleBuilder<List<ProcessorPro
         if (models == null) {
 
         }
+        return null;
+    }
+
+    @Override
+    protected Class<? extends ComponentRegister> componentRegisterClass() {
         return null;
     }
 }

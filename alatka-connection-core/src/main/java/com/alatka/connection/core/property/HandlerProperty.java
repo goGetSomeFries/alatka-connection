@@ -4,10 +4,10 @@ import java.util.Map;
 
 public class HandlerProperty extends Property {
 
-    private HandlerName name;
+    private Type type;
     private Map<String, Object> params;
 
-    public enum HandlerName {
+    public enum Type {
         passthrough, logger;
     }
 }
