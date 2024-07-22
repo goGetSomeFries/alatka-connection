@@ -40,6 +40,7 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
                         JsonUtil.convertToList(entry.getValue(), entry.getKey().getType()).stream() :
                         Stream.of(JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType())))
                 .map(model -> (Property) model)
+                .filter(Property::isEnabled)
                 .collect(Collectors.toList());
     }
 

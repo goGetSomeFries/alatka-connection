@@ -41,7 +41,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         return this.doBuild(convertedModel, mapping);
     }
 
-    private Map<Object, ComponentRegister<? extends Property, Object>> mappingComponentRegister() {
+    protected Map<Object, ComponentRegister<? extends Property, Object>> mappingComponentRegister() {
         return SpringFactoriesLoader.loadFactories(this.componentRegisterClass(), null).stream()
                 .collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
     }
@@ -68,7 +68,8 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
                         String value = ClassUtil.getValue(field, property);
                         value = Optional.ofNullable(value).orElse("");
                         if (!value.contains(".")) {
-                            ClassUtil.setValue(field, property, this.identity.concat(".").concat(value));
+                            String lastValue = this.identity.concat(value.isEmpty() ? value : ".".concat(value));
+                            ClassUtil.setValue(field, property, lastValue);
                         }
                     }
                 });

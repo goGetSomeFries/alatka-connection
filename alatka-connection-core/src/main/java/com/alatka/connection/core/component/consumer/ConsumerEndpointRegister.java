@@ -8,7 +8,7 @@ import org.springframework.integration.config.ConsumerEndpointFactoryBean;
 /**
  * @author ybliu
  */
-public class ConsumerEndpointRegister extends AbstractComponentRegister<ConsumerProperty, Void> {
+public class ConsumerEndpointRegister extends AbstractComponentRegister<ConsumerProperty, Class<ConsumerProperty>> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, ConsumerProperty property) {
@@ -24,7 +24,12 @@ public class ConsumerEndpointRegister extends AbstractComponentRegister<Consumer
     }
 
     @Override
-    public Void reference() {
-        return null;
+    protected String beanNameSuffix() {
+        return "consumer";
+    }
+
+    @Override
+    public Class<ConsumerProperty> reference() {
+        return ConsumerProperty.class;
     }
 }
