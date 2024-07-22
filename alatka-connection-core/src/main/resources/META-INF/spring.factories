@@ -1,7 +1,7 @@
 org.springframework.integration.config.IntegrationConfigurationInitializer=\
   com.alatka.connection.core.AlatkaConnectionInitializer
 
-com.alatka.connection.core.component.channel.ChannelComponentRegister=\
+com.alatka.connection.core.component.ChannelComponentRegister=\
   com.alatka.connection.core.component.channel.DirectChannelRegister,\
   com.alatka.connection.core.component.channel.QueueChannelRegister
 com.alatka.connection.core.component.SupportComponentRegister=\

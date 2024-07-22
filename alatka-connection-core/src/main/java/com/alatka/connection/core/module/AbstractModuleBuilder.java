@@ -4,6 +4,7 @@ import com.alatka.connection.core.annotation.BeanProperty;
 import com.alatka.connection.core.annotation.ReferenceBeanProperty;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.ReferenceProperty;
+import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.core.util.Validator;
 import org.springframework.core.io.support.SpringFactoriesLoader;
@@ -11,6 +12,7 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,26 +22,26 @@ import java.util.stream.Stream;
  */
 public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
-    private String identity;
+    private final String identity;
 
     public AbstractModuleBuilder(String identity) {
         this.identity = identity;
     }
 
     @Override
-    public final void build(T model) {
+    public final List<String> build(T model) {
         if (model != null) {
             Validator.validateByException(model);
         }
 
-        Map<Object, ComponentRegister> mapping = this.registerMapping();
+        Map<Object, ComponentRegister<? extends Property, Object>> mapping = this.mappingComponentRegister();
         S convertedModel = this.convert(model);
         this.postConvert(convertedModel);
 
-        this.doBuild(convertedModel, mapping);
+        return this.doBuild(convertedModel, mapping);
     }
 
-    private Map<Object, ComponentRegister> registerMapping() {
+    private Map<Object, ComponentRegister<? extends Property, Object>> mappingComponentRegister() {
         return SpringFactoriesLoader.loadFactories(this.componentRegisterClass(), null).stream()
                 .collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
     }
@@ -49,35 +51,44 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     }
 
     private void postConvert(Object model) {
-        List<?> list = model instanceof List ? (List<?>) model : Collections.singletonList(model);
-        list.stream().forEach(instance -> this.assignIdentity(instance, instance.getClass()));
+        List<? extends Property> list = (List<? extends Property>) (model instanceof List ? model : Collections.singletonList(model));
+        list.stream().forEach(property -> this.assignIdentity(property, property.getClass()));
     }
 
-    private void assignIdentity(Object instance, Class<?> clazz) {
+    private void assignIdentity(Object property, Class<?> clazz) {
         Stream.of(clazz.getDeclaredFields())
                 .peek(field -> {
                     if (field.isAnnotationPresent(ReferenceBeanProperty.class)) {
-                        Object value = ClassUtil.getValue(field, instance);
-                        this.assignIdentity(value, instance.getClass());
+                        Object value = ClassUtil.getValue(field, property);
+                        this.assignIdentity(value, property.getClass());
                     }
                 })
                 .forEach(field -> {
                     if (field.isAnnotationPresent(BeanProperty.class)) {
-                        String value = ClassUtil.getValue(field, instance);
-                        if (value != null && !value.isEmpty() && !value.contains(".")) {
-                            ClassUtil.setValue(field, instance, this.identity.concat(".").concat(value));
+                        String value = ClassUtil.getValue(field, property);
+                        value = Optional.ofNullable(value).orElse("");
+                        if (!value.contains(".")) {
+                            ClassUtil.setValue(field, property, this.identity.concat(".").concat(value));
                         }
                     }
                 });
 
         Class<?> superclass = clazz.getSuperclass();
         if (superclass != null && superclass != Object.class) {
-            this.assignIdentity(instance, superclass);
+            this.assignIdentity(property, superclass);
         }
     }
 
+    /**
+     * @return
+     */
     protected abstract Class<? extends ComponentRegister> componentRegisterClass();
 
-    protected abstract void doBuild(S model, Map<Object, ComponentRegister> mapping);
+    /**
+     * @param model
+     * @param mapping
+     * @return
+     */
+    protected abstract List<String> doBuild(S model, Map<Object, ComponentRegister<? extends Property, Object>> mapping);
 
 }

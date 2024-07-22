@@ -1,4 +1,4 @@
-package com.alatka.connection.core.component.channel;
+package com.alatka.connection.core.component;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.property.channel.ChannelProperty;

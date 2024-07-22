@@ -1,9 +1,11 @@
 package com.alatka.connection.core.module;
 
+import java.util.List;
+
 /**
  * @author ybliu
  */
 public interface ModuleBuilder<T> {
 
-    void build(T model);
+    List<String> build(T model);
 }

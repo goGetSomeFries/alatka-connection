@@ -22,11 +22,11 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     }
 
     @Override
-    protected void doBuild(List<? extends Property> models, Map<Object, ComponentRegister> mapping) {
-        models.forEach(property -> {
+    protected List<String> doBuild(List<? extends Property> models, Map<Object, ComponentRegister<? extends Property, Object>> mapping) {
+        return models.stream().map(property -> {
             ComponentRegister componentRegister = mapping.get(property.getClass());
-            componentRegister.register(property, property.getId(), true);
-        });
+            return componentRegister.register(property, property.getId(), true);
+        }).collect(Collectors.toList());
     }
 
     @Override

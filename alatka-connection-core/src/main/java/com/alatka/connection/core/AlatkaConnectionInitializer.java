@@ -38,8 +38,8 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         AbstractComponentRegister.init((DefaultListableBeanFactory) beanFactory);
 
         for (Resource resource : this.loadResources()) {
-            String identity = this.identity(resource.getFilename());
-            RootModel rootModel = this.rootModel(resource);
+            String identity = this.getIdentity(resource.getFilename());
+            RootModel rootModel = this.getRootModel(resource);
 
             // alatka.connection.definition
             DefinitionModuleBuilder definitionModuleBuilder = new DefinitionModuleBuilder(identity);
@@ -59,6 +59,11 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         }
     }
 
+    /**
+     * 加载alatka-connection*.[yml|yaml]
+     *
+     * @return {@link Resource}集合
+     */
     private List<Resource> loadResources() {
         try {
             Resource[] ymlResources = ResourcePatternUtils.getResourcePatternResolver(null)
@@ -83,12 +88,12 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
      * @param fileName
      * @return
      */
-    private String identity(String fileName) {
+    private String getIdentity(String fileName) {
         String str = fileName.substring(fileName.indexOf(FILE_PREFIX) + FILE_PREFIX.length(), fileName.lastIndexOf("."));
         return str.isEmpty() ? "default" : str.substring(1);
     }
 
-    private RootModel rootModel(Resource resource) {
+    private RootModel getRootModel(Resource resource) {
         try {
             return YamlUtil.getObject(resource.getFile(), "alatka.connection", RootModel.class);
         } catch (IOException e) {

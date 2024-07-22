@@ -1,9 +1,10 @@
 package com.alatka.connection.core.module;
 
+import com.alatka.connection.core.component.ChannelComponentRegister;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.ReferenceProperty;
-import com.alatka.connection.core.component.channel.ChannelComponentRegister;
 import com.alatka.connection.core.property.ProcessorProperty;
+import com.alatka.connection.core.property.Property;
 import org.springframework.core.io.support.SpringFactoriesLoader;
 
 import java.util.List;
@@ -16,14 +17,20 @@ import java.util.stream.Collectors;
  */
 public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<ProcessorProperty>, List<ProcessorProperty>> {
 
+    private String identity;
+
     public ProcessorModuleBuilder(String identity) {
         super(identity);
+        this.identity = identity;
     }
 
     @Override
-    protected void doBuild(List<ProcessorProperty> models, Map<Object, ComponentRegister> mapping) {
-        List<String> requestChannels = this.registerChannels(models, ProcessorProperty.Type.request);
-        List<String> replyChannels = this.registerChannels(models, ProcessorProperty.Type.reply);
+    protected List<String> doBuild(List<ProcessorProperty> models, Map<Object, ComponentRegister<? extends Property, Object>> mapping) {
+        List<String> requestChannels = this.buildChannels(models, ProcessorProperty.Type.request);
+        List<String> replyChannels = this.buildChannels(models, ProcessorProperty.Type.reply);
+        ChannelModuleBuilder channelModuleBuilder = new ChannelModuleBuilder(this.identity);
+        channelModuleBuilder.type(ProcessorProperty.Type.reply).build(models);
+        return null;
     }
 
     @Override
@@ -39,7 +46,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         return null;
     }
 
-    private List<String> registerChannels(List<ProcessorProperty> models, ProcessorProperty.Type type) {
+    private List<String> buildChannels(List<ProcessorProperty> models, ProcessorProperty.Type type) {
         Map<Object, ChannelComponentRegister> mapping = SpringFactoriesLoader.loadFactories(ChannelComponentRegister.class, null).stream()
                 .collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
 

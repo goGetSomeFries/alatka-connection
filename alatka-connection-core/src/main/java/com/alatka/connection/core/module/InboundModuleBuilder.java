@@ -5,6 +5,7 @@ import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.JsonUtil;
 
 import java.util.List;
@@ -21,11 +22,11 @@ public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel
     }
 
     @Override
-    protected void doBuild(List<? extends ChannelAdapterProperty> models, Map<Object, ComponentRegister> mapping) {
-        models.forEach(property -> {
+    protected List<String> doBuild(List<? extends ChannelAdapterProperty> models, Map<Object, ComponentRegister<? extends Property, Object>> mapping) {
+        return models.stream().map(property -> {
             ComponentRegister componentRegister = mapping.get(property.getClass());
-            componentRegister.register(property, property.getId(), true);
-        });
+            return componentRegister.register(property, property.getId(), true);
+        }).collect(Collectors.toList());
     }
 
     @Override

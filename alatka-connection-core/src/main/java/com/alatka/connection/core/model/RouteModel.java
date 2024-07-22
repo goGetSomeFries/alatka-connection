@@ -3,6 +3,8 @@ package com.alatka.connection.core.model;
 
 import com.alatka.connection.core.property.ProcessorProperty;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +13,12 @@ import java.util.Map;
  */
 public class RouteModel {
 
+    @Size(min = 1)
+    @NotNull
     private Map<InboundModel, Object> inbound;
     private List<ProcessorProperty> processors;
+    @Size(min = 1)
+    @NotNull
     private Map<OutboundModel, Object> outbound;
     private Map<OutboundModel, Object> bypass;
 
