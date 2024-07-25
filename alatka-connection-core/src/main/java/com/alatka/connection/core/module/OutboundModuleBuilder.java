@@ -20,8 +20,6 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
 
     private ConsumerModuleBuilder moduleBuilder;
 
-    private static final String PREFIX = "outbound";
-
     public OutboundModuleBuilder(String identity) {
         super(identity);
         this.moduleBuilder = new ConsumerModuleBuilder(identity);
@@ -30,12 +28,12 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
     @Override
     protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = mapping.get(property.getClass());
-        String beanName = componentRegister.register(property, property.getId().concat(".").concat(PREFIX), false);
+        String beanName = componentRegister.register(property, property.getId().concat(".").concat(this.prefix()), false);
 
         ConsumerProperty consumerProperty = new ConsumerProperty();
-        consumerProperty.setInputChannel(ConnectionConstant.OUTBOUND_INPUT_CHANNEL);
+        consumerProperty.setInputChannel(this.inputChannel());
         consumerProperty.setMessageHandler(beanName);
-        consumerProperty.setId(PREFIX.concat(".consumer"));
+        consumerProperty.setId(this.prefix().concat(".consumer"));
         this.moduleBuilder.build(consumerProperty);
     }
 
@@ -45,7 +43,7 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
                 .stream()
                 .map(entry -> {
                     ChannelAdapterProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
-                    property.setOutputChannel(entry.getKey().isDuplex() ? ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL : null);
+                    property.setOutputChannel(entry.getKey().isDuplex() ? this.outputChannel() : null);
                     return property;
                 }).filter(Property::isEnabled)
                 .collect(Collectors.toList());
@@ -59,6 +57,18 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
     @Override
     protected Class<OutboundComponentRegister> componentRegisterClass() {
         return OutboundComponentRegister.class;
+    }
+
+    protected String prefix() {
+        return "outbound";
+    }
+
+    protected String inputChannel() {
+        return ConnectionConstant.INBOUND_OUTPUT_CHANNEL;
+    }
+
+    protected String outputChannel() {
+        return ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
     }
 
 }

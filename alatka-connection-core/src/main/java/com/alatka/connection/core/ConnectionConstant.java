@@ -46,6 +46,8 @@ public final class ConnectionConstant {
 
     public static final String INBOUND_INPUT_CHANNEL = "";
     public static final String INBOUND_OUTPUT_CHANNEL = "";
+    public static final String INBOUND_BYPASS_CHANNEL = "";
     public static final String OUTBOUND_INPUT_CHANNEL = "";
     public static final String OUTBOUND_OUTPUT_CHANNEL = "";
+    public static final String OUTBOUND_BYPASS_CHANNEL = "";
 }

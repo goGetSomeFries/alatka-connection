@@ -2,10 +2,7 @@ package com.alatka.connection.core;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.model.RootModel;
-import com.alatka.connection.core.module.DefinitionModuleBuilder;
-import com.alatka.connection.core.module.InboundModuleBuilder;
-import com.alatka.connection.core.module.OutboundModuleBuilder;
-import com.alatka.connection.core.module.ProcessorModuleBuilder;
+import com.alatka.connection.core.module.*;
 import com.alatka.connection.core.util.YamlUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -56,6 +53,10 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
             // alatka.connection.route.outbound
             OutboundModuleBuilder outboundModuleBuilder = new OutboundModuleBuilder(identity);
             outboundModuleBuilder.build(rootModel.getRoute().getOutbound());
+
+            // alatka.connection.route.bypass
+            BypassModuleBuilder bypassModuleBuilder = new BypassModuleBuilder(identity);
+            bypassModuleBuilder.build(rootModel.getRoute().getBypass());
         }
     }
 

@@ -1,34 +1,26 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.component.ComponentRegister;
-import com.alatka.connection.core.property.ProcessorProperty;
-
-import java.util.List;
-import java.util.Map;
+import com.alatka.connection.core.ConnectionConstant;
 
 /**
  * @author ybliu
  */
-public class BypassModuleBuilder extends AbstractModuleBuilder<List<ProcessorProperty>, List<ProcessorProperty>> {
+public class BypassModuleBuilder extends OutboundModuleBuilder {
 
     public BypassModuleBuilder(String identity) {
         super(identity);
     }
 
-    @Override
-    protected void doBuild(List<ProcessorProperty> models, Map<Object, ? extends ComponentRegister> mapping) {
+    protected String prefix() {
+        return "bypass";
     }
 
-    @Override
-    protected List<ProcessorProperty> convert(List<ProcessorProperty> models) {
-        if (models == null) {
-
-        }
-        return null;
+    protected String inputChannel() {
+        return ConnectionConstant.INBOUND_BYPASS_CHANNEL;
     }
 
-    @Override
-    protected Class<? extends ComponentRegister> componentRegisterClass() {
-        return null;
+    protected String outputChannel() {
+        return ConnectionConstant.OUTBOUND_BYPASS_CHANNEL;
     }
+
 }

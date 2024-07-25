@@ -1,6 +1,7 @@
 package com.alatka.connection.core.property.http;
 
 import com.alatka.connection.core.property.InboundProperty;
+import com.alatka.connection.core.util.ClassUtil;
 
 /**
  * @author ybliu
@@ -33,7 +34,7 @@ public class HttpInboundProperty extends InboundProperty {
         return requestType;
     }
 
-    public void setRequestType(Class<?> requestType) {
-        this.requestType = requestType;
+    public void setRequestType(String requestType) {
+        this.requestType = ClassUtil.forName(requestType);
     }
 }
