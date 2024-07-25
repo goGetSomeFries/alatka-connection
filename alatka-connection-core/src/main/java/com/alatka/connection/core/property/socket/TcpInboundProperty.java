@@ -1,9 +1,11 @@
-package com.alatka.connection.core.property;
+package com.alatka.connection.core.property.socket;
+
+import com.alatka.connection.core.property.InboundProperty;
 
 /**
  * @author ybliu
  */
-public class TcpInboundProperty extends ChannelAdapterProperty {
+public class TcpInboundProperty extends InboundProperty {
 
     private boolean clientMode = false;
 

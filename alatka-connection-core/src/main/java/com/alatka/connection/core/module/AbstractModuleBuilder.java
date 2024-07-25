@@ -7,6 +7,8 @@ import com.alatka.connection.core.component.ReferenceProperty;
 import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.core.util.Validator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.SpringFactoriesLoader;
 
 import java.util.Collections;
@@ -22,6 +24,8 @@ import java.util.stream.Stream;
  */
 public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private final String identity;
 
     public AbstractModuleBuilder(String identity) {
@@ -29,21 +33,23 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     }
 
     @Override
-    public final List<String> build(T model) {
+    public final void build(T model) {
         if (model != null) {
             Validator.validateByException(model);
         }
 
-        Map<Object, ComponentRegister<? extends Property, Object>> mapping = this.mappingComponentRegister();
+        Map<Object, ? extends ComponentRegister> mapping = this.mappingComponentRegister();
         S convertedModel = this.convert(model);
         this.postConvert(convertedModel);
-
-        return this.doBuild(convertedModel, mapping);
+        this.doBuild(convertedModel, mapping);
     }
 
-    protected Map<Object, ComponentRegister<? extends Property, Object>> mappingComponentRegister() {
-        return SpringFactoriesLoader.loadFactories(this.componentRegisterClass(), null).stream()
-                .collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
+    private Map<Object, ? extends ComponentRegister> mappingComponentRegister() {
+        List<? extends ComponentRegister> list = SpringFactoriesLoader.loadFactories(this.componentRegisterClass(), null);
+        if (list.isEmpty()) {
+            list.add(ClassUtil.newInstance(this.componentRegisterClass().getName()));
+        }
+        return list.stream().collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
     }
 
     protected S convert(T model) {
@@ -81,6 +87,8 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     }
 
     /**
+     * {@link ComponentRegister}
+     *
      * @return
      */
     protected abstract Class<? extends ComponentRegister> componentRegisterClass();
@@ -90,6 +98,6 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
      * @param mapping
      * @return
      */
-    protected abstract List<String> doBuild(S model, Map<Object, ComponentRegister<? extends Property, Object>> mapping);
+    protected abstract void doBuild(S model, Map<Object, ? extends ComponentRegister> mapping);
 
 }

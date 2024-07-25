@@ -24,11 +24,6 @@ public class ConsumerEndpointRegister extends AbstractComponentRegister<Consumer
     }
 
     @Override
-    protected String beanNameSuffix() {
-        return "consumer";
-    }
-
-    @Override
     public Class<ConsumerProperty> reference() {
         return ConsumerProperty.class;
     }

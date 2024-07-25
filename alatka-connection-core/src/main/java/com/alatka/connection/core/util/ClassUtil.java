@@ -6,14 +6,26 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ClassUtil {
 
+    public static <T> T newInstance(String className) {
+        return newInstance(className, null, null);
+    }
+
     public static <T> T newInstance(String className, Class<?>[] paramTypes, Object[] params) {
         try {
             Class<?> clazz = Class.forName(className);
             Constructor<?> constructor = clazz.getDeclaredConstructor(paramTypes == null ? new Class<?>[0] : paramTypes);
             return (T) constructor.newInstance(params == null ? new Object[0] : params);
         } catch (InstantiationException | IllegalAccessException |
-                 InvocationTargetException | ClassNotFoundException | NoSuchMethodException e) {
+                InvocationTargetException | ClassNotFoundException | NoSuchMethodException e) {
             throw new RuntimeException("");
+        }
+    }
+
+    public static Class<?> forName(String className) {
+        try {
+            return Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

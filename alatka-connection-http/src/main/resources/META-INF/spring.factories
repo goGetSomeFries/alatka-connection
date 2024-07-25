@@ -1,0 +1,4 @@
+com.alatka.connection.core.component.OutboundComponentRegister=\
+  com.alatka.connection.http.component.outbound.HttpOutboundRegister
+com.alatka.connection.core.component.InboundComponentRegister=\
+ com.alatka.connection.http.component.inbound.HttpInboundRegister

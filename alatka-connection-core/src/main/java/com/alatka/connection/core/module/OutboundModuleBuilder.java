@@ -28,13 +28,15 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
     }
 
     @Override
-    protected List<String> doBuild(ChannelAdapterProperty property, Map<Object, ComponentRegister<? extends Property, Object>> mapping) {
-        ComponentRegister<? extends Property, Object> componentRegister = mapping.get(property.getClass());
-//        String beanName = componentRegister.register(property, property.getId().concat(".").concat(PREFIX), false);
+    protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+        ComponentRegister componentRegister = mapping.get(property.getClass());
+        String beanName = componentRegister.register(property, property.getId().concat(".").concat(PREFIX), false);
 
         ConsumerProperty consumerProperty = new ConsumerProperty();
+        consumerProperty.setInputChannel(ConnectionConstant.OUTBOUND_INPUT_CHANNEL);
+        consumerProperty.setMessageHandler(beanName);
+        consumerProperty.setId(PREFIX.concat(".consumer"));
         this.moduleBuilder.build(consumerProperty);
-        return null;
     }
 
     @Override
@@ -43,8 +45,7 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
                 .stream()
                 .map(entry -> {
                     ChannelAdapterProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
-                    property.setInputChannel(ConnectionConstant.OUTBOUND_INPUT_CHANNEL);
-                    property.setOutputChannel(entry.getKey().isDuplex() ? ConnectionConstant.INBOUND_OUTPUT_CHANNEL : null);
+                    property.setOutputChannel(entry.getKey().isDuplex() ? ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL : null);
                     return property;
                 }).filter(Property::isEnabled)
                 .collect(Collectors.toList());

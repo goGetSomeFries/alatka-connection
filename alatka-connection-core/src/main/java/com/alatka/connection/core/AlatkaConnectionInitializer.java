@@ -38,7 +38,7 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         AbstractComponentRegister.init((DefaultListableBeanFactory) beanFactory);
 
         for (Resource resource : this.loadResources()) {
-            String identity = this.getIdentity(resource.getFilename());
+            String identity = this.getIdentity(resource);
             RootModel rootModel = this.getRootModel(resource);
 
             // alatka.connection.definition
@@ -85,10 +85,11 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
      * alatka-connection-app.yaml -> app<br>
      * alatka-connection.yml -> default<br>
      *
-     * @param fileName
+     * @param resource
      * @return
      */
-    private String getIdentity(String fileName) {
+    private String getIdentity(Resource resource) {
+        String fileName = resource.getFilename();
         String str = fileName.substring(fileName.indexOf(FILE_PREFIX) + FILE_PREFIX.length(), fileName.lastIndexOf("."));
         return str.isEmpty() ? "default" : str.substring(1);
     }

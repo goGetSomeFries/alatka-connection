@@ -2,13 +2,13 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.consumer.ConsumerEndpointRegister;
-import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.property.consumer.ConsumerProperty;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * @author ybliu
+ */
 public class ConsumerModuleBuilder extends AbstractModuleBuilder<ConsumerProperty, ConsumerProperty> {
 
     public ConsumerModuleBuilder(String identity) {
@@ -16,15 +16,9 @@ public class ConsumerModuleBuilder extends AbstractModuleBuilder<ConsumerPropert
     }
 
     @Override
-    protected List<String> doBuild(ConsumerProperty property, Map<Object, ComponentRegister<? extends Property, Object>> mapping) {
-        ConsumerEndpointRegister componentRegister = new ConsumerEndpointRegister();
-        componentRegister.register(property, property.getId(), false);
-        return null;
-    }
-
-    @Override
-    protected Map<Object, ComponentRegister<? extends Property, Object>> mappingComponentRegister() {
-        return Collections.emptyMap();
+    protected void doBuild(ConsumerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+        ConsumerEndpointRegister componentRegister = (ConsumerEndpointRegister) mapping.get(property.getClass());
+        componentRegister.register(property, property.getId(), true);
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.alatka.connection.core.ConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
-import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.JsonUtil;
 
@@ -15,29 +15,36 @@ import java.util.stream.Collectors;
 /**
  * @author ybliu
  */
-public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel, Object>, List<? extends ChannelAdapterProperty>> {
+public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel, Object>, InboundProperty> {
+
+    private static final String PREFIX = "inbound";
 
     public InboundModuleBuilder(String identity) {
         super(identity);
     }
 
     @Override
-    protected List<String> doBuild(List<? extends ChannelAdapterProperty> models, Map<Object, ComponentRegister<? extends Property, Object>> mapping) {
-        return models.stream().map(property -> {
-            ComponentRegister componentRegister = mapping.get(property.getClass());
-            return componentRegister.register(property, property.getId(), true);
-        }).collect(Collectors.toList());
+    protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+        ComponentRegister componentRegister = mapping.get(property.getClass());
+        componentRegister.register(property, property.getId().concat(".").concat(PREFIX), false);
     }
 
     @Override
-    protected List<? extends ChannelAdapterProperty> convert(Map<InboundModel, Object> map) {
-        return map.entrySet()
+    protected InboundProperty convert(Map<InboundModel, Object> map) {
+        List<InboundProperty> list = map.entrySet()
                 .stream()
-                .map(entry -> JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType()))
-                .map(entity -> (ChannelAdapterProperty) entity)
-                .peek(property -> property.setInputChannel(ConnectionConstant.INBOUND_INPUT_CHANNEL))
-                .peek(property -> property.setOutputChannel(ConnectionConstant.INBOUND_OUTPUT_CHANNEL))
+                .map(entry -> {
+                    InboundProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
+                    property.setInputChannel(entry.getKey().isDuplex() ? ConnectionConstant.INBOUND_INPUT_CHANNEL : null);
+                    property.setOutputChannel(ConnectionConstant.INBOUND_OUTPUT_CHANNEL);
+                    return property;
+                }).filter(Property::isEnabled)
                 .collect(Collectors.toList());
+
+        if (list.size() != 1) {
+            throw new IllegalArgumentException("count of enabled inbound must be 1");
+        }
+        return list.get(0);
     }
 
     @Override

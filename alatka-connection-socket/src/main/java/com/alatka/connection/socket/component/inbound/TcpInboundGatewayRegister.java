@@ -1,7 +1,7 @@
 package com.alatka.connection.socket.component.inbound;
 
 import com.alatka.connection.core.component.InboundComponentRegister;
-import com.alatka.connection.core.property.TcpInboundProperty;
+import com.alatka.connection.core.property.socket.TcpInboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpInboundGateway;
 

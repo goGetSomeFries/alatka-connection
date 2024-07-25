@@ -3,9 +3,19 @@ package com.alatka.connection.core.property;
 /**
  * @author ybliu
  */
-public abstract class ChannelAdapterProperty extends Property {
+public abstract class InboundProperty extends Property {
+
+    private String inputChannel;
 
     private String outputChannel;
+
+    public String getInputChannel() {
+        return inputChannel;
+    }
+
+    public void setInputChannel(String inputChannel) {
+        this.inputChannel = inputChannel;
+    }
 
     public String getOutputChannel() {
         return outputChannel;

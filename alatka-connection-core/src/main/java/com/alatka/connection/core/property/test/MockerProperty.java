@@ -1,11 +1,11 @@
 package com.alatka.connection.core.property.test;
 
-import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.InboundProperty;
 
 /**
  * @author ybliu
  */
-public class MockerProperty extends ChannelAdapterProperty {
+public class MockerProperty extends InboundProperty {
 
     private String poller;
 

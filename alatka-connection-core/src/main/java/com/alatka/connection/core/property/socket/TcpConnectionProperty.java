@@ -1,4 +1,6 @@
-package com.alatka.connection.core.property;
+package com.alatka.connection.core.property.socket;
+
+import com.alatka.connection.core.property.Property;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
