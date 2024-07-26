@@ -11,14 +11,17 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
         super(identity);
     }
 
-    protected String prefix() {
+    @Override
+    protected String beanNamePrefix() {
         return "bypass";
     }
 
+    @Override
     protected String inputChannel() {
         return ConnectionConstant.INBOUND_BYPASS_CHANNEL;
     }
 
+    @Override
     protected String outputChannel() {
         return ConnectionConstant.OUTBOUND_BYPASS_CHANNEL;
     }

@@ -4,7 +4,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * 不需要{@link com.alatka.connection.core.component.ComponentRegister}单独解析，无需继承{@link com.alatka.connection.core.property.Property}
+ * 不需要{@link com.alatka.connection.core.component.ComponentRegister}单独解析，
+ * 无需继承{@link com.alatka.connection.core.property.Property}
  *
  * @author ybliu
  */

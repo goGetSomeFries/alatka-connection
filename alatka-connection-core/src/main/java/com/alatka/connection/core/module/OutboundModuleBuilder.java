@@ -28,12 +28,12 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
     @Override
     protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = mapping.get(property.getClass());
-        String beanName = componentRegister.register(property, property.getId().concat(".").concat(this.prefix()), false);
+        String beanName = componentRegister.register(property, property.getId().concat(".").concat(this.beanNamePrefix()), false);
 
         ConsumerProperty consumerProperty = new ConsumerProperty();
         consumerProperty.setInputChannel(this.inputChannel());
         consumerProperty.setMessageHandler(beanName);
-        consumerProperty.setId(this.prefix().concat(".consumer"));
+        consumerProperty.setId(this.beanNamePrefix().concat(".consumer"));
         this.moduleBuilder.build(consumerProperty);
     }
 
@@ -49,7 +49,7 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
                 .collect(Collectors.toList());
 
         if (list.size() != 1) {
-            throw new IllegalArgumentException("count of enabled outbound must be 1");
+            throw new IllegalArgumentException("count of enabled " + this.beanNamePrefix() + " must be 1");
         }
         return list.get(0);
     }
@@ -59,7 +59,7 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
         return OutboundComponentRegister.class;
     }
 
-    protected String prefix() {
+    protected String beanNamePrefix() {
         return "outbound";
     }
 

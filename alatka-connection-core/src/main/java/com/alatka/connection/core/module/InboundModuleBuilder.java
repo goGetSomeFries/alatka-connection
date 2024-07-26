@@ -42,7 +42,7 @@ public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel
                 .collect(Collectors.toList());
 
         if (list.size() != 1) {
-            throw new IllegalArgumentException("count of enabled inbound must be 1");
+            throw new IllegalArgumentException("count of enabled " + PREFIX + " must be 1");
         }
         return list.get(0);
     }
