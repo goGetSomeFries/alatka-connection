@@ -1,5 +1,6 @@
 package com.alatka.connection.core.property.test;
 
+import com.alatka.connection.core.annotation.BeanProperty;
 import com.alatka.connection.core.property.InboundProperty;
 
 /**
@@ -7,6 +8,7 @@ import com.alatka.connection.core.property.InboundProperty;
  */
 public class MockerProperty extends InboundProperty {
 
+    @BeanProperty
     private String poller;
 
     private String className;

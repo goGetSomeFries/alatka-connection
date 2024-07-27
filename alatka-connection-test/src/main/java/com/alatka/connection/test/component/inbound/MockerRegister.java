@@ -15,7 +15,7 @@ public class MockerRegister extends InboundComponentRegister<MockerProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, MockerProperty property) {
-        Object instance = ClassUtil.newInstance(property.getClassName(), null, null);
+        Object instance = ClassUtil.newInstance(property.getClassName());
         MethodInvokingMessageSource messageSource = new MethodInvokingMessageSource();
         messageSource.setObject(instance);
         messageSource.setMethodName(property.getMethodName());

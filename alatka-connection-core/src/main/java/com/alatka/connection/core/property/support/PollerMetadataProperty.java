@@ -3,6 +3,7 @@ package com.alatka.connection.core.property.support;
 import com.alatka.connection.core.annotation.BeanProperty;
 import com.alatka.connection.core.property.Property;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -15,6 +16,7 @@ public class PollerMetadataProperty extends Property {
     private String taskExecutor;
     @NotNull
     private Long maxMessagesPerPoll;
+    @Valid
     @NotNull
     private TriggerProperty trigger;
 

@@ -6,6 +6,7 @@ import com.alatka.connection.core.component.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.ChannelAdapterProperty;
 import com.alatka.connection.core.property.Property;
+import com.alatka.connection.core.property.channel.ChannelProperty;
 import com.alatka.connection.core.property.consumer.ConsumerProperty;
 import com.alatka.connection.core.util.JsonUtil;
 
@@ -16,25 +17,42 @@ import java.util.stream.Collectors;
 /**
  * @author ybliu
  */
-public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundModel, Object>, ChannelAdapterProperty> {
+public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, ChannelAdapterProperty> {
 
-    private ConsumerModuleBuilder moduleBuilder;
+    private final ChannelModuleBuilder channelModuleBuilder;
+
+    private final ConsumerModuleBuilder consumerModuleBuilder;
 
     public OutboundModuleBuilder(String identity) {
         super(identity);
-        this.moduleBuilder = new ConsumerModuleBuilder(identity);
+        this.channelModuleBuilder = new ChannelModuleBuilder(identity);
+        this.consumerModuleBuilder = new ConsumerModuleBuilder(identity);
     }
 
     @Override
     protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+        super.setDuplex(property.getOutputChannel() != null);
+
+        // channel
+        ChannelProperty inputChannelProperty = new ChannelProperty();
+        inputChannelProperty.setId(this.inputChannel());
+        this.channelModuleBuilder.build(inputChannelProperty);
+        if (property.getOutputChannel() != null) {
+            ChannelProperty outputChannelProperty = new ChannelProperty();
+            outputChannelProperty.setId(this.outputChannel());
+            this.channelModuleBuilder.build(outputChannelProperty);
+        }
+
+        // outbound
         ComponentRegister componentRegister = mapping.get(property.getClass());
         String beanName = componentRegister.register(property, property.getId().concat(".").concat(this.beanNamePrefix()), false);
 
+        // consumer
         ConsumerProperty consumerProperty = new ConsumerProperty();
         consumerProperty.setInputChannel(this.inputChannel());
         consumerProperty.setMessageHandler(beanName);
         consumerProperty.setId(this.beanNamePrefix().concat(".consumer"));
-        this.moduleBuilder.build(consumerProperty);
+        this.consumerModuleBuilder.build(consumerProperty);
     }
 
     @Override
@@ -64,11 +82,17 @@ public class OutboundModuleBuilder extends AbstractModuleBuilder<Map<OutboundMod
     }
 
     protected String inputChannel() {
-        return ConnectionConstant.INBOUND_OUTPUT_CHANNEL;
+        return ConnectionConstant.OUTBOUND_INPUT_CHANNEL;
     }
 
     protected String outputChannel() {
         return ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
+    }
+
+    protected void test(String outputChannel) {
+        ChannelProperty property = new ChannelProperty();
+        property.setId(this.inputChannel());
+        this.channelModuleBuilder.build(property);
     }
 
 }

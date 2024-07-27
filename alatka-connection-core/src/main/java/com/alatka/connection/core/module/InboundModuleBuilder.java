@@ -6,6 +6,7 @@ import com.alatka.connection.core.component.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.property.Property;
+import com.alatka.connection.core.property.channel.ChannelProperty;
 import com.alatka.connection.core.util.JsonUtil;
 
 import java.util.List;
@@ -15,16 +16,32 @@ import java.util.stream.Collectors;
 /**
  * @author ybliu
  */
-public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel, Object>, InboundProperty> {
+public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel, Object>, InboundProperty> {
 
     private static final String PREFIX = "inbound";
 
+    private final ChannelModuleBuilder channelModuleBuilder;
+
     public InboundModuleBuilder(String identity) {
         super(identity);
+        this.channelModuleBuilder = new ChannelModuleBuilder(identity);
     }
 
     @Override
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+        super.setDuplex(property.getInputChannel() != null);
+
+        // channel
+        ChannelProperty outputChannelProperty = new ChannelProperty();
+        outputChannelProperty.setId(ConnectionConstant.INBOUND_OUTPUT_CHANNEL);
+        this.channelModuleBuilder.build(outputChannelProperty);
+        if (property.getInputChannel() != null) {
+            ChannelProperty inputChannelProperty = new ChannelProperty();
+            inputChannelProperty.setId(ConnectionConstant.INBOUND_INPUT_CHANNEL);
+            this.channelModuleBuilder.build(inputChannelProperty);
+        }
+
+        // inbound
         ComponentRegister componentRegister = mapping.get(property.getClass());
         componentRegister.register(property, property.getId().concat(".").concat(PREFIX), false);
     }
@@ -51,5 +68,4 @@ public class InboundModuleBuilder extends AbstractModuleBuilder<Map<InboundModel
     protected Class<InboundComponentRegister> componentRegisterClass() {
         return InboundComponentRegister.class;
     }
-
 }

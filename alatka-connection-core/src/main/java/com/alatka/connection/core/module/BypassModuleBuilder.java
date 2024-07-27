@@ -1,7 +1,5 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.ConnectionConstant;
-
 /**
  * @author ybliu
  */
@@ -18,12 +16,14 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
 
     @Override
     protected String inputChannel() {
-        return ConnectionConstant.INBOUND_BYPASS_CHANNEL;
+//        return ConnectionConstant.INBOUND_BYPASS_CHANNEL;
+        return null;
     }
 
     @Override
     protected String outputChannel() {
-        return ConnectionConstant.OUTBOUND_BYPASS_CHANNEL;
+//        return ConnectionConstant.OUTBOUND_BYPASS_CHANNEL;
+        return null;
     }
 
 }

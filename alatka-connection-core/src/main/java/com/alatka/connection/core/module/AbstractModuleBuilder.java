@@ -45,6 +45,9 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     }
 
     private Map<Object, ? extends ComponentRegister> mappingComponentRegister() {
+        if (this.componentRegisterClass() == null) {
+            return Collections.emptyMap();
+        }
         List<? extends ComponentRegister> list = SpringFactoriesLoader.loadFactories(this.componentRegisterClass(), null);
         if (list.isEmpty()) {
             list.add(ClassUtil.newInstance(this.componentRegisterClass().getName()));

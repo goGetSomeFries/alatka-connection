@@ -29,10 +29,6 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
         this.postDoRegister(builder, property);
 
         String beanName = this.resolveBeanName(beanNamePrefix, custom);
-        if (!property.isEnabled()) {
-            this.logger.debug("bean [" + beanName + "] is disabled.");
-            return null;
-        }
         beanFactory.registerBeanDefinition(beanName, builder.getBeanDefinition());
         return beanName;
     }

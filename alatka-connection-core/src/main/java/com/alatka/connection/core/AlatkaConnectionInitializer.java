@@ -3,6 +3,7 @@ package com.alatka.connection.core;
 import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.model.RootModel;
 import com.alatka.connection.core.module.*;
+import com.alatka.connection.core.property.ProcessorProperty;
 import com.alatka.connection.core.util.YamlUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -42,10 +43,6 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
             DefinitionModuleBuilder definitionModuleBuilder = new DefinitionModuleBuilder(identity);
             definitionModuleBuilder.build(rootModel.getDefinition());
 
-            // alatka.connection.route.processor
-            ProcessorModuleBuilder processorModuleBuilder = new ProcessorModuleBuilder(identity);
-            processorModuleBuilder.build(rootModel.getRoute().getProcessors());
-
             // alatka.connection.route.inbound
             InboundModuleBuilder inboundModuleBuilder = new InboundModuleBuilder(identity);
             inboundModuleBuilder.build(rootModel.getRoute().getInbound());
@@ -57,6 +54,15 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
             // alatka.connection.route.bypass
             BypassModuleBuilder bypassModuleBuilder = new BypassModuleBuilder(identity);
             bypassModuleBuilder.build(rootModel.getRoute().getBypass());
+
+            // alatka.connection.route.processor
+            ProcessorModuleBuilder requestProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.request);
+            requestProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
+
+            if (inboundModuleBuilder.isDuplex() || outboundModuleBuilder.isDuplex()) {
+                ProcessorModuleBuilder replyProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.reply);
+                replyProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
+            }
         }
     }
 

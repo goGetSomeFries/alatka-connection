@@ -3,41 +3,24 @@ package com.alatka.connection.core.module;
 import com.alatka.connection.core.component.ChannelComponentRegister;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.property.HandlerProperty;
-import com.alatka.connection.core.property.ProcessorProperty;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author ybliu
  */
-public class HandlerModuleBuilder extends AbstractModuleBuilder<List<ProcessorProperty>, List<HandlerProperty>> {
+public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty, HandlerProperty> {
 
-    private ProcessorProperty.Type type;
+    private String beanName;
 
-    private List<String> beanNames;
-
-    public HandlerModuleBuilder(String identity, ProcessorProperty.Type type) {
+    public HandlerModuleBuilder(String identity) {
         super(identity);
-        this.type = type;
     }
 
     @Override
-    protected void doBuild(List<HandlerProperty> models, Map<Object, ? extends ComponentRegister> mapping) {
-        this.beanNames = models.stream()
-                .map(property -> {
-                    ComponentRegister componentRegister = mapping.get(property.getClass());
-                    return componentRegister.register(property, property.getId(), true);
-                }).collect(Collectors.toList());
-    }
-
-    @Override
-    protected List<HandlerProperty> convert(List<ProcessorProperty> list) {
-        return list.stream()
-                .filter(processor -> processor.getType() == ProcessorProperty.Type.all || processor.getType() == type)
-                .map(ProcessorProperty::getHandler)
-                .collect(Collectors.toList());
+    protected void doBuild(HandlerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+        ComponentRegister componentRegister = mapping.get(property.getClass());
+        this.beanName = componentRegister.register(property, property.getId(), true);
     }
 
     @Override
@@ -45,7 +28,7 @@ public class HandlerModuleBuilder extends AbstractModuleBuilder<List<ProcessorPr
         return ChannelComponentRegister.class;
     }
 
-    public List<String> getBeanNames() {
-        return beanNames;
+    public String getBeanName() {
+        return beanName;
     }
 }
