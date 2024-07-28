@@ -23,6 +23,11 @@ public class ProcessorProperty extends Property {
         all, request, reply
     }
 
+    @Override
+    public ProcessorProperty defaultProperty() {
+        return null;
+    }
+
     public Type getType() {
         return type;
     }

@@ -15,6 +15,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 /**
+ * processor模块构建器<br><br>
+ * alatka.connection.processors[1-n].type<br>
+ * alatka.connection.processors[1-n].handler<br>
+ * alatka.connection.processors[1-n].channel<br>
+ * alatka.connection.processors[1-n].......
+ *
  * @author ybliu
  */
 public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<ProcessorProperty>, List<ProcessorProperty>> {
@@ -42,8 +48,11 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
                 .filter(processor -> processor.getType() == ProcessorProperty.Type.all || processor.getType() == this.type)
                 .peek(processor -> index.incrementAndGet())
                 .collect(Collectors.toList());
-
         Collections.reverse(list);
+
+        if (list.isEmpty()) {
+            list.add(new ProcessorProperty().defaultProperty());
+        }
 
         String outputChannelBeanName = this.type == ProcessorProperty.Type.request ?
                 ConnectionConstant.OUTBOUND_INPUT_CHANNEL : ConnectionConstant.INBOUND_INPUT_CHANNEL;
@@ -90,11 +99,8 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
     }
 
     @Override
-    protected List<ProcessorProperty> convert(List<ProcessorProperty> models) {
-        if (models == null) {
-
-        }
-        return null;
+    protected List<ProcessorProperty> validAndConvert(List<ProcessorProperty> models) {
+        return models == null ? Collections.emptyList() : models;
     }
 
     @Override

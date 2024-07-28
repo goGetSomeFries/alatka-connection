@@ -6,13 +6,18 @@ import com.alatka.connection.core.model.DefinitionModel;
 import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.JsonUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * definition模块构建器<br><br>
+ * alatka.connection.definition.taskSchedulers<br>
+ * alatka.connection.definition.taskExecutors<br>
+ * alatka.connection.definition.pollerMetadatas<br>
+ * alatka.connection.definition.......
+ *
  * @author ybliu
  */
 public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<DefinitionModel, Object>, List<? extends Property>> {
@@ -30,9 +35,9 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     }
 
     @Override
-    protected List<? extends Property> convert(Map<DefinitionModel, Object> map) {
+    protected List<? extends Property> validAndConvert(Map<DefinitionModel, Object> map) {
         if (map == null) {
-            return Collections.emptyList();
+            return null;
         }
         return map.entrySet()
                 .stream()

@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * @author ybliu
+ * @param <T>
+ * @param <S>
  */
 public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
@@ -38,10 +39,13 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
             Validator.validateByException(model);
         }
 
-        Map<Object, ? extends ComponentRegister> mapping = this.mappingComponentRegister();
-        S convertedModel = this.convert(model);
-        this.postConvert(convertedModel);
-        this.doBuild(convertedModel, mapping);
+        S convertedModel = this.validAndConvert(model);
+        if (convertedModel != null) {
+            Map<Object, ? extends ComponentRegister> mapping = this.mappingComponentRegister();
+
+            this.preDoBuild(convertedModel);
+            this.doBuild(convertedModel, mapping);
+        }
     }
 
     private Map<Object, ? extends ComponentRegister> mappingComponentRegister() {
@@ -55,11 +59,11 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         return list.stream().collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
     }
 
-    protected S convert(T model) {
+    protected S validAndConvert(T model) {
         return (S) model;
     }
 
-    private void postConvert(Object model) {
+    private void preDoBuild(Object model) {
         List<? extends Property> list = (List<? extends Property>) (model instanceof List ? model : Collections.singletonList(model));
         list.stream().forEach(property -> this.assignIdentity(property, property.getClass()));
     }
@@ -76,8 +80,8 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
                     if (field.isAnnotationPresent(BeanProperty.class)) {
                         String value = ClassUtil.getValue(field, property);
                         value = Optional.ofNullable(value).orElse("");
-                        if (!value.contains(".")) {
-                            String lastValue = this.identity.concat(value.isEmpty() ? value : ".".concat(value));
+                        if (!value.contains("@")) {
+                            String lastValue = this.identity.concat("@").concat(value);
                             ClassUtil.setValue(field, property, lastValue);
                         }
                     }
@@ -90,16 +94,16 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     }
 
     /**
-     * {@link ComponentRegister}
+     * 基于SpringFactories实现<br>
+     * 在{@link SpringFactoriesLoader#FACTORIES_RESOURCE_LOCATION}中配置{@link ComponentRegister} {@link Class}类型
      *
-     * @return
+     * @return {@link ComponentRegister} {@link Class}类型
      */
     protected abstract Class<? extends ComponentRegister> componentRegisterClass();
 
     /**
      * @param model
      * @param mapping
-     * @return
      */
     protected abstract void doBuild(S model, Map<Object, ? extends ComponentRegister> mapping);
 

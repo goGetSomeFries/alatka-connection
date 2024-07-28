@@ -15,13 +15,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * outbound模块构建器<br><br>
+ * alatka.connection.outbound.http<br>
+ * alatka.connection.outbound.tcp_simplex<br>
+ * alatka.connection.outbound.tcp_duplex<br>
+ * alatka.connection.outbound.......
+ *
  * @author ybliu
  */
 public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, ChannelAdapterProperty> {
 
-    private final ChannelModuleBuilder channelModuleBuilder;
+    protected final ChannelModuleBuilder channelModuleBuilder;
 
-    private final ConsumerModuleBuilder consumerModuleBuilder;
+    protected final ConsumerModuleBuilder consumerModuleBuilder;
 
     public OutboundModuleBuilder(String identity) {
         super(identity);
@@ -31,21 +37,11 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
     @Override
     protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        super.setDuplex(property.getOutputChannel() != null);
-
-        // channel
-        ChannelProperty inputChannelProperty = new ChannelProperty();
-        inputChannelProperty.setId(this.inputChannel());
-        this.channelModuleBuilder.build(inputChannelProperty);
-        if (property.getOutputChannel() != null) {
-            ChannelProperty outputChannelProperty = new ChannelProperty();
-            outputChannelProperty.setId(this.outputChannel());
-            this.channelModuleBuilder.build(outputChannelProperty);
-        }
+        super.doBuild(property, mapping);
 
         // outbound
         ComponentRegister componentRegister = mapping.get(property.getClass());
-        String beanName = componentRegister.register(property, property.getId().concat(".").concat(this.beanNamePrefix()), false);
+        String beanName = componentRegister.register(property, property.getId().concat(this.beanNamePrefix()), false);
 
         // consumer
         ConsumerProperty consumerProperty = new ConsumerProperty();
@@ -56,7 +52,26 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     }
 
     @Override
-    protected ChannelAdapterProperty convert(Map<OutboundModel, Object> map) {
+    protected void buildInputChannel() {
+        ChannelProperty property = new ChannelProperty();
+        property.setId(this.inputChannel());
+        property.setType(ChannelProperty.Type.publishSubscribe);
+        this.channelModuleBuilder.build(property);
+    }
+
+    @Override
+    protected void buildOutputChannel() {
+        ChannelProperty property = new ChannelProperty();
+        property.setId(this.outputChannel());
+        property.setType(ChannelProperty.Type.direct);
+        this.channelModuleBuilder.build(property);
+        if (super.isDuplex()) {
+            // TODO
+        }
+    }
+
+    @Override
+    protected ChannelAdapterProperty validAndConvert(Map<OutboundModel, Object> map) {
         List<ChannelAdapterProperty> list = map.entrySet()
                 .stream()
                 .map(entry -> {
@@ -69,7 +84,10 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         if (list.size() != 1) {
             throw new IllegalArgumentException("count of enabled " + this.beanNamePrefix() + " must be 1");
         }
-        return list.get(0);
+
+        ChannelAdapterProperty property = list.get(0);
+        super.setDuplex(property.getOutputChannel() != null);
+        return property;
     }
 
     @Override
@@ -87,12 +105,6 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
     protected String outputChannel() {
         return ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
-    }
-
-    protected void test(String outputChannel) {
-        ChannelProperty property = new ChannelProperty();
-        property.setId(this.inputChannel());
-        this.channelModuleBuilder.build(property);
     }
 
 }

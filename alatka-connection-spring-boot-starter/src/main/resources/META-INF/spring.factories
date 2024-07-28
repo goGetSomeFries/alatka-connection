@@ -1,6 +1,2 @@
-org.springframework.context.ApplicationContextInitializer=\
-
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  
 org.springframework.boot.env.EnvironmentPostProcessor=\
   com.alatka.connection.ConnectionConfigEnvironmentPostProcessor

@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * TODO
+ *
  * @author ybliu
  */
 public class AlatkaConnectionInitializer implements IntegrationConfigurationInitializer {
-
-    public static final String BEAN_NAME = AlatkaConnectionInitializer.class.getName();
 
     private static final String FILE_PREFIX = "alatka-connection";
 
@@ -33,36 +33,36 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
 
     @Override
     public void initialize(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        // init ComponentRegister
         AbstractComponentRegister.init((DefaultListableBeanFactory) beanFactory);
 
         for (Resource resource : this.loadResources()) {
             String identity = this.getIdentity(resource);
-            RootModel rootModel = this.getRootModel(resource);
+            RootModel root = this.getRootModel(resource);
 
             // alatka.connection.definition
             DefinitionModuleBuilder definitionModuleBuilder = new DefinitionModuleBuilder(identity);
-            definitionModuleBuilder.build(rootModel.getDefinition());
+            definitionModuleBuilder.build(root.getDefinition());
 
             // alatka.connection.route.inbound
             InboundModuleBuilder inboundModuleBuilder = new InboundModuleBuilder(identity);
-            inboundModuleBuilder.build(rootModel.getRoute().getInbound());
+            inboundModuleBuilder.build(root.getRoute().getInbound());
 
             // alatka.connection.route.outbound
             OutboundModuleBuilder outboundModuleBuilder = new OutboundModuleBuilder(identity);
-            outboundModuleBuilder.build(rootModel.getRoute().getOutbound());
+            outboundModuleBuilder.build(root.getRoute().getOutbound());
 
             // alatka.connection.route.bypass
             BypassModuleBuilder bypassModuleBuilder = new BypassModuleBuilder(identity);
-            bypassModuleBuilder.build(rootModel.getRoute().getBypass());
+            bypassModuleBuilder.build(root.getRoute().getBypass());
 
-            // alatka.connection.route.processor
+            // alatka.connection.route.processor request
             ProcessorModuleBuilder requestProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.request);
-            requestProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
+            requestProcessorModuleBuilder.build(root.getRoute().getProcessors());
 
-            if (inboundModuleBuilder.isDuplex() || outboundModuleBuilder.isDuplex()) {
-                ProcessorModuleBuilder replyProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.reply);
-                replyProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
-            }
+            // alatka.connection.route.processor reply
+            ProcessorModuleBuilder replyProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.reply);
+            replyProcessorModuleBuilder.build(root.getRoute().getProcessors());
         }
     }
 
@@ -92,8 +92,8 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
      * alatka-connection-app.yaml -> app<br>
      * alatka-connection.yml -> default<br>
      *
-     * @param resource
-     * @return
+     * @param resource yaml {@link Resource}
+     * @return [identity]
      */
     private String getIdentity(Resource resource) {
         String fileName = resource.getFilename();
@@ -101,6 +101,12 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         return str.isEmpty() ? "default" : str.substring(1);
     }
 
+    /**
+     * 获取yaml文件内容
+     *
+     * @param resource yaml {@link Resource}
+     * @return {@link RootModel}
+     */
     private RootModel getRootModel(Resource resource) {
         try {
             return YamlUtil.getObject(resource.getFile(), "alatka.connection", RootModel.class);

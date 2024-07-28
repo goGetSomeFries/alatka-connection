@@ -14,6 +14,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * inbound模块构建器<br><br>
+ * alatka.connection.inbound.http<br>
+ * alatka.connection.inbound.tcp_simplex<br>
+ * alatka.connection.inbound.tcp_duplex<br>
+ * alatka.connection.inbound.......
+ *
  * @author ybliu
  */
 public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel, Object>, InboundProperty> {
@@ -29,25 +35,31 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
 
     @Override
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        super.setDuplex(property.getInputChannel() != null);
-
-        // channel
-        ChannelProperty outputChannelProperty = new ChannelProperty();
-        outputChannelProperty.setId(ConnectionConstant.INBOUND_OUTPUT_CHANNEL);
-        this.channelModuleBuilder.build(outputChannelProperty);
-        if (property.getInputChannel() != null) {
-            ChannelProperty inputChannelProperty = new ChannelProperty();
-            inputChannelProperty.setId(ConnectionConstant.INBOUND_INPUT_CHANNEL);
-            this.channelModuleBuilder.build(inputChannelProperty);
-        }
+        super.doBuild(property, mapping);
 
         // inbound
         ComponentRegister componentRegister = mapping.get(property.getClass());
-        componentRegister.register(property, property.getId().concat(".").concat(PREFIX), false);
+        componentRegister.register(property, property.getId().concat(PREFIX), false);
     }
 
     @Override
-    protected InboundProperty convert(Map<InboundModel, Object> map) {
+    protected void buildInputChannel() {
+        ChannelProperty property = new ChannelProperty();
+        property.setId(ConnectionConstant.INBOUND_INPUT_CHANNEL);
+        property.setType(super.isDuplex() ? ChannelProperty.Type.direct : ChannelProperty.Type.null_);
+        this.channelModuleBuilder.build(property);
+    }
+
+    @Override
+    protected void buildOutputChannel() {
+        ChannelProperty property = new ChannelProperty();
+        property.setId(ConnectionConstant.INBOUND_OUTPUT_CHANNEL);
+        property.setType(ChannelProperty.Type.direct);
+        this.channelModuleBuilder.build(property);
+    }
+
+    @Override
+    protected InboundProperty validAndConvert(Map<InboundModel, Object> map) {
         List<InboundProperty> list = map.entrySet()
                 .stream()
                 .map(entry -> {
@@ -61,7 +73,10 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
         if (list.size() != 1) {
             throw new IllegalArgumentException("count of enabled " + PREFIX + " must be 1");
         }
-        return list.get(0);
+
+        InboundProperty property = list.get(0);
+        super.setDuplex(property.getInputChannel() != null);
+        return property;
     }
 
     @Override

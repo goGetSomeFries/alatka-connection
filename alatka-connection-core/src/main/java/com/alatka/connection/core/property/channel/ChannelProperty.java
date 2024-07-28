@@ -15,6 +15,8 @@ public class ChannelProperty extends Property {
 
     public enum Type {
         direct(Kind.SUBSCRIBABLE),
+        publishSubscribe(Kind.SUBSCRIBABLE),
+        null_(Kind.SUBSCRIBABLE),
         queue(Kind.POLLABLE);
 
         private Kind kind;

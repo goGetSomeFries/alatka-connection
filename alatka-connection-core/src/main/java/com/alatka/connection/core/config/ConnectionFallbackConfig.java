@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.channel.NullChannel;
 import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.messaging.MessageChannel;
@@ -98,5 +99,11 @@ public class ConnectionFallbackConfig {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.ERROR);
         handler.setLogExpressionString(expression);
         return handler;
+    }
+
+    @Bean(ConnectionConstant.FALLBACK_NULL_CHANNEL)
+    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_NULL_CHANNEL)
+    public MessageChannel nullChannel() {
+        return new NullChannel();
     }
 }
