@@ -99,7 +99,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
     }
 
     @Override
-    protected List<ProcessorProperty> validAndConvert(List<ProcessorProperty> models) {
+    protected List<ProcessorProperty> validateAndConvert(List<ProcessorProperty> models) {
         return models == null ? Collections.emptyList() : models;
     }
 

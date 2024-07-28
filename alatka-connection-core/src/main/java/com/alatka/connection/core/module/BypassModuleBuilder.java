@@ -36,11 +36,11 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
     }
 
     @Override
-    protected ChannelAdapterProperty validAndConvert(Map<OutboundModel, Object> map) {
+    protected ChannelAdapterProperty validateAndConvert(Map<OutboundModel, Object> map) {
         if (map == null) {
             return null;
         }
-        return super.validAndConvert(map);
+        return super.validateAndConvert(map);
     }
 
     @Override

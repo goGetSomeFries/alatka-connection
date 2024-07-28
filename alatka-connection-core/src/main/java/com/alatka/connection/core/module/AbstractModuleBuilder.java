@@ -39,7 +39,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
             Validator.validateByException(model);
         }
 
-        S convertedModel = this.validAndConvert(model);
+        S convertedModel = this.validateAndConvert(model);
         if (convertedModel != null) {
             Map<Object, ? extends ComponentRegister> mapping = this.mappingComponentRegister();
 
@@ -59,7 +59,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         return list.stream().collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
     }
 
-    protected S validAndConvert(T model) {
+    protected S validateAndConvert(T model) {
         return (S) model;
     }
 

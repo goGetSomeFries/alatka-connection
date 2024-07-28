@@ -5,7 +5,7 @@ import com.alatka.connection.core.property.InboundProperty;
 /**
  * @author ybliu
  */
-public class TcpInboundProperty extends InboundProperty {
+public class TcpSimplexInboundProperty extends InboundProperty {
 
     private boolean clientMode = false;
 

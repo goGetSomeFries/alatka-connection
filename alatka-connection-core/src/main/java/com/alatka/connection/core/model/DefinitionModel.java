@@ -16,6 +16,9 @@ public enum DefinitionModel {
     taskSchedulers(TaskSchedulerProperty.class, true),
     taskExecutors(TaskExecutorProperty.class, true);
 
+    /**
+     * definition子类型
+     */
     private Class<? extends Property> type;
     /**
      * 是否是集合类型

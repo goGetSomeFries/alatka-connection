@@ -35,7 +35,7 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     }
 
     @Override
-    protected List<? extends Property> validAndConvert(Map<DefinitionModel, Object> map) {
+    protected List<? extends Property> validateAndConvert(Map<DefinitionModel, Object> map) {
         if (map == null) {
             return null;
         }

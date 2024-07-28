@@ -59,7 +59,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     }
 
     @Override
-    protected InboundProperty validAndConvert(Map<InboundModel, Object> map) {
+    protected InboundProperty validateAndConvert(Map<InboundModel, Object> map) {
         List<InboundProperty> list = map.entrySet()
                 .stream()
                 .map(entry -> {

@@ -71,7 +71,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     }
 
     @Override
-    protected ChannelAdapterProperty validAndConvert(Map<OutboundModel, Object> map) {
+    protected ChannelAdapterProperty validateAndConvert(Map<OutboundModel, Object> map) {
         List<ChannelAdapterProperty> list = map.entrySet()
                 .stream()
                 .map(entry -> {
