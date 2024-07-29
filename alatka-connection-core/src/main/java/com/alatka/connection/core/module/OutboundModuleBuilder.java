@@ -5,6 +5,7 @@ import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.HandlerProperty;
 import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.property.channel.ChannelProperty;
 import com.alatka.connection.core.property.consumer.ConsumerProperty;
@@ -25,13 +26,16 @@ import java.util.stream.Collectors;
  */
 public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, ChannelAdapterProperty> {
 
-    protected final ChannelModuleBuilder channelModuleBuilder;
+    private final ChannelModuleBuilder channelModuleBuilder;
 
-    protected final ConsumerModuleBuilder consumerModuleBuilder;
+    private final HandlerModuleBuilder handlerModuleBuilder;
+
+    private final ConsumerModuleBuilder consumerModuleBuilder;
 
     public OutboundModuleBuilder(String identity) {
         super(identity);
         this.channelModuleBuilder = new ChannelModuleBuilder(identity);
+        this.handlerModuleBuilder = new HandlerModuleBuilder(identity);
         this.consumerModuleBuilder = new ConsumerModuleBuilder(identity);
     }
 
@@ -53,20 +57,30 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
     @Override
     protected void buildInputChannel() {
-        ChannelProperty property = new ChannelProperty();
-        property.setId(this.inputChannel());
-        property.setType(ChannelProperty.Type.publishSubscribe);
-        this.channelModuleBuilder.build(property);
+        ChannelProperty channel = new ChannelProperty();
+        channel.setId(this.inputChannel());
+        channel.setType(ChannelProperty.Type.publishSubscribe);
+        this.channelModuleBuilder.build(channel);
     }
 
     @Override
     protected void buildOutputChannel() {
-        ChannelProperty property = new ChannelProperty();
-        property.setId(this.outputChannel());
-        property.setType(ChannelProperty.Type.direct);
-        this.channelModuleBuilder.build(property);
-        if (super.isDuplex()) {
-            // TODO
+        ChannelProperty channel = new ChannelProperty();
+        channel.setId(this.outputChannel());
+        channel.setType(ChannelProperty.Type.direct);
+        this.channelModuleBuilder.build(channel);
+        if (!super.isDuplex()) {
+            HandlerProperty handler = new HandlerProperty();
+            handler.setId(HandlerProperty.Type.passthrough.name().concat(".outbound.input-output"));
+            handler.setType(HandlerProperty.Type.passthrough);
+            handler.setOutputChannel(this.outputChannel());
+            this.handlerModuleBuilder.build(handler);
+
+            ConsumerProperty consumerProperty = new ConsumerProperty();
+            consumerProperty.setInputChannel(this.inputChannel());
+            consumerProperty.setMessageHandler(this.handlerModuleBuilder.getBeanName());
+            consumerProperty.setId("consumer.".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-output"));
+            this.consumerModuleBuilder.build(consumerProperty);
         }
     }
 

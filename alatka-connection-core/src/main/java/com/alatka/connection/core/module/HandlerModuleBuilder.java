@@ -1,7 +1,7 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.component.ChannelComponentRegister;
 import com.alatka.connection.core.component.ComponentRegister;
+import com.alatka.connection.core.component.HandlerComponentRegister;
 import com.alatka.connection.core.property.HandlerProperty;
 
 import java.util.Map;
@@ -24,8 +24,8 @@ public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty,
     }
 
     @Override
-    protected Class<ChannelComponentRegister> componentRegisterClass() {
-        return ChannelComponentRegister.class;
+    protected Class<HandlerComponentRegister> componentRegisterClass() {
+        return HandlerComponentRegister.class;
     }
 
     public String getBeanName() {

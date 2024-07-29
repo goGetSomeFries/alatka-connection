@@ -13,4 +13,20 @@ public class HandlerProperty extends ChannelAdapterProperty {
     public enum Type {
         passthrough, logger;
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
 }

@@ -84,17 +84,19 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
             consumer.setId("processor." + suffix);
             this.consumerModuleBuilder.build(consumer);
         });
-
-        HandlerProperty handler = null;
-        handler.setId("");
-        handler.setOutputChannel(reference.get());
-
-        ConsumerProperty consumer = new ConsumerProperty();
-        consumer.setMessageHandler(null);
         String inputChannelBeanName = this.type == ProcessorProperty.Type.request ?
                 ConnectionConstant.INBOUND_OUTPUT_CHANNEL : ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
+
+        HandlerProperty handler = new HandlerProperty();
+        handler.setType(HandlerProperty.Type.passthrough);
+        handler.setOutputChannel(reference.get());
+        handler.setId(HandlerProperty.Type.passthrough.name().concat(".").concat(inputChannelBeanName));
+        this.handlerModuleBuilder.build(handler);
+
+        ConsumerProperty consumer = new ConsumerProperty();
+        consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
         consumer.setInputChannel(inputChannelBeanName);
-        consumer.setId("");
+        consumer.setId("consumer.".concat(inputChannelBeanName));
         this.consumerModuleBuilder.build(consumer);
     }
 
