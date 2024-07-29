@@ -25,7 +25,7 @@ public class TcpDuplexInboundRegister extends InboundComponentRegister<TcpSimple
     }
 
     @Override
-    public Class<TcpSimplexInboundProperty> reference() {
+    public Class<TcpSimplexInboundProperty> mappingKey() {
         return TcpSimplexInboundProperty.class;
     }
 }

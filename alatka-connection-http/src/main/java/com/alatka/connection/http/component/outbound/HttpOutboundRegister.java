@@ -24,7 +24,7 @@ public class HttpOutboundRegister extends OutboundComponentRegister<HttpOutbound
     }
 
     @Override
-    public Class<HttpOutboundProperty> reference() {
+    public Class<HttpOutboundProperty> mappingKey() {
         return HttpOutboundProperty.class;
     }
 }

@@ -1,12 +1,18 @@
 package com.alatka.connection.core.component.channel;
 
+import com.alatka.connection.core.component.ChannelComponentRegister;
 import com.alatka.connection.core.property.channel.ChannelProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.channel.QueueChannel;
 
 import java.util.Map;
 
-public class QueueChannelRegister extends PollableChannelRegister<ChannelProperty> {
+/**
+ * {@link QueueChannel}组件注册器
+ *
+ * @author ybliu
+ */
+public class QueueChannelRegister extends ChannelComponentRegister<ChannelProperty> {
 
     private static final String KEY_CAPACITY = "capacity";
 
@@ -25,7 +31,7 @@ public class QueueChannelRegister extends PollableChannelRegister<ChannelPropert
     }
 
     @Override
-    public ChannelProperty.Type reference() {
+    public ChannelProperty.Type mappingKey() {
         return ChannelProperty.Type.queue;
     }
 }

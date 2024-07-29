@@ -3,6 +3,9 @@ package com.alatka.connection.core.component;
 import com.alatka.connection.core.property.InboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
+/**
+ * @author ybliu
+ */
 public abstract class InboundComponentRegister<T extends InboundProperty> extends AbstractComponentRegister<T, Class<T>> {
 
     private static final String REQUEST_CHANNEL = "requestChannelName";

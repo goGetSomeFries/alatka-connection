@@ -29,7 +29,7 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     @Override
     protected void doBuild(List<? extends Property> models, Map<Object, ? extends ComponentRegister> mapping) {
         models.forEach(property -> {
-            ComponentRegister componentRegister = mapping.get(property.getClass());
+            ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
             componentRegister.register(property, property.getId(), true);
         });
     }

@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.consumer;
 
-import com.alatka.connection.core.annotation.BeanProperty;
+import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.property.Property;
 
 import javax.validation.constraints.NotBlank;
@@ -11,17 +11,17 @@ import javax.validation.constraints.NotBlank;
 public class ConsumerProperty extends Property {
 
     @NotBlank
-    @BeanProperty
+    @IdentityProperty
     private String inputChannel;
 
     @NotBlank
-    @BeanProperty
+    @IdentityProperty
     private String messageHandler;
 
-    @BeanProperty
+    @IdentityProperty
     private String pollerMetadata;
 
-    @BeanProperty
+    @IdentityProperty
     private String taskScheduler;
 
     public String getInputChannel() {

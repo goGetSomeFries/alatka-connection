@@ -26,7 +26,7 @@ public class ByteArraySingleTerminatorSerializerRegister extends SupportComponen
     }
 
     @Override
-    public Class<SerializerProperty> reference() {
+    public Class<SerializerProperty> mappingKey() {
         return SerializerProperty.class;
     }
 }

@@ -1,11 +1,14 @@
 package com.alatka.connection.core.property.support;
 
+import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.property.Property;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
+ * alatka.connection.definition.taskExecutors
+ *
  * @author ybliu
  */
 public class TaskExecutorProperty extends Property {
@@ -19,6 +22,7 @@ public class TaskExecutorProperty extends Property {
     @NotNull
     private Integer keepAliveSeconds;
     @NotBlank
+    @IdentityProperty
     private String threadNamePrefix;
 
     public Integer getCorePoolSize() {

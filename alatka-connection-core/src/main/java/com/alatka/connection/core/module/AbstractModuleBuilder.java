@@ -1,7 +1,7 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.annotation.BeanProperty;
-import com.alatka.connection.core.annotation.ReferenceBeanProperty;
+import com.alatka.connection.core.annotation.IdentityProperty;
+import com.alatka.connection.core.annotation.ReferenceIdentityProperty;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.ReferenceProperty;
 import com.alatka.connection.core.property.Property;
@@ -22,6 +22,7 @@ import java.util.stream.Stream;
 /**
  * @param <T>
  * @param <S>
+ * @author ybliu
  */
 public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
@@ -56,7 +57,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         if (list.isEmpty()) {
             list.add(ClassUtil.newInstance(this.componentRegisterClass().getName()));
         }
-        return list.stream().collect(Collectors.toMap(ReferenceProperty::reference, Function.identity()));
+        return list.stream().collect(Collectors.toMap(ReferenceProperty::mappingKey, Function.identity()));
     }
 
     protected S validateAndConvert(T model) {
@@ -71,13 +72,13 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     private void assignIdentity(Object property, Class<?> clazz) {
         Stream.of(clazz.getDeclaredFields())
                 .peek(field -> {
-                    if (field.isAnnotationPresent(ReferenceBeanProperty.class)) {
+                    if (field.isAnnotationPresent(ReferenceIdentityProperty.class)) {
                         Object value = ClassUtil.getValue(field, property);
                         this.assignIdentity(value, property.getClass());
                     }
                 })
                 .forEach(field -> {
-                    if (field.isAnnotationPresent(BeanProperty.class)) {
+                    if (field.isAnnotationPresent(IdentityProperty.class)) {
                         String value = ClassUtil.getValue(field, property);
                         value = Optional.ofNullable(value).orElse("");
                         if (!value.contains("@")) {
@@ -91,6 +92,13 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         if (superclass != null && superclass != Object.class) {
             this.assignIdentity(property, superclass);
         }
+    }
+
+    protected ComponentRegister getComponentRegister(Object key, Map<Object, ? extends ComponentRegister> mapping) {
+        if (!mapping.containsKey(key)) {
+            throw new IllegalArgumentException("未映射对应ComponentRegister, key: " + key + ", mapping: " + mapping);
+        }
+        return mapping.get(key);
     }
 
     /**

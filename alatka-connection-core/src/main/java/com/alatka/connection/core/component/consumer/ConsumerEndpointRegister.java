@@ -24,7 +24,7 @@ public class ConsumerEndpointRegister extends AbstractComponentRegister<Consumer
     }
 
     @Override
-    public Class<ConsumerProperty> reference() {
+    public Class<ConsumerProperty> mappingKey() {
         return ConsumerProperty.class;
     }
 }

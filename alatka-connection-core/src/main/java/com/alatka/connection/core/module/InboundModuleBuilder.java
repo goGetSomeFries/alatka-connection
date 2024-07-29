@@ -37,8 +37,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         super.doBuild(property, mapping);
 
-        // inbound
-        ComponentRegister componentRegister = mapping.get(property.getClass());
+        ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         componentRegister.register(property, property.getId().concat(PREFIX), false);
     }
 

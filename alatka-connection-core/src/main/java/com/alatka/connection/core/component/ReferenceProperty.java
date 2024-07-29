@@ -5,5 +5,5 @@ package com.alatka.connection.core.component;
  */
 public interface ReferenceProperty<T> {
 
-    T reference();
+    T mappingKey();
 }

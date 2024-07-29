@@ -47,7 +47,7 @@ public class TcpConnectionFactoryFactoryBeanRegister extends SupportComponentReg
     }
 
     @Override
-    public Class<TcpConnectionProperty> reference() {
+    public Class<TcpConnectionProperty> mappingKey() {
         return null;
     }
 }

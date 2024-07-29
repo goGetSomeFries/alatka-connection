@@ -3,14 +3,19 @@ package com.alatka.connection.core.property.http;
 import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author ybliu
  */
 public class HttpInboundProperty extends InboundProperty {
 
+    @NotNull
+    @NotEmpty
     private String[] pathPatterns;
 
-    private String method;
+    private String[] methods;
 
     private Class<?> requestType;
 
@@ -22,12 +27,12 @@ public class HttpInboundProperty extends InboundProperty {
         this.pathPatterns = pathPatterns;
     }
 
-    public String getMethod() {
-        return method;
+    public String[] getMethods() {
+        return methods;
     }
 
-    public void setMethod(String method) {
-        this.method = method;
+    public void setMethods(String... methods) {
+        this.methods = methods;
     }
 
     public Class<?> getRequestType() {

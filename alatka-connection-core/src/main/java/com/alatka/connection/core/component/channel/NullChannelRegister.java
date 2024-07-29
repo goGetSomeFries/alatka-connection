@@ -3,26 +3,26 @@ package com.alatka.connection.core.component.channel;
 import com.alatka.connection.core.component.ChannelComponentRegister;
 import com.alatka.connection.core.property.channel.ChannelProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.channel.NullChannel;
 
 /**
- * {@link DirectChannel}组件注册器
+ * {@link NullChannel}组件注册器
  *
  * @author ybliu
  */
-public class DirectChannelRegister extends ChannelComponentRegister<ChannelProperty> {
+public class NullChannelRegister extends ChannelComponentRegister<ChannelProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, ChannelProperty property) {
     }
 
     @Override
-    protected Class<DirectChannel> beanClass() {
-        return DirectChannel.class;
+    protected Class<NullChannel> beanClass() {
+        return NullChannel.class;
     }
 
     @Override
     public ChannelProperty.Type mappingKey() {
-        return ChannelProperty.Type.direct;
+        return ChannelProperty.Type.null_;
     }
 }

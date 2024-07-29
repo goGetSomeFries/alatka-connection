@@ -17,7 +17,8 @@ public class ConsumerModuleBuilder extends AbstractModuleBuilder<ConsumerPropert
 
     @Override
     protected void doBuild(ConsumerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        ConsumerEndpointRegister componentRegister = (ConsumerEndpointRegister) mapping.get(property.getClass());
+        ConsumerEndpointRegister componentRegister =
+                (ConsumerEndpointRegister) super.getComponentRegister(property.getClass(), mapping);
         componentRegister.register(property, property.getId(), true);
     }
 

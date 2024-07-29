@@ -1,15 +1,22 @@
 package com.alatka.connection.core.property.support;
 
+import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.property.Property;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * alatka.connection.definition.taskSchedulers
+ *
+ * @author ybliu
+ */
 public class TaskSchedulerProperty extends Property {
 
     @NotNull
     private Integer poolSize;
     @NotBlank
+    @IdentityProperty
     private String threadNamePrefix;
 
     public Integer getPoolSize() {

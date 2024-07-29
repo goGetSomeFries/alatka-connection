@@ -1,16 +1,16 @@
 package com.alatka.connection.core.property;
 
-import com.alatka.connection.core.annotation.BeanProperty;
+import com.alatka.connection.core.annotation.IdentityProperty;
 
 /**
  * @author ybliu
  */
 public abstract class InboundProperty extends Property {
 
-    @BeanProperty
+    @IdentityProperty
     private String inputChannel;
 
-    @BeanProperty
+    @IdentityProperty
     private String outputChannel;
 
     public String getInputChannel() {

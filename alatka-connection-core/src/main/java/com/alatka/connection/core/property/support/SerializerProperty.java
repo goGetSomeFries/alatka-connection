@@ -5,6 +5,8 @@ import com.alatka.connection.core.property.Property;
 import java.util.Map;
 
 /**
+ * alatka.connection.definition.serializers
+ *
  * @author ybliu
  */
 public class SerializerProperty extends Property {

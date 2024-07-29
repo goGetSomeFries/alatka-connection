@@ -40,7 +40,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         super.doBuild(property, mapping);
 
         // outbound
-        ComponentRegister componentRegister = mapping.get(property.getClass());
+        ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         String beanName = componentRegister.register(property, property.getId().concat(this.beanNamePrefix()), false);
 
         // consumer

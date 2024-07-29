@@ -1,18 +1,20 @@
 package com.alatka.connection.core.property.support;
 
-import com.alatka.connection.core.annotation.BeanProperty;
+import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.property.Property;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
+ * alatka.connection.definition.pollerMetadatas
+ *
  * @author ybliu
  */
 public class PollerMetadataProperty extends Property {
 
     @NotNull
-    @BeanProperty
+    @IdentityProperty
     private String taskExecutor;
     @NotNull
     private Long maxMessagesPerPoll;

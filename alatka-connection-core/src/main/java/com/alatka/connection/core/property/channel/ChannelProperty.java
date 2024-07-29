@@ -19,12 +19,15 @@ public class ChannelProperty extends Property {
         null_(Kind.SUBSCRIBABLE),
         queue(Kind.POLLABLE);
 
+        @Deprecated
         private Kind kind;
 
+        @Deprecated
         Type(Kind kind) {
             this.kind = kind;
         }
 
+        @Deprecated
         public Kind getKind() {
             return kind;
         }

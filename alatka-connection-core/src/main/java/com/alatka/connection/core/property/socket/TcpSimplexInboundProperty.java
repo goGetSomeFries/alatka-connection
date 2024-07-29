@@ -3,6 +3,8 @@ package com.alatka.connection.core.property.socket;
 import com.alatka.connection.core.property.InboundProperty;
 
 /**
+ * alatka.connection.inbound.tcp_simplex
+ *
  * @author ybliu
  */
 public class TcpSimplexInboundProperty extends InboundProperty {
