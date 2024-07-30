@@ -11,5 +11,8 @@ public abstract class HandlerComponentRegister<T extends HandlerProperty> extend
     @Override
     protected void postDoRegister(BeanDefinitionBuilder builder, T property) {
         builder.addPropertyValue("outputChannelName", property.getOutputChannel());
+        if (property.getOrder() != null) {
+            builder.addPropertyValue("order", property.getOrder());
+        }
     }
 }

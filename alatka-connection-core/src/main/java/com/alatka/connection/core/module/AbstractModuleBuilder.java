@@ -14,7 +14,6 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -79,10 +78,14 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
                 })
                 .forEach(field -> {
                     if (field.isAnnotationPresent(IdentityProperty.class)) {
+                        IdentityProperty annotation = field.getAnnotation(IdentityProperty.class);
+                        boolean referenced = annotation.referenced();
                         String value = ClassUtil.getValue(field, property);
-                        value = Optional.ofNullable(value).orElse("");
-                        if (!value.contains("@")) {
+                        if (referenced && value != null && !value.contains("@")) {
                             String lastValue = this.identity.concat("@").concat(value);
+                            ClassUtil.setValue(field, property, lastValue);
+                        } else if (!referenced && (value == null || !value.contains("@"))) {
+                            String lastValue = this.identity.concat("@").concat(value == null ? "" : value);
                             ClassUtil.setValue(field, property, lastValue);
                         }
                     }

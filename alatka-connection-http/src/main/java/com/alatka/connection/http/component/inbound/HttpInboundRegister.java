@@ -1,6 +1,7 @@
 package com.alatka.connection.http.component.inbound;
 
 import com.alatka.connection.core.component.InboundComponentRegister;
+import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.http.HttpInboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.http.HttpMethod;
@@ -39,5 +40,10 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
     @Override
     public Class<HttpInboundProperty> mappingKey() {
         return HttpInboundProperty.class;
+    }
+
+    @Override
+    protected String beanNameSuffix() {
+        return InboundModel.http.name();
     }
 }

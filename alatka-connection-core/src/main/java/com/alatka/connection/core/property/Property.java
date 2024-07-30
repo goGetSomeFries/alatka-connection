@@ -7,7 +7,7 @@ import com.alatka.connection.core.annotation.IdentityProperty;
  */
 public abstract class Property {
 
-    @IdentityProperty
+    @IdentityProperty(referenced = false)
     private String id;
 
     private boolean enabled = true;

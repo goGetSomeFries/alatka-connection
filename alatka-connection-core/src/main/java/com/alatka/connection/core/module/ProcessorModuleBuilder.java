@@ -59,18 +59,18 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         AtomicReference<String> reference = new AtomicReference<>(outputChannelBeanName);
 
         list.forEach(processor -> {
-            String suffix = type.name() + index.getAndDecrement();
+            String suffix = "." + index.getAndDecrement();
 
             // handler
             HandlerProperty handler = processor.getHandler();
-            handler.setId("handler." + suffix);
+            handler.setId("handler." + type.name() + "." + handler.getType() + suffix);
             handler.setOutputChannel(reference.get());
             this.handlerModuleBuilder.build(handler);
             String handlerBeanName = this.handlerModuleBuilder.getBeanName();
 
             // channel
             ChannelProperty channel = processor.getChannel();
-            channel.setId("channel." + suffix);
+            channel.setId("channel." + type.name() + "." + channel.getType() + suffix);
             this.channelModuleBuilder.build(channel);
             String channelBeanName = this.channelModuleBuilder.getBeanName();
             reference.set(channelBeanName);
@@ -81,7 +81,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
             consumer.setMessageHandler(handlerBeanName);
             consumer.setPollerMetadata(null);
             consumer.setTaskScheduler(null);
-            consumer.setId("processor." + suffix);
+            consumer.setId("processor." + type.name() + suffix);
             this.consumerModuleBuilder.build(consumer);
         });
         String inputChannelBeanName = this.type == ProcessorProperty.Type.request ?
@@ -90,13 +90,13 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         HandlerProperty handler = new HandlerProperty();
         handler.setType(HandlerProperty.Type.passthrough);
         handler.setOutputChannel(reference.get());
-        handler.setId(HandlerProperty.Type.passthrough.name().concat(".").concat(inputChannelBeanName));
+        handler.setId(HandlerProperty.Type.passthrough.name().concat(".").concat(inputChannelBeanName)); // TODO
         this.handlerModuleBuilder.build(handler);
 
         ConsumerProperty consumer = new ConsumerProperty();
         consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
         consumer.setInputChannel(inputChannelBeanName);
-        consumer.setId("consumer.".concat(inputChannelBeanName));
+        consumer.setId("consumer.".concat(inputChannelBeanName)); // TODO
         this.consumerModuleBuilder.build(consumer);
     }
 

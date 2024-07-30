@@ -10,6 +10,7 @@ import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.property.channel.ChannelProperty;
 import com.alatka.connection.core.property.consumer.ConsumerProperty;
 import com.alatka.connection.core.util.JsonUtil;
+import org.springframework.core.Ordered;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,8 @@ import java.util.stream.Collectors;
  * @author ybliu
  */
 public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, ChannelAdapterProperty> {
+
+    protected static final int ORDER = Ordered.HIGHEST_PRECEDENCE;
 
     private final ChannelModuleBuilder channelModuleBuilder;
 
@@ -45,6 +48,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
         // outbound
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
+        property.setOrder(this.getOrder());
         String beanName = componentRegister.register(property, property.getId().concat(this.beanNamePrefix()), false);
 
         // consumer
@@ -69,18 +73,20 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         channel.setId(this.outputChannel());
         channel.setType(ChannelProperty.Type.direct);
         this.channelModuleBuilder.build(channel);
+
         if (!super.isDuplex()) {
             HandlerProperty handler = new HandlerProperty();
-            handler.setId(HandlerProperty.Type.passthrough.name().concat(".outbound.input-output"));
+            handler.setId("handler.".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-output"));
             handler.setType(HandlerProperty.Type.passthrough);
             handler.setOutputChannel(this.outputChannel());
+            handler.setOrder(ORDER + 1);
             this.handlerModuleBuilder.build(handler);
 
-            ConsumerProperty consumerProperty = new ConsumerProperty();
-            consumerProperty.setInputChannel(this.inputChannel());
-            consumerProperty.setMessageHandler(this.handlerModuleBuilder.getBeanName());
-            consumerProperty.setId("consumer.".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-output"));
-            this.consumerModuleBuilder.build(consumerProperty);
+            ConsumerProperty consumer = new ConsumerProperty();
+            consumer.setInputChannel(this.inputChannel());
+            consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
+            consumer.setId("consumer.".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-output"));
+            this.consumerModuleBuilder.build(consumer);
         }
     }
 
@@ -111,6 +117,10 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
     protected String beanNamePrefix() {
         return "outbound";
+    }
+
+    protected int getOrder() {
+        return ORDER;
     }
 
     protected String inputChannel() {

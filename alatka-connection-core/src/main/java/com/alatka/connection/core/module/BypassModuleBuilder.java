@@ -49,6 +49,11 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
     }
 
     @Override
+    protected int getOrder() {
+        return ORDER + 2;
+    }
+
+    @Override
     protected String inputChannel() {
         return ConnectionConstant.BYPASS_INPUT_CHANNEL;
     }

@@ -13,5 +13,8 @@ public abstract class OutboundComponentRegister<T extends ChannelAdapterProperty
         if (property.getOutputChannel() != null) {
             builder.addPropertyValue("outputChannelName", property.getOutputChannel());
         }
+        if (property.getOrder() != null) {
+            builder.addPropertyValue("order", property.getOrder());
+        }
     }
 }

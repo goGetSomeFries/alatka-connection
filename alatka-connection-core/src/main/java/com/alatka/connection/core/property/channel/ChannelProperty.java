@@ -14,27 +14,10 @@ public class ChannelProperty extends Property {
     private Map<String, Object> params;
 
     public enum Type {
-        direct(Kind.SUBSCRIBABLE),
-        publishSubscribe(Kind.SUBSCRIBABLE),
-        null_(Kind.SUBSCRIBABLE),
-        queue(Kind.POLLABLE);
-
-        @Deprecated
-        private Kind kind;
-
-        @Deprecated
-        Type(Kind kind) {
-            this.kind = kind;
-        }
-
-        @Deprecated
-        public Kind getKind() {
-            return kind;
-        }
-    }
-
-    public enum Kind {
-        POLLABLE, SUBSCRIBABLE;
+        direct,
+        publishSubscribe,
+        null_,
+        queue;
     }
 
     @Override

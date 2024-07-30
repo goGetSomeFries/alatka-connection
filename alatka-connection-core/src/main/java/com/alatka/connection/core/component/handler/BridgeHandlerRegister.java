@@ -5,6 +5,9 @@ import com.alatka.connection.core.property.HandlerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
 
+/**
+ * @author ybliu
+ */
 public class BridgeHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
 
     @Override

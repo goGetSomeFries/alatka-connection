@@ -9,4 +9,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface IdentityProperty {
+
+    boolean referenced() default true;
 }

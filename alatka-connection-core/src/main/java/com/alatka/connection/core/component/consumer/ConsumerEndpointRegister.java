@@ -12,10 +12,14 @@ public class ConsumerEndpointRegister extends AbstractComponentRegister<Consumer
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, ConsumerProperty property) {
-        builder.addPropertyValue("inputChannelName", property.getInputChannel())
-                .addPropertyReference("handler", property.getMessageHandler())
-                .addPropertyReference("taskScheduler", property.getTaskScheduler())
-                .addPropertyReference("pollerMetadata", property.getPollerMetadata());
+        builder.addPropertyValue("inputChannelName", property.getInputChannel());
+        builder.addPropertyReference("handler", property.getMessageHandler());
+        if (property.getTaskScheduler() != null) {
+            builder.addPropertyReference("taskScheduler", property.getTaskScheduler());
+        }
+        if (property.getPollerMetadata() != null) {
+            builder.addPropertyReference("pollerMetadata", property.getPollerMetadata());
+        }
     }
 
     @Override
