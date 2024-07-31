@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.ConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
-import com.alatka.connection.core.component.InboundComponentRegister;
+import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.property.Property;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  */
 public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel, Object>, InboundProperty> {
 
-    private static final String PREFIX = "inbound";
+    private static final String BEAN_NAME_PREFIX = "inbound";
 
     private final ChannelModuleBuilder channelModuleBuilder;
 
@@ -35,10 +35,8 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
 
     @Override
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        super.doBuild(property, mapping);
-
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
-        componentRegister.register(property, property.getId().concat(PREFIX), false);
+        componentRegister.register(property, property.getId().concat(BEAN_NAME_PREFIX), false);
     }
 
     @Override
@@ -70,7 +68,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
                 .collect(Collectors.toList());
 
         if (list.size() != 1) {
-            throw new IllegalArgumentException("count of enabled " + PREFIX + " must be 1");
+            throw new IllegalArgumentException("count of enabled " + BEAN_NAME_PREFIX + " must be 1");
         }
 
         InboundProperty property = list.get(0);

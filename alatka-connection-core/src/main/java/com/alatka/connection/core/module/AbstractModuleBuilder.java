@@ -63,7 +63,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         return (S) model;
     }
 
-    private void preDoBuild(Object model) {
+    protected void preDoBuild(Object model) {
         List<? extends Property> list = (List<? extends Property>) (model instanceof List ? model : Collections.singletonList(model));
         list.stream().forEach(property -> this.assignIdentity(property, property.getClass()));
     }

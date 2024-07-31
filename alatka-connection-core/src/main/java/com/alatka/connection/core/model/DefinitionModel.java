@@ -7,6 +7,8 @@ import com.alatka.connection.core.property.support.TaskExecutorProperty;
 import com.alatka.connection.core.property.support.TaskSchedulerProperty;
 
 /**
+ * alatka.connection.definition
+ *
  * @author ybliu
  */
 public enum DefinitionModel {

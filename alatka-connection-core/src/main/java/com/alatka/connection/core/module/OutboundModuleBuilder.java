@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.ConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
-import com.alatka.connection.core.component.OutboundComponentRegister;
+import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.ChannelAdapterProperty;
 import com.alatka.connection.core.property.HandlerProperty;
@@ -44,8 +44,6 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
     @Override
     protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        super.doBuild(property, mapping);
-
         // outbound
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         property.setOrder(this.getOrder());
@@ -76,7 +74,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
         if (!super.isDuplex()) {
             HandlerProperty handler = new HandlerProperty();
-            handler.setId("handler.".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-output"));
+            handler.setId(HandlerProperty.Type.passthrough.name().concat(".outbound.input-output"));
             handler.setType(HandlerProperty.Type.passthrough);
             handler.setOutputChannel(this.outputChannel());
             handler.setOrder(ORDER + 1);
@@ -85,7 +83,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
             ConsumerProperty consumer = new ConsumerProperty();
             consumer.setInputChannel(this.inputChannel());
             consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
-            consumer.setId("consumer.".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-output"));
+            consumer.setId(HandlerProperty.Type.passthrough.name().concat(".consumer.outbound.input-output"));
             this.consumerModuleBuilder.build(consumer);
         }
     }

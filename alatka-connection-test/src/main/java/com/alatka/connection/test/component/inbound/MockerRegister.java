@@ -1,6 +1,6 @@
 package com.alatka.connection.test.component.inbound;
 
-import com.alatka.connection.core.component.InboundComponentRegister;
+import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.property.test.MockerProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

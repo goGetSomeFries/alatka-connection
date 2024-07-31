@@ -1,6 +1,5 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.component.SupportComponentRegister;
 import com.alatka.connection.core.property.support.PollerMetadataProperty;
 import com.alatka.connection.core.property.support.TriggerProperty;
 import com.alatka.connection.core.util.JsonUtil;

@@ -1,13 +1,13 @@
 org.springframework.integration.config.IntegrationConfigurationInitializer=\
   com.alatka.connection.core.AlatkaConnectionInitializer
-com.alatka.connection.core.component.ChannelComponentRegister=\
+com.alatka.connection.core.component.channel.ChannelComponentRegister=\
   com.alatka.connection.core.component.channel.DirectChannelRegister,\
   com.alatka.connection.core.component.channel.NullChannelRegister,\
   com.alatka.connection.core.component.channel.PublishSubscribeChannelRegister,\
   com.alatka.connection.core.component.channel.QueueChannelRegister
-com.alatka.connection.core.component.HandlerComponentRegister=\
+com.alatka.connection.core.component.handler.HandlerComponentRegister=\
   com.alatka.connection.core.component.handler.BridgeHandlerRegister
-com.alatka.connection.core.component.SupportComponentRegister=\
+com.alatka.connection.core.component.support.SupportComponentRegister=\
   com.alatka.connection.core.component.support.PollerMetadataRegister,\
   com.alatka.connection.core.component.support.TaskExecutorRegister,\
   com.alatka.connection.core.component.support.TaskSchedulerRegister

@@ -1,7 +1,7 @@
 package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.component.ComponentRegister;
-import com.alatka.connection.core.component.HandlerComponentRegister;
+import com.alatka.connection.core.component.handler.HandlerComponentRegister;
 import com.alatka.connection.core.property.HandlerProperty;
 
 import java.util.Map;
@@ -9,9 +9,7 @@ import java.util.Map;
 /**
  * @author ybliu
  */
-public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty, HandlerProperty> {
-
-    private String beanName;
+public class HandlerModuleBuilder extends BeanNameReferenceModuleBuilder<HandlerProperty, HandlerProperty> {
 
     public HandlerModuleBuilder(String identity) {
         super(identity);
@@ -20,7 +18,8 @@ public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty,
     @Override
     protected void doBuild(HandlerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = super.getComponentRegister(property.getType(), mapping);
-        this.beanName = componentRegister.register(property, property.getId(), true);
+        String beanName = componentRegister.register(property, property.getId(), true);
+        super.setBeanName(beanName);
     }
 
     @Override
@@ -28,7 +27,4 @@ public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty,
         return HandlerComponentRegister.class;
     }
 
-    public String getBeanName() {
-        return beanName;
-    }
 }

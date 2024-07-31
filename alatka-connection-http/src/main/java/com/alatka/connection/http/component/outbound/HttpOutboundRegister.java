@@ -1,6 +1,6 @@
 package com.alatka.connection.http.component.outbound;
 
-import com.alatka.connection.core.component.OutboundComponentRegister;
+import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.http.HttpOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

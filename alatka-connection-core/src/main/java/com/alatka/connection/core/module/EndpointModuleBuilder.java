@@ -1,9 +1,5 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.component.ComponentRegister;
-
-import java.util.Map;
-
 /**
  * inbound/outbound父类
  *
@@ -22,7 +18,9 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
     }
 
     @Override
-    protected void doBuild(S model, Map<Object, ? extends ComponentRegister> mapping) {
+    protected void preDoBuild(Object model) {
+        super.preDoBuild(model);
+
         this.buildInputChannel();
         this.buildOutputChannel();
     }

@@ -1,6 +1,6 @@
 package com.alatka.connection.socket.component.support;
 
-import com.alatka.connection.core.component.SupportComponentRegister;
+import com.alatka.connection.core.component.support.SupportComponentRegister;
 import com.alatka.connection.core.property.socket.TcpConnectionProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.config.TcpConnectionFactoryFactoryBean;

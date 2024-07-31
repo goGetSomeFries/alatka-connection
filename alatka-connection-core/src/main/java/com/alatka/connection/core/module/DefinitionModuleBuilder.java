@@ -1,7 +1,7 @@
 package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.component.ComponentRegister;
-import com.alatka.connection.core.component.SupportComponentRegister;
+import com.alatka.connection.core.component.support.SupportComponentRegister;
 import com.alatka.connection.core.model.DefinitionModel;
 import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.JsonUtil;
@@ -36,7 +36,7 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
 
     @Override
     protected List<? extends Property> validateAndConvert(Map<DefinitionModel, Object> map) {
-        if (map == null) {
+        if (map == null || map.isEmpty()) {
             return null;
         }
         return map.entrySet()

@@ -38,31 +38,31 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
 
         for (Resource resource : this.loadResources()) {
             String identity = this.getIdentity(resource);
-            RootModel root = this.getRootModel(resource);
+            RootModel rootModel = this.getRootModel(resource);
 
             // alatka.connection.definition
             DefinitionModuleBuilder definitionModuleBuilder = new DefinitionModuleBuilder(identity);
-            definitionModuleBuilder.build(root.getDefinition());
+            definitionModuleBuilder.build(rootModel.getDefinition());
 
             // alatka.connection.route.inbound
             InboundModuleBuilder inboundModuleBuilder = new InboundModuleBuilder(identity);
-            inboundModuleBuilder.build(root.getRoute().getInbound());
+            inboundModuleBuilder.build(rootModel.getRoute().getInbound());
 
             // alatka.connection.route.outbound
             OutboundModuleBuilder outboundModuleBuilder = new OutboundModuleBuilder(identity);
-            outboundModuleBuilder.build(root.getRoute().getOutbound());
+            outboundModuleBuilder.build(rootModel.getRoute().getOutbound());
 
             // alatka.connection.route.bypass
             BypassModuleBuilder bypassModuleBuilder = new BypassModuleBuilder(identity);
-            bypassModuleBuilder.build(root.getRoute().getBypass());
+            bypassModuleBuilder.build(rootModel.getRoute().getBypass());
 
             // alatka.connection.route.processor request
             ProcessorModuleBuilder requestProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.request);
-            requestProcessorModuleBuilder.build(root.getRoute().getProcessors());
+            requestProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
 
             // alatka.connection.route.processor reply
             ProcessorModuleBuilder replyProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.reply);
-            replyProcessorModuleBuilder.build(root.getRoute().getProcessors());
+            replyProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
         }
     }
 
@@ -86,13 +86,14 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
     }
 
     /**
+     * 获取配置文件唯一标识identity<br>
      * alatka-connection-[identity].yml<br><br>
      * alatka-connection-channel2.yml -> channel2<br>
      * alatka-connection-cpsfe.yaml -> cpsfe<br>
      * alatka-connection-app.yaml -> app<br>
      * alatka-connection.yml -> default<br>
      *
-     * @param resource yaml {@link Resource}
+     * @param resource yaml {@link Resource}文件
      * @return [identity]
      */
     private String getIdentity(Resource resource) {

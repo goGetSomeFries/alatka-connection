@@ -58,8 +58,13 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
                 ConnectionConstant.OUTBOUND_INPUT_CHANNEL : ConnectionConstant.INBOUND_INPUT_CHANNEL;
         AtomicReference<String> reference = new AtomicReference<>(outputChannelBeanName);
 
+        this.buildProcessors(list, index, reference);
+        this.buildOutputChannelBridge(reference);
+    }
+
+    private void buildProcessors(List<ProcessorProperty> list, AtomicInteger index, AtomicReference<String> reference) {
         list.forEach(processor -> {
-            String suffix = "." + index.getAndDecrement();
+            String suffix = "." + index.decrementAndGet();
 
             // handler
             HandlerProperty handler = processor.getHandler();
@@ -77,13 +82,23 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
 
             // processor
             ConsumerProperty consumer = new ConsumerProperty();
+            consumer.setId("processor." + type.name() + suffix);
             consumer.setInputChannel(channelBeanName);
             consumer.setMessageHandler(handlerBeanName);
-            consumer.setPollerMetadata(null);
-            consumer.setTaskScheduler(null);
-            consumer.setId("processor." + type.name() + suffix);
+            if (channel.getType().getKind() == ChannelProperty.Type.Kind.POLLABLE) {
+                String pollerMetadata = processor.getPollerMetadata();
+                if (pollerMetadata == null) {
+                    pollerMetadata = ConnectionConstant.FALLBACK_POLLER_METADATA;
+                    this.logger.warn(consumer.getId() + " 未配置pollerMetadata，使用默认配置：" + pollerMetadata);
+                }
+                consumer.setPollerMetadata(pollerMetadata);
+            }
+            consumer.setTaskScheduler(processor.getTaskScheduler());
             this.consumerModuleBuilder.build(consumer);
         });
+    }
+
+    private void buildOutputChannelBridge(AtomicReference<String> reference) {
         String inputChannelBeanName = this.type == ProcessorProperty.Type.request ?
                 ConnectionConstant.INBOUND_OUTPUT_CHANNEL : ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
 

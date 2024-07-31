@@ -1,5 +1,6 @@
-package com.alatka.connection.core.component;
+package com.alatka.connection.core.component.inbound;
 
+import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.property.InboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
