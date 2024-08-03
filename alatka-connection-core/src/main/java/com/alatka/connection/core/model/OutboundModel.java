@@ -2,12 +2,14 @@ package com.alatka.connection.core.model;
 
 import com.alatka.connection.core.property.ChannelAdapterProperty;
 import com.alatka.connection.core.property.http.HttpOutboundProperty;
+import com.alatka.connection.core.property.test.MockerOutboundProperty;
 
 /**
  * @author ybliu
  */
 public enum OutboundModel {
 
+    mocker(MockerOutboundProperty.class, true),
     http(HttpOutboundProperty.class, true);
 
     /**

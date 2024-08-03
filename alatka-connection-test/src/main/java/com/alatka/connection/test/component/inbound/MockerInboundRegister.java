@@ -1,6 +1,8 @@
 package com.alatka.connection.test.component.inbound;
 
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
+import com.alatka.connection.core.config.DefaultConfig;
+import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.property.test.MockerInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
@@ -20,9 +22,15 @@ public class MockerInboundRegister extends InboundComponentRegister<MockerInboun
         MethodInvokingMessageSource messageSource = new MethodInvokingMessageSource();
         messageSource.setObject(instance);
         messageSource.setMethodName(property.getMethodName());
+        messageSource.setBeanFactory(this.getBeanFactory());
+        messageSource.afterPropertiesSet();
 
-        PollerMetadata pollerMetadata = this.getBeanFactory().getBean(property.getPoller(), PollerMetadata.class);
+        builder.addPropertyValue("source", messageSource);
 
+        String pollerBeanName = property.getPoller() == null ? DefaultConfig.FALLBACK_POLLER_METADATA : property.getPoller();
+        PollerMetadata pollerMetadata = this.getBeanFactory().getBean(pollerBeanName, PollerMetadata.class);
+
+        builder.addPropertyReference("taskScheduler", property.getTaskScheduler() == null ? DefaultConfig.FALLBACK_TASK_SCHEDULER : property.getTaskScheduler());
         builder.addPropertyValue("taskExecutor", pollerMetadata.getTaskExecutor());
         builder.addPropertyValue("trigger", pollerMetadata.getTrigger());
         builder.addPropertyValue("maxMessagesPerPoll", pollerMetadata.getMaxMessagesPerPoll());
@@ -31,7 +39,6 @@ public class MockerInboundRegister extends InboundComponentRegister<MockerInboun
         // pollerMetadata.getErrorHandler();
         // pollerMetadata.getTransactionSynchronizationFactory();
 
-        builder.addPropertyValue("source", messageSource);
     }
 
     @Override
@@ -47,5 +54,10 @@ public class MockerInboundRegister extends InboundComponentRegister<MockerInboun
     @Override
     public Class<MockerInboundProperty> mappingKey() {
         return MockerInboundProperty.class;
+    }
+
+    @Override
+    protected String beanNameSuffix() {
+        return InboundModel.mocker.name();
     }
 }

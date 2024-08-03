@@ -10,6 +10,8 @@ public class MockerInboundProperty extends InboundProperty {
 
     @IdentityProperty
     private String poller;
+    @IdentityProperty
+    private String taskScheduler;
 
     private String className;
     private String methodName;
@@ -20,6 +22,14 @@ public class MockerInboundProperty extends InboundProperty {
 
     public void setPoller(String poller) {
         this.poller = poller;
+    }
+
+    public String getTaskScheduler() {
+        return taskScheduler;
+    }
+
+    public void setTaskScheduler(String taskScheduler) {
+        this.taskScheduler = taskScheduler;
     }
 
     public String getClassName() {

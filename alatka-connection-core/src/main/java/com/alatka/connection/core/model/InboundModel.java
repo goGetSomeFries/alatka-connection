@@ -10,8 +10,7 @@ import com.alatka.connection.core.property.test.MockerInboundProperty;
  */
 public enum InboundModel {
 
-    mocker_duplex(MockerInboundProperty.class, true),
-    mocker_simplex(MockerInboundProperty.class, false),
+    mocker(MockerInboundProperty.class, false),
     tcp_duplex(TcpSimplexInboundProperty.class, true),
     tcp_simplex(TcpSimplexInboundProperty.class, false),
     http(HttpInboundProperty.class, true);

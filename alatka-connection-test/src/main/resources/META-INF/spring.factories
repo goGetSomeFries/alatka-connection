@@ -1,2 +1,4 @@
 com.alatka.connection.core.component.inbound.InboundComponentRegister=\
   com.alatka.connection.test.component.inbound.MockerInboundRegister
+com.alatka.connection.core.component.outbound.OutboundComponentRegister=\
+  com.alatka.connection.test.component.outbound.MockerOutboundRegister
