@@ -2,6 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.ConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
+import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.property.HandlerProperty;
 import com.alatka.connection.core.property.ProcessorProperty;
 import com.alatka.connection.core.property.channel.ChannelProperty;
@@ -88,7 +89,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
             if (channel.getType().getKind() == ChannelProperty.Type.Kind.POLLABLE) {
                 String pollerMetadata = processor.getPollerMetadata();
                 if (pollerMetadata == null) {
-                    pollerMetadata = ConnectionConstant.FALLBACK_POLLER_METADATA;
+                    pollerMetadata = DefaultConfig.FALLBACK_POLLER_METADATA;
                     this.logger.warn(consumer.getId() + " 未配置pollerMetadata，使用默认配置：" + pollerMetadata);
                 }
                 consumer.setPollerMetadata(pollerMetadata);

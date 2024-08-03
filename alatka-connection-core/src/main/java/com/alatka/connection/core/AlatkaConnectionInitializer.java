@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * TODO
+ * 初始化入口
  *
  * @author ybliu
  */
@@ -103,7 +103,7 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
     }
 
     /**
-     * 获取yaml文件内容
+     * 获取yaml文件内容，转换为{@link RootModel}对象
      *
      * @param resource yaml {@link Resource}
      * @return {@link RootModel}

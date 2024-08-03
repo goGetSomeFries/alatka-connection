@@ -1,6 +1,5 @@
 package com.alatka.connection.core.config;
 
-import com.alatka.connection.core.ConnectionConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.NullChannel;
+import org.springframework.integration.context.IntegrationContextUtils;
 import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.messaging.MessageChannel;
@@ -17,16 +17,51 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
+import static com.alatka.connection.core.ConnectionConstant.FALLBACK_PREFIX;
+
 /**
  * 默认配置
  *
  * @author ybliu
  */
 @Configuration
-public class ConnectionFallbackConfig {
+public class DefaultConfig {
 
-    @Bean(ConnectionConstant.FALLBACK_POLLER_METADATA)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_POLLER_METADATA)
+    /**
+     * 默认{@link org.springframework.integration.scheduling.PollerMetadata}
+     */
+    public static final String FALLBACK_POLLER_METADATA = FALLBACK_PREFIX + "pollerMetadata";
+    /**
+     * 默认{@link org.springframework.core.task.TaskExecutor}
+     */
+    public static final String FALLBACK_TASK_EXECUTOR = FALLBACK_PREFIX + "taskExecutor";
+    /**
+     * 默认{@link org.springframework.scheduling.TaskScheduler}
+     */
+    public static final String FALLBACK_TASK_SCHEDULER = FALLBACK_PREFIX + "taskScheduler";
+    /**
+     * 默认info logger handler
+     */
+    public static final String FALLBACK_LOGGER_INFO = FALLBACK_PREFIX + "loggerInfo";
+    /**
+     * 默认info logger channel
+     */
+    public static final String FALLBACK_LOGGER_INFO_CHANNEL = FALLBACK_PREFIX + "loggerInfoChannel";
+    /**
+     * 默认error logger handler
+     */
+    public static final String FALLBACK_LOGGER_ERROR = FALLBACK_PREFIX + "loggerError";
+    /**
+     * 默认error logger channel
+     */
+    public static final String FALLBACK_LOGGER_ERROR_CHANNEL = FALLBACK_PREFIX + "loggerErrorChannel";
+    /**
+     * null channel {@link IntegrationContextUtils#NULL_CHANNEL_BEAN_NAME}
+     */
+    public static final String FALLBACK_NULL_CHANNEL = FALLBACK_PREFIX + "nullChannel";
+
+    @Bean(FALLBACK_POLLER_METADATA)
+    @ConditionalOnMissingBean(name = FALLBACK_POLLER_METADATA)
     public PollerMetadata pollerMetadata(
             @Value("${alatka.connection.fallback.pollerMetadata.period}") long period,
             @Value("${alatka.connection.fallback.pollerMetadata.maxPerPoll}") long maxPerPoll) {
@@ -39,8 +74,8 @@ public class ConnectionFallbackConfig {
         return pollerMetadata;
     }
 
-    @Bean(ConnectionConstant.FALLBACK_TASK_EXECUTOR)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_TASK_EXECUTOR)
+    @Bean(FALLBACK_TASK_EXECUTOR)
+    @ConditionalOnMissingBean(name = FALLBACK_TASK_EXECUTOR)
     public ThreadPoolTaskExecutor taskExecutor(
             @Value("${alatka.connection.fallback.taskExecutor.corePoolSize}") Integer corePoolSize,
             @Value("${alatka.connection.fallback.taskExecutor.maxPoolSize}") Integer maxPoolSize,
@@ -57,8 +92,8 @@ public class ConnectionFallbackConfig {
         return taskExecutor;
     }
 
-    @Bean(ConnectionConstant.FALLBACK_TASK_SCHEDULER)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_TASK_SCHEDULER)
+    @Bean(FALLBACK_TASK_SCHEDULER)
+    @ConditionalOnMissingBean(name = FALLBACK_TASK_SCHEDULER)
     public ThreadPoolTaskScheduler taskScheduler(
             @Value("${alatka.connection.fallback.taskScheduler.corePoolSize}") int schedulerCorePoolSize,
             @Value("${alatka.connection.fallback.taskScheduler.threadNamePrefix}") String schedulerThreadNamePrefix) {
@@ -69,15 +104,15 @@ public class ConnectionFallbackConfig {
         return taskScheduler;
     }
 
-    @Bean(ConnectionConstant.FALLBACK_LOGGER_INFO_CHANNEL)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_INFO_CHANNEL)
+    @Bean(FALLBACK_LOGGER_INFO_CHANNEL)
+    @ConditionalOnMissingBean(name = FALLBACK_LOGGER_INFO_CHANNEL)
     public MessageChannel infoLoggerChannel() {
         return new DirectChannel();
     }
 
-    @Bean(ConnectionConstant.FALLBACK_LOGGER_INFO)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_INFO)
-    @ServiceActivator(inputChannel = ConnectionConstant.FALLBACK_LOGGER_INFO_CHANNEL)
+    @Bean(FALLBACK_LOGGER_INFO)
+    @ConditionalOnMissingBean(name = FALLBACK_LOGGER_INFO)
+    @ServiceActivator(inputChannel = FALLBACK_LOGGER_INFO_CHANNEL)
     public LoggingHandler infoLoggingHandler(
             @Value("${alatka.connection.fallback.logger.info}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.INFO);
@@ -85,15 +120,15 @@ public class ConnectionFallbackConfig {
         return handler;
     }
 
-    @Bean(ConnectionConstant.FALLBACK_LOGGER_ERROR_CHANNEL)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_ERROR_CHANNEL)
+    @Bean(FALLBACK_LOGGER_ERROR_CHANNEL)
+    @ConditionalOnMissingBean(name = FALLBACK_LOGGER_ERROR_CHANNEL)
     public MessageChannel errorLoggerChannel() {
         return new DirectChannel();
     }
 
-    @Bean(ConnectionConstant.FALLBACK_LOGGER_ERROR)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_LOGGER_ERROR)
-    @ServiceActivator(inputChannel = ConnectionConstant.FALLBACK_LOGGER_ERROR_CHANNEL)
+    @Bean(FALLBACK_LOGGER_ERROR)
+    @ConditionalOnMissingBean(name = FALLBACK_LOGGER_ERROR)
+    @ServiceActivator(inputChannel = FALLBACK_LOGGER_ERROR_CHANNEL)
     public LoggingHandler errorLoggingHandler(
             @Value("${alatka.connection.fallback.logger.error}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.ERROR);
@@ -101,8 +136,8 @@ public class ConnectionFallbackConfig {
         return handler;
     }
 
-    @Bean(ConnectionConstant.FALLBACK_NULL_CHANNEL)
-    @ConditionalOnMissingBean(name = ConnectionConstant.FALLBACK_NULL_CHANNEL)
+    @Bean(FALLBACK_NULL_CHANNEL)
+    @ConditionalOnMissingBean(name = FALLBACK_NULL_CHANNEL)
     public MessageChannel nullChannel() {
         return new NullChannel();
     }

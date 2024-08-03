@@ -6,7 +6,7 @@ import com.alatka.connection.core.property.InboundProperty;
 /**
  * @author ybliu
  */
-public class MockerProperty extends InboundProperty {
+public class MockerInboundProperty extends InboundProperty {
 
     @IdentityProperty
     private String poller;

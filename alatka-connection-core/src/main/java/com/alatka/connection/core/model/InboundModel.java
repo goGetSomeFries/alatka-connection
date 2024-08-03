@@ -3,15 +3,15 @@ package com.alatka.connection.core.model;
 import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.property.http.HttpInboundProperty;
 import com.alatka.connection.core.property.socket.TcpSimplexInboundProperty;
-import com.alatka.connection.core.property.test.MockerProperty;
+import com.alatka.connection.core.property.test.MockerInboundProperty;
 
 /**
  * @author ybliu
  */
 public enum InboundModel {
 
-    mocker_duplex(MockerProperty.class, true),
-    mocker_simplex(MockerProperty.class, false),
+    mocker_duplex(MockerInboundProperty.class, true),
+    mocker_simplex(MockerInboundProperty.class, false),
     tcp_duplex(TcpSimplexInboundProperty.class, true),
     tcp_simplex(TcpSimplexInboundProperty.class, false),
     http(HttpInboundProperty.class, true);

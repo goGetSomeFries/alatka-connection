@@ -1,7 +1,8 @@
 package com.alatka.connection.test.component.inbound;
 
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
-import com.alatka.connection.core.property.test.MockerProperty;
+import com.alatka.connection.core.property.InboundProperty;
+import com.alatka.connection.core.property.test.MockerInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.endpoint.MethodInvokingMessageSource;
@@ -11,10 +12,10 @@ import org.springframework.integration.scheduling.PollerMetadata;
 /**
  * @author ybliu
  */
-public class MockerRegister extends InboundComponentRegister<MockerProperty> {
+public class MockerInboundRegister extends InboundComponentRegister<MockerInboundProperty> {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, MockerProperty property) {
+    protected void doRegister(BeanDefinitionBuilder builder, MockerInboundProperty property) {
         Object instance = ClassUtil.newInstance(property.getClassName());
         MethodInvokingMessageSource messageSource = new MethodInvokingMessageSource();
         messageSource.setObject(instance);
@@ -31,6 +32,10 @@ public class MockerRegister extends InboundComponentRegister<MockerProperty> {
         // pollerMetadata.getTransactionSynchronizationFactory();
 
         builder.addPropertyValue("source", messageSource);
+    }
+
+    @Override
+    protected void postDoRegister(BeanDefinitionBuilder builder, InboundProperty property) {
         builder.addPropertyValue("outputChannelName", property.getOutputChannel());
     }
 
@@ -40,7 +45,7 @@ public class MockerRegister extends InboundComponentRegister<MockerProperty> {
     }
 
     @Override
-    public Class<MockerProperty> mappingKey() {
-        return MockerProperty.class;
+    public Class<MockerInboundProperty> mappingKey() {
+        return MockerInboundProperty.class;
     }
 }

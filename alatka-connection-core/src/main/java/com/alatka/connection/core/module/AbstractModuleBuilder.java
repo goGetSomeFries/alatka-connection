@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * {@link ModuleBuilder}抽象类
  * @param <T>
  * @param <S>
  * @author ybliu
