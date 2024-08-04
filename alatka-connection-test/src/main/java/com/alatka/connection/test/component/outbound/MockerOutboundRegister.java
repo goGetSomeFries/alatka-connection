@@ -4,11 +4,13 @@ import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.test.MockerOutboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
+import com.alatka.connection.test.support.MessageMocker;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;
 
 /**
  * @author ybliu
+ * @see MessageMocker#outbound(String)
  */
 public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutboundProperty> {
 

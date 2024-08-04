@@ -1,6 +1,6 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.ConnectionConstant;
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.ChannelAdapterProperty;
 
@@ -24,14 +24,14 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
     @Override
     protected void buildInputChannel() {
         /**
-         * 使用{@link ConnectionConstant#OUTBOUND_INPUT_CHANNEL}，无需注册bean
+         * 使用{@link AlatkaConnectionConstant#OUTBOUND_INPUT_CHANNEL}，无需注册bean
          */
     }
 
     @Override
     protected void buildOutputChannel() {
         /**
-         * 使用{@link ConnectionConstant#FALLBACK_NULL_CHANNEL}，无需注册bean
+         * 使用{@link AlatkaConnectionConstant#FALLBACK_NULL_CHANNEL}，无需注册bean
          */
     }
 
@@ -55,12 +55,12 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
 
     @Override
     protected String inputChannel() {
-        return ConnectionConstant.BYPASS_INPUT_CHANNEL;
+        return AlatkaConnectionConstant.BYPASS_INPUT_CHANNEL;
     }
 
     @Override
     protected String outputChannel() {
-        return ConnectionConstant.BYPASS_OUTPUT_CHANNEL;
+        return AlatkaConnectionConstant.BYPASS_OUTPUT_CHANNEL;
     }
 
 }

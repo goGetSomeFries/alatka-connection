@@ -1,6 +1,6 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.ConnectionConstant;
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
@@ -122,11 +122,11 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     }
 
     protected String inputChannel() {
-        return ConnectionConstant.OUTBOUND_INPUT_CHANNEL;
+        return AlatkaConnectionConstant.OUTBOUND_INPUT_CHANNEL;
     }
 
     protected String outputChannel() {
-        return ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
+        return AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
     }
 
 }

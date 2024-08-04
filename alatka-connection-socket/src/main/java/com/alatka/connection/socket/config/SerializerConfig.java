@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.ip.tcp.serializer.*;
 
-import static com.alatka.connection.core.ConnectionConstant.FALLBACK_PREFIX;
+import static com.alatka.connection.core.AlatkaConnectionConstant.FALLBACK_PREFIX;
 
 @Configuration
 public class SerializerConfig {

@@ -1,6 +1,6 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.ConnectionConstant;
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
@@ -42,7 +42,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     @Override
     protected void buildInputChannel() {
         ChannelProperty property = new ChannelProperty();
-        property.setId(ConnectionConstant.INBOUND_INPUT_CHANNEL);
+        property.setId(AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL);
         property.setType(super.isDuplex() ? ChannelProperty.Type.direct : ChannelProperty.Type.null_);
         this.channelModuleBuilder.build(property);
     }
@@ -50,7 +50,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     @Override
     protected void buildOutputChannel() {
         ChannelProperty property = new ChannelProperty();
-        property.setId(ConnectionConstant.INBOUND_OUTPUT_CHANNEL);
+        property.setId(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
         property.setType(ChannelProperty.Type.direct);
         this.channelModuleBuilder.build(property);
     }
@@ -61,8 +61,8 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
                 .stream()
                 .map(entry -> {
                     InboundProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
-                    property.setInputChannel(entry.getKey().isDuplex() ? ConnectionConstant.INBOUND_INPUT_CHANNEL : null);
-                    property.setOutputChannel(ConnectionConstant.INBOUND_OUTPUT_CHANNEL);
+                    property.setInputChannel(entry.getKey().isDuplex() ? AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL : null);
+                    property.setOutputChannel(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
                     return property;
                 }).filter(Property::isEnabled)
                 .collect(Collectors.toList());

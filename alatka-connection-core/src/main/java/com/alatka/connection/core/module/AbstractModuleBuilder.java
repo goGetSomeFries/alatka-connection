@@ -1,5 +1,6 @@
 package com.alatka.connection.core.module;
 
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.annotation.ReferenceIdentityProperty;
 import com.alatka.connection.core.component.ComponentRegister;
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 
 /**
  * {@link ModuleBuilder}抽象类
+ *
  * @param <T>
  * @param <S>
  * @author ybliu
@@ -82,11 +84,11 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
                         IdentityProperty annotation = field.getAnnotation(IdentityProperty.class);
                         boolean referenced = annotation.referenced();
                         String value = ClassUtil.getValue(field, property);
-                        if (referenced && value != null && !value.contains("@")) {
-                            String lastValue = this.identity.concat("@").concat(value);
+                        if (referenced && value != null && !value.contains(AlatkaConnectionConstant.IDENTITY_SEPARATOR)) {
+                            String lastValue = this.identity.concat(AlatkaConnectionConstant.IDENTITY_SEPARATOR).concat(value);
                             ClassUtil.setValue(field, property, lastValue);
-                        } else if (!referenced && (value == null || !value.contains("@"))) {
-                            String lastValue = this.identity.concat("@").concat(value == null ? "" : value);
+                        } else if (!referenced && (value == null || !value.contains(AlatkaConnectionConstant.IDENTITY_SEPARATOR))) {
+                            String lastValue = this.identity.concat(AlatkaConnectionConstant.IDENTITY_SEPARATOR).concat(value == null ? "" : value);
                             ClassUtil.setValue(field, property, lastValue);
                         }
                     }

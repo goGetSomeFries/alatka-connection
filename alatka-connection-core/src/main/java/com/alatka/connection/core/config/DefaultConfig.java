@@ -17,7 +17,7 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
-import static com.alatka.connection.core.ConnectionConstant.FALLBACK_PREFIX;
+import static com.alatka.connection.core.AlatkaConnectionConstant.FALLBACK_PREFIX;
 
 /**
  * 默认配置

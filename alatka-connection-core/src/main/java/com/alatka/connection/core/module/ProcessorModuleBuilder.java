@@ -1,6 +1,6 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.ConnectionConstant;
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.property.HandlerProperty;
@@ -56,7 +56,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         }
 
         String outputChannelBeanName = this.type == ProcessorProperty.Type.request ?
-                ConnectionConstant.OUTBOUND_INPUT_CHANNEL : ConnectionConstant.INBOUND_INPUT_CHANNEL;
+                AlatkaConnectionConstant.OUTBOUND_INPUT_CHANNEL : AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL;
         AtomicReference<String> reference = new AtomicReference<>(outputChannelBeanName);
 
         this.buildProcessors(list, index, reference);
@@ -101,7 +101,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
 
     private void buildOutputChannelBridge(AtomicReference<String> reference) {
         String inputChannelBeanName = this.type == ProcessorProperty.Type.request ?
-                ConnectionConstant.INBOUND_OUTPUT_CHANNEL : ConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
+                AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL : AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
 
         HandlerProperty handler = new HandlerProperty();
         handler.setType(HandlerProperty.Type.passthrough);

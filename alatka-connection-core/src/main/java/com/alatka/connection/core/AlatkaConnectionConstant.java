@@ -7,9 +7,10 @@ import com.alatka.connection.core.config.DefaultConfig;
  *
  * @author ybliu
  */
-public final class ConnectionConstant {
+public final class AlatkaConnectionConstant {
 
-    public static final String FALLBACK_PREFIX = "fallback@";
+    public static final String IDENTITY_SEPARATOR = "@";
+    public static final String FALLBACK_PREFIX = "fallback" + IDENTITY_SEPARATOR;
 
     public static final String INBOUND_INPUT_CHANNEL = "channel.inbound.input";
     public static final String INBOUND_OUTPUT_CHANNEL = "channel.inbound.output";

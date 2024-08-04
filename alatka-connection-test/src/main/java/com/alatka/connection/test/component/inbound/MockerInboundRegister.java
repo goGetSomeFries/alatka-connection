@@ -6,6 +6,7 @@ import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.property.test.MockerInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
+import com.alatka.connection.test.support.MessageMocker;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.endpoint.MethodInvokingMessageSource;
 import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
@@ -13,6 +14,7 @@ import org.springframework.integration.scheduling.PollerMetadata;
 
 /**
  * @author ybliu
+ * @see MessageMocker#inbound()
  */
 public class MockerInboundRegister extends InboundComponentRegister<MockerInboundProperty> {
 
@@ -30,7 +32,8 @@ public class MockerInboundRegister extends InboundComponentRegister<MockerInboun
         String pollerBeanName = property.getPoller() == null ? DefaultConfig.FALLBACK_POLLER_METADATA : property.getPoller();
         PollerMetadata pollerMetadata = this.getBeanFactory().getBean(pollerBeanName, PollerMetadata.class);
 
-        builder.addPropertyReference("taskScheduler", property.getTaskScheduler() == null ? DefaultConfig.FALLBACK_TASK_SCHEDULER : property.getTaskScheduler());
+        String taskSchedulerBeanName = property.getTaskScheduler() == null ? DefaultConfig.FALLBACK_TASK_SCHEDULER : property.getTaskScheduler();
+        builder.addPropertyReference("taskScheduler", taskSchedulerBeanName);
         builder.addPropertyValue("taskExecutor", pollerMetadata.getTaskExecutor());
         builder.addPropertyValue("trigger", pollerMetadata.getTrigger());
         builder.addPropertyValue("maxMessagesPerPoll", pollerMetadata.getMaxMessagesPerPoll());
