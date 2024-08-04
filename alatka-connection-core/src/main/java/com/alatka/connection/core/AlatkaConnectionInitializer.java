@@ -15,6 +15,7 @@ import org.springframework.integration.config.IntegrationConfigurationInitialize
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -70,6 +71,7 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
      * 加载alatka-connection*.[yml|yaml]
      *
      * @return {@link Resource}集合
+     * @throws IllegalArgumentException 加载配置文件失败或者配置文件命名重复
      */
     private List<Resource> loadResources() {
         try {
@@ -79,6 +81,20 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
                     .getResources(FILE_PREFIX + "*" + FILE_YAML_SUFFIX);
 
             List<Resource> list = Stream.concat(Stream.of(ymlResources), Stream.of(yamlResources)).collect(Collectors.toList());
+
+            // 判断配置文件命名是否重复
+            Map<String, List<Resource>> map = list.stream()
+                    .collect(Collectors.groupingBy(resource -> {
+                        String filename = resource.getFilename();
+                        return filename.substring(0, filename.lastIndexOf("."));
+                    }));
+            map.values().stream()
+                    .filter(l -> l.size() > 1)
+                    .findAny()
+                    .ifPresent(l -> {
+                        throw new IllegalArgumentException(FILE_PREFIX + "配置文件命名重复: " + l);
+                    });
+
             return Collections.unmodifiableList(list);
         } catch (IOException e) {
             throw new IllegalArgumentException("加载" + FILE_PREFIX + "失败", e);

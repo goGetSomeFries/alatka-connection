@@ -1,6 +1,6 @@
 alatka.connection:
   version: @project.version@
-  fallback:
+  default:
     logger:
       info: "'payload: ' + payload + '; headers: ' + headers"
       error: "'payload: ' + payload + '; headers: ' + headers"

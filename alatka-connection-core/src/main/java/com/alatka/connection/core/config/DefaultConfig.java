@@ -63,8 +63,8 @@ public class DefaultConfig {
     @Bean(FALLBACK_POLLER_METADATA)
     @ConditionalOnMissingBean(name = FALLBACK_POLLER_METADATA)
     public PollerMetadata pollerMetadata(
-            @Value("${alatka.connection.fallback.pollerMetadata.period}") long period,
-            @Value("${alatka.connection.fallback.pollerMetadata.maxPerPoll}") long maxPerPoll) {
+            @Value("${alatka.connection.default.pollerMetadata.period}") long period,
+            @Value("${alatka.connection.default.pollerMetadata.maxPerPoll}") long maxPerPoll) {
         PollerMetadata pollerMetadata = new PollerMetadata();
         PeriodicTrigger trigger = new PeriodicTrigger(period);
         trigger.setFixedRate(true);
@@ -77,11 +77,11 @@ public class DefaultConfig {
     @Bean(FALLBACK_TASK_EXECUTOR)
     @ConditionalOnMissingBean(name = FALLBACK_TASK_EXECUTOR)
     public ThreadPoolTaskExecutor taskExecutor(
-            @Value("${alatka.connection.fallback.taskExecutor.corePoolSize}") Integer corePoolSize,
-            @Value("${alatka.connection.fallback.taskExecutor.maxPoolSize}") Integer maxPoolSize,
-            @Value("${alatka.connection.fallback.taskExecutor.queueCapacity}") Integer queueCapacity,
-            @Value("${alatka.connection.fallback.taskExecutor.keepAliveSeconds}") Integer keepAliveSeconds,
-            @Value("${alatka.connection.fallback.taskExecutor.threadNamePrefix}") String threadNamePrefix) {
+            @Value("${alatka.connection.default.taskExecutor.corePoolSize}") Integer corePoolSize,
+            @Value("${alatka.connection.default.taskExecutor.maxPoolSize}") Integer maxPoolSize,
+            @Value("${alatka.connection.default.taskExecutor.queueCapacity}") Integer queueCapacity,
+            @Value("${alatka.connection.default.taskExecutor.keepAliveSeconds}") Integer keepAliveSeconds,
+            @Value("${alatka.connection.default.taskExecutor.threadNamePrefix}") String threadNamePrefix) {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(corePoolSize);
         taskExecutor.setMaxPoolSize(maxPoolSize);
@@ -95,8 +95,8 @@ public class DefaultConfig {
     @Bean(FALLBACK_TASK_SCHEDULER)
     @ConditionalOnMissingBean(name = FALLBACK_TASK_SCHEDULER)
     public ThreadPoolTaskScheduler taskScheduler(
-            @Value("${alatka.connection.fallback.taskScheduler.corePoolSize}") int schedulerCorePoolSize,
-            @Value("${alatka.connection.fallback.taskScheduler.threadNamePrefix}") String schedulerThreadNamePrefix) {
+            @Value("${alatka.connection.default.taskScheduler.corePoolSize}") int schedulerCorePoolSize,
+            @Value("${alatka.connection.default.taskScheduler.threadNamePrefix}") String schedulerThreadNamePrefix) {
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
         taskScheduler.setPoolSize(schedulerCorePoolSize);
         taskScheduler.setThreadNamePrefix(schedulerThreadNamePrefix);
@@ -114,7 +114,7 @@ public class DefaultConfig {
     @ConditionalOnMissingBean(name = FALLBACK_LOGGER_INFO)
     @ServiceActivator(inputChannel = FALLBACK_LOGGER_INFO_CHANNEL)
     public LoggingHandler infoLoggingHandler(
-            @Value("${alatka.connection.fallback.logger.info}") String expression) {
+            @Value("${alatka.connection.default.logger.info}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.INFO);
         handler.setLogExpressionString(expression);
         return handler;
@@ -130,7 +130,7 @@ public class DefaultConfig {
     @ConditionalOnMissingBean(name = FALLBACK_LOGGER_ERROR)
     @ServiceActivator(inputChannel = FALLBACK_LOGGER_ERROR_CHANNEL)
     public LoggingHandler errorLoggingHandler(
-            @Value("${alatka.connection.fallback.logger.error}") String expression) {
+            @Value("${alatka.connection.default.logger.error}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.ERROR);
         handler.setLogExpressionString(expression);
         return handler;
