@@ -24,7 +24,8 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     public final String register(T property, String beanNamePrefix, boolean custom) {
         Validator.validateByException(property);
 
-        BeanDefinitionBuilder builder = this.preDoRegister();
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.beanClass());
+        this.preDoRegister(builder, property);
         this.doRegister(builder, property);
         this.postDoRegister(builder, property);
 
@@ -44,8 +45,7 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     protected void init() {
     }
 
-    protected BeanDefinitionBuilder preDoRegister() {
-        return BeanDefinitionBuilder.genericBeanDefinition(this.beanClass());
+    protected void preDoRegister(BeanDefinitionBuilder builder, T property) {
     }
 
     protected void postDoRegister(BeanDefinitionBuilder builder, T property) {

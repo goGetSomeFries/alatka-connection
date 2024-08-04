@@ -25,7 +25,10 @@ public class ProcessorProperty extends Property {
 
     @Override
     public ProcessorProperty defaultProperty() {
-        return null;
+        this.type = Type.all;
+        this.channel = new ChannelProperty().defaultProperty();
+        this.handler = new HandlerProperty().defaultProperty();
+        return this;
     }
 
     public Type getType() {

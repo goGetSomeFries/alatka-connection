@@ -12,7 +12,7 @@ public abstract class Property {
 
     private boolean enabled = true;
 
-    public Property defaultProperty() {
+    public <T extends Property> T defaultProperty() {
         throw new UnsupportedOperationException("");
     }
 

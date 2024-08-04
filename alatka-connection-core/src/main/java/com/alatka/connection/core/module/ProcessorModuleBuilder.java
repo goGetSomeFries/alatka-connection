@@ -5,6 +5,7 @@ import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.property.HandlerProperty;
 import com.alatka.connection.core.property.ProcessorProperty;
+import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.property.channel.ChannelProperty;
 import com.alatka.connection.core.property.consumer.ConsumerProperty;
 
@@ -68,14 +69,16 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
             String suffix = "." + index.decrementAndGet();
 
             // handler
-            HandlerProperty handler = processor.getHandler();
+            HandlerProperty handler = processor.getHandler().isEnabled() ?
+                    processor.getHandler() : new HandlerProperty().defaultProperty();
             handler.setId("handler." + type.name() + "." + handler.getType() + suffix);
             handler.setOutputChannel(reference.get());
             this.handlerModuleBuilder.build(handler);
             String handlerBeanName = this.handlerModuleBuilder.getBeanName();
 
             // channel
-            ChannelProperty channel = processor.getChannel();
+            ChannelProperty channel = processor.getChannel() == null || !processor.getChannel().isEnabled() ?
+                    new ChannelProperty().defaultProperty() : processor.getChannel();
             channel.setId("channel." + type.name() + "." + channel.getType() + suffix);
             this.channelModuleBuilder.build(channel);
             String channelBeanName = this.channelModuleBuilder.getBeanName();
@@ -118,7 +121,16 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
 
     @Override
     protected List<ProcessorProperty> validateAndConvert(List<ProcessorProperty> models) {
-        return models == null ? Collections.emptyList() : models;
+        if (models == null) {
+            return Collections.emptyList();
+        }
+        return models.stream()
+                .filter(Property::isEnabled)
+                .peek(processor -> {
+                    if (processor.getType() == null) {
+                        processor.setType(ProcessorProperty.Type.all);
+                    }
+                }).collect(Collectors.toList());
     }
 
     @Override

@@ -35,7 +35,7 @@ public class ChannelProperty extends Property {
     }
 
     @Override
-    public Property defaultProperty() {
+    public ChannelProperty defaultProperty() {
         this.type = Type.direct;
         return this;
     }

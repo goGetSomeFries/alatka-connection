@@ -12,7 +12,7 @@ import java.util.Collections;
 public abstract class ChannelComponentRegister<T extends ChannelProperty> extends AbstractComponentRegister<T, ChannelProperty.Type> {
 
     @Override
-    protected void postDoRegister(BeanDefinitionBuilder builder, T property) {
+    protected void preDoRegister(BeanDefinitionBuilder builder, T property) {
         if (property.getDataTypes() != null && property.getDataTypes().length != 0) {
             builder.addPropertyValue("dataTypes", property.getDataTypes());
         }
