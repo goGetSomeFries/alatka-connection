@@ -74,7 +74,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
         if (!super.isDuplex()) {
             HandlerProperty handler = new HandlerProperty();
-            handler.setId(HandlerProperty.Type.passthrough.name().concat(".outbound.input-output"));
+            handler.setId(HandlerProperty.Type.passthrough.name().concat(".outbound.input-outbound.output"));
             handler.setType(HandlerProperty.Type.passthrough);
             handler.setOutputChannel(this.outputChannel());
             handler.setOrder(ORDER + 1);
@@ -83,7 +83,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
             ConsumerProperty consumer = new ConsumerProperty();
             consumer.setInputChannel(this.inputChannel());
             consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
-            consumer.setId(HandlerProperty.Type.passthrough.name().concat(".consumer.outbound.input-output"));
+            consumer.setId("consumer".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-outbound.output"));
             this.consumerModuleBuilder.build(consumer);
         }
     }

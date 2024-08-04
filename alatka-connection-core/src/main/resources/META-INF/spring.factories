@@ -10,6 +10,7 @@ com.alatka.connection.core.component.channel.ChannelComponentRegister=\
 com.alatka.connection.core.component.handler.HandlerComponentRegister=\
   com.alatka.connection.core.component.handler.PassthroughRegister,\
   com.alatka.connection.core.component.handler.LoggerRegister,\
+  com.alatka.connection.core.component.handler.FilterRegister,\
   com.alatka.connection.core.component.handler.CustomRegister
 com.alatka.connection.core.component.support.SupportComponentRegister=\
   com.alatka.connection.core.component.support.PollerMetadataRegister,\

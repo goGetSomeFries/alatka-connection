@@ -109,13 +109,14 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         HandlerProperty handler = new HandlerProperty();
         handler.setType(HandlerProperty.Type.passthrough);
         handler.setOutputChannel(reference.get());
-        handler.setId(HandlerProperty.Type.passthrough.name().concat(".").concat(inputChannelBeanName)); // TODO
+        String suffix = this.type == ProcessorProperty.Type.request ? "inbound.output-processor" : "outbound.output-processor";
+        handler.setId(HandlerProperty.Type.passthrough.name().concat(".").concat(suffix));
         this.handlerModuleBuilder.build(handler);
 
         ConsumerProperty consumer = new ConsumerProperty();
         consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
         consumer.setInputChannel(inputChannelBeanName);
-        consumer.setId("consumer.".concat(inputChannelBeanName)); // TODO
+        consumer.setId("consumer.".concat(suffix));
         this.consumerModuleBuilder.build(consumer);
     }
 
