@@ -14,7 +14,7 @@ import com.alatka.connection.core.property.support.TaskSchedulerProperty;
 public enum DefinitionModel {
 
     serializers(SerializerProperty.class, true),
-    pollerMetadatas(PollerMetadataProperty.class, true),
+    pollerMetadata(PollerMetadataProperty.class, true),
     taskSchedulers(TaskSchedulerProperty.class, true),
     taskExecutors(TaskExecutorProperty.class, true);
 
