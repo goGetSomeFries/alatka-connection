@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * alatka.connection.definition.pollerMetadatas
+ * alatka.connection.definition.pollerMetadata
  *
  * @author ybliu
  */

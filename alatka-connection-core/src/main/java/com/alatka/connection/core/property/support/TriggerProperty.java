@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * alatka.connection.definition.pollerMetadatas.trigger<br><br>
+ * alatka.connection.definition.pollerMetadata.trigger<br><br>
  * 不需要{@link com.alatka.connection.core.component.ComponentRegister}单独解析，
  * 无需继承{@link com.alatka.connection.core.property.Property}
  *

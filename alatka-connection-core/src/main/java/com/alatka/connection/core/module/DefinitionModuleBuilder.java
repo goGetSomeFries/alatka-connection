@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * definition模块构建器<br><br>
  * alatka.connection.definition.taskSchedulers<br>
  * alatka.connection.definition.taskExecutors<br>
- * alatka.connection.definition.pollerMetadatas<br>
+ * alatka.connection.definition.pollerMetadata<br>
  * alatka.connection.definition.......
  *
  * @author ybliu
