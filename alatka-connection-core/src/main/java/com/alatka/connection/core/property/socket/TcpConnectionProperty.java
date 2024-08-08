@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 public class TcpConnectionProperty extends Property {
 
-    @NotNull
     private boolean server;
     private String host;
     @Min(0)

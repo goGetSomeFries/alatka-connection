@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * 构造connection默认变量<br>
  * 文件路径：{@link ConnectionConfigEnvironmentPostProcessor#CONNECTION_CONFIG_YML}<br>
- * 参数优先级：application.yml > connection.yml > connection-config.yml
+ * 参数优先级：application.yml > connection-config.yml
  *
  * @author ybliu
  */

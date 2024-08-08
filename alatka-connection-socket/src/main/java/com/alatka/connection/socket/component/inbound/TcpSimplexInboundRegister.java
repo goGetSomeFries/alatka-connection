@@ -1,6 +1,7 @@
 package com.alatka.connection.socket.component.inbound;
 
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
+import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.socket.TcpSimplexInboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpReceivingChannelAdapter;
@@ -27,5 +28,10 @@ public class TcpSimplexInboundRegister extends InboundComponentRegister<TcpSimpl
     @Override
     public Class<TcpSimplexInboundProperty> mappingKey() {
         return TcpSimplexInboundProperty.class;
+    }
+
+    @Override
+    protected String beanNameSuffix() {
+        return InboundModel.tcp_simplex.name();
     }
 }

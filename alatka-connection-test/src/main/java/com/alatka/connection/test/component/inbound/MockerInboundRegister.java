@@ -3,7 +3,6 @@ package com.alatka.connection.test.component.inbound;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.model.InboundModel;
-import com.alatka.connection.core.property.InboundProperty;
 import com.alatka.connection.core.property.test.MockerInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.test.support.MessageMocker;
@@ -42,11 +41,6 @@ public class MockerInboundRegister extends InboundComponentRegister<MockerInboun
         // pollerMetadata.getErrorHandler();
         // pollerMetadata.getTransactionSynchronizationFactory();
 
-    }
-
-    @Override
-    protected void postDoRegister(BeanDefinitionBuilder builder, InboundProperty property) {
-        builder.addPropertyValue("outputChannelName", property.getOutputChannel());
     }
 
     @Override

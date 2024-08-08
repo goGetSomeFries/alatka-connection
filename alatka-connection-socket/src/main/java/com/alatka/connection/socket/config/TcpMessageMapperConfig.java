@@ -2,6 +2,7 @@ package com.alatka.connection.socket.config;
 
 
 import com.alatka.connection.socket.support.PassThroughBytesMessageMapper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.ip.tcp.connection.TcpMessageMapper;
@@ -14,6 +15,7 @@ public class TcpMessageMapperConfig {
     public static final String FALLBACK_PASSTHROUGH_TCP_MESSAGE_MAPPER = FALLBACK_PREFIX + "passThroughTcpMessageMapper";
 
     @Bean(FALLBACK_PASSTHROUGH_TCP_MESSAGE_MAPPER)
+    @ConditionalOnMissingBean(name = FALLBACK_PASSTHROUGH_TCP_MESSAGE_MAPPER)
     public TcpMessageMapper passThroughTcpMessageMapper() {
         TcpMessageMapper mapper = new TcpMessageMapper();
         mapper.setBytesMessageMapper(new PassThroughBytesMessageMapper());

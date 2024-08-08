@@ -34,5 +34,10 @@
             <artifactId>alatka-connection-websocket</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.alatka.connection</groupId>
+            <artifactId>alatka-connection-test</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 </project>
