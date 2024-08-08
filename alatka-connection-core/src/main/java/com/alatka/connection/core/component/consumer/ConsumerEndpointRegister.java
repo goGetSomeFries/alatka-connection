@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.consumer;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.consumer.ConsumerProperty;
+import com.alatka.connection.core.property.ConsumerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.ConsumerEndpointFactoryBean;
 

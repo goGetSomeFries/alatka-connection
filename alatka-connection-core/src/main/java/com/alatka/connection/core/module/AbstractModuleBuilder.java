@@ -4,7 +4,6 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.annotation.ReferenceIdentityProperty;
 import com.alatka.connection.core.component.ComponentRegister;
-import com.alatka.connection.core.component.ReferenceProperty;
 import com.alatka.connection.core.property.Property;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.core.util.Validator;
@@ -61,7 +60,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         if (list.isEmpty()) {
             list.add(ClassUtil.newInstance(this.componentRegisterClass().getName()));
         }
-        return list.stream().collect(Collectors.toMap(ReferenceProperty::mappingKey, Function.identity()));
+        return list.stream().collect(Collectors.toMap(ComponentRegister::mappingKey, Function.identity()));
     }
 
     protected S validateAndConvert(T model) {

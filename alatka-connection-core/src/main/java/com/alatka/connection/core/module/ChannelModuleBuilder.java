@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.channel.ChannelComponentRegister;
-import com.alatka.connection.core.property.channel.ChannelProperty;
+import com.alatka.connection.core.property.ChannelProperty;
 
 import java.util.Map;
 

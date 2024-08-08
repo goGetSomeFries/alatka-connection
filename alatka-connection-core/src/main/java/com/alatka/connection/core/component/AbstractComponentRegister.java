@@ -8,6 +8,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 /**
+ * {@link ComponentRegister}抽象类
+ *
  * @author ybliu
  */
 public abstract class AbstractComponentRegister<T extends Property, S> implements ComponentRegister<T, S> {
@@ -17,7 +19,7 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     private static DefaultListableBeanFactory beanFactory;
 
     protected AbstractComponentRegister() {
-        init();
+        initialize();
     }
 
     @Override
@@ -42,13 +44,10 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
         return beanFactory;
     }
 
-    protected void init() {
-    }
-
-    protected void preDoRegister(BeanDefinitionBuilder builder, T property) {
-    }
-
-    protected void postDoRegister(BeanDefinitionBuilder builder, T property) {
+    /**
+     * 组件加载初始化
+     */
+    protected void initialize() {
     }
 
     protected String resolveBeanName(String beanNamePrefix, boolean custom) {
@@ -58,6 +57,12 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
 
     protected String beanNameSuffix() {
         return this.beanClass().getSimpleName();
+    }
+
+    protected void preDoRegister(BeanDefinitionBuilder builder, T property) {
+    }
+
+    protected void postDoRegister(BeanDefinitionBuilder builder, T property) {
     }
 
     protected abstract void doRegister(BeanDefinitionBuilder builder, T property);

@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.channel;
 
 
-import com.alatka.connection.core.property.channel.ChannelProperty;
+import com.alatka.connection.core.property.ChannelProperty;
 
 @Deprecated
 public abstract class SubscribableChannelRegister<T extends ChannelProperty> extends ChannelComponentRegister<T> {

@@ -6,8 +6,8 @@ import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.property.HandlerProperty;
 import com.alatka.connection.core.property.ProcessorProperty;
 import com.alatka.connection.core.property.Property;
-import com.alatka.connection.core.property.channel.ChannelProperty;
-import com.alatka.connection.core.property.consumer.ConsumerProperty;
+import com.alatka.connection.core.property.ChannelProperty;
+import com.alatka.connection.core.property.ConsumerProperty;
 
 import java.util.Collections;
 import java.util.List;

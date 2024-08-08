@@ -8,6 +8,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * 线程池BeanDefinition注册器
  *
  * @author ybliu
+ * @see ThreadPoolTaskExecutor
  */
 public class TaskExecutorRegister extends SupportComponentRegister<TaskExecutorProperty> {
 

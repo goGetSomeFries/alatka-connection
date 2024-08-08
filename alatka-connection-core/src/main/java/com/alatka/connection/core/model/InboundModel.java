@@ -18,11 +18,11 @@ public enum InboundModel {
     /**
      * {@link InboundProperty} {@link Class} 类型
      */
-    private Class<? extends InboundProperty> type;
+    private final Class<? extends InboundProperty> type;
     /**
      * 双向通信
      */
-    private boolean duplex;
+    private final boolean duplex;
 
     InboundModel(Class<? extends InboundProperty> type, boolean duplex) {
         this.type = type;

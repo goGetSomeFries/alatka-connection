@@ -1,6 +1,4 @@
-package com.alatka.connection.core.property.channel;
-
-import com.alatka.connection.core.property.Property;
+package com.alatka.connection.core.property;
 
 import java.util.Map;
 

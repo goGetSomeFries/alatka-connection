@@ -15,11 +15,11 @@ public enum OutboundModel {
     /**
      * {@link ChannelAdapterProperty} {@link Class} 类型
      */
-    private Class<? extends ChannelAdapterProperty> type;
+    private final Class<? extends ChannelAdapterProperty> type;
     /**
      * 双向通信
      */
-    private boolean duplex;
+    private final boolean duplex;
 
     OutboundModel(Class<? extends ChannelAdapterProperty> type, boolean duplex) {
         this.type = type;

@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.consumer.ConsumerEndpointRegister;
-import com.alatka.connection.core.property.consumer.ConsumerProperty;
+import com.alatka.connection.core.property.ConsumerProperty;
 
 import java.util.Map;
 

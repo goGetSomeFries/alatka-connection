@@ -21,11 +21,11 @@ public enum DefinitionModel {
     /**
      * definition子类型
      */
-    private Class<? extends Property> type;
+    private final Class<? extends Property> type;
     /**
      * 是否是集合类型
      */
-    private boolean collection;
+    private final boolean collection;
 
     DefinitionModel(Class<? extends Property> type, boolean collection) {
         this.type = type;

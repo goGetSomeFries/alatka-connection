@@ -1,7 +1,6 @@
-package com.alatka.connection.core.property.consumer;
+package com.alatka.connection.core.property;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
-import com.alatka.connection.core.property.Property;
 
 import javax.validation.constraints.NotBlank;
 

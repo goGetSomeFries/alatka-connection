@@ -16,10 +16,13 @@ public class RouteModel {
     @Size(min = 1)
     @NotNull
     private Map<InboundModel, Object> inbound;
+
     private List<ProcessorProperty> processors;
+
     @Size(min = 1)
     @NotNull
     private Map<OutboundModel, Object> outbound;
+
     private Map<OutboundModel, Object> bypass;
 
     public Map<InboundModel, Object> getInbound() {

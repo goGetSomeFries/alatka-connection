@@ -15,6 +15,7 @@ import java.util.function.Function;
 
 /**
  * @author ybliu
+ * @see PollerMetadata
  */
 public class PollerMetadataRegister extends SupportComponentRegister<PollerMetadataProperty> {
 
@@ -37,7 +38,7 @@ public class PollerMetadataRegister extends SupportComponentRegister<PollerMetad
     }
 
     @Override
-    protected void init() {
+    protected void initialize() {
         this.mapping = new HashMap<>(2);
 
         this.mapping.put(TriggerProperty.Type.periodic, object -> {
@@ -49,8 +50,7 @@ public class PollerMetadataRegister extends SupportComponentRegister<PollerMetad
         });
         this.mapping.put(TriggerProperty.Type.cron, object -> {
             TriggerProperty.CronProperty property = JsonUtil.convertToObject(object, TriggerProperty.CronProperty.class);
-            CronTrigger trigger = new CronTrigger(property.getExpression());
-            return trigger;
+            return new CronTrigger(property.getExpression());
         });
     }
 
