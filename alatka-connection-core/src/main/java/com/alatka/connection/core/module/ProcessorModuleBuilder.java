@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
  *
  * @author ybliu
  */
+@SuppressWarnings("rawtypes")
 public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<ProcessorProperty>, List<ProcessorProperty>> {
 
     private final ProcessorProperty.Type type;
@@ -58,13 +59,13 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
 
         String outputChannelBeanName = this.type == ProcessorProperty.Type.request ?
                 AlatkaConnectionConstant.OUTBOUND_INPUT_CHANNEL : AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL;
-        AtomicReference<String> reference = new AtomicReference<>(outputChannelBeanName);
+        AtomicReference<String> atomic = new AtomicReference<>(outputChannelBeanName);
 
-        this.buildProcessors(list, index, reference);
-        this.buildOutputChannelBridge(reference);
+        this.buildProcessors(list, index, atomic);
+        this.buildOutputChannelBridge(atomic.get());
     }
 
-    private void buildProcessors(List<ProcessorProperty> list, AtomicInteger index, AtomicReference<String> reference) {
+    private void buildProcessors(List<ProcessorProperty> list, AtomicInteger index, AtomicReference<String> atomic) {
         list.forEach(processor -> {
             String suffix = "." + index.decrementAndGet();
 
@@ -72,28 +73,26 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
             HandlerProperty handler = processor.getHandler().isEnabled() ?
                     processor.getHandler() : new HandlerProperty().defaultProperty();
             handler.setId("handler." + type.name() + "." + handler.getType() + suffix);
-            handler.setOutputChannel(reference.get());
+            handler.setOutputChannel(atomic.get());
             this.handlerModuleBuilder.build(handler);
-            String handlerBeanName = this.handlerModuleBuilder.getBeanName();
 
             // channel
             ChannelProperty channel = processor.getChannel() == null || !processor.getChannel().isEnabled() ?
                     new ChannelProperty().defaultProperty() : processor.getChannel();
             channel.setId("channel." + type.name() + "." + channel.getType() + suffix);
             this.channelModuleBuilder.build(channel);
-            String channelBeanName = this.channelModuleBuilder.getBeanName();
-            reference.set(channelBeanName);
+            atomic.set(this.channelModuleBuilder.getBeanName());
 
             // processor
             ConsumerProperty consumer = new ConsumerProperty();
             consumer.setId("processor." + type.name() + suffix);
-            consumer.setInputChannel(channelBeanName);
-            consumer.setMessageHandler(handlerBeanName);
+            consumer.setInputChannel(this.channelModuleBuilder.getBeanName());
+            consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
             if (channel.getType().getKind() == ChannelProperty.Type.Kind.POLLABLE) {
                 String pollerMetadata = processor.getPollerMetadata();
                 if (pollerMetadata == null) {
                     pollerMetadata = DefaultConfig.FALLBACK_POLLER_METADATA;
-                    this.logger.warn(consumer.getId() + " 未配置pollerMetadata，使用默认配置：" + pollerMetadata);
+                    this.logger.warn("{} 未配置pollerMetadata，使用默认配置：{}", consumer.getId(), pollerMetadata);
                 }
                 consumer.setPollerMetadata(pollerMetadata);
             }
@@ -102,13 +101,13 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         });
     }
 
-    private void buildOutputChannelBridge(AtomicReference<String> reference) {
+    private void buildOutputChannelBridge(String channelBeanName) {
         String inputChannelBeanName = this.type == ProcessorProperty.Type.request ?
                 AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL : AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
 
         HandlerProperty handler = new HandlerProperty();
         handler.setType(HandlerProperty.Type.passthrough);
-        handler.setOutputChannel(reference.get());
+        handler.setOutputChannel(channelBeanName);
         String suffix = this.type == ProcessorProperty.Type.request ? "inbound.output-processor" : "outbound.output-processor";
         handler.setId(HandlerProperty.Type.passthrough.name().concat(".").concat(suffix));
         this.handlerModuleBuilder.build(handler);
@@ -116,7 +115,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         ConsumerProperty consumer = new ConsumerProperty();
         consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
         consumer.setInputChannel(inputChannelBeanName);
-        consumer.setId("consumer.".concat(suffix));
+        consumer.setId(this.handlerModuleBuilder.getBeanName().concat(".consumer"));
         this.consumerModuleBuilder.build(consumer);
     }
 

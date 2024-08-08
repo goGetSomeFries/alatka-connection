@@ -7,9 +7,14 @@ import com.alatka.connection.core.property.HandlerProperty;
 import java.util.Map;
 
 /**
+ * handler模块构建器
+ *
  * @author ybliu
  */
-public class HandlerModuleBuilder extends BeanNameReferenceModuleBuilder<HandlerProperty, HandlerProperty> {
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty, HandlerProperty> implements BeanNameReference {
+
+    private String beanName;
 
     public HandlerModuleBuilder(String identity) {
         super(identity);
@@ -18,8 +23,7 @@ public class HandlerModuleBuilder extends BeanNameReferenceModuleBuilder<Handler
     @Override
     protected void doBuild(HandlerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = super.getComponentRegister(property.getType(), mapping);
-        String beanName = componentRegister.register(property, property.getId(), true);
-        super.setBeanName(beanName);
+        this.beanName = componentRegister.register(property, property.getId(), true);
     }
 
     @Override
@@ -27,4 +31,8 @@ public class HandlerModuleBuilder extends BeanNameReferenceModuleBuilder<Handler
         return HandlerComponentRegister.class;
     }
 
+    @Override
+    public String getBeanName() {
+        return beanName;
+    }
 }

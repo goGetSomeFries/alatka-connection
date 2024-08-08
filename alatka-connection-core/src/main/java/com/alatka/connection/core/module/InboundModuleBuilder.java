@@ -22,21 +22,17 @@ import java.util.stream.Collectors;
  *
  * @author ybliu
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel, Object>, InboundProperty> {
-
-    private static final String BEAN_NAME_PREFIX = "inbound";
-
-    private final ChannelModuleBuilder channelModuleBuilder;
 
     public InboundModuleBuilder(String identity) {
         super(identity);
-        this.channelModuleBuilder = new ChannelModuleBuilder(identity);
     }
 
     @Override
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
-        componentRegister.register(property, property.getId().concat(BEAN_NAME_PREFIX), false);
+        componentRegister.register(property, property.getId().concat(this.endpointName()), false);
     }
 
     @Override
@@ -68,7 +64,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
                 .collect(Collectors.toList());
 
         if (list.size() != 1) {
-            throw new IllegalArgumentException("count of enabled " + BEAN_NAME_PREFIX + " must be 1");
+            throw new IllegalArgumentException("count of enabled " + this.endpointName() + " must be 1");
         }
 
         InboundProperty property = list.get(0);
@@ -79,5 +75,10 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     @Override
     protected Class<InboundComponentRegister> componentRegisterClass() {
         return InboundComponentRegister.class;
+    }
+
+    @Override
+    protected String endpointName() {
+        return "inbound";
     }
 }

@@ -21,18 +21,18 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
         super(identity);
     }
 
+    /**
+     * 使用{@link AlatkaConnectionConstant#OUTBOUND_INPUT_CHANNEL}，无需注册bean
+     */
     @Override
     protected void buildInputChannel() {
-        /**
-         * 使用{@link AlatkaConnectionConstant#OUTBOUND_INPUT_CHANNEL}，无需注册bean
-         */
     }
 
+    /**
+     * 使用{@link com.alatka.connection.core.config.DefaultConfig#FALLBACK_NULL_CHANNEL}，无需注册bean
+     */
     @Override
     protected void buildOutputChannel() {
-        /**
-         * 使用{@link AlatkaConnectionConstant#FALLBACK_NULL_CHANNEL}，无需注册bean
-         */
     }
 
     @Override
@@ -44,13 +44,13 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
     }
 
     @Override
-    protected String beanNamePrefix() {
+    protected String endpointName() {
         return "bypass";
     }
 
     @Override
     protected int getOrder() {
-        return ORDER + 2;
+        return super.getOrder() + 2;
     }
 
     @Override

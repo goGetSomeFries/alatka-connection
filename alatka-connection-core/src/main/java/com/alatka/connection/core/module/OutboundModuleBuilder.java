@@ -25,11 +25,9 @@ import java.util.stream.Collectors;
  *
  * @author ybliu
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, ChannelAdapterProperty> {
 
-    protected static final int ORDER = Ordered.HIGHEST_PRECEDENCE;
-
-    private final ChannelModuleBuilder channelModuleBuilder;
 
     private final HandlerModuleBuilder handlerModuleBuilder;
 
@@ -37,7 +35,6 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
     public OutboundModuleBuilder(String identity) {
         super(identity);
-        this.channelModuleBuilder = new ChannelModuleBuilder(identity);
         this.handlerModuleBuilder = new HandlerModuleBuilder(identity);
         this.consumerModuleBuilder = new ConsumerModuleBuilder(identity);
     }
@@ -47,13 +44,13 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         // outbound
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         property.setOrder(this.getOrder());
-        String beanName = componentRegister.register(property, property.getId().concat(this.beanNamePrefix()), false);
+        String beanName = componentRegister.register(property, property.getId().concat(this.endpointName()), false);
 
         // consumer
         ConsumerProperty consumerProperty = new ConsumerProperty();
         consumerProperty.setInputChannel(this.inputChannel());
         consumerProperty.setMessageHandler(beanName);
-        consumerProperty.setId(this.beanNamePrefix().concat(".consumer"));
+        consumerProperty.setId(beanName.concat(".consumer"));
         this.consumerModuleBuilder.build(consumerProperty);
     }
 
@@ -77,13 +74,13 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
             handler.setId(HandlerProperty.Type.passthrough.name().concat(".outbound.input-outbound.output"));
             handler.setType(HandlerProperty.Type.passthrough);
             handler.setOutputChannel(this.outputChannel());
-            handler.setOrder(ORDER + 1);
+            handler.setOrder(this.getOrder() + 1);
             this.handlerModuleBuilder.build(handler);
 
             ConsumerProperty consumer = new ConsumerProperty();
             consumer.setInputChannel(this.inputChannel());
             consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
-            consumer.setId("consumer".concat(HandlerProperty.Type.passthrough.name()).concat(".outbound.input-outbound.output"));
+            consumer.setId(this.handlerModuleBuilder.getBeanName().concat(".consumer"));
             this.consumerModuleBuilder.build(consumer);
         }
     }
@@ -100,7 +97,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
                 .collect(Collectors.toList());
 
         if (list.size() != 1) {
-            throw new IllegalArgumentException("count of enabled " + this.beanNamePrefix() + " must be 1");
+            throw new IllegalArgumentException("count of enabled " + this.endpointName() + " must be 1");
         }
 
         ChannelAdapterProperty property = list.get(0);
@@ -113,12 +110,21 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         return OutboundComponentRegister.class;
     }
 
-    protected String beanNamePrefix() {
+    @Override
+    protected String endpointName() {
         return "outbound";
     }
 
+    /**
+     * {@link AlatkaConnectionConstant#OUTBOUND_INPUT_CHANNEL}消息处理优先级<br><br>
+     * 1.outbound<br>
+     * 2.{@link AlatkaConnectionConstant#OUTBOUND_OUTPUT_CHANNEL}（如果outbound为单工）<br>
+     * 3.bypass（如果存在）
+     *
+     * @return 优先级序号
+     */
     protected int getOrder() {
-        return ORDER;
+        return Ordered.HIGHEST_PRECEDENCE;
     }
 
     protected String inputChannel() {

@@ -11,7 +11,7 @@ public class HandlerProperty extends ChannelAdapterProperty {
     private Map<String, Object> params;
 
     public enum Type {
-        passthrough, logger, filter, custom;
+        passthrough, logger, filter, router, custom;
     }
 
     @Override

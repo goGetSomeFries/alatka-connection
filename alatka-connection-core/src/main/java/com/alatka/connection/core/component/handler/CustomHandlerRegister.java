@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.HandlerProperty;
-import com.alatka.connection.core.support.Custom;
+import com.alatka.connection.core.support.CustomHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;
@@ -10,8 +10,9 @@ import java.util.Map;
 
 /**
  * @author ybliu
+ * @see CustomHandler
  */
-public class CustomRegister extends HandlerComponentRegister<HandlerProperty> {
+public class CustomHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
 
     private static final String KEY_CLASS_NAME = "className";
 
@@ -20,8 +21,8 @@ public class CustomRegister extends HandlerComponentRegister<HandlerProperty> {
         Map<String, Object> params = property.getParams();
         String className = (String) params.get(KEY_CLASS_NAME);
         Object instance = ClassUtil.newInstance(className);
-        if (!(instance instanceof Custom)) {
-            throw new IllegalArgumentException(instance + "必须实现" + Custom.class);
+        if (!(instance instanceof CustomHandler)) {
+            throw new IllegalArgumentException(instance + "必须实现" + CustomHandler.class);
         }
         builder.addConstructorArgValue(instance).addConstructorArgValue("execute");
     }

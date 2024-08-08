@@ -7,9 +7,14 @@ import com.alatka.connection.core.property.channel.ChannelProperty;
 import java.util.Map;
 
 /**
+ * channel模块构建器
+ *
  * @author ybliu
  */
-public class ChannelModuleBuilder extends BeanNameReferenceModuleBuilder<ChannelProperty, ChannelProperty> {
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class ChannelModuleBuilder extends AbstractModuleBuilder<ChannelProperty, ChannelProperty> implements BeanNameReference {
+
+    private String beanName;
 
     public ChannelModuleBuilder(String identity) {
         super(identity);
@@ -18,8 +23,7 @@ public class ChannelModuleBuilder extends BeanNameReferenceModuleBuilder<Channel
     @Override
     protected void doBuild(ChannelProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = super.getComponentRegister(property.getType(), mapping);
-        String beanName = componentRegister.register(property, property.getId(), true);
-        super.setBeanName(beanName);
+        this.beanName = componentRegister.register(property, property.getId(), true);
     }
 
     @Override
@@ -27,4 +31,8 @@ public class ChannelModuleBuilder extends BeanNameReferenceModuleBuilder<Channel
         return ChannelComponentRegister.class;
     }
 
+    @Override
+    public String getBeanName() {
+        return beanName;
+    }
 }

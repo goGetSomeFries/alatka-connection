@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @author ybliu
  */
-public class LoggerRegister extends HandlerComponentRegister<HandlerProperty> {
+public class LoggerHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
 
     private static final String KEY_LEVEL = "level";
 

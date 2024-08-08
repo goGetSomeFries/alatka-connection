@@ -8,10 +8,10 @@ com.alatka.connection.core.component.channel.ChannelComponentRegister=\
   com.alatka.connection.core.component.channel.PublishSubscribeChannelRegister,\
   com.alatka.connection.core.component.channel.QueueChannelRegister
 com.alatka.connection.core.component.handler.HandlerComponentRegister=\
-  com.alatka.connection.core.component.handler.PassthroughRegister,\
-  com.alatka.connection.core.component.handler.LoggerRegister,\
-  com.alatka.connection.core.component.handler.FilterRegister,\
-  com.alatka.connection.core.component.handler.CustomRegister
+  com.alatka.connection.core.component.handler.PassthroughHandlerRegister,\
+  com.alatka.connection.core.component.handler.LoggerHandlerRegister,\
+  com.alatka.connection.core.component.handler.FilterHandlerRegister,\
+  com.alatka.connection.core.component.handler.CustomHandlerRegister
 com.alatka.connection.core.component.support.SupportComponentRegister=\
   com.alatka.connection.core.component.support.PollerMetadataRegister,\
   com.alatka.connection.core.component.support.TaskExecutorRegister,\

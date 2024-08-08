@@ -7,8 +7,11 @@ import com.alatka.connection.core.property.consumer.ConsumerProperty;
 import java.util.Map;
 
 /**
+ * consumer模块构建器
+ *
  * @author ybliu
  */
+@SuppressWarnings({"rawtypes"})
 public class ConsumerModuleBuilder extends AbstractModuleBuilder<ConsumerProperty, ConsumerProperty> {
 
     public ConsumerModuleBuilder(String identity) {

@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author ybliu
  */
-public class FilterRegister extends HandlerComponentRegister<HandlerProperty> {
+public class FilterHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
 
     private static final String KEY_EXPRESSION = "expression";
 

@@ -13,8 +13,11 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
 
     private boolean duplex;
 
+    protected final ChannelModuleBuilder channelModuleBuilder;
+
     public EndpointModuleBuilder(String identity) {
         super(identity);
+        this.channelModuleBuilder = new ChannelModuleBuilder(identity);
     }
 
     @Override
@@ -24,6 +27,14 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
         this.buildInputChannel();
         this.buildOutputChannel();
     }
+
+    /**
+     * endpoint名称<br>
+     * inbound/outbound/bypass
+     *
+     * @return endpoint名称
+     */
+    protected abstract String endpointName();
 
     /**
      * 构建inputChannel

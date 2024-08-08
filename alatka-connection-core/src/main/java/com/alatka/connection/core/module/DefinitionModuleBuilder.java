@@ -20,6 +20,7 @@ import java.util.stream.Stream;
  *
  * @author ybliu
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<DefinitionModel, Object>, List<? extends Property>> {
 
     public DefinitionModuleBuilder(String identity) {

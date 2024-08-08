@@ -15,6 +15,7 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,10 +23,11 @@ import java.util.stream.Stream;
 /**
  * {@link ModuleBuilder}抽象类
  *
- * @param <T>
- * @param <S>
+ * @param <T> model实体类型
+ * @param <S> 转换后{@link Property}或者{@link List<Property>}
  * @author ybliu
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -68,9 +70,15 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
     protected void preDoBuild(Object model) {
         List<? extends Property> list = (List<? extends Property>) (model instanceof List ? model : Collections.singletonList(model));
-        list.stream().forEach(property -> this.assignIdentity(property, property.getClass()));
+        list.forEach(property -> this.assignIdentity(property, property.getClass()));
     }
 
+    /**
+     * 为注解{@link IdentityProperty}字段增加前缀{@link #identity}
+     *
+     * @param property {@link Property}对象
+     * @param clazz    {{@link Property}类型
+     */
     private void assignIdentity(Object property, Class<?> clazz) {
         Stream.of(clazz.getDeclaredFields())
                 .peek(field -> {
@@ -101,10 +109,8 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     }
 
     protected ComponentRegister getComponentRegister(Object key, Map<Object, ? extends ComponentRegister> mapping) {
-        if (!mapping.containsKey(key)) {
-            throw new IllegalArgumentException("未映射对应ComponentRegister, key: " + key + ", mapping: " + mapping);
-        }
-        return mapping.get(key);
+        return Optional.ofNullable(mapping.get(key))
+                .orElseThrow(() -> new IllegalArgumentException("未映射对应ComponentRegister, key: " + key + ", mapping: " + mapping));
     }
 
     /**
@@ -116,8 +122,10 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     protected abstract Class<? extends ComponentRegister> componentRegisterClass();
 
     /**
-     * @param model
-     * @param mapping
+     * TODO
+     *
+     * @param model   转换后{@link Property}或者{@link List<Property>}
+     * @param mapping {@link #getComponentRegister(Object, Map)}
      */
     protected abstract void doBuild(S model, Map<Object, ? extends ComponentRegister> mapping);
 

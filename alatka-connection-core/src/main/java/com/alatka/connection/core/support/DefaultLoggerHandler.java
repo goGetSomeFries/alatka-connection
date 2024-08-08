@@ -6,7 +6,7 @@ import org.springframework.messaging.Message;
 
 public class DefaultLoggerHandler extends AbstractReplyProducingMessageHandler {
 
-    private LoggingHandler target;
+    private final LoggingHandler target;
 
     public DefaultLoggerHandler(String level) {
         this.target = new LoggingHandler(level);

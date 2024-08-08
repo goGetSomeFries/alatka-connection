@@ -7,7 +7,7 @@ import org.springframework.integration.handler.BridgeHandler;
 /**
  * @author ybliu
  */
-public class PassthroughRegister extends HandlerComponentRegister<HandlerProperty> {
+public class PassthroughHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
