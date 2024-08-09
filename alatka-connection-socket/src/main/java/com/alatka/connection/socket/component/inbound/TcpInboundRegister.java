@@ -1,6 +1,7 @@
 package com.alatka.connection.socket.component.inbound;
 
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
+import com.alatka.connection.core.property.socket.TcpConnectionProperty;
 import com.alatka.connection.core.property.socket.TcpInboundProperty;
 import com.alatka.connection.socket.component.other.TcpConnectionFactoryFactoryBeanRegister;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -10,11 +11,13 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
  */
 public abstract class TcpInboundRegister<T extends TcpInboundProperty> extends InboundComponentRegister<T> {
 
-    private final TcpConnectionFactoryFactoryBeanRegister register = new TcpConnectionFactoryFactoryBeanRegister();
+    private final TcpConnectionFactoryFactoryBeanRegister componentRegister = new TcpConnectionFactoryFactoryBeanRegister();
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, T property) {
-        String beanName = this.register.register(property.getConnectionFactory());
+        TcpConnectionProperty connectionFactory = property.getConnectionFactory();
+        connectionFactory.setId(property.getId());
+        String beanName = this.componentRegister.register(connectionFactory);
 
         builder.addPropertyReference("connectionFactory", beanName);
         builder.addPropertyValue("clientMode", property.isClientMode());
