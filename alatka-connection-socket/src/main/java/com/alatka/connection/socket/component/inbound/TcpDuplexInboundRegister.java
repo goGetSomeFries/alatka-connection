@@ -7,7 +7,7 @@ import org.springframework.integration.ip.tcp.TcpInboundGateway;
 /**
  * @author ybliu
  */
-public class TcpDuplexInboundRegister extends TcpInboundRegister {
+public class TcpDuplexInboundRegister extends TcpInboundRegister<TcpDuplexInboundProperty> {
 
     @Override
     protected Class<TcpInboundGateway> componentClass() {

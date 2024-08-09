@@ -4,11 +4,7 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
-import com.alatka.connection.core.property.core.HandlerProperty;
-import com.alatka.connection.core.property.core.Property;
-import com.alatka.connection.core.property.core.ChannelProperty;
-import com.alatka.connection.core.property.core.ConsumerProperty;
+import com.alatka.connection.core.property.core.*;
 import com.alatka.connection.core.util.JsonUtil;
 import org.springframework.core.Ordered;
 
@@ -43,8 +39,9 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         // outbound
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
+        property.setId(property.getId().concat(this.endpointName()));
         property.setOrder(this.getOrder());
-        String beanName = componentRegister.register(property, property.getId().concat(this.endpointName()), false);
+        String beanName = componentRegister.register(property);
 
         // consumer
         ConsumerProperty consumerProperty = new ConsumerProperty();

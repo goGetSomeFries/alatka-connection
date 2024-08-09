@@ -23,7 +23,7 @@ public class ChannelModuleBuilder extends AbstractModuleBuilder<ChannelProperty,
     @Override
     protected void doBuild(ChannelProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = super.getComponentRegister(property.getType(), mapping);
-        this.beanName = componentRegister.register(property, property.getId(), true);
+        this.beanName = componentRegister.register(property);
     }
 
     @Override

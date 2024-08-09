@@ -23,7 +23,7 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     }
 
     @Override
-    public final String register(T property, String beanNamePrefix, boolean custom) {
+    public final String register(T property) {
         Validator.validateByException(property);
 
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.componentClass());
@@ -31,7 +31,8 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
         this.doRegister(builder, property);
         this.postDoRegister(builder, property);
 
-        String beanName = this.resolveBeanName(beanNamePrefix, custom);
+        String beanName = beanNameSuffix() == null ?
+                property.getId() : property.getId().concat(".").concat(beanNameSuffix());
         beanFactory.registerBeanDefinition(beanName, builder.getBeanDefinition());
         return beanName;
     }
@@ -50,13 +51,8 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     protected void initialize() {
     }
 
-    protected String resolveBeanName(String beanNamePrefix, boolean custom) {
-        return custom ? beanNamePrefix :
-                beanNamePrefix == null ? beanNameSuffix() : beanNamePrefix.concat(".").concat(beanNameSuffix());
-    }
-
     protected String beanNameSuffix() {
-        return this.componentClass().getSimpleName();
+        return null;
     }
 
     protected void preDoRegister(BeanDefinitionBuilder builder, T property) {

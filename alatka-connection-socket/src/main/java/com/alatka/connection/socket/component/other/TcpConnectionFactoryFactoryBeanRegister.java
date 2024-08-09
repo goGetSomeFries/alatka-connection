@@ -47,6 +47,11 @@ public class TcpConnectionFactoryFactoryBeanRegister extends AbstractComponentRe
     }
 
     @Override
+    protected String beanNameSuffix() {
+        return "tcp-connectionFactory";
+    }
+
+    @Override
     public Void mappingKey() {
         return null;
     }

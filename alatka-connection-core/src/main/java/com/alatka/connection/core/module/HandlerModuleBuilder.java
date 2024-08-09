@@ -23,7 +23,7 @@ public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty,
     @Override
     protected void doBuild(HandlerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = super.getComponentRegister(property.getType(), mapping);
-        this.beanName = componentRegister.register(property, property.getId(), true);
+        this.beanName = componentRegister.register(property);
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 /**
  * @author ybliu
  */
-public abstract class InboundComponentRegister<T extends InboundProperty> extends AbstractComponentRegister<T, Class<? extends T>> {
+public abstract class InboundComponentRegister<T extends InboundProperty> extends AbstractComponentRegister<T, Class<T>> {
 
     @Override
     protected void postDoRegister(BeanDefinitionBuilder builder, InboundProperty property) {

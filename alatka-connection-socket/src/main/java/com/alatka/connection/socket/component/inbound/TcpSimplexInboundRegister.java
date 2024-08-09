@@ -7,7 +7,7 @@ import org.springframework.integration.ip.tcp.TcpReceivingChannelAdapter;
 /**
  * @author ybliu
  */
-public class TcpSimplexInboundRegister extends TcpInboundRegister {
+public class TcpSimplexInboundRegister extends TcpInboundRegister<TcpSimplexInboundProperty> {
 
     @Override
     protected Class<TcpReceivingChannelAdapter> componentClass() {

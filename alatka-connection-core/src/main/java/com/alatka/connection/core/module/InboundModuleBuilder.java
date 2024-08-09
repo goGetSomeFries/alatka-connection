@@ -4,9 +4,9 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
+import com.alatka.connection.core.property.core.ChannelProperty;
 import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.property.core.Property;
-import com.alatka.connection.core.property.core.ChannelProperty;
 import com.alatka.connection.core.util.JsonUtil;
 
 import java.util.List;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  * alatka.connection.inbound.http<br>
  * alatka.connection.inbound.tcp_simplex<br>
  * alatka.connection.inbound.tcp_duplex<br>
+ * alatka.connection.inbound.rabbitmq
  * alatka.connection.inbound.......
  *
  * @author ybliu
@@ -32,7 +33,8 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     @Override
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
-        componentRegister.register(property, property.getId().concat(this.endpointName()), false);
+        property.setId(property.getId().concat(this.endpointName()));
+        componentRegister.register(property);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
         ChannelProperty property = new ChannelProperty();
         property.setId(AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL);
         property.setType(super.isDuplex() ? ChannelProperty.Type.direct : ChannelProperty.Type.null_);
-        this.channelModuleBuilder.build(property);
+        super.channelModuleBuilder.build(property);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
         ChannelProperty property = new ChannelProperty();
         property.setId(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
         property.setType(ChannelProperty.Type.direct);
-        this.channelModuleBuilder.build(property);
+        super.channelModuleBuilder.build(property);
     }
 
     @Override

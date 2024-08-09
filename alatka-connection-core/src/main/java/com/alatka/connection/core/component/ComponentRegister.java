@@ -15,12 +15,10 @@ public interface ComponentRegister<T extends Property, S> {
     /**
      * 注册组件为{@link org.springframework.beans.factory.config.BeanDefinition}
      *
-     * @param property       {@link Property}
-     * @param beanNamePrefix beanName前缀
-     * @param custom         是否自定义beanName
+     * @param property {@link Property}
      * @return spring bean name
      */
-    String register(T property, String beanNamePrefix, boolean custom);
+    String register(T property);
 
     /**
      * {@link ComponentRegister}映射标识
