@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.model.OutboundModel;
-import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 
 import java.util.Map;
 

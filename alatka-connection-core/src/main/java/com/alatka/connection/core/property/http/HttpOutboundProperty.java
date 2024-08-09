@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.http;
 
-import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 import com.alatka.connection.core.util.ClassUtil;
 
 /**

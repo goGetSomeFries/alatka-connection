@@ -1,7 +1,7 @@
 package com.alatka.connection.core.property.test;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
-import com.alatka.connection.core.property.InboundProperty;
+import com.alatka.connection.core.property.core.InboundProperty;
 
 /**
  * @author ybliu

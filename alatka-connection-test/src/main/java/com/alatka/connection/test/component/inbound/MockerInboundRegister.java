@@ -44,7 +44,7 @@ public class MockerInboundRegister extends InboundComponentRegister<MockerInboun
     }
 
     @Override
-    protected Class<SourcePollingChannelAdapter> beanClass() {
+    protected Class<SourcePollingChannelAdapter> componentClass() {
         return SourcePollingChannelAdapter.class;
     }
 

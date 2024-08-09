@@ -1,23 +1,23 @@
-package com.alatka.connection.core.property.support;
-
-import com.alatka.connection.core.property.Property;
+package com.alatka.connection.core.property.core;
 
 import java.util.Map;
 
 /**
- * alatka.connection.definition.serializers
- *
  * @author ybliu
  */
-public class SerializerProperty extends Property {
+public class HandlerProperty extends ChannelAdapterProperty {
 
     private Type type;
-
     private Map<String, Object> params;
 
     public enum Type {
-        byteArraySingleTerminatorSerializer,
+        passthrough, logger, filter, router, custom;
+    }
 
+    @Override
+    public HandlerProperty defaultProperty() {
+        this.type = Type.passthrough;
+        return this;
     }
 
     public Type getType() {

@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component;
 
-import com.alatka.connection.core.property.Property;
+import com.alatka.connection.core.property.core.Property;
 import com.alatka.connection.core.util.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     public final String register(T property, String beanNamePrefix, boolean custom) {
         Validator.validateByException(property);
 
-        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.beanClass());
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.componentClass());
         this.preDoRegister(builder, property);
         this.doRegister(builder, property);
         this.postDoRegister(builder, property);
@@ -56,7 +56,7 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     }
 
     protected String beanNameSuffix() {
-        return this.beanClass().getSimpleName();
+        return this.componentClass().getSimpleName();
     }
 
     protected void preDoRegister(BeanDefinitionBuilder builder, T property) {
@@ -67,5 +67,5 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
 
     protected abstract void doRegister(BeanDefinitionBuilder builder, T property);
 
-    protected abstract Class<?> beanClass();
+    protected abstract Class<?> componentClass();
 }

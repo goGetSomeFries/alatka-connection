@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.property.support.PollerMetadataProperty;
-import com.alatka.connection.core.property.support.TriggerProperty;
+import com.alatka.connection.core.property.core.PollerMetadataProperty;
+import com.alatka.connection.core.property.core.TriggerProperty;
 import com.alatka.connection.core.util.JsonUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.scheduling.PollerMetadata;
@@ -33,7 +33,7 @@ public class PollerMetadataRegister extends SupportComponentRegister<PollerMetad
     }
 
     @Override
-    protected Class<PollerMetadata> beanClass() {
+    protected Class<PollerMetadata> componentClass() {
         return PollerMetadata.class;
     }
 

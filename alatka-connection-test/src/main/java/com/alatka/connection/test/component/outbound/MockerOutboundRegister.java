@@ -22,7 +22,7 @@ public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutb
     }
 
     @Override
-    protected Class<ServiceActivatingHandler> beanClass() {
+    protected Class<ServiceActivatingHandler> componentClass() {
         return ServiceActivatingHandler.class;
     }
 

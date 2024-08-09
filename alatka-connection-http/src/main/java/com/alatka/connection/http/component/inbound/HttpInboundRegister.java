@@ -33,7 +33,7 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
     }
 
     @Override
-    protected Class<HttpRequestHandlingMessagingGateway> beanClass() {
+    protected Class<HttpRequestHandlingMessagingGateway> componentClass() {
         return HttpRequestHandlingMessagingGateway.class;
     }
 

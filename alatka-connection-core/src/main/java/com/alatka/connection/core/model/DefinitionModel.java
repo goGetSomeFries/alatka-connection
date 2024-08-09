@@ -1,10 +1,11 @@
 package com.alatka.connection.core.model;
 
-import com.alatka.connection.core.property.Property;
-import com.alatka.connection.core.property.support.PollerMetadataProperty;
-import com.alatka.connection.core.property.support.SerializerProperty;
-import com.alatka.connection.core.property.support.TaskExecutorProperty;
-import com.alatka.connection.core.property.support.TaskSchedulerProperty;
+import com.alatka.connection.core.property.core.PollerMetadataProperty;
+import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.TaskExecutorProperty;
+import com.alatka.connection.core.property.core.TaskSchedulerProperty;
+import com.alatka.connection.core.property.socket.SerializerProperty;
+import com.alatka.connection.core.property.socket.TcpMessageMapperProperty;
 
 /**
  * alatka.connection.definition
@@ -14,6 +15,7 @@ import com.alatka.connection.core.property.support.TaskSchedulerProperty;
 public enum DefinitionModel {
 
     serializers(SerializerProperty.class, true),
+    tcpMessageMappers(TcpMessageMapperProperty.class, true),
     pollerMetadata(PollerMetadataProperty.class, true),
     taskSchedulers(TaskSchedulerProperty.class, true),
     taskExecutors(TaskExecutorProperty.class, true);

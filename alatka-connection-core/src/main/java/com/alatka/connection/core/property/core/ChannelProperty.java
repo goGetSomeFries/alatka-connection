@@ -1,4 +1,4 @@
-package com.alatka.connection.core.property;
+package com.alatka.connection.core.property.core;
 
 import java.util.Map;
 

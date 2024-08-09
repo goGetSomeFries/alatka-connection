@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.HandlerProperty;
+import com.alatka.connection.core.property.core.HandlerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.filter.ExpressionEvaluatingSelector;
 import org.springframework.integration.filter.MessageFilter;
@@ -24,7 +24,7 @@ public class FilterHandlerRegister extends HandlerComponentRegister<HandlerPrope
     }
 
     @Override
-    protected Class<MessageFilter> beanClass() {
+    protected Class<MessageFilter> componentClass() {
         return MessageFilter.class;
     }
 

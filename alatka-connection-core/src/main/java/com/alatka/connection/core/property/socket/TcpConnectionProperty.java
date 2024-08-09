@@ -1,15 +1,15 @@
 package com.alatka.connection.core.property.socket;
 
-import com.alatka.connection.core.property.Property;
+import com.alatka.connection.core.annotation.IdentityProperty;
+import com.alatka.connection.core.property.core.Property;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 public class TcpConnectionProperty extends Property {
 
-    private boolean server;
+    private boolean client = false;
     private String host;
     @Min(0)
     @Max(65535)
@@ -28,20 +28,24 @@ public class TcpConnectionProperty extends Property {
     private Integer readTimeout = -1;
 
     @NotEmpty
+    @IdentityProperty
     private String serializer;
     @NotEmpty
+    @IdentityProperty
     private String deserializer;
     @NotEmpty
+    @IdentityProperty
     private String tcpMessageMapper;
 
+    @IdentityProperty
     private String taskExecutor;
 
-    public boolean isServer() {
-        return server;
+    public boolean isClient() {
+        return client;
     }
 
-    public void setServer(boolean server) {
-        this.server = server;
+    public void setClient(boolean client) {
+        this.client = client;
     }
 
     public String getHost() {

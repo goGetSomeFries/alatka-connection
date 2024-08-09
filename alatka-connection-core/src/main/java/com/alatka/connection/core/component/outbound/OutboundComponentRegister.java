@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.outbound;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 /**

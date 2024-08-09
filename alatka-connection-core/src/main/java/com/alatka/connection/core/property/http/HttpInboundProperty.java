@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.http;
 
-import com.alatka.connection.core.property.InboundProperty;
+import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 
 import javax.validation.constraints.NotEmpty;

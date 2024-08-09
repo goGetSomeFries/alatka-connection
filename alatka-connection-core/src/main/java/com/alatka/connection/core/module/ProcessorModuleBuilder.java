@@ -3,11 +3,11 @@ package com.alatka.connection.core.module;
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
-import com.alatka.connection.core.property.HandlerProperty;
-import com.alatka.connection.core.property.ProcessorProperty;
-import com.alatka.connection.core.property.Property;
-import com.alatka.connection.core.property.ChannelProperty;
-import com.alatka.connection.core.property.ConsumerProperty;
+import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.ProcessorProperty;
+import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.ChannelProperty;
+import com.alatka.connection.core.property.core.ConsumerProperty;
 
 import java.util.Collections;
 import java.util.List;

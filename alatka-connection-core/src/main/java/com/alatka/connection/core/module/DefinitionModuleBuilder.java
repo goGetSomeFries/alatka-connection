@@ -3,7 +3,7 @@ package com.alatka.connection.core.module;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.support.SupportComponentRegister;
 import com.alatka.connection.core.model.DefinitionModel;
-import com.alatka.connection.core.property.Property;
+import com.alatka.connection.core.property.core.Property;
 import com.alatka.connection.core.util.JsonUtil;
 
 import java.util.List;

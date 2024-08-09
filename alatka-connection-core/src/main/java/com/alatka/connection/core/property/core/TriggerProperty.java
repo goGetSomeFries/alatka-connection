@@ -1,4 +1,4 @@
-package com.alatka.connection.core.property.support;
+package com.alatka.connection.core.property.core;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 /**
  * alatka.connection.definition.pollerMetadata.trigger<br><br>
  * 不需要{@link com.alatka.connection.core.component.ComponentRegister}单独解析，
- * 无需继承{@link com.alatka.connection.core.property.Property}
+ * 无需继承{@link Property}
  *
  * @author ybliu
  */

@@ -22,7 +22,7 @@ public class HttpOutboundRegister extends OutboundComponentRegister<HttpOutbound
     }
 
     @Override
-    protected Class<HttpRequestExecutingMessageHandler> beanClass() {
+    protected Class<HttpRequestExecutingMessageHandler> componentClass() {
         return HttpRequestExecutingMessageHandler.class;
     }
 

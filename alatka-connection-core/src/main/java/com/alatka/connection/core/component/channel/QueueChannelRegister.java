@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.channel;
 
-import com.alatka.connection.core.property.ChannelProperty;
+import com.alatka.connection.core.property.core.ChannelProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.channel.QueueChannel;
 
@@ -25,7 +25,7 @@ public class QueueChannelRegister extends ChannelComponentRegister<ChannelProper
     }
 
     @Override
-    protected Class<QueueChannel> beanClass() {
+    protected Class<QueueChannel> componentClass() {
         return QueueChannel.class;
     }
 

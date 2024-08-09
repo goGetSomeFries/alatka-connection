@@ -4,9 +4,9 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
-import com.alatka.connection.core.property.InboundProperty;
-import com.alatka.connection.core.property.Property;
-import com.alatka.connection.core.property.ChannelProperty;
+import com.alatka.connection.core.property.core.InboundProperty;
+import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.ChannelProperty;
 import com.alatka.connection.core.util.JsonUtil;
 
 import java.util.List;

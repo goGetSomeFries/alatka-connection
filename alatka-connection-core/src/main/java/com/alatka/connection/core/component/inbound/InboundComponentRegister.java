@@ -1,13 +1,13 @@
 package com.alatka.connection.core.component.inbound;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.InboundProperty;
+import com.alatka.connection.core.property.core.InboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 /**
  * @author ybliu
  */
-public abstract class InboundComponentRegister<T extends InboundProperty> extends AbstractComponentRegister<T, Class<T>> {
+public abstract class InboundComponentRegister<T extends InboundProperty> extends AbstractComponentRegister<T, Class<? extends T>> {
 
     @Override
     protected void postDoRegister(BeanDefinitionBuilder builder, InboundProperty property) {

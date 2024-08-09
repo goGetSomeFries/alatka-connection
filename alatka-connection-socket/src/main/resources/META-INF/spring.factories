@@ -7,4 +7,5 @@ com.alatka.connection.core.component.outbound.OutboundComponentRegister=\
   com.alatka.connection.socket.component.outbound.TcpDuplexOutboundRegister,\
   com.alatka.connection.socket.component.outbound.TcpSimplexOutboundRegister
 com.alatka.connection.core.component.support.SupportComponentRegister=\
+  com.alatka.connection.socket.component.support.TcpMessageMapperRegister,\
   com.alatka.connection.socket.component.support.ByteArraySingleTerminatorSerializerRegister

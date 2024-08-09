@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.handler.HandlerComponentRegister;
-import com.alatka.connection.core.property.HandlerProperty;
+import com.alatka.connection.core.property.core.HandlerProperty;
 
 import java.util.Map;
 

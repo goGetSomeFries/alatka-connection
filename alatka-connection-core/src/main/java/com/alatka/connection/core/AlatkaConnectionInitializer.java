@@ -3,7 +3,7 @@ package com.alatka.connection.core;
 import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.model.RootModel;
 import com.alatka.connection.core.module.*;
-import com.alatka.connection.core.property.ProcessorProperty;
+import com.alatka.connection.core.property.core.ProcessorProperty;
 import com.alatka.connection.core.util.YamlUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;

@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.property.support.TaskSchedulerProperty;
+import com.alatka.connection.core.property.core.TaskSchedulerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
@@ -17,7 +17,7 @@ public class TaskSchedulerRegister extends SupportComponentRegister<TaskSchedule
     }
 
     @Override
-    protected Class<ThreadPoolTaskScheduler> beanClass() {
+    protected Class<ThreadPoolTaskScheduler> componentClass() {
         return ThreadPoolTaskScheduler.class;
     }
 

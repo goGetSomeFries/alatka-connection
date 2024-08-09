@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.channel;
 
-import com.alatka.connection.core.property.ChannelProperty;
+import com.alatka.connection.core.property.core.ChannelProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.channel.NullChannel;
 
@@ -16,7 +16,7 @@ public class NullChannelRegister extends ChannelComponentRegister<ChannelPropert
     }
 
     @Override
-    protected Class<NullChannel> beanClass() {
+    protected Class<NullChannel> componentClass() {
         return NullChannel.class;
     }
 

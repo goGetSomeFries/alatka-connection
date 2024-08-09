@@ -1,6 +1,6 @@
-package com.alatka.connection.socket.component.support;
+package com.alatka.connection.socket.component.other;
 
-import com.alatka.connection.core.component.support.SupportComponentRegister;
+import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.property.socket.TcpConnectionProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.config.TcpConnectionFactoryFactoryBean;
@@ -9,11 +9,11 @@ import org.springframework.util.StringUtils;
 /**
  * @author ybliu
  */
-public class TcpConnectionFactoryFactoryBeanRegister extends SupportComponentRegister<TcpConnectionProperty> {
+public class TcpConnectionFactoryFactoryBeanRegister extends AbstractComponentRegister<TcpConnectionProperty, Void> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpConnectionProperty property) {
-        builder.addPropertyValue("type", property.isServer() ? "server" : "client")
+        builder.addPropertyValue("type", property.isClient() ? "client" : "server")
                 .addPropertyValue("port", property.getPort())
                 .addPropertyValue("connectTimeout", property.getConnectTimeout() / 1000)
                 .addPropertyValue("soTimeout", property.getReadTimeout())
@@ -42,12 +42,12 @@ public class TcpConnectionFactoryFactoryBeanRegister extends SupportComponentReg
     }
 
     @Override
-    protected Class<TcpConnectionFactoryFactoryBean> beanClass() {
+    protected Class<TcpConnectionFactoryFactoryBean> componentClass() {
         return TcpConnectionFactoryFactoryBean.class;
     }
 
     @Override
-    public Class<TcpConnectionProperty> mappingKey() {
+    public Void mappingKey() {
         return null;
     }
 }

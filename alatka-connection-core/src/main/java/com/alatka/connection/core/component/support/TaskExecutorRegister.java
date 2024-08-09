@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.support;
 
-import com.alatka.connection.core.property.support.TaskExecutorProperty;
+import com.alatka.connection.core.property.core.TaskExecutorProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -22,7 +22,7 @@ public class TaskExecutorRegister extends SupportComponentRegister<TaskExecutorP
     }
 
     @Override
-    protected Class<ThreadPoolTaskExecutor> beanClass() {
+    protected Class<ThreadPoolTaskExecutor> componentClass() {
         return ThreadPoolTaskExecutor.class;
     }
 

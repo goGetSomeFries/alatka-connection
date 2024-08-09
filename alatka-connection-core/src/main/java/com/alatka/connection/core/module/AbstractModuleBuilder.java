@@ -4,7 +4,7 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.annotation.ReferenceIdentityProperty;
 import com.alatka.connection.core.component.ComponentRegister;
-import com.alatka.connection.core.property.Property;
+import com.alatka.connection.core.property.core.Property;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.core.util.Validator;
 import org.slf4j.Logger;
@@ -83,7 +83,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
                 .peek(field -> {
                     if (field.isAnnotationPresent(ReferenceIdentityProperty.class)) {
                         Object value = ClassUtil.getValue(field, property);
-                        this.assignIdentity(value, property.getClass());
+                        this.assignIdentity(value, value.getClass());
                     }
                 })
                 .forEach(field -> {

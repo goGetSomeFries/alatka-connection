@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.HandlerProperty;
+import com.alatka.connection.core.property.core.HandlerProperty;
 import com.alatka.connection.core.support.DefaultLoggerHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
@@ -21,7 +21,7 @@ public class LoggerHandlerRegister extends HandlerComponentRegister<HandlerPrope
     }
 
     @Override
-    protected Class<DefaultLoggerHandler> beanClass() {
+    protected Class<DefaultLoggerHandler> componentClass() {
         return DefaultLoggerHandler.class;
     }
 

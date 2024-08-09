@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.HandlerProperty;
+import com.alatka.connection.core.property.core.HandlerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
 
@@ -15,7 +15,7 @@ public class PassthroughHandlerRegister extends HandlerComponentRegister<Handler
     }
 
     @Override
-    protected Class<BridgeHandler> beanClass() {
+    protected Class<BridgeHandler> componentClass() {
         return BridgeHandler.class;
     }
 

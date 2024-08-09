@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.consumer;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.ConsumerProperty;
+import com.alatka.connection.core.property.core.ConsumerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.ConsumerEndpointFactoryBean;
 
@@ -23,7 +23,7 @@ public class ConsumerEndpointRegister extends AbstractComponentRegister<Consumer
     }
 
     @Override
-    protected Class<ConsumerEndpointFactoryBean> beanClass() {
+    protected Class<ConsumerEndpointFactoryBean> componentClass() {
         return ConsumerEndpointFactoryBean.class;
     }
 

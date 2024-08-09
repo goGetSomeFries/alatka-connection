@@ -4,11 +4,11 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.model.OutboundModel;
-import com.alatka.connection.core.property.ChannelAdapterProperty;
-import com.alatka.connection.core.property.HandlerProperty;
-import com.alatka.connection.core.property.Property;
-import com.alatka.connection.core.property.ChannelProperty;
-import com.alatka.connection.core.property.ConsumerProperty;
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.ChannelProperty;
+import com.alatka.connection.core.property.core.ConsumerProperty;
 import com.alatka.connection.core.util.JsonUtil;
 import org.springframework.core.Ordered;
 

@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.HandlerProperty;
+import com.alatka.connection.core.property.core.HandlerProperty;
 import com.alatka.connection.core.support.CustomHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -28,7 +28,7 @@ public class CustomHandlerRegister extends HandlerComponentRegister<HandlerPrope
     }
 
     @Override
-    protected Class<ServiceActivatingHandler> beanClass() {
+    protected Class<ServiceActivatingHandler> componentClass() {
         return ServiceActivatingHandler.class;
     }
 

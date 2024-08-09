@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.channel;
 
-import com.alatka.connection.core.property.ChannelProperty;
+import com.alatka.connection.core.property.core.ChannelProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.channel.PublishSubscribeChannel;
 
@@ -16,7 +16,7 @@ public class PublishSubscribeChannelRegister extends ChannelComponentRegister<Ch
     }
 
     @Override
-    protected Class<PublishSubscribeChannel> beanClass() {
+    protected Class<PublishSubscribeChannel> componentClass() {
         return PublishSubscribeChannel.class;
     }
 

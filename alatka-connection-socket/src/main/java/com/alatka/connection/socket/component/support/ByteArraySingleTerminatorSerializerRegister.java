@@ -1,7 +1,7 @@
 package com.alatka.connection.socket.component.support;
 
 import com.alatka.connection.core.component.support.SupportComponentRegister;
-import com.alatka.connection.core.property.support.SerializerProperty;
+import com.alatka.connection.core.property.socket.SerializerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.serializer.ByteArraySingleTerminatorSerializer;
 
@@ -21,7 +21,7 @@ public class ByteArraySingleTerminatorSerializerRegister extends SupportComponen
     }
 
     @Override
-    protected Class<?> beanClass() {
+    protected Class<?> componentClass() {
         return ByteArraySingleTerminatorSerializer.class;
     }
 

@@ -1,7 +1,7 @@
 package com.alatka.connection.core.model;
 
 
-import com.alatka.connection.core.property.ProcessorProperty;
+import com.alatka.connection.core.property.core.ProcessorProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

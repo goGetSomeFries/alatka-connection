@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.test;
 
-import com.alatka.connection.core.property.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 
 /**
  * @author ybliu
