@@ -7,7 +7,7 @@ import com.alatka.connection.core.property.core.Property;
  * TODO 什么是组件
  *
  * @param <T> {@link Property}
- * @param <S>
+ * @param <S> {@link ComponentRegister}类型映射标识
  * @author ybliu
  */
 public interface ComponentRegister<T extends Property, S> {
