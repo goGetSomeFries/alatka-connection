@@ -1,15 +1,18 @@
 package com.alatka.connection.socket.component.outbound;
 
-import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
+import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.socket.TcpSimplexOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpSendingMessageHandler;
 
-public class TcpSimplexOutboundRegister extends OutboundComponentRegister<TcpSimplexOutboundProperty> {
+public class TcpSimplexOutboundRegister extends TcpOutboundRegister<TcpSimplexOutboundProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpSimplexOutboundProperty property) {
-
+        builder.addPropertyValue("clientMode", property.isClientMode());
+        if (property.getRetryInterval() != null) {
+            builder.addPropertyValue("retryInterval", property.getRetryInterval());
+        }
     }
 
     @Override
@@ -20,5 +23,10 @@ public class TcpSimplexOutboundRegister extends OutboundComponentRegister<TcpSim
     @Override
     public Class<TcpSimplexOutboundProperty> mappingKey() {
         return TcpSimplexOutboundProperty.class;
+    }
+
+    @Override
+    protected String beanNameSuffix() {
+        return OutboundModel.tcp_simplex.name();
     }
 }

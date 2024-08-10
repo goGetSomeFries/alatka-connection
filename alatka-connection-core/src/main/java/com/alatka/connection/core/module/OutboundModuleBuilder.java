@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @author ybliu
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, ChannelAdapterProperty> {
+public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, OutboundProperty> {
 
 
     private final HandlerModuleBuilder handlerModuleBuilder;
@@ -36,11 +36,11 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     }
 
     @Override
-    protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+    protected void doBuild(OutboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         // outbound
-        ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         property.setId(property.getId().concat(this.endpointName()));
         property.setOrder(this.getOrder());
+        ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         String beanName = componentRegister.register(property);
 
         // consumer
@@ -83,11 +83,11 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     }
 
     @Override
-    protected ChannelAdapterProperty validateAndConvert(Map<OutboundModel, Object> map) {
-        List<ChannelAdapterProperty> list = map.entrySet()
+    protected OutboundProperty validateAndConvert(Map<OutboundModel, Object> map) {
+        List<OutboundProperty> list = map.entrySet()
                 .stream()
                 .map(entry -> {
-                    ChannelAdapterProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
+                    OutboundProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
                     property.setOutputChannel(entry.getKey().isDuplex() ? this.outputChannel() : null);
                     return property;
                 }).filter(Property::isEnabled)
@@ -97,7 +97,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
             throw new IllegalArgumentException("count of enabled " + this.endpointName() + " must be 1");
         }
 
-        ChannelAdapterProperty property = list.get(0);
+        OutboundProperty property = list.get(0);
         super.setDuplex(property.getOutputChannel() != null);
         return property;
     }

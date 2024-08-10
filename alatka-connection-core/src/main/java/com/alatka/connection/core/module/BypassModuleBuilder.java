@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.model.OutboundModel;
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.OutboundProperty;
 
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
     }
 
     @Override
-    protected ChannelAdapterProperty validateAndConvert(Map<OutboundModel, Object> map) {
+    protected OutboundProperty validateAndConvert(Map<OutboundModel, Object> map) {
         if (map == null) {
             return null;
         }

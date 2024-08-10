@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * alatka.connection.inbound.http<br>
  * alatka.connection.inbound.tcp_simplex<br>
  * alatka.connection.inbound.tcp_duplex<br>
- * alatka.connection.inbound.rabbitmq
+ * alatka.connection.inbound.rabbitmq<br>
  * alatka.connection.inbound.......
  *
  * @author ybliu
@@ -32,8 +32,8 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
 
     @Override
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         property.setId(property.getId().concat(this.endpointName()));
+        ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         componentRegister.register(property);
     }
 

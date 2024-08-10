@@ -1,6 +1,6 @@
 package com.alatka.connection.core.model;
 
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.OutboundProperty;
 import com.alatka.connection.core.property.http.HttpOutboundProperty;
 import com.alatka.connection.core.property.socket.TcpDuplexOutboundProperty;
 import com.alatka.connection.core.property.socket.TcpSimplexOutboundProperty;
@@ -17,20 +17,20 @@ public enum OutboundModel {
     http(HttpOutboundProperty.class, true);
 
     /**
-     * {@link ChannelAdapterProperty} {@link Class} 类型
+     * {@link OutboundProperty} {@link Class} 类型
      */
-    private final Class<? extends ChannelAdapterProperty> type;
+    private final Class<? extends OutboundProperty> type;
     /**
      * 双向通信
      */
     private final boolean duplex;
 
-    OutboundModel(Class<? extends ChannelAdapterProperty> type, boolean duplex) {
+    OutboundModel(Class<? extends OutboundProperty> type, boolean duplex) {
         this.type = type;
         this.duplex = duplex;
     }
 
-    public Class<? extends ChannelAdapterProperty> getType() {
+    public Class<? extends OutboundProperty> getType() {
         return type;
     }
 

@@ -1,15 +1,15 @@
 package com.alatka.connection.socket.component.outbound;
 
-import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
+import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.socket.TcpDuplexOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpOutboundGateway;
 
-public class TcpDuplexOutboundRegister extends OutboundComponentRegister<TcpDuplexOutboundProperty> {
+public class TcpDuplexOutboundRegister extends TcpOutboundRegister<TcpDuplexOutboundProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpDuplexOutboundProperty property) {
-
+        builder.addPropertyValue("closeStreamAfterSend", property.isCloseStreamAfterSend());
     }
 
     @Override
@@ -20,5 +20,10 @@ public class TcpDuplexOutboundRegister extends OutboundComponentRegister<TcpDupl
     @Override
     public Class<TcpDuplexOutboundProperty> mappingKey() {
         return TcpDuplexOutboundProperty.class;
+    }
+
+    @Override
+    protected String beanNameSuffix() {
+        return OutboundModel.tcp_duplex.name();
     }
 }

@@ -1,10 +1,14 @@
 package com.alatka.connection.core.module;
 
+import com.alatka.connection.core.property.core.Property;
+
+import java.util.List;
+
 /**
  * inbound/outbound父类
  *
- * @param <T>
- * @param <S>
+ * @param <T> model实体类型
+ * @param <S> 转换后{@link Property}或者{@link List <Property>}
  * @author ybliu
  * @see InboundModuleBuilder
  * @see OutboundModuleBuilder

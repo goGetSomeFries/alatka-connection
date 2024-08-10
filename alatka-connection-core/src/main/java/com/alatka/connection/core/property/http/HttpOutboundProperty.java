@@ -1,12 +1,12 @@
 package com.alatka.connection.core.property.http;
 
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.OutboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 
 /**
  * @author ybliu
  */
-public class HttpOutboundProperty extends ChannelAdapterProperty {
+public class HttpOutboundProperty extends OutboundProperty {
 
     private String url;
 

@@ -1,16 +1,16 @@
 package com.alatka.connection.core.component.outbound;
 
 import com.alatka.connection.core.component.AbstractComponentRegister;
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.OutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 /**
  * @author ybliu
  */
-public abstract class OutboundComponentRegister<T extends ChannelAdapterProperty> extends AbstractComponentRegister<T, Class<T>> {
+public abstract class OutboundComponentRegister<T extends OutboundProperty> extends AbstractComponentRegister<T, Class<T>> {
 
     @Override
-    protected void postDoRegister(BeanDefinitionBuilder builder, ChannelAdapterProperty property) {
+    protected void postDoRegister(BeanDefinitionBuilder builder, OutboundProperty property) {
         if (property.getOutputChannel() != null) {
             builder.addPropertyValue("outputChannelName", property.getOutputChannel());
         }

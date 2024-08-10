@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.annotation.IdentityProperty;
-import com.alatka.connection.core.annotation.ReferenceIdentityProperty;
+import com.alatka.connection.core.annotation.IdentityPropertyReference;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.property.core.Property;
 import com.alatka.connection.core.util.ClassUtil;
@@ -68,7 +68,8 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     }
 
     protected void preDoBuild(Object model) {
-        List<? extends Property> list = (List<? extends Property>) (model instanceof List ? model : Collections.singletonList(model));
+        List<? extends Property> list =
+                (List<? extends Property>) (model instanceof List ? model : Collections.singletonList(model));
         list.forEach(property -> this.assignIdentity(property, property.getClass()));
     }
 
@@ -81,7 +82,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     private void assignIdentity(Object property, Class<?> clazz) {
         Stream.of(clazz.getDeclaredFields())
                 .peek(field -> {
-                    if (field.isAnnotationPresent(ReferenceIdentityProperty.class)) {
+                    if (field.isAnnotationPresent(IdentityPropertyReference.class)) {
                         Object value = ClassUtil.getValue(field, property);
                         this.assignIdentity(value, value.getClass());
                     }

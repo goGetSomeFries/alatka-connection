@@ -1,11 +1,11 @@
 package com.alatka.connection.core.property.test;
 
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.OutboundProperty;
 
 /**
  * @author ybliu
  */
-public class MockerOutboundProperty extends ChannelAdapterProperty {
+public class MockerOutboundProperty extends OutboundProperty {
 
     private String className;
 

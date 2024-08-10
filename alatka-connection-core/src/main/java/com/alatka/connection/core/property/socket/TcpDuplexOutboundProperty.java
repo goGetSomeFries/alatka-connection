@@ -1,12 +1,19 @@
 package com.alatka.connection.core.property.socket;
 
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
-
 /**
  * alatka.connection.outbound.tcp_duplex
  *
  * @author ybliu
  */
-public class TcpDuplexOutboundProperty extends ChannelAdapterProperty {
+public class TcpDuplexOutboundProperty extends TcpOutboundProperty {
 
+    private boolean closeStreamAfterSend;
+
+    public boolean isCloseStreamAfterSend() {
+        return closeStreamAfterSend;
+    }
+
+    public void setCloseStreamAfterSend(boolean closeStreamAfterSend) {
+        this.closeStreamAfterSend = closeStreamAfterSend;
+    }
 }
