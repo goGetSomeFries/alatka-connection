@@ -11,6 +11,9 @@ import javax.validation.constraints.NotBlank;
  */
 public class TcpMessageMapperProperty extends Property {
 
+    /**
+     * {@link org.springframework.integration.mapping.BytesMessageMapper} className
+     */
     @NotBlank
     private String className;
 

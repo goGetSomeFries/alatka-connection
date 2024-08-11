@@ -12,6 +12,9 @@ import javax.validation.constraints.NotNull;
  */
 public class PollerMetadataProperty extends Property {
 
+    /**
+     * {@link org.springframework.core.task.TaskExecutor} bean id
+     */
     @NotNull
     @IdentityProperty
     private String taskExecutor;

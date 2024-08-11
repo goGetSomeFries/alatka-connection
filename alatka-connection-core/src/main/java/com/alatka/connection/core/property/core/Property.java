@@ -7,13 +7,25 @@ import com.alatka.connection.core.annotation.IdentityProperty;
  */
 public abstract class Property {
 
+    /**
+     * spring bean id
+     */
     @IdentityProperty(referenced = false)
     private String id;
 
+    /**
+     * {@link Property} status
+     */
     private boolean enabled = true;
 
+    /**
+     * {@link Property} 默认值
+     *
+     * @param <T> {@link Property}类型
+     * @return {@link Property}类型对象
+     */
     public <T extends Property> T defaultProperty() {
-        throw new UnsupportedOperationException("");
+        throw new UnsupportedOperationException("不支持该方法调用");
     }
 
     public String getId() {

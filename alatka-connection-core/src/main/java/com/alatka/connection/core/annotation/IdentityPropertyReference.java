@@ -3,9 +3,11 @@ package com.alatka.connection.core.annotation;
 import java.lang.annotation.*;
 
 /**
- * 名称优化
+ * TODO
  *
  * @author ybliu
+ * @see com.alatka.connection.core.module.AbstractModuleBuilder#assignIdentity(Object, Class)
+ * @see com.alatka.connection.core.module.AbstractModuleBuilder#identity
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
