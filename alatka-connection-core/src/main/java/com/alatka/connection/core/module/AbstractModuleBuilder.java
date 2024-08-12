@@ -31,6 +31,9 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * alatka-connection标识
+     */
     private final String identity;
 
     public AbstractModuleBuilder(String identity) {
@@ -43,33 +46,42 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
             Validator.validateByException(model);
         }
 
-        S convertedModel = this.validateAndConvert(model);
-        if (convertedModel != null) {
+        S property = this.validateAndConvert(model);
+        if (property != null) {
             Map<Object, ? extends ComponentRegister> mapping = this.mappingComponentRegister();
 
-            this.preDoBuild(convertedModel);
-            this.doBuild(convertedModel, mapping);
+            this.preDoBuild(property);
+            this.doBuild(property, mapping);
         }
     }
 
+    /**
+     * 基于SpringFactories实现<br>
+     * 在{@link SpringFactoriesLoader#FACTORIES_RESOURCE_LOCATION}中配置{@link ComponentRegister} {@link Class}类型
+     *
+     * @return {@link ComponentRegister}对象映射
+     */
     private Map<Object, ? extends ComponentRegister> mappingComponentRegister() {
         if (this.componentRegisterClass() == null) {
             return Collections.emptyMap();
         }
         List<? extends ComponentRegister> list = SpringFactoriesLoader.loadFactories(this.componentRegisterClass(), null);
-        if (list.isEmpty()) {
-            list.add(ClassUtil.newInstance(this.componentRegisterClass().getName()));
-        }
         return list.stream().collect(Collectors.toMap(ComponentRegister::mappingKey, Function.identity()));
     }
 
+    /**
+     * 校验并转换为{@link Property}
+     *
+     * @param model {@link #build(Object)}
+     * @return {@link Property}或者{@link List<Property>}
+     */
     protected S validateAndConvert(T model) {
         return (S) model;
     }
 
-    protected void preDoBuild(Object model) {
+    protected void preDoBuild(Object object) {
         List<? extends Property> list =
-                (List<? extends Property>) (model instanceof List ? model : Collections.singletonList(model));
+                (List<? extends Property>) (object instanceof List ? object : Collections.singletonList(object));
         list.forEach(property -> this.assignIdentity(property, property.getClass()));
     }
 
@@ -122,7 +134,7 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
     protected abstract Class<? extends ComponentRegister> componentRegisterClass();
 
     /**
-     * TODO
+     * 构建Component
      *
      * @param model   转换后{@link Property}或者{@link List<Property>}
      * @param mapping {@link #getComponentRegister(Object, Map)}

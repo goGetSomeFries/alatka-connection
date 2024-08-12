@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * 初始化入口
+ * 初始化入口<br><br>
+ * 加载{@link #FILE_PREFIX}配置文件，解析注册为Spring Bean
  *
  * @author ybliu
  */

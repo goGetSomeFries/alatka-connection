@@ -15,6 +15,9 @@ import java.util.List;
  */
 public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<T, S> {
 
+    /**
+     * 是否双工
+     */
     private boolean duplex;
 
     protected final ChannelModuleBuilder channelModuleBuilder;
@@ -25,8 +28,8 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
     }
 
     @Override
-    protected void preDoBuild(Object model) {
-        super.preDoBuild(model);
+    protected void preDoBuild(Object object) {
+        super.preDoBuild(object);
 
         this.buildInputChannel();
         this.buildOutputChannel();
@@ -50,9 +53,6 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
      */
     protected abstract void buildOutputChannel();
 
-    /**
-     * 是否双工
-     */
     protected boolean isDuplex() {
         return duplex;
     }
