@@ -69,16 +69,6 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         return list.stream().collect(Collectors.toMap(ComponentRegister::mappingKey, Function.identity()));
     }
 
-    /**
-     * 校验并转换为{@link Property}
-     *
-     * @param model {@link #build(Object)}
-     * @return {@link Property}或者{@link List<Property>}
-     */
-    protected S validateAndConvert(T model) {
-        return (S) model;
-    }
-
     protected void preDoBuild(Object object) {
         List<? extends Property> list =
                 (List<? extends Property>) (object instanceof List ? object : Collections.singletonList(object));
@@ -124,6 +114,14 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         return Optional.ofNullable(mapping.get(key))
                 .orElseThrow(() -> new IllegalArgumentException("未映射对应ComponentRegister, key: " + key + ", mapping: " + mapping));
     }
+
+    /**
+     * 校验并转换为{@link Property}
+     *
+     * @param model {@link #build(Object)}
+     * @return {@link Property}或者{@link List<Property>}
+     */
+    protected abstract S validateAndConvert(T model);
 
     /**
      * 基于SpringFactories实现<br>

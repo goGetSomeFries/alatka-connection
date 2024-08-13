@@ -27,6 +27,11 @@ public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty,
     }
 
     @Override
+    protected HandlerProperty validateAndConvert(HandlerProperty property) {
+        return property;
+    }
+
+    @Override
     protected Class<HandlerComponentRegister> componentRegisterClass() {
         return HandlerComponentRegister.class;
     }

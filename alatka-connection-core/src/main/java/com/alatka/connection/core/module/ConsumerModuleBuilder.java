@@ -25,6 +25,11 @@ public class ConsumerModuleBuilder extends AbstractModuleBuilder<ConsumerPropert
     }
 
     @Override
+    protected ConsumerProperty validateAndConvert(ConsumerProperty property) {
+        return property;
+    }
+
+    @Override
     protected Class<ConsumerEndpointRegister> componentRegisterClass() {
         return null;
     }

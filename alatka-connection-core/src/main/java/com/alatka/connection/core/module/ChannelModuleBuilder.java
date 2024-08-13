@@ -27,6 +27,11 @@ public class ChannelModuleBuilder extends AbstractModuleBuilder<ChannelProperty,
     }
 
     @Override
+    protected ChannelProperty validateAndConvert(ChannelProperty property) {
+        return property;
+    }
+
+    @Override
     protected Class<ChannelComponentRegister> componentRegisterClass() {
         return ChannelComponentRegister.class;
     }
