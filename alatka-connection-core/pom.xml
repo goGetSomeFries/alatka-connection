@@ -9,28 +9,6 @@
 
     <artifactId>alatka-connection-core</artifactId>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/connection*.yml</include>
-                    <include>**/connection*.yaml</include>
-                    <include>**/connection*.properties</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/connection*.yml</exclude>
-                    <exclude>**/connection*.yaml</exclude>
-                    <exclude>**/connection*.properties</exclude>
-                </excludes>
-            </resource>
-        </resources>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

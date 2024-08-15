@@ -1,2 +1,2 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  com.alatka.connection.ConnectionConfigEnvironmentPostProcessor
+  com.alatka.connection.AlatkaConnectionConfigEnvironmentPostProcessor
