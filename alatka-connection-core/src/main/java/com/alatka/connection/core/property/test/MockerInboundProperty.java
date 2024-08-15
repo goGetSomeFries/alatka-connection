@@ -4,6 +4,8 @@ import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.property.core.InboundProperty;
 
 /**
+ * alatka.connection.route.inbound.mocker
+ *
  * @author ybliu
  */
 public class MockerInboundProperty extends InboundProperty {

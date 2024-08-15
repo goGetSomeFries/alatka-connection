@@ -7,6 +7,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import java.util.Map;
 
 /**
+ * TODO
+ *
  * @author ybliu
  */
 public class LoggerHandlerRegister extends HandlerComponentRegister<HandlerProperty> {

@@ -5,7 +5,7 @@ import com.alatka.connection.core.property.core.Property;
 import javax.validation.constraints.NotBlank;
 
 /**
- * alatka.connection.definition.serializers
+ * alatka.connection.definition.tcpMessageMappers
  *
  * @author ybliu
  */

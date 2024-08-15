@@ -5,6 +5,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
+ * {@link ThreadPoolTaskScheduler}组件注册器
+ *
  * @author ybliu
  * @see ThreadPoolTaskScheduler
  */

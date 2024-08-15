@@ -5,6 +5,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
 
 /**
+ * TODO
+ *
  * @author ybliu
  */
 public class PassthroughHandlerRegister extends HandlerComponentRegister<HandlerProperty> {

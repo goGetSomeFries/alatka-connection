@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
+ * {@link PollerMetadata}组件注册器
+ *
  * @author ybliu
  * @see PollerMetadata
  */

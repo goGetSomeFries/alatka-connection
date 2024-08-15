@@ -7,6 +7,8 @@ import com.alatka.connection.core.property.socket.TcpSimplexOutboundProperty;
 import com.alatka.connection.core.property.test.MockerOutboundProperty;
 
 /**
+ * alatka.connection.route.outbound
+ *
  * @author ybliu
  */
 public enum OutboundModel {

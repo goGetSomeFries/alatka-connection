@@ -6,6 +6,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.ConsumerEndpointFactoryBean;
 
 /**
+ * TODO
+ *
  * @author ybliu
  */
 public class ConsumerEndpointRegister extends AbstractComponentRegister<ConsumerProperty, Class<ConsumerProperty>> {

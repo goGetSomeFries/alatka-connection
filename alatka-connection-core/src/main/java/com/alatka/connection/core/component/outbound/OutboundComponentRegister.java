@@ -5,6 +5,8 @@ import com.alatka.connection.core.property.core.OutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 /**
+ * TODO
+ *
  * @author ybliu
  */
 public abstract class OutboundComponentRegister<T extends OutboundProperty> extends AbstractComponentRegister<T, Class<T>> {

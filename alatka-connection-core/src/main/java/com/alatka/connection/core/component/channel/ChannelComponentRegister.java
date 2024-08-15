@@ -7,6 +7,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import java.util.Collections;
 
 /**
+ * TODO
+ *
  * @author ybliu
  */
 public abstract class ChannelComponentRegister<T extends ChannelProperty> extends AbstractComponentRegister<T, ChannelProperty.Type> {

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
- * 线程池BeanDefinition注册器
+ * {@link ThreadPoolTaskExecutor}组件注册器
  *
  * @author ybliu
  * @see ThreadPoolTaskExecutor

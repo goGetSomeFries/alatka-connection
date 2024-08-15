@@ -9,20 +9,34 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * alatka.connection.route
+ *
  * @author ybliu
  */
 public class RouteModel {
 
+    /**
+     * alatka.connection.route.inbound
+     */
     @Size(min = 1)
     @NotNull
     private Map<InboundModel, Object> inbound;
 
+    /**
+     * alatka.connection.route.processors
+     */
     private List<ProcessorProperty> processors;
 
+    /**
+     * alatka.connection.route.outbound
+     */
     @Size(min = 1)
     @NotNull
     private Map<OutboundModel, Object> outbound;
 
+    /**
+     * alatka.connection.route.bypass
+     */
     private Map<OutboundModel, Object> bypass;
 
     public Map<InboundModel, Object> getInbound() {

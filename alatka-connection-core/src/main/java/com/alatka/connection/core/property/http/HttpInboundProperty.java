@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
+ * alatka.connection.route.inbound.http
+ *
  * @author ybliu
  */
 public class HttpInboundProperty extends InboundProperty {

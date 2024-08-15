@@ -8,6 +8,8 @@ import org.springframework.integration.filter.MessageFilter;
 import java.util.Map;
 
 /**
+ * TODO
+ *
  * @author ybliu
  */
 public class FilterHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
