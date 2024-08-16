@@ -5,24 +5,29 @@ import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.test.MockerInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
-import com.alatka.connection.test.support.MessageMocker;
+import com.alatka.connection.test.support.InboundMocker;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.endpoint.MethodInvokingMessageSource;
 import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
 import org.springframework.integration.scheduling.PollerMetadata;
 
 /**
+ * TODO
+ *
  * @author ybliu
- * @see MessageMocker#inbound()
+ * @see InboundMocker#mockInbound()
  */
 public class MockerInboundRegister extends InboundComponentRegister<MockerInboundProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, MockerInboundProperty property) {
         Object instance = ClassUtil.newInstance(property.getClassName());
+        if (!(instance instanceof InboundMocker)) {
+            throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + InboundMocker.class.getName());
+        }
         MethodInvokingMessageSource messageSource = new MethodInvokingMessageSource();
         messageSource.setObject(instance);
-        messageSource.setMethodName(property.getMethodName());
+        messageSource.setMethodName(InboundMocker.METHOD_NAME);
         messageSource.setBeanFactory(this.getBeanFactory());
         messageSource.afterPropertiesSet();
 

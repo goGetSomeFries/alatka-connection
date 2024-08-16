@@ -2,16 +2,23 @@ package com.alatka.connection.test.support;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.Message;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MessageMocker {
+/**
+ * TODO
+ *
+ * @author whocares
+ */
+public class MessageMocker implements InboundMocker<String>, OutboundMocker<String, String> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final AtomicInteger counter = new AtomicInteger(0);
 
-    public String inbound() {
+    @Override
+    public String doMockInbound() {
         String payload = "inbound" + counter.incrementAndGet();
         this.logger.info(">>>>>>>>>>>>>>>> inbound >>>>>>>>>>>>>>>>>");
         this.logger.info("inbound send message: {}", payload);
@@ -19,9 +26,10 @@ public class MessageMocker {
         return payload;
     }
 
-    public String outbound(String payload) {
+    @Override
+    public String doMockOutbound(Message<String> message) {
         this.logger.info(">>>>>>>>>>>>>>>> outbound >>>>>>>>>>>>>>>>>");
-        this.logger.info("outbound receive message: {}", payload);
+        this.logger.info("outbound receive message: {}", message.getPayload());
         this.logger.info(">>>>>>>>>>>>>>>> outbound >>>>>>>>>>>>>>>>>");
         String reply = "outbound" + counter.incrementAndGet();
         this.logger.info("<<<<<<<<<<<<<<<< outbound <<<<<<<<<<<<<<<<<");

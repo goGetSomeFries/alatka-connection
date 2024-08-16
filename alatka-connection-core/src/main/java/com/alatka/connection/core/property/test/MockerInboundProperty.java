@@ -16,7 +16,6 @@ public class MockerInboundProperty extends InboundProperty {
     private String taskScheduler;
 
     private String className;
-    private String methodName;
 
     public String getPoller() {
         return poller;
@@ -42,11 +41,4 @@ public class MockerInboundProperty extends InboundProperty {
         this.className = className;
     }
 
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
 }

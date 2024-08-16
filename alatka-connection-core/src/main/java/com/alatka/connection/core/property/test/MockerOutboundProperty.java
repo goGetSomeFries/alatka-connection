@@ -11,8 +11,6 @@ public class MockerOutboundProperty extends OutboundProperty {
 
     private String className;
 
-    private String methodName;
-
     public String getClassName() {
         return className;
     }
@@ -21,11 +19,4 @@ public class MockerOutboundProperty extends OutboundProperty {
         this.className = className;
     }
 
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
 }
