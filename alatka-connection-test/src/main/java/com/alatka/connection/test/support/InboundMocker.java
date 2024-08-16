@@ -16,6 +16,7 @@ public interface InboundMocker<T> {
     T doMockInbound();
 
     default Message<T> mockInbound() {
-        return MessageBuilder.withPayload(doMockInbound()).build();
+        T payload = doMockInbound();
+        return MessageBuilder.withPayload(payload).build();
     }
 }

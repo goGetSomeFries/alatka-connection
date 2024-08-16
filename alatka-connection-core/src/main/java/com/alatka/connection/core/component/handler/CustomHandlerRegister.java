@@ -23,10 +23,11 @@ public class CustomHandlerRegister extends HandlerComponentRegister<HandlerPrope
         Map<String, Object> params = property.getParams();
         String className = (String) params.get(KEY_CLASS_NAME);
         Object instance = ClassUtil.newInstance(className);
-        if (!(instance instanceof CustomHandler)) {
-            throw new IllegalArgumentException(instance + "必须实现" + CustomHandler.class);
+        if (!CustomHandler.class.isAssignableFrom(instance.getClass())) {
+            throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + CustomHandler.class.getName());
         }
-        builder.addConstructorArgValue(instance).addConstructorArgValue("execute");
+        builder.addConstructorArgValue(instance)
+                .addConstructorArgValue(CustomHandler.METHOD_NAME);
     }
 
     @Override

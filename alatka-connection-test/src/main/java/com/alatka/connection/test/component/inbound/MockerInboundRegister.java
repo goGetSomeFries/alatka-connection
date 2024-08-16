@@ -22,7 +22,7 @@ public class MockerInboundRegister extends InboundComponentRegister<MockerInboun
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, MockerInboundProperty property) {
         Object instance = ClassUtil.newInstance(property.getClassName());
-        if (!(instance instanceof InboundMocker)) {
+        if (!InboundMocker.class.isAssignableFrom(instance.getClass())) {
             throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + InboundMocker.class.getName());
         }
         MethodInvokingMessageSource messageSource = new MethodInvokingMessageSource();

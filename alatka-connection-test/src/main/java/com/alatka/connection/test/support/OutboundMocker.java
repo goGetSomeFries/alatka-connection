@@ -17,6 +17,7 @@ public interface OutboundMocker<T, S> {
     S doMockOutbound(Message<T> message);
 
     default Message<S> mockOutbound(Message<T> message) {
-        return MessageBuilder.withPayload(doMockOutbound(message)).build();
+        S payload = doMockOutbound(message);
+        return MessageBuilder.withPayload(payload).copyHeaders(message.getHeaders()).build();
     }
 }

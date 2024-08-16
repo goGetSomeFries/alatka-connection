@@ -20,7 +20,7 @@ public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutb
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, MockerOutboundProperty property) {
         Object instance = ClassUtil.newInstance(property.getClassName());
-        if (!(instance instanceof OutboundMocker)) {
+        if (!OutboundMocker.class.isAssignableFrom(instance.getClass())) {
             throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + OutboundMocker.class.getName());
         }
         builder.addConstructorArgValue(instance)
