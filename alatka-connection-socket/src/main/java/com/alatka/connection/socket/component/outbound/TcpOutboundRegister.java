@@ -14,6 +14,9 @@ public abstract class TcpOutboundRegister<T extends TcpOutboundProperty> extends
     protected void postDoRegister(BeanDefinitionBuilder builder, T property) {
         TcpConnectionProperty connectionFactory = property.getConnectionFactory();
         connectionFactory.setId(property.getId());
+        if (connectionFactory.getClient() == null) {
+            connectionFactory.setClient(true);
+        }
         String beanName = this.componentRegister.register(connectionFactory);
         builder.addPropertyReference("connectionFactory", beanName);
 

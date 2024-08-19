@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 
 public class TcpConnectionProperty extends Property {
 
-    private boolean client = false;
+    private Boolean client;
     private String host;
     @Min(0)
     @Max(65535)
@@ -40,11 +40,11 @@ public class TcpConnectionProperty extends Property {
     @IdentityProperty
     private String taskExecutor;
 
-    public boolean isClient() {
+    public Boolean getClient() {
         return client;
     }
 
-    public void setClient(boolean client) {
+    public void setClient(Boolean client) {
         this.client = client;
     }
 

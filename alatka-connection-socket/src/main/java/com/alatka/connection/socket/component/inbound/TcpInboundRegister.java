@@ -17,6 +17,9 @@ public abstract class TcpInboundRegister<T extends TcpInboundProperty> extends I
     protected void doRegister(BeanDefinitionBuilder builder, T property) {
         TcpConnectionProperty connectionFactory = property.getConnectionFactory();
         connectionFactory.setId(property.getId());
+        if (connectionFactory.getClient() == null) {
+            connectionFactory.setClient(false);
+        }
         String beanName = this.componentRegister.register(connectionFactory);
 
         builder.addPropertyReference("connectionFactory", beanName);

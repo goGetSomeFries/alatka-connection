@@ -15,6 +15,7 @@ public class TcpOutboundProperty extends OutboundProperty {
     @IdentityPropertyReference
     @JsonUnwrapped
     private TcpConnectionProperty connectionFactory;
+
     public TcpConnectionProperty getConnectionFactory() {
         return connectionFactory;
     }

@@ -7,7 +7,7 @@ package com.alatka.connection.core.property.socket;
  */
 public class TcpSimplexOutboundProperty extends TcpOutboundProperty {
 
-    private boolean clientMode = false;
+    private boolean clientMode = true;
 
     private Long retryInterval;
 

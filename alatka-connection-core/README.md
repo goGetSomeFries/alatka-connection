@@ -1,4 +1,0 @@
-- component 对应配置文件中独立配置的组件
-- model
-- property
-- module

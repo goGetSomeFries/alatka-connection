@@ -11,17 +11,11 @@ import static com.alatka.connection.core.AlatkaConnectionConstant.FALLBACK_PREFI
 public class SerializerConfig {
 
     public static final String FALLBACK_BYTES_LF_SERIALIZER = FALLBACK_PREFIX + "byteArrayLfSerializer";
-
     public static final String FALLBACK_BYTES_CRLF_SERIALIZER = FALLBACK_PREFIX + "byteArrayCrLfSerializer";
-
     public static final String FALLBACK_BYTES_STX_ETX_SERIALIZER = FALLBACK_PREFIX + "byteArrayStxEtxSerializer";
-
     public static final String FALLBACK_BYTES_RAW_SERIALIZER = FALLBACK_PREFIX + "byteArrayRawSerializer";
-
     public static final String FALLBACK_BYTES_4_LENGTH_HEADER_SERIALIZER = FALLBACK_PREFIX + "byteArray4LengthHeaderSerializer";
-
     public static final String FALLBACK_BYTES_2_LENGTH_HEADER_SERIALIZER = FALLBACK_PREFIX + "byteArray2LengthHeaderSerializer";
-
     public static final String FALLBACK_BYTES_1_LENGTH_HEADER_SERIALIZER = FALLBACK_PREFIX + "byteArray1LengthHeaderSerializer";
 
     /**

@@ -13,7 +13,7 @@ public class TcpConnectionFactoryFactoryBeanRegister extends AbstractComponentRe
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpConnectionProperty property) {
-        builder.addPropertyValue("type", property.isClient() ? "client" : "server")
+        builder.addPropertyValue("type", property.getClient() ? "client" : "server")
                 .addPropertyValue("port", property.getPort())
                 .addPropertyValue("connectTimeout", property.getConnectTimeout() / 1000)
                 .addPropertyValue("soTimeout", property.getReadTimeout())
