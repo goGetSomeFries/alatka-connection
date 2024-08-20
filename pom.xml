@@ -22,6 +22,6 @@
         <module>alatka-connection-test</module>
     </modules>
     <properties>
-        <revision>0.1.0-SNAPSHOT</revision>
+        <revision>0.1.0</revision>
     </properties>
 </project>
