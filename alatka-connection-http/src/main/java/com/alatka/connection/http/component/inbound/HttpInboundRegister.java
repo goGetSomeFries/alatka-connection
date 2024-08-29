@@ -10,6 +10,7 @@ import org.springframework.integration.http.inbound.RequestMapping;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
 import javax.validation.Validation;
+import javax.validation.Validator;
 import java.util.stream.Stream;
 
 /**
@@ -25,8 +26,9 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
             Stream.of(property.getMethods()).map(HttpMethod::resolve).forEach(requestMapping::setMethods);
         }
 
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         builder.addPropertyValue("requestMapping", requestMapping)
-                .addPropertyValue("validator", new SpringValidatorAdapter(Validation.buildDefaultValidatorFactory().getValidator()));
+                .addPropertyValue("validator", new SpringValidatorAdapter(validator));
         if (property.getRequestType() != null) {
             builder.addPropertyValue("requestPayloadTypeClass", property.getRequestType());
         }
