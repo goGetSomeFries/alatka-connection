@@ -10,6 +10,11 @@ import java.util.Map;
 public class RootModel {
 
     /**
+     * alatka.connection.desc
+     */
+    private String desc;
+
+    /**
      * alatka.connection.route
      */
     private RouteModel route;
