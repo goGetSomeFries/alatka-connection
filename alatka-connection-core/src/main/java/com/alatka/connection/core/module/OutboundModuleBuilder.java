@@ -63,7 +63,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     protected void buildOutputChannel() {
         ChannelProperty channel = new ChannelProperty();
         channel.setId(this.outputChannel());
-        channel.setType(ChannelProperty.Type.direct);
+        channel.setType(ChannelProperty.Type.publishSubscribe);
         this.channelModuleBuilder.build(channel);
 
         if (!super.isDuplex()) {
