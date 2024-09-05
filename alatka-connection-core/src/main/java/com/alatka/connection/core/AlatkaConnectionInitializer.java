@@ -5,6 +5,8 @@ import com.alatka.connection.core.model.RootModel;
 import com.alatka.connection.core.module.*;
 import com.alatka.connection.core.property.core.ProcessorProperty;
 import com.alatka.connection.core.util.YamlUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -13,6 +15,8 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.integration.config.IntegrationConfigurationInitializer;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +31,8 @@ import java.util.stream.Stream;
  */
 public class AlatkaConnectionInitializer implements IntegrationConfigurationInitializer {
 
+    private final Logger logger = LoggerFactory.getLogger(AlatkaConnectionInitializer.class);
+
     private static final String FILE_PREFIX = "alatka-connection";
 
     private static final String FILE_YML_SUFFIX = ".yml";
@@ -38,9 +44,19 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         // init ComponentRegister
         AbstractComponentRegister.init((DefaultListableBeanFactory) beanFactory);
 
+        this.logger.info("********开始构建alatka-connection配置文件********");
+        Instant start = Instant.now();
+
         for (Resource resource : this.loadResources()) {
             String identity = this.getIdentity(resource);
             RootModel rootModel = this.getRootModel(resource);
+            String filename = resource.getFilename();
+
+            this.logger.info("building '{}/{}'...", filename, rootModel.getDesc());
+            if (!rootModel.isEnabled()) {
+                this.logger.warn("'{}/{}' is disabled, will skip build", filename, rootModel.getDesc());
+                continue;
+            }
 
             // alatka.connection.definition
             DefinitionModuleBuilder definitionModuleBuilder = new DefinitionModuleBuilder(identity);
@@ -66,6 +82,9 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
             ProcessorModuleBuilder replyProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.reply);
             replyProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
         }
+
+        Instant end = Instant.now();
+        this.logger.info("********构建alatka-connection配置文件完成，耗时{}ms********", Duration.between(start, end).toMillis());
     }
 
     /**
