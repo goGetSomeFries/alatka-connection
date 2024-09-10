@@ -20,7 +20,7 @@ public class RedirectInboundRegister extends InboundComponentRegister<RedirectIn
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, RedirectInboundProperty property) {
         ConsumerProperty consumerProperty = new ConsumerProperty();
-        consumerProperty.setInputChannel(property.getInputChannel());
+        consumerProperty.setInputChannel(property.getRedirectChannel());
         String beanName = property.getId().concat(".").concat(this.beanNameSuffix());
         consumerProperty.setMessageHandler(beanName);
         consumerProperty.setId(beanName.concat(".consumer"));

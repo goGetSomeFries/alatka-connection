@@ -14,7 +14,7 @@ public class RedirectOutboundRegister extends OutboundComponentRegister<Redirect
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, RedirectOutboundProperty property) {
-
+        builder.addPropertyValue("outputChannelName", property.getRedirectChannel());
     }
 
     @Override
