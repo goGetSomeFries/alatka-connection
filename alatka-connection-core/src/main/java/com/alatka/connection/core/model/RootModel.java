@@ -10,6 +10,11 @@ import java.util.Map;
 public class RootModel {
 
     /**
+     * alatka.connection.enabled
+     */
+    private boolean enabled = true;
+
+    /**
      * alatka.connection.desc
      */
     private String desc;
@@ -23,6 +28,22 @@ public class RootModel {
      * alatka.connection.definition
      */
     private Map<DefinitionModel, Object> definition;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public RouteModel getRoute() {
         return route;
