@@ -50,8 +50,8 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         for (Resource resource : this.loadResources()) {
             String identity = this.getIdentity(resource);
             RootModel rootModel = this.getRootModel(resource);
-
             String filename = resource.getFilename();
+
             this.logger.info("building '{}/{}'...", filename, rootModel.getDesc());
             if (!rootModel.isEnabled()) {
                 this.logger.warn("'{}/{}' is disabled, will skip build", filename, rootModel.getDesc());
@@ -82,6 +82,7 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
             ProcessorModuleBuilder replyProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.reply);
             replyProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
         }
+
         Instant end = Instant.now();
         this.logger.info("********构建alatka-connection配置文件完成，耗时{}ms********", Duration.between(start, end).toMillis());
     }
