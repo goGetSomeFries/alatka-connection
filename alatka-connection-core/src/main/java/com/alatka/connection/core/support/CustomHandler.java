@@ -11,7 +11,7 @@ public interface CustomHandler<T, S> {
 
     default Message<S> execute(Message<T> message) {
         S payload = doExecute(message);
-        return MessageBuilder.withPayload(payload).copyHeaders(message.getHeaders()).build();
+        return payload == null ? null : MessageBuilder.withPayload(payload).copyHeaders(message.getHeaders()).build();
     }
 
 }
