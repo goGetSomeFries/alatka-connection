@@ -22,6 +22,10 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
         initialize();
     }
 
+    public static void init(DefaultListableBeanFactory beanFactory) {
+        AbstractComponentRegister.beanFactory = beanFactory;
+    }
+
     @Override
     public final String register(T property) {
         Validator.validateByException(property);
@@ -35,10 +39,6 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
                 property.getId() : property.getId().concat(".").concat(beanNameSuffix());
         beanFactory.registerBeanDefinition(beanName, builder.getBeanDefinition());
         return beanName;
-    }
-
-    public static void init(DefaultListableBeanFactory beanFactory) {
-        AbstractComponentRegister.beanFactory = beanFactory;
     }
 
     protected DefaultListableBeanFactory getBeanFactory() {
