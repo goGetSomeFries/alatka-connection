@@ -28,6 +28,11 @@
         </dependency>
         <dependency>
             <groupId>com.alatka.connection</groupId>
+            <artifactId>alatka-connection-ratelimiter</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.alatka.connection</groupId>
             <artifactId>alatka-connection-socket</artifactId>
             <optional>true</optional>
         </dependency>
