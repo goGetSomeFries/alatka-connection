@@ -4,7 +4,7 @@
     <parent>
         <artifactId>alatka</artifactId>
         <groupId>com.alatka</groupId>
-        <version>1.0.7</version>
+        <version>1.0.8</version>
     </parent>
 
     <groupId>com.alatka.connection</groupId>
