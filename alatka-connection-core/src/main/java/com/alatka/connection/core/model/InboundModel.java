@@ -3,6 +3,7 @@ package com.alatka.connection.core.model;
 import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.property.core.RedirectInboundProperty;
 import com.alatka.connection.core.property.http.HttpInboundProperty;
+import com.alatka.connection.core.property.jdbc.JdbcInboundProperty;
 import com.alatka.connection.core.property.socket.TcpDuplexInboundProperty;
 import com.alatka.connection.core.property.socket.TcpSimplexInboundProperty;
 import com.alatka.connection.core.property.test.MockerInboundProperty;
@@ -15,6 +16,7 @@ import com.alatka.connection.core.property.test.MockerInboundProperty;
 public enum InboundModel {
 
     redirect(RedirectInboundProperty.class, false),
+    jdbc(JdbcInboundProperty.class, false),
     mocker(MockerInboundProperty.class, false),
     tcp_duplex(TcpDuplexInboundProperty.class, true),
     tcp_simplex(TcpSimplexInboundProperty.class, false),
