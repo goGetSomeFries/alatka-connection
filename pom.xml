@@ -20,6 +20,7 @@
         <module>alatka-connection-http</module>
         <module>alatka-connection-websocket</module>
         <module>alatka-connection-test</module>
+        <module>alatka-connection-jdbc</module>
     </modules>
     <properties>
         <revision>0.5.0</revision>

@@ -6,8 +6,6 @@ import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;
 
-import java.util.Map;
-
 /**
  * TODO
  *
@@ -20,8 +18,7 @@ public class CustomHandlerRegister extends HandlerComponentRegister<HandlerPrope
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        Map<String, Object> params = property.getParams();
-        String className = (String) params.get(KEY_CLASS_NAME);
+        String className = this.getParamsValueOrThrow(property.getParams(), KEY_CLASS_NAME);
         Object instance = ClassUtil.newInstance(className);
         if (!CustomHandler.class.isAssignableFrom(instance.getClass())) {
             throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + CustomHandler.class.getName());
