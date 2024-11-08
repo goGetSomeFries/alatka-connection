@@ -12,6 +12,7 @@ com.alatka.connection.core.component.handler.HandlerComponentRegister=\
   com.alatka.connection.core.component.handler.LoggerHandlerRegister,\
   com.alatka.connection.core.component.handler.FilterHandlerRegister,\
   com.alatka.connection.core.component.handler.NullHandlerRegister,\
+  com.alatka.connection.core.component.handler.SplitterHandlerRegister,\
   com.alatka.connection.core.component.handler.CustomHandlerRegister
 com.alatka.connection.core.component.support.SupportComponentRegister=\
   com.alatka.connection.core.component.support.PollerMetadataRegister,\
