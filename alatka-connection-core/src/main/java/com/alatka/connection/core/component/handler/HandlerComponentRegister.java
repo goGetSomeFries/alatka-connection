@@ -5,6 +5,8 @@ import com.alatka.connection.core.property.core.HandlerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * TODO
@@ -22,5 +24,14 @@ public abstract class HandlerComponentRegister<T extends HandlerProperty> extend
         if (property.getParams() == null) {
             property.setParams(Collections.emptyMap());
         }
+    }
+
+    protected <S> S getParamsValue(Map<String, Object> params, String key) {
+        return (S) params.get(key);
+    }
+
+    protected <S> S getParamsValueOrThrow(Map<String, Object> params, String key) {
+        return (S) Optional.ofNullable(params.get(key))
+                .orElseThrow(() -> new IllegalArgumentException(key + "must not be null"));
     }
 }
