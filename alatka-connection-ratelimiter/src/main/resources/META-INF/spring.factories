@@ -1,0 +1,2 @@
+com.alatka.connection.core.component.handler.HandlerComponentRegister=\
+  com.alatka.connection.ratelimiter.component.handler.RateLimiterHandlerRegister

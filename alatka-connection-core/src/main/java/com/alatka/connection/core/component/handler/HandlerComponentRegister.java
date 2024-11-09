@@ -26,6 +26,10 @@ public abstract class HandlerComponentRegister<T extends HandlerProperty> extend
         }
     }
 
+    protected <S> S getParamsValue(Map<String, Object> params, String key, S defaultValue) {
+        return (S) params.getOrDefault(key, defaultValue);
+    }
+
     protected <S> S getParamsValue(Map<String, Object> params, String key) {
         return (S) params.get(key);
     }
