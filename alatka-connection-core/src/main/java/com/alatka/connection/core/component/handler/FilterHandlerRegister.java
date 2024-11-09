@@ -5,8 +5,6 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.filter.ExpressionEvaluatingSelector;
 import org.springframework.integration.filter.MessageFilter;
 
-import java.util.Map;
-
 /**
  * TODO
  *
@@ -18,8 +16,7 @@ public class FilterHandlerRegister extends HandlerComponentRegister<HandlerPrope
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        Map<String, Object> params = property.getParams();
-        String expression = (String) params.get(KEY_EXPRESSION);
+        String expression = this.getParamsValueOrThrow(property.getParams(), KEY_EXPRESSION);
         ExpressionEvaluatingSelector selector = new ExpressionEvaluatingSelector(expression);
 
         builder.addConstructorArgValue(selector);

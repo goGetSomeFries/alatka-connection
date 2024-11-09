@@ -18,7 +18,7 @@ public class LoggerHandlerRegister extends HandlerComponentRegister<HandlerPrope
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
         Map<String, Object> params = property.getParams();
-        String level = (String) params.get(KEY_LEVEL);
+        String level = getParamsValueOrThrow(params, KEY_LEVEL);
         builder.addConstructorArgValue(level);
     }
 
