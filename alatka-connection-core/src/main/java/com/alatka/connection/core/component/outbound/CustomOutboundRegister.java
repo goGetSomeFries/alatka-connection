@@ -1,0 +1,47 @@
+package com.alatka.connection.core.component.outbound;
+
+import com.alatka.connection.core.model.OutboundModel;
+import com.alatka.connection.core.property.core.CustomOutboundProperty;
+import com.alatka.connection.core.support.CustomHandler;
+import com.alatka.connection.core.util.ClassUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.integration.handler.ServiceActivatingHandler;
+
+/**
+ * TODO
+ *
+ * @author ybliu
+ */
+public class CustomOutboundRegister extends OutboundComponentRegister<CustomOutboundProperty> {
+
+    @Override
+    protected void doRegister(BeanDefinitionBuilder builder, CustomOutboundProperty property) {
+        String beanName = property.getBeanName();
+        String className = property.getClassName();
+        if (beanName == null && className == null) {
+            throw new IllegalArgumentException("beanName & className must not be null both");
+        }
+        Object instance = beanName != null ? this.getBeanFactory().getBean(beanName) : ClassUtil.newInstance(className);
+
+        if (!CustomHandler.class.isAssignableFrom(instance.getClass())) {
+            throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + CustomHandler.class.getName());
+        }
+        builder.addConstructorArgValue(instance)
+                .addConstructorArgValue(CustomHandler.METHOD_NAME);
+    }
+
+    @Override
+    protected Class<ServiceActivatingHandler> componentClass() {
+        return ServiceActivatingHandler.class;
+    }
+
+    @Override
+    public Class<CustomOutboundProperty> mappingKey() {
+        return CustomOutboundProperty.class;
+    }
+
+    @Override
+    protected String beanNameSuffix() {
+        return OutboundModel.custom.name();
+    }
+}

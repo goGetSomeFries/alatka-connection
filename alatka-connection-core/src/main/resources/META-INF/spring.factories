@@ -1,7 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.alatka.connection.core.AutoConfiguration
-org.springframework.integration.config.IntegrationConfigurationInitializer=\
-  com.alatka.connection.core.AlatkaConnectionInitializer
 com.alatka.connection.core.component.channel.ChannelComponentRegister=\
   com.alatka.connection.core.component.channel.DirectChannelRegister,\
   com.alatka.connection.core.component.channel.NullChannelRegister,\
@@ -19,6 +17,7 @@ com.alatka.connection.core.component.support.SupportComponentRegister=\
   com.alatka.connection.core.component.support.TaskExecutorRegister,\
   com.alatka.connection.core.component.support.TaskSchedulerRegister
 com.alatka.connection.core.component.outbound.OutboundComponentRegister=\
+  com.alatka.connection.core.component.outbound.CustomOutboundRegister,\
   com.alatka.connection.core.component.outbound.RedirectOutboundRegister
 com.alatka.connection.core.component.inbound.InboundComponentRegister=\
   com.alatka.connection.core.component.inbound.RedirectInboundRegister

@@ -8,11 +8,12 @@ import com.alatka.connection.core.util.YamlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.core.Ordered;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternUtils;
-import org.springframework.integration.config.IntegrationConfigurationInitializer;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -29,7 +30,7 @@ import java.util.stream.Stream;
  *
  * @author ybliu
  */
-public class AlatkaConnectionInitializer implements IntegrationConfigurationInitializer {
+public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Ordered {
 
     private final Logger logger = LoggerFactory.getLogger(AlatkaConnectionInitializer.class);
 
@@ -40,7 +41,7 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
     private static final String FILE_YAML_SUFFIX = ".yaml";
 
     @Override
-    public void initialize(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         // init ComponentRegister
         AbstractComponentRegister.init((DefaultListableBeanFactory) beanFactory);
 
@@ -152,4 +153,8 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         }
     }
 
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
+    }
 }

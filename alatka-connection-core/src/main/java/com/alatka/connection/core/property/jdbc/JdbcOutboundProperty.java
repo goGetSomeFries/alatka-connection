@@ -4,6 +4,11 @@ import com.alatka.connection.core.property.core.OutboundProperty;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * alatka.connection.route.outbound.jdbc
+ *
+ * @author ybliu
+ */
 public class JdbcOutboundProperty extends OutboundProperty {
 
     private String dataSource;

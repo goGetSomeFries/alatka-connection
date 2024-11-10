@@ -5,6 +5,11 @@ import com.alatka.connection.core.property.core.SourcePollingInboundProperty;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
+/**
+ * alatka.connection.route.inbound.jdbc
+ *
+ * @author ybliu
+ */
 public class JdbcInboundProperty extends SourcePollingInboundProperty {
 
     private String dataSource;
