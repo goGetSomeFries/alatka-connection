@@ -23,7 +23,8 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
         RequestMapping requestMapping = new RequestMapping();
         requestMapping.setPathPatterns(property.getPathPatterns());
         if (property.getMethods() != null) {
-            Stream.of(property.getMethods()).map(HttpMethod::resolve).forEach(requestMapping::setMethods);
+            HttpMethod[] methods = Stream.of(property.getMethods()).map(HttpMethod::resolve).toArray(HttpMethod[]::new);
+            requestMapping.setMethods(methods);
         }
 
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
