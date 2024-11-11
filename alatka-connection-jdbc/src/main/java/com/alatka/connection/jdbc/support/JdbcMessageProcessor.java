@@ -1,6 +1,6 @@
 package com.alatka.connection.jdbc.support;
 
-import com.alatka.connection.core.support.CustomHandler;
+import org.springframework.integration.handler.MessageProcessor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -11,7 +11,7 @@ import org.springframework.messaging.Message;
 import javax.sql.DataSource;
 import java.util.Map;
 
-public class JdbcHandler implements CustomHandler<Object, Object> {
+public class JdbcMessageProcessor implements MessageProcessor<Object> {
 
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -21,16 +21,16 @@ public class JdbcHandler implements CustomHandler<Object, Object> {
 
     private Class<?> resultClass;
 
-    public JdbcHandler(JdbcTemplate jdbcTemplate) {
+    public JdbcMessageProcessor(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
     }
 
-    public JdbcHandler(DataSource dataSource) {
+    public JdbcMessageProcessor(DataSource dataSource) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     @Override
-    public Object doExecute(Message<Object> message) {
+    public Object processMessage(Message<?> message) {
         Object payload = message.getPayload();
         SqlParameterSource sqlParameterSource = payload instanceof Map ?
                 new MapSqlParameterSource((Map<String, ?>) payload) : new BeanPropertySqlParameterSource(payload);

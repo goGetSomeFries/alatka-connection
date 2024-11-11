@@ -1,13 +1,11 @@
-package com.alatka.connection.core.property.test;
-
-import com.alatka.connection.core.property.core.SourcePollingInboundProperty;
+package com.alatka.connection.core.property.core;
 
 /**
- * alatka.connection.route.inbound.mocker
+ * alatka.connection.route.outbound.custom
  *
  * @author ybliu
  */
-public class MockerInboundProperty extends SourcePollingInboundProperty {
+public class CustomOutboundProperty extends OutboundProperty {
 
     private String beanName;
 

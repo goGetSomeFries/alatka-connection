@@ -4,7 +4,7 @@
     <parent>
         <artifactId>alatka</artifactId>
         <groupId>com.alatka</groupId>
-        <version>1.12.0</version>
+        <version>1.13.0</version>
     </parent>
 
     <groupId>com.alatka.connection</groupId>
@@ -24,6 +24,6 @@
         <module>alatka-connection-ratelimiter</module>
     </modules>
     <properties>
-        <revision>0.7.0</revision>
+        <revision>0.8.0</revision>
     </properties>
 </project>
