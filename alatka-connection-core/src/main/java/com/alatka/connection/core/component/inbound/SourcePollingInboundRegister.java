@@ -3,14 +3,13 @@ package com.alatka.connection.core.component.inbound;
 import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.property.core.SourcePollingInboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
 import org.springframework.integration.scheduling.PollerMetadata;
 
 public abstract class SourcePollingInboundRegister<T extends SourcePollingInboundProperty> extends InboundComponentRegister<T> {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, T property) {
+    protected final void doRegister(BeanDefinitionBuilder builder, T property) {
         String pollerBeanName = property.getPoller() == null ? DefaultConfig.FALLBACK_POLLER_METADATA : property.getPoller();
         PollerMetadata pollerMetadata = this.getBeanFactory().getBean(pollerBeanName, PollerMetadata.class);
 
@@ -23,13 +22,23 @@ public abstract class SourcePollingInboundRegister<T extends SourcePollingInboun
         // pollerMetadata.getAdviceChain();
         // pollerMetadata.getErrorHandler();
         // pollerMetadata.getTransactionSynchronizationFactory();
-        builder.addPropertyValue("source", this.messageSource(property));
+        builder.addPropertyReference("source", this.registerMessageSource(property));
     }
 
     @Override
-    protected Class<SourcePollingChannelAdapter> componentClass() {
+    protected final Class<SourcePollingChannelAdapter> componentClass() {
         return SourcePollingChannelAdapter.class;
     }
 
-    protected abstract MessageSource messageSource(T property);
+    private String registerMessageSource(T property) {
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.messageSourceClass());
+        this.doRegisterMessageSource(builder, property);
+        String beanName = property.getId() + "." + this.beanNameSuffix() + ".messageSource";
+        this.getBeanFactory().registerBeanDefinition(beanName, builder.getBeanDefinition());
+        return beanName;
+    }
+
+    protected abstract void doRegisterMessageSource(BeanDefinitionBuilder builder, T property);
+
+    protected abstract Class<?> messageSourceClass();
 }

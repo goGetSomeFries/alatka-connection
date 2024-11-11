@@ -2,6 +2,7 @@ package com.alatka.connection.core;
 
 import com.alatka.connection.core.config.DefaultConfig;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -10,4 +11,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ImportAutoConfiguration({DefaultConfig.class})
 public class AutoConfiguration {
+
+    @Bean
+    public AlatkaConnectionInitializer alatkaConnectionInitializer() {
+        return new AlatkaConnectionInitializer();
+    }
 }

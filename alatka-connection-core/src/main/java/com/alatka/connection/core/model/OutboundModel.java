@@ -1,5 +1,6 @@
 package com.alatka.connection.core.model;
 
+import com.alatka.connection.core.property.core.CustomOutboundProperty;
 import com.alatka.connection.core.property.core.OutboundProperty;
 import com.alatka.connection.core.property.core.RedirectOutboundProperty;
 import com.alatka.connection.core.property.http.HttpOutboundProperty;
@@ -17,6 +18,7 @@ public enum OutboundModel {
 
     redirect(RedirectOutboundProperty.class, false),
     jdbc(JdbcOutboundProperty.class, false),
+    custom(CustomOutboundProperty.class, true),
     mocker(MockerOutboundProperty.class, true),
     tcp_simplex(TcpSimplexOutboundProperty.class, false),
     tcp_duplex(TcpDuplexOutboundProperty.class, true),

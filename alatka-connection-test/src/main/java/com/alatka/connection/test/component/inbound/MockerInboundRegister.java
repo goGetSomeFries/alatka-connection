@@ -5,7 +5,7 @@ import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.test.MockerInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.test.support.InboundMocker;
-import org.springframework.integration.core.MessageSource;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.endpoint.MethodInvokingMessageSource;
 
 /**
@@ -17,17 +17,29 @@ import org.springframework.integration.endpoint.MethodInvokingMessageSource;
 public class MockerInboundRegister extends SourcePollingInboundRegister<MockerInboundProperty> {
 
     @Override
-    protected MessageSource messageSource(MockerInboundProperty property) {
-        Object instance = ClassUtil.newInstance(property.getClassName());
-        if (!InboundMocker.class.isAssignableFrom(instance.getClass())) {
-            throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + InboundMocker.class.getName());
+    protected void doRegisterMessageSource(BeanDefinitionBuilder builder, MockerInboundProperty property) {
+        String beanName = property.getBeanName();
+        String className = property.getClassName();
+        if (beanName == null && className == null) {
+            throw new IllegalArgumentException("beanName and className must not be null both");
         }
-        MethodInvokingMessageSource messageSource = new MethodInvokingMessageSource();
-        messageSource.setObject(instance);
-        messageSource.setMethodName(InboundMocker.METHOD_NAME);
-        messageSource.setBeanFactory(this.getBeanFactory());
-        messageSource.afterPropertiesSet();
-        return messageSource;
+
+        Class<?> clazz = ClassUtil.forName(beanName != null ? getBeanFactory().getBeanDefinition(beanName).getBeanClassName() : className);
+        if (!InboundMocker.class.isAssignableFrom(clazz)) {
+            throw new IllegalArgumentException(clazz.getName() + " must be an instance of " + InboundMocker.class.getName());
+        }
+
+        if (beanName != null) {
+            builder.addPropertyReference("object", beanName);
+        } else {
+            builder.addPropertyValue("object", ClassUtil.newInstance(property.getClassName()));
+        }
+        builder.addPropertyValue("methodName", InboundMocker.METHOD_NAME);
+    }
+
+    @Override
+    protected Class<MethodInvokingMessageSource> messageSourceClass() {
+        return MethodInvokingMessageSource.class;
     }
 
     @Override
