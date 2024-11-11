@@ -4,13 +4,10 @@ import com.alatka.connection.core.component.inbound.SourcePollingInboundRegister
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.jdbc.JdbcInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
-import org.springframework.integration.core.MessageSource;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.jdbc.JdbcPollingChannelAdapter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-
-import javax.sql.DataSource;
 
 /**
  * TODO
@@ -20,23 +17,25 @@ import javax.sql.DataSource;
 public class JdbcInboundRegister extends SourcePollingInboundRegister<JdbcInboundProperty> {
 
     @Override
-    protected MessageSource messageSource(JdbcInboundProperty property) {
-        JdbcPollingChannelAdapter messageSource;
+    protected void doRegisterMessageSource(BeanDefinitionBuilder builder, JdbcInboundProperty property) {
         if (property.getJdbcTemplate() != null) {
-            JdbcTemplate jdbcTemplate = this.getBeanFactory().getBean(property.getJdbcTemplate(), JdbcTemplate.class);
-            messageSource = new JdbcPollingChannelAdapter(jdbcTemplate, property.getSelectSql());
+            builder.addConstructorArgReference(property.getJdbcTemplate());
         } else {
-            DataSource dataSource = this.getBeanFactory().getBean(property.getDataSource(), DataSource.class);
-            messageSource = new JdbcPollingChannelAdapter(dataSource, property.getSelectSql());
+            builder.addConstructorArgReference(property.getDataSource());
         }
-        messageSource.setMaxRows(property.getMaxRows());
-        messageSource.setUpdateSql(property.getUpdateSql());
-        messageSource.setUpdatePerRow(property.isUpdatePerRow());
-        messageSource.setSelectSqlParameterSource(new MapSqlParameterSource(property.getParams()));
-        messageSource.setRowMapper(new BeanPropertyRowMapper<>(ClassUtil.forName(property.getResultClass())));
+        builder.addConstructorArgValue(property.getSelectSql());
+        builder.addPropertyValue("maxRows", property.getMaxRows());
+        builder.addPropertyValue("updatePerRow", property.isUpdatePerRow());
+        if (property.getUpdateSql() != null) {
+            builder.addPropertyValue("updateSql", property.getUpdateSql());
+        }
+        builder.addPropertyValue("selectSqlParameterSource", new MapSqlParameterSource(property.getParams()));
+        builder.addPropertyValue("rowMapper", new BeanPropertyRowMapper<>(ClassUtil.forName(property.getResultClass())));
+    }
 
-        messageSource.afterPropertiesSet();
-        return messageSource;
+    @Override
+    protected Class<JdbcPollingChannelAdapter> messageSourceClass() {
+        return JdbcPollingChannelAdapter.class;
     }
 
     @Override
