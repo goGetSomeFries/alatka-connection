@@ -8,15 +8,17 @@ import com.alatka.connection.core.util.YamlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.core.Ordered;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternUtils;
-import org.springframework.integration.config.IntegrationConfigurationInitializer;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,18 +31,16 @@ import java.util.stream.Stream;
  *
  * @author ybliu
  */
-public class AlatkaConnectionInitializer implements IntegrationConfigurationInitializer {
+public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Ordered {
 
     private final Logger logger = LoggerFactory.getLogger(AlatkaConnectionInitializer.class);
 
     private static final String FILE_PREFIX = "alatka-connection";
 
-    private static final String FILE_YML_SUFFIX = ".yml";
-
-    private static final String FILE_YAML_SUFFIX = ".yaml";
+    private static final String[] FILE_SUFFIX = new String[]{".yml", ".yaml"};
 
     @Override
-    public void initialize(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         // init ComponentRegister
         AbstractComponentRegister.init((DefaultListableBeanFactory) beanFactory);
 
@@ -94,31 +94,32 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
      * @throws IllegalArgumentException 加载配置文件失败或者配置文件命名重复
      */
     private List<Resource> loadResources() {
-        try {
-            Resource[] ymlResources = ResourcePatternUtils.getResourcePatternResolver(null)
-                    .getResources(FILE_PREFIX + "*" + FILE_YML_SUFFIX);
-            Resource[] yamlResources = ResourcePatternUtils.getResourcePatternResolver(null)
-                    .getResources(FILE_PREFIX + "*" + FILE_YAML_SUFFIX);
+        List<Resource> list = Arrays.stream(FILE_SUFFIX)
+                .map(suffix -> {
+                    try {
+                        return ResourcePatternUtils.getResourcePatternResolver(null)
+                                .getResources(FILE_PREFIX + "*" + suffix);
+                    } catch (IOException e) {
+                        throw new RuntimeException("加载" + FILE_PREFIX + "失败", e);
+                    }
+                })
+                .flatMap(Stream::of)
+                .collect(Collectors.toList());
 
-            List<Resource> list = Stream.concat(Stream.of(ymlResources), Stream.of(yamlResources)).collect(Collectors.toList());
+        // 判断配置文件命名是否重复
+        Map<String, List<Resource>> map = list.stream()
+                .collect(Collectors.groupingBy(resource -> {
+                    String filename = resource.getFilename();
+                    return filename.substring(0, filename.lastIndexOf("."));
+                }));
+        map.values().stream()
+                .filter(l -> l.size() > 1)
+                .findAny()
+                .ifPresent(l -> {
+                    throw new IllegalArgumentException(FILE_PREFIX + "配置文件命名重复: " + l);
+                });
 
-            // 判断配置文件命名是否重复
-            Map<String, List<Resource>> map = list.stream()
-                    .collect(Collectors.groupingBy(resource -> {
-                        String filename = resource.getFilename();
-                        return filename.substring(0, filename.lastIndexOf("."));
-                    }));
-            map.values().stream()
-                    .filter(l -> l.size() > 1)
-                    .findAny()
-                    .ifPresent(l -> {
-                        throw new IllegalArgumentException(FILE_PREFIX + "配置文件命名重复: " + l);
-                    });
-
-            return Collections.unmodifiableList(list);
-        } catch (IOException e) {
-            throw new IllegalArgumentException("加载" + FILE_PREFIX + "失败", e);
-        }
+        return Collections.unmodifiableList(list);
     }
 
     /**
@@ -152,4 +153,8 @@ public class AlatkaConnectionInitializer implements IntegrationConfigurationInit
         }
     }
 
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
+    }
 }
