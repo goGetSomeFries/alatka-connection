@@ -1,5 +1,6 @@
 alatka:
   connection:
+    classpath: ""
     default:
       logger:
         info: "'payload: ' + payload + '; headers: ' + headers"

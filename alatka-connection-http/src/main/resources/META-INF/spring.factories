@@ -1,3 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.alatka.connection.http.AutoConfiguration
 com.alatka.connection.core.component.outbound.OutboundComponentRegister=\
   com.alatka.connection.http.component.outbound.HttpOutboundRegister
 com.alatka.connection.core.component.inbound.InboundComponentRegister=\

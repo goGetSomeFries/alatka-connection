@@ -2,6 +2,11 @@ package com.alatka.connection.core.property.core;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
 
+/**
+ * alatka.connection.route.inbound.redirect
+ *
+ * @author ybliu
+ */
 public class RedirectInboundProperty extends InboundProperty {
 
     @IdentityProperty

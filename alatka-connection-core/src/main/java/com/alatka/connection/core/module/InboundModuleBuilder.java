@@ -3,11 +3,11 @@ package com.alatka.connection.core.module;
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
+import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.model.InboundModel;
-import com.alatka.connection.core.property.core.ChannelProperty;
-import com.alatka.connection.core.property.core.InboundProperty;
-import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.*;
 import com.alatka.connection.core.util.JsonUtil;
+import org.springframework.core.Ordered;
 
 import java.util.List;
 import java.util.Map;
@@ -53,6 +53,32 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
         super.channelModuleBuilder.build(property);
     }
 
+    private void buildErrorChannel() {
+        ChannelProperty channel = new ChannelProperty();
+        channel.setId(AlatkaConnectionConstant.INBOUND_ERROR_CHANNEL);
+        channel.setType(ChannelProperty.Type.publishSubscribe);
+        this.channelModuleBuilder.build(channel);
+
+        HandlerProperty handler = new HandlerProperty();
+        handler.setId(HandlerProperty.Type.passthrough.name().concat(".inbound.error"));
+        handler.setType(HandlerProperty.Type.passthrough);
+        handler.setOutputChannel(DefaultConfig.FALLBACK_LOGGER_ERROR_CHANNEL);
+        handler.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        this.handlerModuleBuilder.build(handler);
+
+        ConsumerProperty consumer = new ConsumerProperty();
+        consumer.setInputChannel(AlatkaConnectionConstant.INBOUND_ERROR_CHANNEL);
+        consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
+        consumer.setId(this.handlerModuleBuilder.getBeanName().concat(".consumer"));
+        this.consumerModuleBuilder.build(consumer);
+    }
+
+    @Override
+    protected void preDoBuild(Object object) {
+        super.preDoBuild(object);
+        this.buildErrorChannel();
+    }
+
     @Override
     protected InboundProperty validateAndConvert(Map<InboundModel, Object> map) {
         List<InboundProperty> list = map.entrySet()
@@ -61,6 +87,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
                     InboundProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
                     property.setInputChannel(entry.getKey().isDuplex() ? AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL : null);
                     property.setOutputChannel(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
+                    property.setErrorChannel(AlatkaConnectionConstant.INBOUND_ERROR_CHANNEL);
                     return property;
                 }).filter(Property::isEnabled)
                 .collect(Collectors.toList());

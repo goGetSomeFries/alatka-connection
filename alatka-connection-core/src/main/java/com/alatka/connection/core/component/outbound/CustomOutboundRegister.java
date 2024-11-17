@@ -2,7 +2,7 @@ package com.alatka.connection.core.component.outbound;
 
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.core.CustomOutboundProperty;
-import com.alatka.connection.core.support.CustomHandler;
+import com.alatka.connection.core.support.CustomMessageHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;
@@ -19,12 +19,12 @@ public class CustomOutboundRegister extends OutboundComponentRegister<CustomOutb
         String beanName = property.getBeanName();
         String className = property.getClassName();
         if (beanName == null && className == null) {
-            throw new IllegalArgumentException("BeanName and className must not be null both");
+            throw new IllegalArgumentException("beanName and className must not be null both");
         }
 
         Class<?> clazz = ClassUtil.forName(beanName != null ? getBeanFactory().getBeanDefinition(beanName).getBeanClassName() : className);
-        if (!CustomHandler.class.isAssignableFrom(clazz)) {
-            throw new IllegalArgumentException(clazz.getName() + " must be an instance of " + CustomHandler.class.getName());
+        if (!CustomMessageHandler.class.isAssignableFrom(clazz)) {
+            throw new IllegalArgumentException(clazz.getName() + " must be an instance of " + CustomMessageHandler.class.getName());
         }
 
         if (beanName != null) {
@@ -32,7 +32,7 @@ public class CustomOutboundRegister extends OutboundComponentRegister<CustomOutb
         } else {
             builder.addConstructorArgValue(ClassUtil.newInstance(className));
         }
-        builder.addConstructorArgValue(CustomHandler.METHOD_NAME);
+        builder.addConstructorArgValue(CustomMessageHandler.METHOD_NAME);
     }
 
     @Override
