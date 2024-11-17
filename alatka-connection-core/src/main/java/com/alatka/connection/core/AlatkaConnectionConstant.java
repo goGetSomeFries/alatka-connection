@@ -9,6 +9,8 @@ import com.alatka.connection.core.config.DefaultConfig;
  */
 public final class AlatkaConnectionConstant {
 
+    public static final String CLASSPATH = "alatka.connection.classpath";
+
     public static final String IDENTITY_SEPARATOR = "@";
     public static final String FALLBACK_PREFIX = "fallback" + IDENTITY_SEPARATOR;
 
