@@ -16,6 +16,7 @@ public final class AlatkaConnectionConstant {
 
     public static final String INBOUND_INPUT_CHANNEL = "channel.inbound.input";
     public static final String INBOUND_OUTPUT_CHANNEL = "channel.inbound.output";
+    public static final String INBOUND_ERROR_CHANNEL = "channel.inbound.error";
     public static final String OUTBOUND_INPUT_CHANNEL = "channel.outbound.input";
     public static final String OUTBOUND_OUTPUT_CHANNEL = "channel.outbound.output";
     public static final String BYPASS_INPUT_CHANNEL = OUTBOUND_INPUT_CHANNEL;

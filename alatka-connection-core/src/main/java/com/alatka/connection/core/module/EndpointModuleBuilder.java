@@ -22,9 +22,15 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
 
     protected final ChannelModuleBuilder channelModuleBuilder;
 
+    protected final HandlerModuleBuilder handlerModuleBuilder;
+
+    protected final ConsumerModuleBuilder consumerModuleBuilder;
+
     public EndpointModuleBuilder(String identity) {
         super(identity);
         this.channelModuleBuilder = new ChannelModuleBuilder(identity);
+        this.handlerModuleBuilder = new HandlerModuleBuilder(identity);
+        this.consumerModuleBuilder = new ConsumerModuleBuilder(identity);
     }
 
     @Override

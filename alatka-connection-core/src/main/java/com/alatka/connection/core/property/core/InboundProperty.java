@@ -13,6 +13,8 @@ public abstract class InboundProperty extends Property {
     @IdentityProperty
     private String outputChannel;
 
+    private String errorChannel;
+
     public String getInputChannel() {
         return inputChannel;
     }
@@ -27,5 +29,13 @@ public abstract class InboundProperty extends Property {
 
     public void setOutputChannel(String outputChannel) {
         this.outputChannel = outputChannel;
+    }
+
+    public String getErrorChannel() {
+        return errorChannel;
+    }
+
+    public void setErrorChannel(String errorChannel) {
+        this.errorChannel = errorChannel;
     }
 }
