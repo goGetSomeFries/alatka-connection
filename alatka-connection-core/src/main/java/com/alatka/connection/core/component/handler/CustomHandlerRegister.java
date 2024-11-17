@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
-import com.alatka.connection.core.support.CustomHandler;
+import com.alatka.connection.core.support.CustomMessageHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;
@@ -10,21 +10,33 @@ import org.springframework.integration.handler.ServiceActivatingHandler;
  * TODO
  *
  * @author ybliu
- * @see CustomHandler
+ * @see CustomMessageHandler
  */
 public class CustomHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
 
     private static final String KEY_CLASS_NAME = "className";
 
+    private static final String KEY_BEAN_NAME = "beanName";
+
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        String className = this.getParamsValueOrThrow(property.getParams(), KEY_CLASS_NAME);
-        Object instance = ClassUtil.newInstance(className);
-        if (!CustomHandler.class.isAssignableFrom(instance.getClass())) {
-            throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + CustomHandler.class.getName());
+        String beanName = this.getParamsValue(property.getParams(), KEY_BEAN_NAME);
+        String className = this.getParamsValue(property.getParams(), KEY_CLASS_NAME);
+        if (beanName == null && className == null) {
+            throw new IllegalArgumentException("beanName and className must not be null both");
         }
-        builder.addConstructorArgValue(instance)
-                .addConstructorArgValue(CustomHandler.METHOD_NAME);
+
+        Class<?> clazz = ClassUtil.forName(beanName != null ? getBeanFactory().getBeanDefinition(beanName).getBeanClassName() : className);
+        if (!CustomMessageHandler.class.isAssignableFrom(clazz)) {
+            throw new IllegalArgumentException(clazz.getName() + " must be an instance of " + CustomMessageHandler.class.getName());
+        }
+
+        if (beanName != null) {
+            builder.addConstructorArgReference(beanName);
+        } else {
+            builder.addConstructorArgValue(ClassUtil.newInstance(className));
+        }
+        builder.addConstructorArgValue(CustomMessageHandler.METHOD_NAME);
     }
 
     @Override

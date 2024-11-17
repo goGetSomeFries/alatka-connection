@@ -24,15 +24,8 @@ import java.util.stream.Collectors;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundModel, Object>, OutboundProperty> {
 
-
-    private final HandlerModuleBuilder handlerModuleBuilder;
-
-    private final ConsumerModuleBuilder consumerModuleBuilder;
-
     public OutboundModuleBuilder(String identity) {
         super(identity);
-        this.handlerModuleBuilder = new HandlerModuleBuilder(identity);
-        this.consumerModuleBuilder = new ConsumerModuleBuilder(identity);
     }
 
     @Override

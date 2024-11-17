@@ -36,6 +36,6 @@ public abstract class HandlerComponentRegister<T extends HandlerProperty> extend
 
     protected <S> S getParamsValueOrThrow(Map<String, Object> params, String key) {
         return (S) Optional.ofNullable(params.get(key))
-                .orElseThrow(() -> new IllegalArgumentException(key + "must not be null"));
+                .orElseThrow(() -> new IllegalArgumentException(key + " must not be null"));
     }
 }

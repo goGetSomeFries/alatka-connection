@@ -11,8 +11,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.core.Ordered;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
 
 import java.io.IOException;
@@ -31,13 +34,15 @@ import java.util.stream.Stream;
  *
  * @author ybliu
  */
-public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Ordered {
+public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Ordered, EnvironmentAware {
 
     private final Logger logger = LoggerFactory.getLogger(AlatkaConnectionInitializer.class);
 
     private static final String FILE_PREFIX = "alatka-connection";
 
     private static final String[] FILE_SUFFIX = new String[]{".yml", ".yaml"};
+
+    private String classpath;
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -98,7 +103,7 @@ public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Or
                 .map(suffix -> {
                     try {
                         return ResourcePatternUtils.getResourcePatternResolver(null)
-                                .getResources(FILE_PREFIX + "*" + suffix);
+                                .getResources(ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + this.classpath + FILE_PREFIX + "*" + suffix);
                     } catch (IOException e) {
                         throw new RuntimeException("加载" + FILE_PREFIX + "失败", e);
                     }
@@ -156,5 +161,10 @@ public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Or
     @Override
     public int getOrder() {
         return Ordered.LOWEST_PRECEDENCE;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.classpath = environment.getProperty(AlatkaConnectionConstant.CLASSPATH, String.class);
     }
 }
