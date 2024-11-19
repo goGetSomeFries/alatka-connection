@@ -55,6 +55,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
 
         if (list.isEmpty()) {
             list.add(new ProcessorProperty().defaultProperty());
+            index.addAndGet(1);
         }
 
         String outputChannelBeanName = this.type == ProcessorProperty.Type.request ?
