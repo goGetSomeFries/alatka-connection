@@ -4,6 +4,7 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.core.OutboundProperty;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,7 +37,7 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
     }
 
     @Override
-    protected OutboundProperty validateAndConvert(Map<OutboundModel, Object> map) {
+    protected List<OutboundProperty> validateAndConvert(Map<OutboundModel, Object> map) {
         if (map == null) {
             return null;
         }
