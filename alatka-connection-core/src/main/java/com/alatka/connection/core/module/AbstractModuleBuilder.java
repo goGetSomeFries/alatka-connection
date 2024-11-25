@@ -11,10 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.SpringFactoriesLoader;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -86,7 +83,12 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
                 .peek(field -> {
                     if (field.isAnnotationPresent(IdentityPropertyReference.class)) {
                         Object value = ClassUtil.getValue(field, property);
-                        this.assignIdentity(value, value.getClass());
+                        if (value instanceof Collection) {
+                            Class<?> collectionClass = ClassUtil.getGenericType(field);
+                            ((Collection<?>) value).forEach(v -> this.assignIdentity(v, collectionClass));
+                        } else {
+                            this.assignIdentity(value, value.getClass());
+                        }
                     }
                 })
                 .forEach(field -> {
