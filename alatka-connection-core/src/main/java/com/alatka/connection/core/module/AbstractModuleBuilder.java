@@ -66,10 +66,10 @@ public abstract class AbstractModuleBuilder<T, S> implements ModuleBuilder<T> {
         return list.stream().collect(Collectors.toMap(ComponentRegister::mappingKey, Function.identity()));
     }
 
-    protected void preDoBuild(Object object) {
+    protected void preDoBuild(S property) {
         List<? extends Property> list =
-                (List<? extends Property>) (object instanceof List ? object : Collections.singletonList(object));
-        list.forEach(property -> this.assignIdentity(property, property.getClass()));
+                (List<? extends Property>) (property instanceof List ? property : Collections.singletonList(property));
+        list.forEach(prop -> this.assignIdentity(prop, prop.getClass()));
     }
 
     /**

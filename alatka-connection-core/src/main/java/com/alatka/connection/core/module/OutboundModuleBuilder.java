@@ -36,7 +36,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         list.forEach(property -> {
             // outbound
             property.setOrder(this.getOrder() + index.get());
-            property.setId(property.getId() + this.endpointName() + "-" + index.getAndIncrement());
+            property.setId(property.getId() + this.endpointName() + "." + index.getAndIncrement());
             ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
             String beanName = componentRegister.register(property);
 
@@ -50,7 +50,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     }
 
     @Override
-    protected void buildInputChannel() {
+    protected void buildInputChannel(List<OutboundProperty> list) {
         ChannelProperty channel = new ChannelProperty();
         channel.setId(this.inputChannel());
         channel.setType(ChannelProperty.Type.publishSubscribe);
@@ -58,15 +58,16 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     }
 
     @Override
-    protected void buildOutputChannel() {
+    protected void buildOutputChannel(List<OutboundProperty> list) {
         ChannelProperty channel = new ChannelProperty();
         channel.setId(this.outputChannel());
         channel.setType(ChannelProperty.Type.publishSubscribe);
         this.channelModuleBuilder.build(channel);
 
-        if (!super.isDuplex()) {
+        boolean simplex = list.size() > 1 ? true : list.get(0).getOutputChannel() == null;
+        if (simplex) {
             HandlerProperty handler = new HandlerProperty();
-            handler.setId(HandlerProperty.Type.passthrough.name().concat(".outbound.input-outbound.output"));
+            handler.setId("handler.request." + HandlerProperty.Type.passthrough.name() + ".outbound.input-output");
             handler.setType(HandlerProperty.Type.passthrough);
             handler.setOutputChannel(this.outputChannel());
             handler.setOrder(this.getOrder() + 100);
@@ -75,7 +76,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
             ConsumerProperty consumer = new ConsumerProperty();
             consumer.setInputChannel(this.inputChannel());
             consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
-            consumer.setId(this.handlerModuleBuilder.getBeanName().concat(".consumer"));
+            consumer.setId("processor.request." + HandlerProperty.Type.passthrough.name() + ".outbound.input-output");
             this.consumerModuleBuilder.build(consumer);
         }
     }
@@ -85,10 +86,6 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         List<OutboundProperty> list = this.doConvert(map, false);
         if (list.size() == 0) {
             throw new IllegalArgumentException("count of enabled " + this.endpointName() + " must not be 0");
-        } else if (list.size() == 1) {
-            super.setDuplex(list.get(0).getOutputChannel() != null);
-        } else {
-            super.setDuplex(false);
         }
         return list;
     }

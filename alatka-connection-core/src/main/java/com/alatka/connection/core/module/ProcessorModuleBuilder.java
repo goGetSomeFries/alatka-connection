@@ -3,11 +3,7 @@ package com.alatka.connection.core.module;
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
-import com.alatka.connection.core.property.core.HandlerProperty;
-import com.alatka.connection.core.property.core.ProcessorProperty;
-import com.alatka.connection.core.property.core.Property;
-import com.alatka.connection.core.property.core.ChannelProperty;
-import com.alatka.connection.core.property.core.ConsumerProperty;
+import com.alatka.connection.core.property.core.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -109,14 +105,14 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         HandlerProperty handler = new HandlerProperty();
         handler.setType(HandlerProperty.Type.passthrough);
         handler.setOutputChannel(channelBeanName);
-        String suffix = this.type == ProcessorProperty.Type.request ? "inbound.output-processor" : "outbound.output-processor";
-        handler.setId(HandlerProperty.Type.passthrough.name().concat(".").concat(suffix));
+        String suffix = this.type == ProcessorProperty.Type.request ? ".inbound-processor" : ".outbound-processor";
+        handler.setId("handler." + this.type.name() + HandlerProperty.Type.passthrough.name() + suffix);
         this.handlerModuleBuilder.build(handler);
 
         ConsumerProperty consumer = new ConsumerProperty();
         consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
         consumer.setInputChannel(inputChannelBeanName);
-        consumer.setId(this.handlerModuleBuilder.getBeanName().concat(".consumer"));
+        consumer.setId("processor." + this.type.name() + suffix);
         this.consumerModuleBuilder.build(consumer);
     }
 

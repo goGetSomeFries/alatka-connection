@@ -14,6 +14,7 @@ public class AutoConfiguration {
 
     @Bean
     public AlatkaConnectionInitializer alatkaConnectionInitializer() {
+        // TODO static method ?
         return new AlatkaConnectionInitializer();
     }
 }

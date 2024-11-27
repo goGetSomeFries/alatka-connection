@@ -1,8 +1,10 @@
 package com.alatka.connection.core.module;
 
+import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.property.core.Property;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * inbound/outbound父类
@@ -14,11 +16,6 @@ import java.util.List;
  * @see OutboundModuleBuilder
  */
 public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<T, S> {
-
-    /**
-     * 是否双工
-     */
-    private boolean duplex;
 
     protected final ChannelModuleBuilder channelModuleBuilder;
 
@@ -34,11 +31,20 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
     }
 
     @Override
-    protected void preDoBuild(Object object) {
-        super.preDoBuild(object);
+    protected void preDoBuild(S property) {
+        super.preDoBuild(property);
 
-        this.buildInputChannel();
-        this.buildOutputChannel();
+        this.buildInputChannel(property);
+        this.buildOutputChannel(property);
+    }
+
+    @Override
+    protected ComponentRegister getComponentRegister(Object key, Map<Object, ? extends ComponentRegister> mapping) {
+        ComponentRegister componentRegister = super.getComponentRegister(key, mapping);
+        if (componentRegister instanceof ChannelModuleBuilderAware) {
+            ((ChannelModuleBuilderAware) componentRegister).setChannelModuleBuilder(channelModuleBuilder);
+        }
+        return componentRegister;
     }
 
     /**
@@ -52,18 +58,11 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
     /**
      * 构建inputChannel
      */
-    protected abstract void buildInputChannel();
+    protected abstract void buildInputChannel(S property);
 
     /**
      * 构建outputChannel
      */
-    protected abstract void buildOutputChannel();
+    protected abstract void buildOutputChannel(S property);
 
-    protected boolean isDuplex() {
-        return duplex;
-    }
-
-    protected void setDuplex(boolean duplex) {
-        this.duplex = duplex;
-    }
 }
