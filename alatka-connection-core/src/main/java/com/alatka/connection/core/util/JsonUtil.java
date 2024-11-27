@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class JsonUtil {
 
@@ -29,6 +30,15 @@ public class JsonUtil {
     public static <T> List<T> convertToList(Object object, Class<T> clazz) {
         try {
             JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(List.class, clazz);
+            return OBJECT_MAPPER.readValue(OBJECT_MAPPER.writeValueAsBytes(object), javaType);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <K, V> Map<K, V> convertToMap(Object object, Class<K> keyClass, Class<V> valueClass) {
+        try {
+            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(Map.class, keyClass, valueClass);
             return OBJECT_MAPPER.readValue(OBJECT_MAPPER.writeValueAsBytes(object), javaType);
         } catch (IOException e) {
             throw new RuntimeException(e);

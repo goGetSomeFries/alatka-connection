@@ -4,6 +4,7 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.core.OutboundProperty;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,18 +26,18 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
      * 使用{@link AlatkaConnectionConstant#OUTBOUND_INPUT_CHANNEL}，无需注册bean
      */
     @Override
-    protected void buildInputChannel() {
+    protected void buildInputChannel(List<OutboundProperty> list) {
     }
 
     /**
      * 使用{@link com.alatka.connection.core.config.DefaultConfig#FALLBACK_NULL_CHANNEL}，无需注册bean
      */
     @Override
-    protected void buildOutputChannel() {
+    protected void buildOutputChannel(List<OutboundProperty> list) {
     }
 
     @Override
-    protected OutboundProperty validateAndConvert(Map<OutboundModel, Object> map) {
+    protected List<OutboundProperty> validateAndConvert(Map<OutboundModel, Object> map) {
         if (map == null) {
             return null;
         }
@@ -50,7 +51,7 @@ public class BypassModuleBuilder extends OutboundModuleBuilder {
 
     @Override
     protected int getOrder() {
-        return super.getOrder() + 2;
+        return super.getOrder() + 200;
     }
 
     @Override

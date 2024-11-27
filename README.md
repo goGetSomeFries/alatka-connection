@@ -1,4 +1,4 @@
-### alatka-connection是什么？
+### alatka-connection是什么
 
 基于Spring Integration实现，高度可配置化（Yaml）的企业集成模式框架。
 
@@ -7,7 +7,12 @@
 
 ### 主体流程
 
-![输入图片说明](https://foruda.gitee.com/images/1731119694660611276/5476ec67_2152177.png "alatka-connection流程概述.drawio.png")
+整体分为`inbound`**入站**、`outbound`**出站**、`processor`**处理器**三个部分；
+`inbound`对接上游系统，接收上游数据，流转多个`processor`进行数据转换处理，通过`outbound`转发下游系统并得到响应；再反向经过`processor`处理，最终回传给上游系统，完成一次数据交互。
+
+整体流程全部通过`yaml`文件配置实现，只需实现核心业务逻辑，并提供丰富的组件，极大简化代码开发。
+
+![输入图片说明](https://foruda.gitee.com/images/1732331639122176984/d37045c1_2152177.png "alatka-connection流程概述.drawio.png")
 
 ### 功能概述
 
