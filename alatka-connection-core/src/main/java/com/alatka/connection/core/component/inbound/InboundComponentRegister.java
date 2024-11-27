@@ -19,5 +19,10 @@ public abstract class InboundComponentRegister<T extends InboundProperty> extend
             builder.addPropertyValue("requestChannelName", property.getOutputChannel());
             builder.addPropertyValue("replyChannelName", property.getInputChannel());
         }
+
+        if (property.getErrorChannel() != null) {
+            builder.addPropertyValue("errorChannelName", property.getErrorChannel());
+        }
     }
+
 }

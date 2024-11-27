@@ -3,7 +3,6 @@ package com.alatka.connection.core.component.inbound;
 import com.alatka.connection.core.component.consumer.ConsumerEndpointRegister;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.core.ConsumerProperty;
-import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.property.core.RedirectInboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
@@ -25,11 +24,6 @@ public class RedirectInboundRegister extends InboundComponentRegister<RedirectIn
         consumerProperty.setMessageHandler(beanName);
         consumerProperty.setId(beanName.concat(".consumer"));
         this.register.register(consumerProperty);
-    }
-
-    @Override
-    protected void postDoRegister(BeanDefinitionBuilder builder, InboundProperty property) {
-        builder.addPropertyValue("outputChannelName", property.getOutputChannel());
     }
 
     @Override

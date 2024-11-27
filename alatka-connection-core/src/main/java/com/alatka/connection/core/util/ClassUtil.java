@@ -3,6 +3,7 @@ package com.alatka.connection.core.util;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 
 public class ClassUtil {
 
@@ -16,7 +17,7 @@ public class ClassUtil {
             Constructor<?> constructor = clazz.getDeclaredConstructor(paramTypes == null ? new Class<?>[0] : paramTypes);
             return (T) constructor.newInstance(params == null ? new Object[0] : params);
         } catch (InstantiationException | IllegalAccessException |
-                InvocationTargetException | ClassNotFoundException | NoSuchMethodException e) {
+                 InvocationTargetException | ClassNotFoundException | NoSuchMethodException e) {
             throw new RuntimeException("");
         }
     }
@@ -45,5 +46,16 @@ public class ClassUtil {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 获取集合泛型类型
+     *
+     * @param field {@link Field}
+     * @return 集合泛型类型
+     */
+    public static Class<?> getGenericType(Field field) {
+        ParameterizedType type = (ParameterizedType) field.getGenericType();
+        return (Class<?>) type.getActualTypeArguments()[0];
     }
 }

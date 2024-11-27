@@ -100,10 +100,11 @@ public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Or
      */
     private List<Resource> loadResources() {
         List<Resource> list = Arrays.stream(FILE_SUFFIX)
-                .map(suffix -> {
+                .map(suffix -> ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + this.classpath + FILE_PREFIX + "*" + suffix)
+                .map(locationPattern -> {
                     try {
                         return ResourcePatternUtils.getResourcePatternResolver(null)
-                                .getResources(ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + this.classpath + FILE_PREFIX + "*" + suffix);
+                                .getResources(locationPattern);
                     } catch (IOException e) {
                         throw new RuntimeException("加载" + FILE_PREFIX + "失败", e);
                     }
@@ -165,6 +166,6 @@ public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Or
 
     @Override
     public void setEnvironment(Environment environment) {
-        this.classpath = environment.getProperty(AlatkaConnectionConstant.CLASSPATH, String.class);
+        this.classpath = environment.getProperty(AlatkaConnectionConstant.FILE_CLASSPATH, String.class);
     }
 }

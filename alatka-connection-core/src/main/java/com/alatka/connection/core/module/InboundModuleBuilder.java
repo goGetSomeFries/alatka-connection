@@ -38,45 +38,47 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     }
 
     @Override
-    protected void buildInputChannel() {
-        ChannelProperty property = new ChannelProperty();
-        property.setId(AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL);
-        property.setType(super.isDuplex() ? ChannelProperty.Type.direct : ChannelProperty.Type.null_);
-        super.channelModuleBuilder.build(property);
-    }
-
-    @Override
-    protected void buildOutputChannel() {
-        ChannelProperty property = new ChannelProperty();
-        property.setId(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
-        property.setType(ChannelProperty.Type.direct);
-        super.channelModuleBuilder.build(property);
-    }
-
-    private void buildErrorChannel() {
+    protected void buildInputChannel(InboundProperty property) {
         ChannelProperty channel = new ChannelProperty();
-        channel.setId(AlatkaConnectionConstant.INBOUND_ERROR_CHANNEL);
-        channel.setType(ChannelProperty.Type.publishSubscribe);
-        this.channelModuleBuilder.build(channel);
-
-        HandlerProperty handler = new HandlerProperty();
-        handler.setId(HandlerProperty.Type.passthrough.name().concat(".inbound.error"));
-        handler.setType(HandlerProperty.Type.passthrough);
-        handler.setOutputChannel(DefaultConfig.FALLBACK_LOGGER_ERROR_CHANNEL);
-        handler.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        this.handlerModuleBuilder.build(handler);
-
-        ConsumerProperty consumer = new ConsumerProperty();
-        consumer.setInputChannel(AlatkaConnectionConstant.INBOUND_ERROR_CHANNEL);
-        consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
-        consumer.setId(this.handlerModuleBuilder.getBeanName().concat(".consumer"));
-        this.consumerModuleBuilder.build(consumer);
+        channel.setId(AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL);
+        channel.setType(property.getInputChannel() != null ? ChannelProperty.Type.direct : ChannelProperty.Type.null_);
+        super.channelModuleBuilder.build(channel);
     }
 
     @Override
-    protected void preDoBuild(Object object) {
-        super.preDoBuild(object);
-        this.buildErrorChannel();
+    protected void buildOutputChannel(InboundProperty property) {
+        ChannelProperty channel = new ChannelProperty();
+        channel.setId(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
+        channel.setType(ChannelProperty.Type.direct);
+        super.channelModuleBuilder.build(channel);
+    }
+
+    private void buildErrorChannel(InboundProperty property) {
+        if (property.getErrorChannel() != null) {
+            ChannelProperty channel = new ChannelProperty();
+            channel.setId(AlatkaConnectionConstant.ERROR_CHANNEL);
+            channel.setType(ChannelProperty.Type.publishSubscribe);
+            this.channelModuleBuilder.build(channel);
+
+            HandlerProperty handler = new HandlerProperty();
+            handler.setId("handler.all." + HandlerProperty.Type.passthrough.name() + ".error");
+            handler.setType(HandlerProperty.Type.passthrough);
+            handler.setOutputChannel(DefaultConfig.FALLBACK_LOGGER_ERROR_CHANNEL);
+            handler.setOrder(Ordered.HIGHEST_PRECEDENCE);
+            this.handlerModuleBuilder.build(handler);
+
+            ConsumerProperty consumer = new ConsumerProperty();
+            consumer.setInputChannel(AlatkaConnectionConstant.ERROR_CHANNEL);
+            consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
+            consumer.setId("processor.all.error");
+            this.consumerModuleBuilder.build(consumer);
+        }
+    }
+
+    @Override
+    protected void preDoBuild(InboundProperty property) {
+        super.preDoBuild(property);
+        this.buildErrorChannel(property);
     }
 
     @Override
@@ -84,10 +86,11 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
         List<InboundProperty> list = map.entrySet()
                 .stream()
                 .map(entry -> {
-                    InboundProperty property = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
-                    property.setInputChannel(entry.getKey().isDuplex() ? AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL : null);
+                    InboundModel inboundModel = entry.getKey();
+                    InboundProperty property = JsonUtil.convertToObject(entry.getValue(), inboundModel.getType());
+                    property.setInputChannel(inboundModel.isDuplex() ? AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL : null);
                     property.setOutputChannel(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
-                    property.setErrorChannel(AlatkaConnectionConstant.INBOUND_ERROR_CHANNEL);
+                    property.setErrorChannel(inboundModel.isErrorHandle() ? AlatkaConnectionConstant.ERROR_CHANNEL : null);
                     return property;
                 }).filter(Property::isEnabled)
                 .collect(Collectors.toList());
@@ -96,9 +99,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
             throw new IllegalArgumentException("count of enabled " + this.endpointName() + " must be 1");
         }
 
-        InboundProperty property = list.get(0);
-        super.setDuplex(property.getInputChannel() != null);
-        return property;
+        return list.get(0);
     }
 
     @Override
