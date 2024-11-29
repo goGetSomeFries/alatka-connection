@@ -13,7 +13,7 @@ import org.springframework.integration.handler.ServiceActivatingHandler;
 public class CustomHandlerRegister extends MessageProcessorHandlerRegister {
 
     @Override
-    protected Class<?> handlerClass() {
+    protected Class<CustomMessageHandler> handlerClass() {
         return CustomMessageHandler.class;
     }
 

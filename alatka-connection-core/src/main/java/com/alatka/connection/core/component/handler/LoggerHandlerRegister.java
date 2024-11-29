@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
-import com.alatka.connection.core.support.DefaultLoggerHandler;
+import com.alatka.connection.core.extend.DefaultLoggerHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 import java.util.Map;

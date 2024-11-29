@@ -1,7 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
-import com.alatka.connection.core.support.CustomMessageHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
@@ -37,9 +36,7 @@ public abstract class MessageProcessorHandlerRegister extends HandlerComponentRe
         builder.addConstructorArgValue(this.handlerMethodName());
     }
 
-    protected Class<?> handlerClass() {
-        return CustomMessageHandler.class;
-    }
+    abstract protected Class<?> handlerClass();
 
     abstract protected String handlerMethodName();
 }

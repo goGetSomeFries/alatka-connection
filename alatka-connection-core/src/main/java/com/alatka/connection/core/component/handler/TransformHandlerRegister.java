@@ -10,10 +10,10 @@ import org.springframework.integration.transformer.MessageTransformingHandler;
  * @author ybliu
  * @see TransformMessageHandler
  */
-public class TransformerHandlerRegister extends MessageProcessorHandlerRegister {
+public class TransformHandlerRegister extends MessageProcessorHandlerRegister {
 
     @Override
-    protected Class<?> handlerClass() {
+    protected Class<TransformMessageHandler> handlerClass() {
         return TransformMessageHandler.class;
     }
 

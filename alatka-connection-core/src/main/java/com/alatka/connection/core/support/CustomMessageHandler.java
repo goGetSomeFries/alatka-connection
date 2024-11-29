@@ -20,13 +20,20 @@ public interface CustomMessageHandler<T, S> {
         return false;
     }
 
-    default Message<S> execute(Message<T> message) {
+    default boolean returnRawType() {
+        return false;
+    }
+
+    default Object execute(Message<T> message) {
         S payload = doExecute(message);
         if (payload == null) {
             if (this.deliveryFailed()) {
                 throw new MessageDeliveryException(message, "payload must not be null");
             }
             return null;
+        }
+        if (this.returnRawType()) {
+            return payload;
         }
         return payload instanceof Message ? (Message<S>) payload :
                 MessageBuilder.withPayload(payload).copyHeaders(this.buildHeaders(message)).build();

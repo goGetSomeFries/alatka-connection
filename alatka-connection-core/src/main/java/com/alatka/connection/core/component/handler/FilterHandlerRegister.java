@@ -1,6 +1,7 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.support.FilterMessageHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.filter.ExpressionEvaluatingSelector;
 import org.springframework.integration.filter.MessageFilter;
@@ -10,16 +11,29 @@ import org.springframework.integration.filter.MessageFilter;
  *
  * @author ybliu
  */
-public class FilterHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
+public class FilterHandlerRegister extends MessageProcessorHandlerRegister {
 
     private static final String KEY_EXPRESSION = "expression";
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        String expression = this.getParamsValueOrThrow(property.getParams(), KEY_EXPRESSION);
-        ExpressionEvaluatingSelector selector = new ExpressionEvaluatingSelector(expression);
+        String expression = this.getParamsValue(property.getParams(), KEY_EXPRESSION);
+        if (expression != null) {
+            ExpressionEvaluatingSelector selector = new ExpressionEvaluatingSelector(expression);
+            builder.addConstructorArgValue(selector);
+        } else {
+            super.doRegister(builder, property);
+        }
+    }
 
-        builder.addConstructorArgValue(selector);
+    @Override
+    protected Class<FilterMessageHandler> handlerClass() {
+        return FilterMessageHandler.class;
+    }
+
+    @Override
+    protected String handlerMethodName() {
+        return FilterMessageHandler.METHOD_NAME;
     }
 
     @Override
