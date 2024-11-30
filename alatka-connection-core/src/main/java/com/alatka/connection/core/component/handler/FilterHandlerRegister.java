@@ -1,10 +1,10 @@
 package com.alatka.connection.core.component.handler;
 
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.property.core.HandlerProperty;
 import com.alatka.connection.core.support.FilterMessageHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.integration.filter.ExpressionEvaluatingSelector;
-import org.springframework.integration.filter.MessageFilter;
+import org.springframework.integration.config.FilterFactoryBean;
 
 /**
  * TODO
@@ -13,17 +13,9 @@ import org.springframework.integration.filter.MessageFilter;
  */
 public class FilterHandlerRegister extends MessageProcessorHandlerRegister {
 
-    private static final String KEY_EXPRESSION = "expression";
-
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        String expression = this.getParamsValue(property.getParams(), KEY_EXPRESSION);
-        if (expression != null) {
-            ExpressionEvaluatingSelector selector = new ExpressionEvaluatingSelector(expression);
-            builder.addConstructorArgValue(selector);
-        } else {
-            super.doRegister(builder, property);
-        }
+    protected void postDoRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
+        builder.addPropertyValue("discardChannelName", property.identity() + AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL);
     }
 
     @Override
@@ -37,8 +29,8 @@ public class FilterHandlerRegister extends MessageProcessorHandlerRegister {
     }
 
     @Override
-    protected Class<MessageFilter> componentClass() {
-        return MessageFilter.class;
+    protected Class<FilterFactoryBean> componentClass() {
+        return FilterFactoryBean.class;
     }
 
     @Override

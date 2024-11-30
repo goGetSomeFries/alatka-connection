@@ -2,7 +2,7 @@ package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
 import com.alatka.connection.core.support.TransformMessageHandler;
-import org.springframework.integration.transformer.MessageTransformingHandler;
+import org.springframework.integration.config.TransformerFactoryBean;
 
 /**
  * TODO
@@ -23,8 +23,8 @@ public class TransformHandlerRegister extends MessageProcessorHandlerRegister {
     }
 
     @Override
-    protected Class<MessageTransformingHandler> componentClass() {
-        return MessageTransformingHandler.class;
+    protected Class<TransformerFactoryBean> componentClass() {
+        return TransformerFactoryBean.class;
     }
 
     @Override

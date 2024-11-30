@@ -2,7 +2,7 @@ package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
 import com.alatka.connection.core.support.CustomMessageHandler;
-import org.springframework.integration.handler.ServiceActivatingHandler;
+import org.springframework.integration.config.ServiceActivatorFactoryBean;
 
 /**
  * TODO
@@ -23,8 +23,8 @@ public class CustomHandlerRegister extends MessageProcessorHandlerRegister {
     }
 
     @Override
-    protected Class<ServiceActivatingHandler> componentClass() {
-        return ServiceActivatingHandler.class;
+    protected Class<ServiceActivatorFactoryBean> componentClass() {
+        return ServiceActivatorFactoryBean.class;
     }
 
     @Override
