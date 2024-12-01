@@ -1,5 +1,6 @@
 package com.alatka.connection.core.property.core;
 
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.annotation.IdentityProperty;
 
 /**
@@ -42,5 +43,13 @@ public abstract class Property {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String identity() {
+        int index = this.id.indexOf(AlatkaConnectionConstant.IDENTITY_SEPARATOR);
+        if (index == -1) {
+            throw new IllegalArgumentException("identity not exist");
+        }
+        return this.id.substring(0, index + 1);
     }
 }
