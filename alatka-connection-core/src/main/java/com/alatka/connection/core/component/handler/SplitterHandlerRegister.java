@@ -1,9 +1,11 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.support.SplitterMessageHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.integration.splitter.MethodInvokingSplitter;
+import org.springframework.integration.config.SplitterFactoryBean;
 
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -11,17 +13,23 @@ import java.util.function.Function;
  *
  * @author ybliu
  */
-public class SplitterHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
+public class SplitterHandlerRegister extends MessageProcessorHandlerRegister {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        builder.addConstructorArgValue(new InnerSplitter())
-                .addConstructorArgValue(InnerSplitter.METHOD_NAME);
+    protected void preDoRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
+        super.preDoRegister(builder, property);
+        Map<String, Object> params = property.getParams();
+        params.put(KEY_CLASS_NAME, SplitterMessageHandler.class.getName());
     }
 
     @Override
-    protected Class<MethodInvokingSplitter> componentClass() {
-        return MethodInvokingSplitter.class;
+    protected String handlerMethodName() {
+        return SplitterMessageHandler.METHOD_NAME;
+    }
+
+    @Override
+    protected Class<SplitterFactoryBean> componentClass() {
+        return SplitterFactoryBean.class;
     }
 
     @Override
@@ -29,12 +37,4 @@ public class SplitterHandlerRegister extends HandlerComponentRegister<HandlerPro
         return HandlerProperty.Type.splitter;
     }
 
-    public class InnerSplitter {
-
-        private static final String METHOD_NAME = "split";
-
-        public Object split(Object object) {
-            return object;
-        }
-    }
 }

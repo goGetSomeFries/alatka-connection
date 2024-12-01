@@ -1,4 +1,4 @@
-package com.alatka.connection.core.support;
+package com.alatka.connection.core.extend;
 
 import org.springframework.integration.handler.AbstractReplyProducingMessageHandler;
 import org.springframework.integration.handler.LoggingHandler;

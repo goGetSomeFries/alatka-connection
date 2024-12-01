@@ -1,26 +1,29 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.support.NullMessageHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.integration.handler.MessageProcessor;
-import org.springframework.integration.handler.ServiceActivatingHandler;
+import org.springframework.integration.config.ServiceActivatorFactoryBean;
+
+import java.util.Map;
 
 /**
  * TODO
  *
  * @author ybliu
  */
-public class NullHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
+public class NullHandlerRegister extends MessageProcessorHandlerRegister {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        MessageProcessor<Object> messageProcessor = message -> null;
-        builder.addConstructorArgValue(messageProcessor);
+    protected void preDoRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
+        super.preDoRegister(builder, property);
+        Map<String, Object> params = property.getParams();
+        params.put(KEY_CLASS_NAME, NullMessageHandler.class.getName());
     }
 
     @Override
-    protected Class<ServiceActivatingHandler> componentClass() {
-        return ServiceActivatingHandler.class;
+    protected Class<ServiceActivatorFactoryBean> componentClass() {
+        return ServiceActivatorFactoryBean.class;
     }
 
     @Override
