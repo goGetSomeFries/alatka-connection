@@ -4,6 +4,7 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
+import com.alatka.connection.core.model.HandlerModel;
 import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.core.*;
 import com.alatka.connection.core.util.JsonUtil;
@@ -36,7 +37,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         list.forEach(property -> {
             // outbound
             property.setOrder(this.getOrder() + index.get());
-            property.setId(property.getId() + this.endpointName() + "." + index.getAndIncrement());
+            property.setId(property.getId() + "." + index.getAndIncrement());
             ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
             String beanName = componentRegister.register(property);
 
@@ -66,9 +67,8 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
 
         boolean simplex = list.size() > 1 ? true : list.get(0).getOutputChannel() == null;
         if (simplex) {
-            HandlerProperty handler = new HandlerProperty();
-            handler.setId("handler.request." + HandlerProperty.Type.passthrough.name() + ".outbound.input-output");
-            handler.setType(HandlerProperty.Type.passthrough);
+            ChannelAdapterProperty handler = new PassthroughHandlerProperty();
+            handler.setId("handler.request." + HandlerModel.passthrough.name() + ".outbound.input-output");
             handler.setOutputChannel(this.outputChannel());
             handler.setOrder(this.getOrder() + 100);
             this.handlerModuleBuilder.build(handler);
@@ -76,7 +76,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
             ConsumerProperty consumer = new ConsumerProperty();
             consumer.setInputChannel(this.inputChannel());
             consumer.setMessageHandler(this.handlerModuleBuilder.getBeanName());
-            consumer.setId("processor.request." + HandlerProperty.Type.passthrough.name() + ".outbound.input-output");
+            consumer.setId("processor.request.outbound.input-output");
             this.consumerModuleBuilder.build(consumer);
         }
     }
@@ -100,6 +100,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
                     } else {
                         property.setOutputChannel(entry.getKey().isDuplex() ? this.outputChannel() : null);
                     }
+                    property.setId(this.endpointName() + "." + entry.getKey().name());
                     return property;
                 })
                 .filter(Property::isEnabled)

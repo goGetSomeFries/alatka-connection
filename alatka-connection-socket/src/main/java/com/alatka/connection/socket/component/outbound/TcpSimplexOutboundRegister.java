@@ -1,6 +1,5 @@
 package com.alatka.connection.socket.component.outbound;
 
-import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.socket.TcpSimplexOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpSendingMessageHandler;
@@ -25,8 +24,4 @@ public class TcpSimplexOutboundRegister extends TcpOutboundRegister<TcpSimplexOu
         return TcpSimplexOutboundProperty.class;
     }
 
-    @Override
-    protected String beanNameSuffix() {
-        return OutboundModel.tcp_simplex.name();
-    }
 }

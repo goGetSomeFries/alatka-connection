@@ -1,7 +1,6 @@
 package com.alatka.connection.jdbc.component.outbound;
 
 import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
-import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.jdbc.JdbcOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.jdbc.JdbcMessageHandler;
@@ -33,8 +32,4 @@ public class JdbcOutboundRegister extends OutboundComponentRegister<JdbcOutbound
         return JdbcOutboundProperty.class;
     }
 
-    @Override
-    protected String beanNameSuffix() {
-        return OutboundModel.jdbc.name();
-    }
 }

@@ -4,6 +4,8 @@ import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.property.core.InboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
+import java.util.Optional;
+
 /**
  * TODO
  *
@@ -15,13 +17,20 @@ public abstract class InboundComponentRegister<T extends InboundProperty> extend
     protected void postDoRegister(BeanDefinitionBuilder builder, InboundProperty property) {
         if (property.getInputChannel() == null) {
             builder.addPropertyValue("outputChannelName", property.getOutputChannel());
+            builder.addPropertyValue("sendTimeout", Optional.ofNullable(property.getSendTimeout()).orElse(-1L));
         } else {
             builder.addPropertyValue("requestChannelName", property.getOutputChannel());
             builder.addPropertyValue("replyChannelName", property.getInputChannel());
+            builder.addPropertyValue("requestTimeout", Optional.ofNullable(property.getSendTimeout()).orElse(-1L));
+            builder.addPropertyValue("replyTimeout", Optional.ofNullable(property.getReceiveTimeout()).orElse(-1L));
         }
 
-        if (property.getErrorChannel() != null) {
-            builder.addPropertyValue("errorChannelName", property.getErrorChannel());
+        this.buildErrorChannel(builder, property.getErrorChannel());
+    }
+
+    protected void buildErrorChannel(BeanDefinitionBuilder builder, String errorChannelName) {
+        if (errorChannelName != null) {
+            builder.addPropertyValue("errorChannelName", errorChannelName);
         }
     }
 

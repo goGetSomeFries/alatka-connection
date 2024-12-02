@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author ybliu
  */
-public class TaskSchedulerProperty extends Property {
+public class TaskSchedulerProperty extends SupportProperty {
 
     @NotNull
     private Integer poolSize;

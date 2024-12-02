@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.CustomHandlerProperty;
 import com.alatka.connection.core.support.CustomMessageHandler;
 import org.springframework.integration.config.ServiceActivatorFactoryBean;
 
@@ -10,7 +10,7 @@ import org.springframework.integration.config.ServiceActivatorFactoryBean;
  * @author ybliu
  * @see CustomMessageHandler
  */
-public class CustomHandlerRegister extends MessageProcessorHandlerRegister {
+public class CustomHandlerRegister extends MessageProcessorRegister<CustomHandlerProperty> {
 
     @Override
     protected Class<CustomMessageHandler> handlerClass() {
@@ -28,7 +28,7 @@ public class CustomHandlerRegister extends MessageProcessorHandlerRegister {
     }
 
     @Override
-    public HandlerProperty.Type mappingKey() {
-        return HandlerProperty.Type.custom;
+    public Class<CustomHandlerProperty> mappingKey() {
+        return CustomHandlerProperty.class;
     }
 }
