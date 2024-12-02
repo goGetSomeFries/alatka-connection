@@ -1,6 +1,7 @@
 package com.alatka.connection.core.property.core;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -9,6 +10,8 @@ import javax.validation.constraints.NotNull;
 public class ProcessorProperty extends Property {
 
     private Type type = Type.all;
+    @NotBlank
+    private String desc;
     @Valid
     private ChannelProperty channel;
     @NotNull
@@ -35,6 +38,14 @@ public class ProcessorProperty extends Property {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public ChannelProperty getChannel() {
