@@ -22,6 +22,7 @@
         <module>alatka-connection-test</module>
         <module>alatka-connection-jdbc</module>
         <module>alatka-connection-ratelimiter</module>
+        <module>alatka-connection-example</module>
     </modules>
     <properties>
         <revision>0.12.0-SNAPSHOT</revision>
