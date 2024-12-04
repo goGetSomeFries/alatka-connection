@@ -1,0 +1,13 @@
+alatka.connection:
+  enabled: true
+  desc: http
+  route:
+    inbound:
+      http:
+        pathPatterns:
+          - /example1/1
+        methods:
+          - GET
+    outbound:
+      custom:
+        beanName: statService

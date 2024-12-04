@@ -1,11 +1,10 @@
 package com.alatka.connection.core.model;
 
 
-import com.alatka.connection.core.property.core.ProcessorProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,7 +24,8 @@ public class RouteModel {
     /**
      * alatka.connection.route.processors
      */
-    private List<ProcessorProperty> processors;
+    @JsonUnwrapped
+    private ProcessorsModel processors;
 
     /**
      * alatka.connection.route.outbound
@@ -47,11 +47,11 @@ public class RouteModel {
         this.inbound = inbound;
     }
 
-    public List<ProcessorProperty> getProcessors() {
+    public ProcessorsModel getProcessors() {
         return processors;
     }
 
-    public void setProcessors(List<ProcessorProperty> processors) {
+    public void setProcessors(ProcessorsModel processors) {
         this.processors = processors;
     }
 

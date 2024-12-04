@@ -3,6 +3,7 @@ package com.alatka.connection.core.module;
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
+import com.alatka.connection.core.model.ProcessorsModel;
 import com.alatka.connection.core.property.core.*;
 
 import java.util.Collections;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
  * @author ybliu
  */
 @SuppressWarnings("rawtypes")
-public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<ProcessorProperty>, List<ProcessorProperty>> {
+public class ProcessorModuleBuilder extends AbstractModuleBuilder<ProcessorsModel, List<ProcessorProperty>> {
 
     private final ProcessorProperty.Type type;
 
@@ -117,11 +118,11 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
     }
 
     @Override
-    protected List<ProcessorProperty> validateAndConvert(List<ProcessorProperty> models) {
-        if (models == null) {
+    protected List<ProcessorProperty> validateAndConvert(ProcessorsModel model) {
+        if (model == null || model.getProcessors() == null) {
             return Collections.emptyList();
         }
-        return models.stream()
+        return model.getProcessors().stream()
                 .filter(Property::isEnabled)
                 .peek(processor -> {
                     if (processor.getType() == null) {

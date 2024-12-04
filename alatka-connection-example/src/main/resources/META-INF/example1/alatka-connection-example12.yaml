@@ -1,0 +1,13 @@
+alatka.connection:
+  enabled: true
+  desc: http
+  route:
+    inbound:
+      http:
+        pathPatterns:
+          - /example1/2
+        methods:
+          - GET
+    outbound:
+      custom:
+        className: com.alatka.connection.example.service.StatService

@@ -1,5 +1,7 @@
 package com.alatka.connection.core.property.core;
 
+import com.alatka.connection.core.annotation.IdentityProperty;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -9,15 +11,22 @@ import javax.validation.constraints.NotNull;
  */
 public class ProcessorProperty extends Property {
 
-    private Type type = Type.all;
+    private Type type;
+
     @NotBlank
     private String desc;
+
     @Valid
     private ChannelProperty channel;
+
     @NotNull
     @Valid
     private HandlerProperty handler;
+
+    @IdentityProperty
     private String pollerMetadata;
+
+    @IdentityProperty
     private String taskScheduler;
 
     public enum Type {
