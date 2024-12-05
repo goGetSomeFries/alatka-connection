@@ -1,13 +1,11 @@
 alatka.connection:
   enabled: true
-  desc: http
+  desc: http GET请求获取url参数并响应
   route:
     inbound:
       http:
-        pathPatterns:
-          - /example1/1
-        methods:
-          - GET
+        pathPatterns: [ /example1/1 ]
+        methods: [ GET ]
     outbound:
       custom:
-        beanName: statService
+        beanName: example1Stat1Service
