@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author ybliu
  */
-public class PollerMetadataProperty extends Property {
+public class PollerMetadataProperty extends SupportProperty {
 
     /**
      * {@link org.springframework.core.task.TaskExecutor} bean id

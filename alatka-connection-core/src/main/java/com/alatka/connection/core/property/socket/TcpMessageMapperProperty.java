@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.socket;
 
-import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.SupportProperty;
 
 import javax.validation.constraints.NotBlank;
 
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
  *
  * @author ybliu
  */
-public class TcpMessageMapperProperty extends Property {
+public class TcpMessageMapperProperty extends SupportProperty {
 
     /**
      * {@link org.springframework.integration.mapping.BytesMessageMapper} className

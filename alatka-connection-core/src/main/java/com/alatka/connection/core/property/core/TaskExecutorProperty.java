@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author ybliu
  */
-public class TaskExecutorProperty extends Property {
+public class TaskExecutorProperty extends SupportProperty {
 
     @NotNull
     private Integer corePoolSize;

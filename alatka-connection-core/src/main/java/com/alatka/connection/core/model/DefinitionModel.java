@@ -1,9 +1,6 @@
 package com.alatka.connection.core.model;
 
-import com.alatka.connection.core.property.core.PollerMetadataProperty;
-import com.alatka.connection.core.property.core.Property;
-import com.alatka.connection.core.property.core.TaskExecutorProperty;
-import com.alatka.connection.core.property.core.TaskSchedulerProperty;
+import com.alatka.connection.core.property.core.*;
 import com.alatka.connection.core.property.socket.SerializerProperty;
 import com.alatka.connection.core.property.socket.TcpMessageMapperProperty;
 
@@ -29,7 +26,7 @@ public enum DefinitionModel {
      */
     private final boolean collection;
 
-    DefinitionModel(Class<? extends Property> type, boolean collection) {
+    DefinitionModel(Class<? extends SupportProperty> type, boolean collection) {
         this.type = type;
         this.collection = collection;
     }
