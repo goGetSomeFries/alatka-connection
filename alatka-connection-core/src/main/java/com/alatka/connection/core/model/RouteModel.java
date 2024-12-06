@@ -3,8 +3,7 @@ package com.alatka.connection.core.model;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 /**
@@ -17,8 +16,7 @@ public class RouteModel {
     /**
      * alatka.connection.route.inbound
      */
-    @Size(min = 1)
-    @NotNull
+    @NotEmpty
     private Map<InboundModel, Object> inbound;
 
     /**
@@ -30,8 +28,7 @@ public class RouteModel {
     /**
      * alatka.connection.route.outbound
      */
-    @Size(min = 1)
-    @NotNull
+    @NotEmpty
     private Map<OutboundModel, Object> outbound;
 
     /**
