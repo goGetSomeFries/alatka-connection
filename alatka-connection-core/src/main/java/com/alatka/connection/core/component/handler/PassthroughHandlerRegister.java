@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.PassthroughHandlerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
 
@@ -9,10 +9,10 @@ import org.springframework.integration.handler.BridgeHandler;
  *
  * @author ybliu
  */
-public class PassthroughHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
+public class PassthroughHandlerRegister extends HandlerComponentRegister<PassthroughHandlerProperty> {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
+    protected void doRegister(BeanDefinitionBuilder builder, PassthroughHandlerProperty property) {
 
     }
 
@@ -22,7 +22,7 @@ public class PassthroughHandlerRegister extends HandlerComponentRegister<Handler
     }
 
     @Override
-    public HandlerProperty.Type mappingKey() {
-        return HandlerProperty.Type.passthrough;
+    public Class<PassthroughHandlerProperty> mappingKey() {
+        return PassthroughHandlerProperty.class;
     }
 }

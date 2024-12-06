@@ -1,16 +1,21 @@
 package com.alatka.connection.core.property.core;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
+import com.alatka.connection.core.model.HandlerModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * @author ybliu
  */
 public class ProcessorProperty extends Property {
 
+    @JsonIgnore
     private Type type;
 
     @NotBlank
@@ -19,9 +24,8 @@ public class ProcessorProperty extends Property {
     @Valid
     private ChannelProperty channel;
 
-    @NotNull
-    @Valid
-    private HandlerProperty handler;
+    @NotEmpty
+    private Map<HandlerModel, Object> handler;
 
     @IdentityProperty
     private String pollerMetadata;
@@ -37,7 +41,7 @@ public class ProcessorProperty extends Property {
     public ProcessorProperty defaultProperty() {
         this.type = Type.all;
         this.channel = new ChannelProperty().defaultProperty();
-        this.handler = new HandlerProperty().defaultProperty();
+        this.handler = Collections.singletonMap(HandlerModel.passthrough, null);
         return this;
     }
 
@@ -65,11 +69,11 @@ public class ProcessorProperty extends Property {
         this.channel = channel;
     }
 
-    public HandlerProperty getHandler() {
+    public Map<HandlerModel, Object> getHandler() {
         return handler;
     }
 
-    public void setHandler(HandlerProperty handler) {
+    public void setHandler(Map<HandlerModel, Object> handler) {
         this.handler = handler;
     }
 

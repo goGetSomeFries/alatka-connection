@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.AlatkaConnectionConstant;
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.FilterHandlerProperty;
 import com.alatka.connection.core.support.FilterMessageHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.FilterFactoryBean;
@@ -11,10 +11,10 @@ import org.springframework.integration.config.FilterFactoryBean;
  *
  * @author ybliu
  */
-public class FilterHandlerRegister extends MessageProcessorHandlerRegister {
+public class FilterHandlerRegister extends MessageProcessorRegister<FilterHandlerProperty> {
 
     @Override
-    protected void postDoRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
+    protected void postDoRegister(BeanDefinitionBuilder builder, FilterHandlerProperty property) {
         builder.addPropertyReference("discardChannel", property.identity() + AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL);
     }
 
@@ -34,7 +34,7 @@ public class FilterHandlerRegister extends MessageProcessorHandlerRegister {
     }
 
     @Override
-    public HandlerProperty.Type mappingKey() {
-        return HandlerProperty.Type.filter;
+    public Class<FilterHandlerProperty> mappingKey() {
+        return FilterHandlerProperty.class;
     }
 }

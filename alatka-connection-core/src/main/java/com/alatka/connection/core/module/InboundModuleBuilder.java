@@ -4,6 +4,7 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
+import com.alatka.connection.core.model.HandlerModel;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.core.*;
 import com.alatka.connection.core.util.JsonUtil;
@@ -60,9 +61,8 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
             channel.setType(ChannelProperty.Type.publishSubscribe);
             this.channelModuleBuilder.build(channel);
 
-            HandlerProperty handler = new HandlerProperty();
-            handler.setId("handler.all." + HandlerProperty.Type.passthrough.name() + ".error");
-            handler.setType(HandlerProperty.Type.passthrough);
+            ChannelAdapterProperty handler = new PassthroughHandlerProperty();
+            handler.setId("handler.all." + HandlerModel.passthrough.name() + ".error");
             handler.setOutputChannel(DefaultConfig.FALLBACK_LOGGER_ERROR_CHANNEL);
             handler.setOrder(Ordered.HIGHEST_PRECEDENCE);
             this.handlerModuleBuilder.build(handler);

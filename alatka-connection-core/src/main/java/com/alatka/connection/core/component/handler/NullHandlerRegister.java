@@ -1,24 +1,21 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.NullHandlerProperty;
 import com.alatka.connection.core.support.NullMessageHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.ServiceActivatorFactoryBean;
-
-import java.util.Map;
 
 /**
  * TODO
  *
  * @author ybliu
  */
-public class NullHandlerRegister extends MessageProcessorHandlerRegister {
+public class NullHandlerRegister extends MessageProcessorRegister<NullHandlerProperty> {
 
     @Override
-    protected void preDoRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
+    protected void preDoRegister(BeanDefinitionBuilder builder, NullHandlerProperty property) {
         super.preDoRegister(builder, property);
-        Map<String, Object> params = property.getParams();
-        params.put(KEY_CLASS_NAME, NullMessageHandler.class.getName());
+        property.setClassName(NullMessageHandler.class.getName());
     }
 
     @Override
@@ -27,7 +24,7 @@ public class NullHandlerRegister extends MessageProcessorHandlerRegister {
     }
 
     @Override
-    public HandlerProperty.Type mappingKey() {
-        return HandlerProperty.Type.null_;
+    public Class<NullHandlerProperty> mappingKey() {
+        return NullHandlerProperty.class;
     }
 }

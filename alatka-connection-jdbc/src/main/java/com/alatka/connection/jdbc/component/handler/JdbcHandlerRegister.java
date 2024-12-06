@@ -1,48 +1,35 @@
 package com.alatka.connection.jdbc.component.handler;
 
 import com.alatka.connection.core.component.handler.HandlerComponentRegister;
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.JdbcHandlerProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.jdbc.support.JdbcMessageProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;
-
-import java.util.Map;
 
 /**
  * TODO
  *
  * @author ybliu
  */
-public class JdbcHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
-
-    private static final String KEY_JDBC_TEMPLATE = "jdbcTemplate";
-
-    private static final String KEY_DATA_SOURCE = "dataSource";
-
-    private static final String KEY_RESULT_CLASS = "resultClass";
-
-    private static final String KEY_SQL = "sql";
-
-    private static final String KEY_MULTIPLE = "multiple";
+public class JdbcHandlerRegister extends HandlerComponentRegister<JdbcHandlerProperty> {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        Map<String, Object> params = property.getParams();
-        String beanName = this.registerMessageProcessor(property.getId(), params);
+    protected void doRegister(BeanDefinitionBuilder builder, JdbcHandlerProperty property) {
+        String beanName = this.registerMessageProcessor(property.getId(), property);
         builder.addConstructorArgReference(beanName);
     }
 
-    private String registerMessageProcessor(String id, Map<String, Object> params) {
+    private String registerMessageProcessor(String id, JdbcHandlerProperty property) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(JdbcMessageProcessor.class);
-        if (getParamsValue(params, KEY_JDBC_TEMPLATE) != null) {
-            builder.addConstructorArgReference(getParamsValue(params, KEY_JDBC_TEMPLATE));
+        if (property.getJdbcTemplate() != null) {
+            builder.addConstructorArgReference(property.getJdbcTemplate());
         } else {
-            builder.addConstructorArgReference(getParamsValueOrThrow(params, KEY_DATA_SOURCE));
+            builder.addConstructorArgReference(property.getDataSource());
         }
-        builder.addPropertyValue("sql", getParamsValueOrThrow(params, KEY_SQL));
-        builder.addPropertyValue("resultClass", ClassUtil.forName(getParamsValueOrThrow(params, KEY_RESULT_CLASS)));
-        builder.addPropertyValue("multiple", getParamsValueOrThrow(params, KEY_MULTIPLE));
+        builder.addPropertyValue("sql", property.getSql());
+        builder.addPropertyValue("resultClass", ClassUtil.forName(property.getResultClass()));
+        builder.addPropertyValue("multiple", property.getMultiple());
 
         String beanName = id + ".messageProcessor";
         getBeanFactory().registerBeanDefinition(beanName, builder.getBeanDefinition());
@@ -55,7 +42,7 @@ public class JdbcHandlerRegister extends HandlerComponentRegister<HandlerPropert
     }
 
     @Override
-    public HandlerProperty.Type mappingKey() {
-        return HandlerProperty.Type.jdbc;
+    public Class<JdbcHandlerProperty> mappingKey() {
+        return JdbcHandlerProperty.class;
     }
 }
