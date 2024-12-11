@@ -1,6 +1,6 @@
 package com.alatka.connection.test.support;
 
-import org.springframework.integration.support.MessageBuilder;
+import com.alatka.connection.core.support.CustomMessageHandler;
 import org.springframework.messaging.Message;
 
 /**
@@ -10,14 +10,12 @@ import org.springframework.messaging.Message;
  * @param <S>
  * @author ybliu
  */
-public interface OutboundMocker<T, S> {
+public interface OutboundMocker<T, S> extends CustomMessageHandler<T, S> {
 
-    String METHOD_NAME = "mockOutbound";
+    S mockOutbound(Message<T> message);
 
-    S doMockOutbound(Message<T> message);
-
-    default Message<S> mockOutbound(Message<T> message) {
-        S payload = doMockOutbound(message);
-        return MessageBuilder.withPayload(payload).copyHeaders(message.getHeaders()).build();
+    @Override
+    default S doExecute(Message<T> message) {
+        return mockOutbound(message);
     }
 }

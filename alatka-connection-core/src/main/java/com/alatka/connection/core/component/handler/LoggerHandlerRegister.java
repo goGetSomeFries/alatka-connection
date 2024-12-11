@@ -1,25 +1,19 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.core.HandlerProperty;
 import com.alatka.connection.core.extend.DefaultLoggerHandler;
+import com.alatka.connection.core.property.core.LoggerHandlerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-
-import java.util.Map;
 
 /**
  * TODO
  *
  * @author ybliu
  */
-public class LoggerHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
-
-    private static final String KEY_LEVEL = "level";
+public class LoggerHandlerRegister extends HandlerComponentRegister<LoggerHandlerProperty> {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        Map<String, Object> params = property.getParams();
-        String level = getParamsValueOrThrow(params, KEY_LEVEL);
-        builder.addConstructorArgValue(level);
+    protected void doRegister(BeanDefinitionBuilder builder, LoggerHandlerProperty property) {
+        builder.addConstructorArgValue(property.getLevel());
     }
 
     @Override
@@ -28,7 +22,7 @@ public class LoggerHandlerRegister extends HandlerComponentRegister<HandlerPrope
     }
 
     @Override
-    public HandlerProperty.Type mappingKey() {
-        return HandlerProperty.Type.logger;
+    public Class<LoggerHandlerProperty> mappingKey() {
+        return LoggerHandlerProperty.class;
     }
 }

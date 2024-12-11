@@ -1,0 +1,22 @@
+alatka.connection:
+  enabled: true
+  desc: http转换请求对象
+  route:
+    inbound:
+      http:
+        pathPatterns:
+          - /example1/4
+        methods: [ POST ]
+    processors:
+      - desc: 转换请求对象
+        type: request
+        handler:
+          transformer:
+            beanName: reqMessConvertor
+      - desc: 记录日志
+        handler:
+          logger:
+            level: INFO
+    outbound:
+      custom:
+        beanName: example1Stat4Service

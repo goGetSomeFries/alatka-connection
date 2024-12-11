@@ -2,7 +2,7 @@ package com.alatka.connection.core.module;
 
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.handler.HandlerComponentRegister;
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import java.util.Map;
  * @author ybliu
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty, HandlerProperty> implements BeanNameReference {
+public class HandlerModuleBuilder extends AbstractModuleBuilder<ChannelAdapterProperty, ChannelAdapterProperty> implements BeanNameReference {
 
     private String beanName;
 
@@ -21,13 +21,13 @@ public class HandlerModuleBuilder extends AbstractModuleBuilder<HandlerProperty,
     }
 
     @Override
-    protected void doBuild(HandlerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        ComponentRegister componentRegister = super.getComponentRegister(property.getType(), mapping);
+    protected void doBuild(ChannelAdapterProperty property, Map<Object, ? extends ComponentRegister> mapping) {
+        ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         this.beanName = componentRegister.register(property);
     }
 
     @Override
-    protected HandlerProperty validateAndConvert(HandlerProperty property) {
+    protected ChannelAdapterProperty validateAndConvert(ChannelAdapterProperty property) {
         return property;
     }
 

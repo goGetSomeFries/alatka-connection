@@ -1,0 +1,14 @@
+alatka.connection:
+  enabled: true
+  desc: http异常响应
+  route:
+    inbound:
+      http:
+        errorHandled: true
+        pathPatterns:
+          - /example2/1
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.example2.ReqMess
+    outbound:
+      custom:
+        beanName: example2Stat1Service

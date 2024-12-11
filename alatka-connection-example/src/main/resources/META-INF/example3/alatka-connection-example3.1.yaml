@@ -1,0 +1,11 @@
+alatka.connection:
+  enabled: false
+  desc: test
+  route:
+    inbound:
+      mocker:
+        errorHandled: true
+        className: com.alatka.connection.test.support.MessageMocker
+    outbound:
+      mocker:
+        className: com.alatka.connection.test.support.MessageMocker

@@ -117,6 +117,7 @@ public class DefaultConfig {
             @Value("${alatka.connection.default.logger.info}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.INFO);
         handler.setLogExpressionString(expression);
+        handler.setLoggerName(FALLBACK_LOGGER_INFO);
         return handler;
     }
 
@@ -133,6 +134,7 @@ public class DefaultConfig {
             @Value("${alatka.connection.default.logger.error}") String expression) {
         LoggingHandler handler = new LoggingHandler(LoggingHandler.Level.ERROR);
         handler.setLogExpressionString(expression);
+        handler.setLoggerName(FALLBACK_LOGGER_ERROR);
         return handler;
     }
 

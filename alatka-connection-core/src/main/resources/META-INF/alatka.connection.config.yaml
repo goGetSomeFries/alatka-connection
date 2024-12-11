@@ -4,7 +4,7 @@ alatka:
     default:
       logger:
         info: "'payload: ' + payload + '; headers: ' + headers"
-        error: "'payload: ' + payload + '; headers: ' + headers"
+        error: "payload"
       taskExecutor:
         corePoolSize: 2
         maxPoolSize: 5

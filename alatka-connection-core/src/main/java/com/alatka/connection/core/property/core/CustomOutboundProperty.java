@@ -7,9 +7,19 @@ package com.alatka.connection.core.property.core;
  */
 public class CustomOutboundProperty extends OutboundProperty {
 
+    private String expression;
+
     private String beanName;
 
     private String className;
+
+    public String getExpression() {
+        return expression;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
 
     public String getBeanName() {
         return beanName;

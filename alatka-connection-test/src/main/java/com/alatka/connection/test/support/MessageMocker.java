@@ -18,7 +18,7 @@ public class MessageMocker implements InboundMocker<String>, OutboundMocker<Stri
     private final AtomicInteger counter = new AtomicInteger(0);
 
     @Override
-    public String doMockInbound() {
+    public String mockInbound() {
         String payload = "inbound" + counter.incrementAndGet();
         this.logger.info(">>>>>>>>>>>>>>>> inbound >>>>>>>>>>>>>>>>>");
         this.logger.info("inbound send message: {}", payload);
@@ -27,7 +27,7 @@ public class MessageMocker implements InboundMocker<String>, OutboundMocker<Stri
     }
 
     @Override
-    public String doMockOutbound(Message<String> message) {
+    public String mockOutbound(Message<String> message) {
         this.logger.info(">>>>>>>>>>>>>>>> outbound >>>>>>>>>>>>>>>>>");
         this.logger.info("outbound receive message: {}", message.getPayload());
         this.logger.info(">>>>>>>>>>>>>>>> outbound >>>>>>>>>>>>>>>>>");

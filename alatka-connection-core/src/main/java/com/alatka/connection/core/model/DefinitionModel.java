@@ -1,7 +1,7 @@
 package com.alatka.connection.core.model;
 
 import com.alatka.connection.core.property.core.PollerMetadataProperty;
-import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.SupportProperty;
 import com.alatka.connection.core.property.core.TaskExecutorProperty;
 import com.alatka.connection.core.property.core.TaskSchedulerProperty;
 import com.alatka.connection.core.property.socket.SerializerProperty;
@@ -23,13 +23,13 @@ public enum DefinitionModel {
     /**
      * definition子类型
      */
-    private final Class<? extends Property> type;
+    private final Class<? extends SupportProperty> type;
     /**
      * 是否是集合类型
      */
     private final boolean collection;
 
-    DefinitionModel(Class<? extends Property> type, boolean collection) {
+    DefinitionModel(Class<? extends SupportProperty> type, boolean collection) {
         this.type = type;
         this.collection = collection;
     }

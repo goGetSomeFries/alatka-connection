@@ -1,6 +1,5 @@
 package com.alatka.connection.core.component.outbound;
 
-import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.module.ChannelModuleBuilder;
 import com.alatka.connection.core.module.ChannelModuleBuilderAware;
 import com.alatka.connection.core.property.core.ChannelProperty;
@@ -63,11 +62,6 @@ public class RouterOutboundRegister extends OutboundComponentRegister<RouterOutb
     @Override
     public Class<RouterOutboundProperty> mappingKey() {
         return RouterOutboundProperty.class;
-    }
-
-    @Override
-    protected String beanNameSuffix() {
-        return OutboundModel.router.name();
     }
 
     @Override
