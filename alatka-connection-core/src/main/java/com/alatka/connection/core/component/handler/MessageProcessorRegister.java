@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.MessageProcessorProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.AbstractStandardMessageHandlerFactoryBean;
@@ -10,22 +10,16 @@ import org.springframework.integration.config.AbstractStandardMessageHandlerFact
  *
  * @author ybliu
  */
-public abstract class MessageProcessorHandlerRegister extends HandlerComponentRegister<HandlerProperty> {
-
-    private static final String KEY_EXPRESSION = "expression";
-
-    protected static final String KEY_CLASS_NAME = "className";
-
-    private static final String KEY_BEAN_NAME = "beanName";
+public abstract class MessageProcessorRegister<T extends MessageProcessorProperty> extends HandlerComponentRegister<T> {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, HandlerProperty property) {
-        String expression = this.getParamsValue(property.getParams(), KEY_EXPRESSION);
+    public void doRegister(BeanDefinitionBuilder builder, MessageProcessorProperty property) {
+        String expression = property.getExpression();
         if (expression != null) {
             builder.addPropertyValue("expressionString", expression);
         } else {
-            String beanName = this.getParamsValue(property.getParams(), KEY_BEAN_NAME);
-            String className = this.getParamsValue(property.getParams(), KEY_CLASS_NAME);
+            String beanName = property.getBeanName();
+            String className = property.getClassName();
             if (beanName == null && className == null) {
                 throw new IllegalArgumentException("beanName and className must not be null both");
             }

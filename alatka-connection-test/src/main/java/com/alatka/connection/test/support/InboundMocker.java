@@ -1,6 +1,6 @@
 package com.alatka.connection.test.support;
 
-import org.springframework.integration.support.MessageBuilder;
+import org.springframework.integration.handler.MessageProcessor;
 import org.springframework.messaging.Message;
 
 /**
@@ -9,14 +9,12 @@ import org.springframework.messaging.Message;
  * @param <T>
  * @author whocares
  */
-public interface InboundMocker<T> {
+public interface InboundMocker<T> extends MessageProcessor<T> {
 
-    String METHOD_NAME = "mockInbound";
+    T mockInbound();
 
-    T doMockInbound();
-
-    default Message<T> mockInbound() {
-        T payload = doMockInbound();
-        return MessageBuilder.withPayload(payload).build();
+    @Override
+    default T processMessage(Message<?> message) {
+        return mockInbound();
     }
 }

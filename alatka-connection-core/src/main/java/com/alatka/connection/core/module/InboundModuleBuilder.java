@@ -4,6 +4,7 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
+import com.alatka.connection.core.model.HandlerModel;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.core.*;
 import com.alatka.connection.core.util.JsonUtil;
@@ -33,6 +34,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     @Override
     protected void doBuild(InboundProperty property, Map<Object, ? extends ComponentRegister> mapping) {
         property.setId(property.getId().concat(this.endpointName()));
+
         ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
         componentRegister.register(property);
     }
@@ -60,9 +62,8 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
             channel.setType(ChannelProperty.Type.publishSubscribe);
             this.channelModuleBuilder.build(channel);
 
-            HandlerProperty handler = new HandlerProperty();
-            handler.setId("handler.all." + HandlerProperty.Type.passthrough.name() + ".error");
-            handler.setType(HandlerProperty.Type.passthrough);
+            ChannelAdapterProperty handler = new PassthroughHandlerProperty();
+            handler.setId("handler.all." + HandlerModel.passthrough.name() + ".error");
             handler.setOutputChannel(DefaultConfig.FALLBACK_LOGGER_ERROR_CHANNEL);
             handler.setOrder(Ordered.HIGHEST_PRECEDENCE);
             this.handlerModuleBuilder.build(handler);
@@ -90,9 +91,10 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
                     InboundProperty property = JsonUtil.convertToObject(entry.getValue(), inboundModel.getType());
                     property.setInputChannel(inboundModel.isDuplex() ? AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL : null);
                     property.setOutputChannel(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
-                    property.setErrorChannel(inboundModel.isErrorHandle() ? AlatkaConnectionConstant.ERROR_CHANNEL : null);
+                    property.setErrorChannel(property.isErrorHandled() ? AlatkaConnectionConstant.ERROR_CHANNEL : null);
                     return property;
-                }).filter(Property::isEnabled)
+                })
+                .filter(Property::isEnabled)
                 .collect(Collectors.toList());
 
         if (list.size() != 1) {

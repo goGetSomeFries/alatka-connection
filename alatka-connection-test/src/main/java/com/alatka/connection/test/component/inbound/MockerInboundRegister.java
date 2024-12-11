@@ -6,7 +6,7 @@ import com.alatka.connection.core.property.test.MockerInboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.test.support.InboundMocker;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.integration.endpoint.MethodInvokingMessageSource;
+import org.springframework.integration.endpoint.MessageProcessorMessageSource;
 
 /**
  * TODO
@@ -30,16 +30,15 @@ public class MockerInboundRegister extends SourcePollingInboundRegister<MockerIn
         }
 
         if (beanName != null) {
-            builder.addPropertyReference("object", beanName);
+            builder.addConstructorArgReference(beanName);
         } else {
-            builder.addPropertyValue("object", ClassUtil.newInstance(property.getClassName()));
+            builder.addConstructorArgValue(ClassUtil.newInstance(property.getClassName()));
         }
-        builder.addPropertyValue("methodName", InboundMocker.METHOD_NAME);
     }
 
     @Override
-    protected Class<MethodInvokingMessageSource> messageSourceClass() {
-        return MethodInvokingMessageSource.class;
+    protected Class<MessageProcessorMessageSource> messageSourceClass() {
+        return MessageProcessorMessageSource.class;
     }
 
     @Override

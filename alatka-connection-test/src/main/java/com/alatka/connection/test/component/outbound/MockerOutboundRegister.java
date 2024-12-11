@@ -1,12 +1,14 @@
 package com.alatka.connection.test.component.outbound;
 
+import com.alatka.connection.core.component.handler.MessageProcessorRegister;
 import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
-import com.alatka.connection.core.model.OutboundModel;
+import com.alatka.connection.core.property.core.CustomHandlerProperty;
+import com.alatka.connection.core.property.core.MessageProcessorProperty;
 import com.alatka.connection.core.property.test.MockerOutboundProperty;
-import com.alatka.connection.core.util.ClassUtil;
+import com.alatka.connection.core.support.CustomMessageHandler;
 import com.alatka.connection.test.support.OutboundMocker;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.integration.handler.ServiceActivatingHandler;
+import org.springframework.integration.config.ServiceActivatorFactoryBean;
 import org.springframework.messaging.Message;
 
 /**
@@ -17,19 +19,23 @@ import org.springframework.messaging.Message;
  */
 public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutboundProperty> {
 
+    private final InnerMockerOutboundRegister inner = new InnerMockerOutboundRegister();
+
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, MockerOutboundProperty property) {
-        Object instance = ClassUtil.newInstance(property.getClassName());
-        if (!OutboundMocker.class.isAssignableFrom(instance.getClass())) {
-            throw new IllegalArgumentException(instance.getClass().getName() + " must be an instance of " + OutboundMocker.class.getName());
-        }
-        builder.addConstructorArgValue(instance)
-                .addConstructorArgValue(OutboundMocker.METHOD_NAME);
+        CustomHandlerProperty handler = new CustomHandlerProperty();
+        handler.setExpression(property.getExpression());
+        handler.setBeanName(property.getBeanName());
+        handler.setClassName(property.getClassName());
+        handler.setId(property.getId());
+        handler.setOrder(property.getOrder());
+        handler.setOutputChannel(property.getOutputChannel());
+        this.inner.doRegister(builder, handler);
     }
 
     @Override
-    protected Class<ServiceActivatingHandler> componentClass() {
-        return ServiceActivatingHandler.class;
+    protected Class<ServiceActivatorFactoryBean> componentClass() {
+        return ServiceActivatorFactoryBean.class;
     }
 
     @Override
@@ -37,8 +43,26 @@ public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutb
         return MockerOutboundProperty.class;
     }
 
-    @Override
-    protected String beanNameSuffix() {
-        return OutboundModel.mocker.name();
+    private class InnerMockerOutboundRegister extends MessageProcessorRegister<MessageProcessorProperty> {
+
+        @Override
+        protected Class<ServiceActivatorFactoryBean> componentClass() {
+            return null;
+        }
+
+        @Override
+        public Class<MessageProcessorProperty> mappingKey() {
+            return null;
+        }
+
+        @Override
+        protected Class<OutboundMocker> handlerClass() {
+            return OutboundMocker.class;
+        }
+
+        @Override
+        protected String handlerMethodName() {
+            return CustomMessageHandler.METHOD_NAME;
+        }
     }
 }

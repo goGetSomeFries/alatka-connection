@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: alatka-connection-example
+alatka:
+  connection:
+    classpath: META-INF/example*/

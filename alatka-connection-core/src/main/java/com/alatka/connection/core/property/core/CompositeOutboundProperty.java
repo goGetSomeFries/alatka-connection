@@ -2,6 +2,7 @@ package com.alatka.connection.core.property.core;
 
 import com.alatka.connection.core.model.OutboundModel;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import java.util.Map;
  */
 public class CompositeOutboundProperty extends OutboundProperty {
 
+    @NotEmpty
     private List<Map<OutboundModel, Object>> items;
 
     public List<Map<OutboundModel, Object>> getItems() {

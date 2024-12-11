@@ -1,0 +1,18 @@
+alatka.connection:
+  enabled: true
+  desc: http 输出请求响应报文日志
+  route:
+    inbound:
+      http:
+        pathPatterns:
+          - /example1/3
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.example1.ReqMess
+    processors:
+      - desc: 记录日志
+        handler:
+          logger:
+            level: INFO
+    outbound:
+      custom:
+        beanName: example1Stat3Service

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 /**
  * @author ybliu
  */
-public class TcpInboundProperty extends InboundProperty {
+public abstract class TcpInboundProperty extends InboundProperty {
 
     private boolean clientMode = false;
 

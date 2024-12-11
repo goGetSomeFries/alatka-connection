@@ -1,6 +1,6 @@
 package com.alatka.connection.core.component.handler;
 
-import com.alatka.connection.core.property.core.HandlerProperty;
+import com.alatka.connection.core.property.core.TransformerHandlerProperty;
 import com.alatka.connection.core.support.TransformMessageHandler;
 import org.springframework.integration.config.TransformerFactoryBean;
 
@@ -10,7 +10,7 @@ import org.springframework.integration.config.TransformerFactoryBean;
  * @author ybliu
  * @see TransformMessageHandler
  */
-public class TransformHandlerRegister extends MessageProcessorHandlerRegister {
+public class TransformHandlerRegister extends MessageProcessorRegister<TransformerHandlerProperty> {
 
     @Override
     protected Class<TransformMessageHandler> handlerClass() {
@@ -28,7 +28,7 @@ public class TransformHandlerRegister extends MessageProcessorHandlerRegister {
     }
 
     @Override
-    public HandlerProperty.Type mappingKey() {
-        return HandlerProperty.Type.transformer;
+    public Class<TransformerHandlerProperty> mappingKey() {
+        return TransformerHandlerProperty.class;
     }
 }

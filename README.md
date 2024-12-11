@@ -42,11 +42,11 @@
 - 协议适配类系统
 - MQ消息转接系统
 
-### [访问wiki查看更多教程](https://gitee.com/asuka2001/alatka-connection/wikis)
+### [ :point_right: 访问wiki查看更多教程](https://gitee.com/asuka2001/alatka-connection/wikis)
 
 ### github地址
 
-项目同步更新在github；如有需要，[点击我访问](https://github.com/goGetSomeFries/alatka-connection)
+项目同步更新在github；如有需要， :point_right: [点击我访问](https://github.com/goGetSomeFries/alatka-connection)
 
 ### 感谢支持
 

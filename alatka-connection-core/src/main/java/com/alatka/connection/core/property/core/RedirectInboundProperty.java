@@ -19,4 +19,5 @@ public class RedirectInboundProperty extends InboundProperty {
     public void setRedirectChannel(String redirectChannel) {
         this.redirectChannel = redirectChannel;
     }
+
 }

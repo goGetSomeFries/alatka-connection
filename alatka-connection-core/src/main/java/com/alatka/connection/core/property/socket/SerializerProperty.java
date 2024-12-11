@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.socket;
 
-import com.alatka.connection.core.property.core.Property;
+import com.alatka.connection.core.property.core.SupportProperty;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
  *
  * @author ybliu
  */
-public class SerializerProperty extends Property {
+public class SerializerProperty extends SupportProperty {
 
     private Type type;
 

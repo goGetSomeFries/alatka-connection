@@ -1,0 +1,12 @@
+alatka.connection:
+  enabled: true
+  desc: http POST请求获取body并响应
+  route:
+    inbound:
+      http:
+        pathPatterns: [ /example1/2 ]
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.example1.ReqMess
+    outbound:
+      custom:
+        className: com.alatka.connection.example.example1.Stat2Service

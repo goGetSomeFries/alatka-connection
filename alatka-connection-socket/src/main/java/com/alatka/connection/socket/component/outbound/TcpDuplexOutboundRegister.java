@@ -1,6 +1,5 @@
 package com.alatka.connection.socket.component.outbound;
 
-import com.alatka.connection.core.model.OutboundModel;
 import com.alatka.connection.core.property.socket.TcpDuplexOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpOutboundGateway;
@@ -22,8 +21,4 @@ public class TcpDuplexOutboundRegister extends TcpOutboundRegister<TcpDuplexOutb
         return TcpDuplexOutboundProperty.class;
     }
 
-    @Override
-    protected String beanNameSuffix() {
-        return OutboundModel.tcp_duplex.name();
-    }
 }

@@ -3,8 +3,12 @@ package com.alatka.connection.core.module;
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.config.DefaultConfig;
+import com.alatka.connection.core.model.HandlerModel;
+import com.alatka.connection.core.model.ProcessorsModel;
 import com.alatka.connection.core.property.core.*;
+import com.alatka.connection.core.util.JsonUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +26,7 @@ import java.util.stream.Collectors;
  * @author ybliu
  */
 @SuppressWarnings("rawtypes")
-public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<ProcessorProperty>, List<ProcessorProperty>> {
+public class ProcessorModuleBuilder extends AbstractModuleBuilder<ProcessorsModel, List<ProcessorProperty>> {
 
     private final ProcessorProperty.Type type;
 
@@ -41,16 +45,13 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
     }
 
     @Override
-    protected void doBuild(List<ProcessorProperty> models, Map<Object, ? extends ComponentRegister> mapping) {
-        AtomicInteger index = new AtomicInteger(0);
-        List<ProcessorProperty> list = models.stream()
-                .filter(processor -> processor.getType() == ProcessorProperty.Type.all || processor.getType() == this.type)
-                .peek(processor -> index.incrementAndGet())
-                .collect(Collectors.toList());
-        Collections.reverse(list);
+    protected void doBuild(List<ProcessorProperty> list, Map<Object, ? extends ComponentRegister> mapping) {
+        AtomicInteger index = new AtomicInteger(list.size());
+        List<ProcessorProperty> properties = new ArrayList<>(list);
+        Collections.reverse(properties);
 
-        if (list.isEmpty()) {
-            list.add(new ProcessorProperty().defaultProperty());
+        if (properties.isEmpty()) {
+            properties.add(new ProcessorProperty().defaultProperty());
             index.addAndGet(1);
         }
 
@@ -58,7 +59,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
                 AlatkaConnectionConstant.OUTBOUND_INPUT_CHANNEL : AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL;
         AtomicReference<String> atomic = new AtomicReference<>(outputChannelBeanName);
 
-        this.buildProcessors(list, index, atomic);
+        this.buildProcessors(properties, index, atomic);
         this.buildOutputChannelBridge(atomic.get());
     }
 
@@ -67,11 +68,19 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
             String suffix = "." + index.decrementAndGet();
 
             // handler
-            HandlerProperty handler = processor.getHandler().isEnabled() ?
-                    processor.getHandler() : new HandlerProperty().defaultProperty();
-            handler.setId("handler." + type.name() + "." + handler.getType() + suffix);
-            handler.setOutputChannel(atomic.get());
-            this.handlerModuleBuilder.build(handler);
+            List<ChannelAdapterProperty> handlers = processor.getHandler().entrySet().stream()
+                    .map(entry -> {
+                        ChannelAdapterProperty handler = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
+                        handler.setId("handler." + type.name() + "." + entry.getKey().name() + suffix);
+                        handler.setOutputChannel(atomic.get());
+                        return handler;
+                    })
+                    .filter(Property::isEnabled)
+                    .collect(Collectors.toList());
+            if (handlers.size() != 1) {
+                throw new IllegalArgumentException("count of enabled handler must be 1");
+            }
+            this.handlerModuleBuilder.build(handlers.get(0));
 
             // channel
             ChannelProperty channel = processor.getChannel() == null || !processor.getChannel().isEnabled() ?
@@ -102,11 +111,10 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
         String inputChannelBeanName = this.type == ProcessorProperty.Type.request ?
                 AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL : AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL;
 
-        HandlerProperty handler = new HandlerProperty();
-        handler.setType(HandlerProperty.Type.passthrough);
-        handler.setOutputChannel(channelBeanName);
+        ChannelAdapterProperty handler = new PassthroughHandlerProperty();
         String suffix = this.type == ProcessorProperty.Type.request ? ".inbound-processor" : ".outbound-processor";
-        handler.setId("handler." + this.type.name() + HandlerProperty.Type.passthrough.name() + suffix);
+        handler.setId("handler." + this.type.name() + "." + HandlerModel.passthrough.name() + suffix);
+        handler.setOutputChannel(channelBeanName);
         this.handlerModuleBuilder.build(handler);
 
         ConsumerProperty consumer = new ConsumerProperty();
@@ -117,17 +125,16 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<List<Processor
     }
 
     @Override
-    protected List<ProcessorProperty> validateAndConvert(List<ProcessorProperty> models) {
-        if (models == null) {
+    protected List<ProcessorProperty> validateAndConvert(ProcessorsModel model) {
+        if (model == null || model.getProcessors() == null) {
             return Collections.emptyList();
         }
-        return models.stream()
+        return model.getProcessors().stream()
                 .filter(Property::isEnabled)
-                .peek(processor -> {
-                    if (processor.getType() == null) {
-                        processor.setType(ProcessorProperty.Type.all);
-                    }
-                }).collect(Collectors.toList());
+                .filter(processor -> processor.getType() == null ||
+                        processor.getType() == ProcessorProperty.Type.all ||
+                        processor.getType() == this.type)
+                .collect(Collectors.toList());
     }
 
     @Override
