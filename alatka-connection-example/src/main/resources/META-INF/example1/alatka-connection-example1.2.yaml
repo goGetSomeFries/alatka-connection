@@ -4,7 +4,7 @@ alatka.connection:
   route:
     inbound:
       http:
-        pathPatterns: [ /example1/2 ]
+        paths: [ /example1/2 ]
         methods: [ POST ]
         requestType: com.alatka.connection.example.example1.ReqMess
     outbound:

@@ -21,7 +21,7 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, HttpInboundProperty property) {
         RequestMapping requestMapping = new RequestMapping();
-        requestMapping.setPathPatterns(property.getPathPatterns());
+        requestMapping.setPathPatterns(property.getPaths());
         if (property.getMethods() != null) {
             HttpMethod[] methods = Stream.of(property.getMethods()).map(HttpMethod::resolve).toArray(HttpMethod[]::new);
             requestMapping.setMethods(methods);
