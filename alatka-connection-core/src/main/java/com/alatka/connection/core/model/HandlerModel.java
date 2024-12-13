@@ -12,6 +12,7 @@ public enum HandlerModel {
     null_(NullHandlerProperty.class),
     splitter(SplitterHandlerProperty.class),
     jdbc(JdbcHandlerProperty.class),
+    consumer(ConsumerHandlerProperty.class),
     custom(CustomHandlerProperty.class);
 
     private final Class<? extends ChannelAdapterProperty> type;
