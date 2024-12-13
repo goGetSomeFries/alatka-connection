@@ -4,7 +4,7 @@ alatka.connection:
   route:
     inbound:
       http:
-        pathPatterns:
+        paths:
           - /example1/4
         methods: [ POST ]
     processors:
@@ -14,6 +14,7 @@ alatka.connection:
           transformer:
             beanName: reqMessConvertor
       - desc: 记录日志
+        type: both
         handler:
           logger:
             level: INFO
