@@ -132,7 +132,7 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<ProcessorsMode
         return model.getProcessors().stream()
                 .filter(Property::isEnabled)
                 .filter(processor -> processor.getType() == null ||
-                        processor.getType() == ProcessorProperty.Type.all ||
+                        processor.getType() == ProcessorProperty.Type.both ||
                         processor.getType() == this.type)
                 .collect(Collectors.toList());
     }
