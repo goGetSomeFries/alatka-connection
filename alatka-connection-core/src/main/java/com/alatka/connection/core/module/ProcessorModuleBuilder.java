@@ -6,6 +6,7 @@ import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.model.HandlerModel;
 import com.alatka.connection.core.model.ProcessorsModel;
 import com.alatka.connection.core.property.core.*;
+import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.core.util.JsonUtil;
 
 import java.util.ArrayList;
@@ -70,8 +71,12 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<ProcessorsMode
             // handler
             List<ChannelAdapterProperty> handlers = processor.getHandler().entrySet().stream()
                     .map(entry -> {
-                        ChannelAdapterProperty handler = JsonUtil.convertToObject(entry.getValue(), entry.getKey().getType());
-                        handler.setId("handler." + type.name() + "." + entry.getKey().name() + suffix);
+                        Object value = entry.getValue();
+                        HandlerModel handlerModel = entry.getKey();
+                        ChannelAdapterProperty handler = value == null ?
+                                ClassUtil.newInstance(handlerModel.getType().getName()) :
+                                JsonUtil.convertToObject(value, handlerModel.getType());
+                        handler.setId("handler." + type.name() + "." + handlerModel.name() + suffix);
                         handler.setOutputChannel(atomic.get());
                         return handler;
                     })

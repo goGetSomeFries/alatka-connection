@@ -1,11 +1,12 @@
 alatka.connection:
   enabled: true
-  desc: http异常响应（@ExceptionHandler方式）
+  desc: http异常响应（errorChannel方式）
   route:
     inbound:
       http:
+        errorHandled: true
         paths:
-          - /example2/1
+          - /example2/2
         methods: [ POST ]
         requestType: com.alatka.connection.example.example2.ReqMess
     processors:

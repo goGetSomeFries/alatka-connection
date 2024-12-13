@@ -12,7 +12,6 @@ alatka.connection:
       - desc: 记录日志
         handler:
           logger:
-            level: INFO
     outbound:
       custom:
         beanName: example1Stat3Service
