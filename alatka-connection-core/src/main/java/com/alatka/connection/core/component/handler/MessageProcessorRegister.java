@@ -13,7 +13,7 @@ import org.springframework.integration.config.AbstractStandardMessageHandlerFact
 public abstract class MessageProcessorRegister<T extends MessageProcessorProperty> extends HandlerComponentRegister<T> {
 
     @Override
-    public void doRegister(BeanDefinitionBuilder builder, MessageProcessorProperty property) {
+    public void doRegister(BeanDefinitionBuilder builder, T property) {
         String expression = property.getExpression();
         if (expression != null) {
             builder.addPropertyValue("expressionString", expression);
@@ -32,7 +32,7 @@ public abstract class MessageProcessorRegister<T extends MessageProcessorPropert
             if (beanName != null) {
                 builder.addPropertyReference("targetObject", beanName);
             } else {
-                builder.addPropertyValue("targetObject", ClassUtil.newInstance(className));
+                builder.addPropertyValue("targetObject", this.createObject(property));
             }
             builder.addPropertyValue("targetMethodName", this.handlerMethodName());
         }
@@ -44,6 +44,10 @@ public abstract class MessageProcessorRegister<T extends MessageProcessorPropert
 
     protected String handlerMethodName() {
         throw new UnsupportedOperationException(getClass().getName() + " does not support handlerMethodName().");
+    }
+
+    protected Object createObject(T property) {
+        return ClassUtil.newInstance(property.getClassName());
     }
 
     @Override
