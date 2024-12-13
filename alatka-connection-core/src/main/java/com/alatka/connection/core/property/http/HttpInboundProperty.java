@@ -4,7 +4,6 @@ import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  * alatka.connection.route.inbound.http
@@ -13,20 +12,19 @@ import javax.validation.constraints.NotNull;
  */
 public class HttpInboundProperty extends InboundProperty {
 
-    @NotNull
     @NotEmpty
-    private String[] pathPatterns;
+    private String[] paths;
 
     private String[] methods;
 
     private Class<?> requestType;
 
-    public String[] getPathPatterns() {
-        return pathPatterns;
+    public String[] getPaths() {
+        return paths;
     }
 
-    public void setPathPatterns(String[] pathPatterns) {
-        this.pathPatterns = pathPatterns;
+    public void setPaths(String[] paths) {
+        this.paths = paths;
     }
 
     public String[] getMethods() {

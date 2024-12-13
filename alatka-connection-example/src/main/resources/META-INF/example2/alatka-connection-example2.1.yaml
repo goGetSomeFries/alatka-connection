@@ -5,10 +5,15 @@ alatka.connection:
     inbound:
       http:
         errorHandled: true
-        pathPatterns:
+        paths:
           - /example2/1
         methods: [ POST ]
         requestType: com.alatka.connection.example.example2.ReqMess
+    processors:
+      - desc: 记录日志
+        handler:
+          logger:
+            level: INFO
     outbound:
       custom:
         beanName: example2Stat1Service

@@ -32,12 +32,12 @@ public class ProcessorProperty extends Property {
     private String taskScheduler;
 
     public enum Type {
-        all, request, reply
+        both, request, reply
     }
 
     @Override
     public ProcessorProperty defaultProperty() {
-        this.type = Type.all;
+        this.type = Type.both;
         this.channel = new ChannelProperty().defaultProperty();
         this.handler = Collections.singletonMap(HandlerModel.passthrough, new PassthroughHandlerProperty());
         return this;
