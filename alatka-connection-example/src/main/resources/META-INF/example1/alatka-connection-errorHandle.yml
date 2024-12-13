@@ -4,13 +4,13 @@ alatka.connection:
   route:
     inbound:
       redirect:
-        redirectChannel: example2.2@channel.error
+        redirectChannel: example1.6@channel.error
     processors:
       - type: request
         desc: "异常信息组装"
         handler:
           transformer:
-            className: com.alatka.connection.example.example2.ErrorConvertor
+            className: com.alatka.connection.example.example1.ErrorConvertor
     outbound:
       redirect:
-        redirectChannel: example2.2@channel.outbound.output
+        redirectChannel: example1.6@channel.outbound.output

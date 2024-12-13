@@ -1,11 +1,11 @@
-package com.alatka.connection.example.example2;
+package com.alatka.connection.example.example1;
 
 import com.alatka.connection.core.support.CustomMessageHandler;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
-@Component("example2Stat1Service")
-public class Stat1Service implements CustomMessageHandler<ReqMess, RespMess> {
+@Component("example1ErrorService")
+public class ErrorService implements CustomMessageHandler<ReqMess, RespMess> {
 
     @Override
     public RespMess doExecute(Message<ReqMess> message) {

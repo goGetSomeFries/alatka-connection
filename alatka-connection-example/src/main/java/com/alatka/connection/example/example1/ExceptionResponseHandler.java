@@ -1,4 +1,4 @@
-package com.alatka.connection.example.example2;
+package com.alatka.connection.example.example1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

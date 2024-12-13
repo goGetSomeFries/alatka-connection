@@ -1,4 +1,4 @@
-package com.alatka.connection.example.example2;
+package com.alatka.connection.example.example1;
 
 import com.alatka.connection.core.support.TransformMessageHandler;
 import org.springframework.messaging.Message;
