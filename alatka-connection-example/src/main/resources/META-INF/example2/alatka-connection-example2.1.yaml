@@ -1,0 +1,12 @@
+alatka.connection:
+  enabled: true
+  desc: outbound mocker-多用于挡板
+  route:
+    inbound:
+      http:
+        paths: [ /example2/1 ]
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.example1.ReqMess
+    outbound:
+      mocker:
+        className: com.alatka.connection.test.support.MessageMocker
