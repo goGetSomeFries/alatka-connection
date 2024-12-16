@@ -1,5 +1,5 @@
 alatka.connection:
-  enabled: true
+  enabled: false
   desc: inbound mocker-模拟请求数据（10s执行一次）
   route:
     inbound:

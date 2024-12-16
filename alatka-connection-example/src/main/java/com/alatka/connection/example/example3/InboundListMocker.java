@@ -1,4 +1,4 @@
-package com.alatka.connection.example.example2;
+package com.alatka.connection.example.example3;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;

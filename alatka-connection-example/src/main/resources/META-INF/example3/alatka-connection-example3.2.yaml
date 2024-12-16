@@ -1,11 +1,11 @@
 alatka.connection:
-  enabled: true
+  enabled: false
   desc: splitter组件拆分集合
   route:
     inbound:
       mocker:
         poller: defaultPollerMetadata
-        className: com.alatka.connection.example.example2.InboundListMocker
+        className: com.alatka.connection.example.example3.InboundListMocker
     processors:
       - desc: List扁平化
         handler:
