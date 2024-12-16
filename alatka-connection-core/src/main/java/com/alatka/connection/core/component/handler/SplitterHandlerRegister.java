@@ -21,6 +21,11 @@ public class SplitterHandlerRegister extends MessageProcessorRegister<SplitterHa
     }
 
     @Override
+    protected Class<SplitterMessageHandler> handlerClass() {
+        return SplitterMessageHandler.class;
+    }
+
+    @Override
     protected String handlerMethodName() {
         return SplitterMessageHandler.METHOD_NAME;
     }

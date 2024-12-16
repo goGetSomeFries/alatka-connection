@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class InboundMocker implements com.alatka.connection.test.support.InboundMocker<List<String>> {
+public class InboundListMocker implements com.alatka.connection.test.support.InboundMocker<List<String>> {
 
     private final AtomicInteger index = new AtomicInteger(0);
 

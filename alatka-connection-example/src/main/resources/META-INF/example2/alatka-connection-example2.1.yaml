@@ -6,7 +6,7 @@ alatka.connection:
       http:
         paths: [ /example2/1 ]
         methods: [ POST ]
-        requestType: com.alatka.connection.example.example1.ReqMess
+        requestType: com.alatka.connection.example.model.ReqMess
     outbound:
       mocker:
-        className: com.alatka.connection.test.support.MessageMocker
+        className: com.alatka.connection.test.support.MessageOutboundMocker

@@ -1,14 +1,18 @@
 alatka.connection:
   enabled: true
-  desc: inbound mocker-模拟请求数据（10s执行一次）
+  desc: splitter组件拆分集合
   route:
     inbound:
       mocker:
         poller: defaultPollerMetadata
-        className: com.alatka.connection.example.example2.InboundMocker
+        className: com.alatka.connection.example.example2.InboundListMocker
+    processors:
+      - desc: List扁平化
+        handler:
+          splitter:
     outbound:
-      mocker:
-        className: com.alatka.connection.test.support.MessageMocker
+      custom:
+        className: com.alatka.connection.example.service.LoggerService
   definition:
     pollerMetadata:
       - id: defaultPollerMetadata

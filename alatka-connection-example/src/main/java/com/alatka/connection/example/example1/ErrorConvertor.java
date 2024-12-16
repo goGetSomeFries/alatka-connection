@@ -1,6 +1,7 @@
 package com.alatka.connection.example.example1;
 
 import com.alatka.connection.core.support.TransformMessageHandler;
+import com.alatka.connection.example.model.RespMess;
 import org.springframework.messaging.Message;
 
 public class ErrorConvertor implements TransformMessageHandler<Throwable, RespMess> {

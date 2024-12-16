@@ -1,11 +1,33 @@
 alatka.connection:
-  enabled: false
-  desc: test
+  enabled: true
+  desc: splitter组件拆分集合
   route:
     inbound:
       mocker:
-        errorHandled: true
-        className: com.alatka.connection.test.support.MessageMocker
+        poller: defaultPollerMetadata
+        className: com.alatka.connection.example.example2.InboundListMocker
+    processors:
+      - desc: List扁平化
+        handler:
+          splitter:
     outbound:
-      mocker:
-        className: com.alatka.connection.test.support.MessageMocker
+      custom:
+        className: com.alatka.connection.example.service.LoggerService
+  definition:
+    pollerMetadata:
+      - id: defaultPollerMetadata
+        taskExecutor: defaultTaskExecutor
+        maxMessagesPerPoll: 1
+        trigger:
+          type: periodic
+          params:
+            initialDelay: 3000
+            period: 10000
+            fixedRate: true
+    taskExecutors:
+      - id: defaultTaskExecutor
+        corePoolSize: 2
+        maxPoolSize: 10
+        queueCapacity: 5
+        keepAliveSeconds: 60
+        threadNamePrefix: alatka-connection-

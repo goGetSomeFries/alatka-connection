@@ -7,7 +7,7 @@ alatka.connection:
         paths:
           - /example1/5
         methods: [ POST ]
-        requestType: com.alatka.connection.example.example1.ReqMess
+        requestType: com.alatka.connection.example.model.ReqMess
     processors:
       - desc: 记录日志
         handler:

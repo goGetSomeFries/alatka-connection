@@ -1,5 +1,6 @@
 package com.alatka.connection.example.example1;
 
+import com.alatka.connection.example.model.RespMess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

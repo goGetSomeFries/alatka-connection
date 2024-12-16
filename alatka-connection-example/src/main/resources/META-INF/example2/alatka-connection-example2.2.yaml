@@ -5,10 +5,10 @@ alatka.connection:
     inbound:
       mocker:
         poller: defaultPollerMetadata
-        className: com.alatka.connection.test.support.MessageMocker
+        className: com.alatka.connection.test.support.MessageInboundMocker
     outbound:
-      mocker:
-        className: com.alatka.connection.test.support.MessageMocker
+      custom:
+        className: com.alatka.connection.example.service.LoggerService
   definition:
     pollerMetadata:
       - id: defaultPollerMetadata
