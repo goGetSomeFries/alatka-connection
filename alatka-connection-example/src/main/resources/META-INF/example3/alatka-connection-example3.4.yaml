@@ -1,0 +1,16 @@
+alatka.connection:
+  enabled: true
+  desc: passthrough组件
+  route:
+    inbound:
+      http:
+        paths: [ /example3/4 ]
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.model.ReqMess
+    processors:
+      - desc: 透传，无实际功能
+        handler:
+          passthrough:
+    outbound:
+      custom:
+        className: com.alatka.connection.example.service.LoggerService
