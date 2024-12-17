@@ -1,0 +1,18 @@
+alatka.connection:
+  enabled: true
+  desc: transformer组件
+  route:
+    inbound:
+      http:
+        paths: [ /example3/5 ]
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.model.ReqMess
+    processors:
+      - desc:
+        type: request
+        handler:
+          transformer:
+            className: com.alatka.connection.example.example3.TransformerService
+    outbound:
+      custom:
+        className: com.alatka.connection.example.service.LoggerService
