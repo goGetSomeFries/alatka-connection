@@ -1,17 +1,18 @@
 alatka.connection:
   enabled: true
-  desc: http 输出请求响应报文日志
+  desc: http异常响应（@ExceptionHandler方式）
   route:
     inbound:
       http:
         paths:
-          - /example1/3
+          - /example1/5
         methods: [ POST ]
         requestType: com.alatka.connection.example.model.ReqMess
     processors:
       - desc: 记录日志
         handler:
           logger:
+            level: INFO
     outbound:
       custom:
-        beanName: example1Stat3Service
+        beanName: example1ErrorService

@@ -57,9 +57,9 @@ public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Or
             RootModel rootModel = this.getRootModel(resource);
             String filename = resource.getFilename();
 
-            this.logger.info("building '{}/{}'...", filename, rootModel.getDesc());
+            this.logger.info("building '{} / {}'...", filename, rootModel.getDesc());
             if (!rootModel.isEnabled()) {
-                this.logger.warn("'{}/{}' is disabled, will skip build", filename, rootModel.getDesc());
+                this.logger.warn("'{}' is disabled, will skip build", filename);
                 continue;
             }
 
