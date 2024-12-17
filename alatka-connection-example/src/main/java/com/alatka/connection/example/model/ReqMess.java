@@ -1,4 +1,4 @@
-package com.alatka.connection.example.example2;
+package com.alatka.connection.example.model;
 
 public class ReqMess {
 

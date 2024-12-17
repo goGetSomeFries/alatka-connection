@@ -1,19 +1,12 @@
 alatka.connection:
   enabled: true
-  desc: http异常响应
+  desc: outbound mocker-多用于挡板
   route:
     inbound:
       http:
-        errorHandled: true
-        paths:
-          - /example2/1
+        paths: [ /example2/1 ]
         methods: [ POST ]
-        requestType: com.alatka.connection.example.example2.ReqMess
-    processors:
-      - desc: 记录日志
-        handler:
-          logger:
-            level: INFO
+        requestType: com.alatka.connection.example.model.ReqMess
     outbound:
-      custom:
-        beanName: example2Stat1Service
+      mocker:
+        className: com.alatka.connection.test.support.MessageOutboundMocker

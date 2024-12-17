@@ -6,7 +6,7 @@ alatka.connection:
       http:
         paths: [ /example1/2 ]
         methods: [ POST ]
-        requestType: com.alatka.connection.example.example1.ReqMess
+        requestType: com.alatka.connection.example.model.ReqMess
     outbound:
       custom:
         className: com.alatka.connection.example.example1.Stat2Service
