@@ -11,20 +11,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author whocares
  */
-public class MessageMocker implements InboundMocker<String>, OutboundMocker<String, String> {
+public class MessageOutboundMocker implements OutboundMocker<String, String> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final AtomicInteger counter = new AtomicInteger(0);
-
-    @Override
-    public String mockInbound() {
-        String payload = "inbound" + counter.incrementAndGet();
-        this.logger.info(">>>>>>>>>>>>>>>> inbound >>>>>>>>>>>>>>>>>");
-        this.logger.info("inbound send message: {}", payload);
-        this.logger.info(">>>>>>>>>>>>>>>> inbound >>>>>>>>>>>>>>>>>");
-        return payload;
-    }
 
     @Override
     public String mockOutbound(Message<String> message) {

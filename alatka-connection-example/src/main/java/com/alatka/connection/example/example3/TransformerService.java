@@ -1,13 +1,11 @@
-package com.alatka.connection.example.example1;
+package com.alatka.connection.example.example3;
 
-import com.alatka.connection.core.support.CustomMessageHandler;
+import com.alatka.connection.core.support.TransformMessageHandler;
 import com.alatka.connection.example.model.ReqMess;
 import com.alatka.connection.example.model.RespMess;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Component;
 
-@Component("example1Stat4Service")
-public class Stat4Service implements CustomMessageHandler<ReqMess, RespMess> {
+public class TransformerService implements TransformMessageHandler<ReqMess, RespMess> {
 
     @Override
     public RespMess doExecute(Message<ReqMess> message) {

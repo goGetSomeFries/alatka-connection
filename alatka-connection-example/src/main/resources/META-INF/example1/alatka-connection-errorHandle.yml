@@ -1,0 +1,16 @@
+alatka.connection:
+  enabled: true
+  desc: http异常响应（errorChannel方式）
+  route:
+    inbound:
+      redirect:
+        redirectChannel: example1.6@channel.error
+    processors:
+      - type: request
+        desc: "异常信息组装"
+        handler:
+          transformer:
+            className: com.alatka.connection.example.example1.ErrorConvertor
+    outbound:
+      redirect:
+        redirectChannel: example1.6@channel.outbound.output

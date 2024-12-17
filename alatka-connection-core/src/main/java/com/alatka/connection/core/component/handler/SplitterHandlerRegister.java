@@ -17,7 +17,12 @@ public class SplitterHandlerRegister extends MessageProcessorRegister<SplitterHa
     @Override
     protected void preDoRegister(BeanDefinitionBuilder builder, SplitterHandlerProperty property) {
         super.preDoRegister(builder, property);
-        property.setClassName(SplitterFactoryBean.class.getName());
+        property.setClassName(SplitterMessageHandler.class.getName());
+    }
+
+    @Override
+    protected Class<SplitterMessageHandler> handlerClass() {
+        return SplitterMessageHandler.class;
     }
 
     @Override

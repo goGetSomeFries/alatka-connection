@@ -1,20 +1,18 @@
 alatka.connection:
   enabled: true
-  desc: filter组件
+  desc: transformer组件
   route:
     inbound:
       http:
-        paths: [ /example3/1 ]
+        paths: [ /example3/5 ]
         methods: [ POST ]
         requestType: com.alatka.connection.example.model.ReqMess
     processors:
-      - desc: filter过滤
+      - desc:
         type: request
         handler:
-          filter:
-            # expression: "payload.topic != null"
-            # beanName: exampleFilter
-            className: com.alatka.connection.example.example3.ExampleFilter
+          transformer:
+            className: com.alatka.connection.example.example3.TransformerService
     outbound:
       custom:
         className: com.alatka.connection.example.service.LoggerService

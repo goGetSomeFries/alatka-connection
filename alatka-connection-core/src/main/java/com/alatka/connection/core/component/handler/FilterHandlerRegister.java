@@ -15,7 +15,9 @@ public class FilterHandlerRegister extends MessageProcessorRegister<FilterHandle
 
     @Override
     protected void postDoRegister(BeanDefinitionBuilder builder, FilterHandlerProperty property) {
-        builder.addPropertyReference("discardChannel", property.identity() + AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL);
+        String discardChannel = property.getDiscardChannel() == null ?
+                property.identity() + AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL : property.getDiscardChannel();
+        builder.addPropertyReference("discardChannel", discardChannel);
     }
 
     @Override

@@ -1,20 +1,16 @@
 alatka.connection:
   enabled: true
-  desc: filter组件
+  desc: passthrough组件
   route:
     inbound:
       http:
-        paths: [ /example3/1 ]
+        paths: [ /example3/4 ]
         methods: [ POST ]
         requestType: com.alatka.connection.example.model.ReqMess
     processors:
-      - desc: filter过滤
-        type: request
+      - desc: 透传，无实际功能
         handler:
-          filter:
-            # expression: "payload.topic != null"
-            # beanName: exampleFilter
-            className: com.alatka.connection.example.example3.ExampleFilter
+          passthrough:
     outbound:
       custom:
         className: com.alatka.connection.example.service.LoggerService
