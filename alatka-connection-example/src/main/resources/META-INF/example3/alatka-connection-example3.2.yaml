@@ -8,6 +8,7 @@ alatka.connection:
         className: com.alatka.connection.example.example3.InboundListMocker
     processors:
       - desc: List扁平化
+        type: request
         handler:
           splitter:
     outbound:
