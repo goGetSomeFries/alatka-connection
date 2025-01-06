@@ -49,7 +49,9 @@ public class ProcessorModuleBuilder extends AbstractModuleBuilder<ProcessorsMode
     protected void doBuild(List<ProcessorProperty> list, Map<Object, ? extends ComponentRegister> mapping) {
         AtomicInteger index = new AtomicInteger(list.size());
         List<ProcessorProperty> properties = new ArrayList<>(list);
-        Collections.reverse(properties);
+        if (this.type == ProcessorProperty.Type.request) {
+            Collections.reverse(properties);
+        }
 
         if (properties.isEmpty()) {
             properties.add(new ProcessorProperty().defaultProperty());
