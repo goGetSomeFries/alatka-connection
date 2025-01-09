@@ -1,5 +1,6 @@
 package com.alatka.connection.core.component.outbound;
 
+import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.module.ChannelModuleBuilder;
 import com.alatka.connection.core.module.ChannelModuleBuilderAware;
 import com.alatka.connection.core.property.core.ChannelProperty;
@@ -30,6 +31,10 @@ public class RouterOutboundRegister extends OutboundComponentRegister<RouterOutb
                 .map(this::buildRecipient)
                 .collect(Collectors.toList());
         builder.addPropertyValue("recipients", recipients);
+
+        String defaultChannel = property.getDefaultChannel() == null ?
+                DefaultConfig.FALLBACK_NULL_CHANNEL : property.getDefaultChannel();
+        builder.addPropertyValue("defaultOutputChannelName", defaultChannel);
     }
 
     private void init(RouterOutboundProperty.RouterProperty property) {
