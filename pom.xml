@@ -4,7 +4,7 @@
     <parent>
         <artifactId>alatka</artifactId>
         <groupId>com.alatka</groupId>
-        <version>1.24.0</version>
+        <version>1.27.0</version>
     </parent>
 
     <groupId>com.alatka.connection</groupId>
@@ -25,6 +25,6 @@
         <module>alatka-connection-example</module>
     </modules>
     <properties>
-        <revision>0.14.0</revision>
+        <revision>0.15.0</revision>
     </properties>
 </project>
