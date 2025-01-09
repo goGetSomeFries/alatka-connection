@@ -18,6 +18,9 @@ public class RouterOutboundProperty extends OutboundProperty {
     @IdentityPropertyReference
     private List<RouterProperty> items;
 
+    @IdentityProperty
+    private String defaultChannel;
+
     public static class RouterProperty {
 
         @NotBlank
@@ -59,5 +62,13 @@ public class RouterOutboundProperty extends OutboundProperty {
 
     public void setItems(List<RouterProperty> items) {
         this.items = items;
+    }
+
+    public String getDefaultChannel() {
+        return defaultChannel;
+    }
+
+    public void setDefaultChannel(String defaultChannel) {
+        this.defaultChannel = defaultChannel;
     }
 }
