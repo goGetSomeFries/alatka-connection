@@ -1,0 +1,18 @@
+alatka.connection:
+  enabled: true
+  desc: custom组件
+  route:
+    inbound:
+      http:
+        paths: [ /example3/6 ]
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.model.ReqMess
+    processors:
+      - desc:
+        type: request
+        handler:
+          custom:
+            className: com.alatka.connection.example.example3.CustomService
+    outbound:
+      custom:
+        className: com.alatka.connection.example.service.LoggerService

@@ -4,6 +4,7 @@ import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.Map;
 
 /**
  * alatka.connection.route.inbound.http
@@ -18,6 +19,8 @@ public class HttpInboundProperty extends InboundProperty {
     private String[] methods;
 
     private Class<?> requestType;
+
+    private Map<String, String> headerExpressions;
 
     public String[] getPaths() {
         return paths;
@@ -41,5 +44,13 @@ public class HttpInboundProperty extends InboundProperty {
 
     public void setRequestType(String requestType) {
         this.requestType = ClassUtil.forName(requestType);
+    }
+
+    public Map<String, String> getHeaderExpressions() {
+        return headerExpressions;
+    }
+
+    public void setHeaderExpressions(Map<String, String> headerExpressions) {
+        this.headerExpressions = headerExpressions;
     }
 }
