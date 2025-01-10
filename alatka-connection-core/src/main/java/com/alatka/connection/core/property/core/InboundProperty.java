@@ -18,7 +18,6 @@ public abstract class InboundProperty extends Property {
     @IdentityProperty
     private String outputChannel;
 
-    @JsonIgnore
     @IdentityProperty
     private String errorChannel;
 
