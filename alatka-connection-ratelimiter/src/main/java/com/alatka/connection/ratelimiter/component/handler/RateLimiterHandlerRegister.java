@@ -17,7 +17,7 @@ public class RateLimiterHandlerRegister extends HandlerComponentRegister<RateLim
     protected void doRegister(BeanDefinitionBuilder builder, RateLimiterHandlerProperty property) {
         Integer permitsPerSecond = property.getPermitsPerSecond();
         Integer warmupPeriod = property.getWarmupPeriod();
-        boolean blocked = property.getBlocked() == null ? false : property.getBlocked();
+        boolean blocked = property.getBlocked() != null && property.getBlocked();
         Integer timeout = property.getTimeout() == null ? 0 : property.getTimeout();
 
         RateLimiterHandler handler = warmupPeriod == null ?
