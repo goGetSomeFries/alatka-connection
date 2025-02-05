@@ -56,7 +56,7 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
     }
 
     private void buildErrorChannel(InboundProperty property) {
-        if (property.getErrorChannel() != null) {
+        if (AlatkaConnectionConstant.ERROR_CHANNEL.equals(property.getErrorChannel())) {
             ChannelProperty channel = new ChannelProperty();
             channel.setId(AlatkaConnectionConstant.ERROR_CHANNEL);
             channel.setType(ChannelProperty.Type.publishSubscribe);
@@ -91,7 +91,10 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
                     InboundProperty property = JsonUtil.convertToObject(entry.getValue(), inboundModel.getType());
                     property.setInputChannel(inboundModel.isDuplex() ? AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL : null);
                     property.setOutputChannel(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
-                    property.setErrorChannel(property.isErrorHandled() ? AlatkaConnectionConstant.ERROR_CHANNEL : null);
+                    if (property.getErrorChannel() == null && property.isErrorHandled()) {
+                        property.setErrorChannel(inboundModel.isDuplex() ?
+                                AlatkaConnectionConstant.OUTBOUND_OUTPUT_CHANNEL : AlatkaConnectionConstant.ERROR_CHANNEL);
+                    }
                     return property;
                 })
                 .filter(Property::isEnabled)

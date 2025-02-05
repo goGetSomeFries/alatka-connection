@@ -17,7 +17,7 @@ public class ChannelProperty extends Property {
         null_(Kind.POLLABLE),
         queue(Kind.POLLABLE);
 
-        private Kind kind;
+        private final Kind kind;
 
         Type(Kind kind) {
             this.kind = kind;

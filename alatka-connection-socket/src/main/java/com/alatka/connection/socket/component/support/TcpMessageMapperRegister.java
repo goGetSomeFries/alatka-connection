@@ -10,7 +10,7 @@ import org.springframework.integration.mapping.BytesMessageMapper;
 /**
  * @author ybliu
  */
-public class TcpMessageMapperRegister extends SupportComponentRegister<TcpMessageMapperProperty> {
+public class TcpMessageMapperRegister extends SupportComponentRegister<TcpMessageMapperProperty, Class<TcpMessageMapperProperty>> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpMessageMapperProperty property) {

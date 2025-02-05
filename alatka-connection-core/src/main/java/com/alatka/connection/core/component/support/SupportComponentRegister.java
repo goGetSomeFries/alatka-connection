@@ -8,6 +8,6 @@ import com.alatka.connection.core.property.core.SupportProperty;
  *
  * @author ybliu
  */
-public abstract class SupportComponentRegister<T extends SupportProperty> extends AbstractComponentRegister<T, Class<T>> {
+public abstract class SupportComponentRegister<T extends SupportProperty, S> extends AbstractComponentRegister<T, S> {
 
 }

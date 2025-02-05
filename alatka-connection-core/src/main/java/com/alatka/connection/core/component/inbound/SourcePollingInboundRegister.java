@@ -34,11 +34,14 @@ public abstract class SourcePollingInboundRegister<T extends SourcePollingInboun
     private String registerMessageSource(T property) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.messageSourceClass());
 
-        if (property.getErrorChannel() != null) {
-            Map<String, Expression> headerExpressions = new HashMap<>();
-            headerExpressions.put(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME, new ValueExpression<>(property.getErrorChannel()));
-            builder.addPropertyValue("headerExpressions", headerExpressions);
+        Map<String, Expression> headerExpressions = new HashMap<>();
+        if (property.getHeaderExpressions() != null) {
+            property.getHeaderExpressions().forEach((key, value) -> headerExpressions.put(key, new ValueExpression<>(value)));
         }
+        if (property.getErrorChannel() != null) {
+            headerExpressions.put(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME, new ValueExpression<>(property.getErrorChannel()));
+        }
+        builder.addPropertyValue("headerExpressions", headerExpressions);
 
         this.doRegisterMessageSource(builder, property);
 
