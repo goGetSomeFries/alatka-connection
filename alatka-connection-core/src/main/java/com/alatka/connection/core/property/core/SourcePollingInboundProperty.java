@@ -2,6 +2,8 @@ package com.alatka.connection.core.property.core;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
 
+import java.util.Map;
+
 /**
  * TODO
  *
@@ -13,6 +15,7 @@ public class SourcePollingInboundProperty extends InboundProperty {
     private String poller;
     @IdentityProperty
     private String taskScheduler;
+    private Map<String, String> headerExpressions;
 
     public String getPoller() {
         return poller;
@@ -28,5 +31,13 @@ public class SourcePollingInboundProperty extends InboundProperty {
 
     public void setTaskScheduler(String taskScheduler) {
         this.taskScheduler = taskScheduler;
+    }
+
+    public Map<String, String> getHeaderExpressions() {
+        return headerExpressions;
+    }
+
+    public void setHeaderExpressions(Map<String, String> headerExpressions) {
+        this.headerExpressions = headerExpressions;
     }
 }
