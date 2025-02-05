@@ -10,7 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @author ybliu
  * @see ThreadPoolTaskExecutor
  */
-public class TaskExecutorRegister extends SupportComponentRegister<TaskExecutorProperty> {
+public class TaskExecutorRegister extends SupportComponentRegister<TaskExecutorProperty, Class<TaskExecutorProperty>> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TaskExecutorProperty property) {

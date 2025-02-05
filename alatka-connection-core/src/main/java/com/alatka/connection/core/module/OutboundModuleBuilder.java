@@ -65,7 +65,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
         channel.setType(ChannelProperty.Type.publishSubscribe);
         this.channelModuleBuilder.build(channel);
 
-        boolean simplex = list.size() > 1 ? true : list.get(0).getOutputChannel() == null;
+        boolean simplex = list.size() > 1 || list.get(0).getOutputChannel() == null;
         if (simplex) {
             ChannelAdapterProperty handler = new PassthroughHandlerProperty();
             handler.setId("handler.request." + HandlerModel.passthrough.name() + ".outbound.input-output");
@@ -84,7 +84,7 @@ public class OutboundModuleBuilder extends EndpointModuleBuilder<Map<OutboundMod
     @Override
     protected List<OutboundProperty> validateAndConvert(Map<OutboundModel, Object> map) {
         List<OutboundProperty> list = this.doConvert(map, false);
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             throw new IllegalArgumentException("count of enabled " + this.endpointName() + " must not be 0");
         }
         return list;
