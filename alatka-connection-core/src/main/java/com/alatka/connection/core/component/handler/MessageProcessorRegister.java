@@ -51,6 +51,6 @@ public abstract class MessageProcessorRegister<T extends MessageProcessorPropert
     }
 
     @Override
-    protected abstract Class<? extends AbstractStandardMessageHandlerFactoryBean> componentClass();
+    protected abstract Class<? extends AbstractStandardMessageHandlerFactoryBean> componentClass(T property);
 
 }

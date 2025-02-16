@@ -42,7 +42,7 @@ public class TcpConnectionFactoryFactoryBeanRegister extends AbstractComponentRe
     }
 
     @Override
-    protected Class<TcpConnectionFactoryFactoryBean> componentClass() {
+    protected Class<TcpConnectionFactoryFactoryBean> componentClass(TcpConnectionProperty property) {
         return TcpConnectionFactoryFactoryBean.class;
     }
 

@@ -16,7 +16,7 @@ public class DirectChannelRegister extends ChannelComponentRegister<ChannelPrope
     }
 
     @Override
-    protected Class<DirectChannel> componentClass() {
+    protected Class<DirectChannel> componentClass(ChannelProperty property) {
         return DirectChannel.class;
     }
 

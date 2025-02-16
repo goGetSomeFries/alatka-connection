@@ -14,7 +14,7 @@ import org.springframework.integration.handler.BridgeHandler;
  */
 public class RedirectInboundRegister extends InboundComponentRegister<RedirectInboundProperty> {
 
-    private ConsumerEndpointRegister register = new ConsumerEndpointRegister();
+    private final ConsumerEndpointRegister register = new ConsumerEndpointRegister();
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, RedirectInboundProperty property) {
@@ -27,7 +27,7 @@ public class RedirectInboundRegister extends InboundComponentRegister<RedirectIn
     }
 
     @Override
-    protected Class<BridgeHandler> componentClass() {
+    protected Class<BridgeHandler> componentClass(RedirectInboundProperty property) {
         return BridgeHandler.class;
     }
 

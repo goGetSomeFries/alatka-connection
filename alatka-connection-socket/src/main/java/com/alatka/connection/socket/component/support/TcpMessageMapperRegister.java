@@ -23,7 +23,7 @@ public class TcpMessageMapperRegister extends SupportComponentRegister<TcpMessag
     }
 
     @Override
-    protected Class<TcpMessageMapper> componentClass() {
+    protected Class<TcpMessageMapper> componentClass(TcpMessageMapperProperty property) {
         return TcpMessageMapper.class;
     }
 

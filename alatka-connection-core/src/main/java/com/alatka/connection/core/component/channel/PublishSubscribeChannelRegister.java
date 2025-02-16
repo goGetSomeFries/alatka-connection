@@ -16,7 +16,7 @@ public class PublishSubscribeChannelRegister extends ChannelComponentRegister<Ch
     }
 
     @Override
-    protected Class<PublishSubscribeChannel> componentClass() {
+    protected Class<PublishSubscribeChannel> componentClass(ChannelProperty property) {
         return PublishSubscribeChannel.class;
     }
 

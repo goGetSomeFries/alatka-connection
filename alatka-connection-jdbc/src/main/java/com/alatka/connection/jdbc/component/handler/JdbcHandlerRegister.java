@@ -37,7 +37,7 @@ public class JdbcHandlerRegister extends HandlerComponentRegister<JdbcHandlerPro
     }
 
     @Override
-    protected Class<ServiceActivatingHandler> componentClass() {
+    protected Class<ServiceActivatingHandler> componentClass(JdbcHandlerProperty property) {
         return ServiceActivatingHandler.class;
     }
 

@@ -22,7 +22,7 @@ public abstract class SourcePollingInboundRegister<T extends SourcePollingInboun
     }
 
     @Override
-    protected final Class<SourcePollingChannelAdapterFactoryBean> componentClass() {
+    protected final Class<SourcePollingChannelAdapterFactoryBean> componentClass(T property) {
         return SourcePollingChannelAdapterFactoryBean.class;
     }
 

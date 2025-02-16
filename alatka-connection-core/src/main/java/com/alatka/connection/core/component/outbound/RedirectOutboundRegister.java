@@ -17,7 +17,7 @@ public class RedirectOutboundRegister extends OutboundComponentRegister<Redirect
     }
 
     @Override
-    protected Class<BridgeHandler> componentClass() {
+    protected Class<BridgeHandler> componentClass(RedirectOutboundProperty property) {
         return BridgeHandler.class;
     }
 

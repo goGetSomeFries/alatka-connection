@@ -28,7 +28,7 @@ public class RateLimiterHandlerRegister extends HandlerComponentRegister<RateLim
     }
 
     @Override
-    protected Class<ServiceActivatingHandler> componentClass() {
+    protected Class<ServiceActivatingHandler> componentClass(RateLimiterHandlerProperty property) {
         return ServiceActivatingHandler.class;
     }
 

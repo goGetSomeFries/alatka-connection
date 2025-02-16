@@ -17,7 +17,7 @@ public class PassthroughHandlerRegister extends HandlerComponentRegister<Passthr
     }
 
     @Override
-    protected Class<BridgeHandler> componentClass() {
+    protected Class<BridgeHandler> componentClass(PassthroughHandlerProperty property) {
         return BridgeHandler.class;
     }
 

@@ -22,7 +22,7 @@ public class TaskExecutorRegister extends SupportComponentRegister<TaskExecutorP
     }
 
     @Override
-    protected Class<ThreadPoolTaskExecutor> componentClass() {
+    protected Class<ThreadPoolTaskExecutor> componentClass(TaskExecutorProperty property) {
         return ThreadPoolTaskExecutor.class;
     }
 

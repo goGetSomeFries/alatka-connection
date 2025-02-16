@@ -25,7 +25,7 @@ public class QueueChannelRegister extends ChannelComponentRegister<ChannelProper
     }
 
     @Override
-    protected Class<QueueChannel> componentClass() {
+    protected Class<QueueChannel> componentClass(ChannelProperty property) {
         return QueueChannel.class;
     }
 
