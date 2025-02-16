@@ -1,7 +1,7 @@
 package com.alatka.connection.ratelimiter.component.handler;
 
 import com.alatka.connection.core.component.handler.HandlerComponentRegister;
-import com.alatka.connection.core.property.core.RateLimiterHandlerProperty;
+import com.alatka.connection.core.property.ratelimiter.RateLimiterHandlerProperty;
 import com.alatka.connection.ratelimiter.support.RateLimiterHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;

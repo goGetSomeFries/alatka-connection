@@ -1,7 +1,7 @@
 package com.alatka.connection.jdbc.component.handler;
 
 import com.alatka.connection.core.component.handler.HandlerComponentRegister;
-import com.alatka.connection.core.property.core.JdbcHandlerProperty;
+import com.alatka.connection.core.property.jdbc.JdbcHandlerProperty;
 import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.jdbc.support.JdbcMessageProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
