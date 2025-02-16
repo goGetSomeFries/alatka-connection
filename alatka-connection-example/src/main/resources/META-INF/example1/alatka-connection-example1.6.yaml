@@ -14,6 +14,11 @@ alatka.connection:
         handler:
           logger:
             level: INFO
+      - type: reply
+        desc: "异常信息组装"
+        handler:
+          transformer:
+            className: com.alatka.connection.example.example1.ErrorConvertor
     outbound:
       custom:
         beanName: example1ErrorService
