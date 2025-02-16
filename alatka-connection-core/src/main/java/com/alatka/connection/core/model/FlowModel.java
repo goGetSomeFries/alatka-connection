@@ -7,11 +7,11 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 /**
- * alatka.connection.route
+ * alatka.connection.flow
  *
  * @author ybliu
  */
-public class RouteModel {
+public class FlowModel {
 
     /**
      * alatka.connection.route.inbound
