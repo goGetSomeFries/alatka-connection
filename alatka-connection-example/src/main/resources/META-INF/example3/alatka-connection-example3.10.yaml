@@ -1,0 +1,9 @@
+alatka.connection:
+  enabled: true
+  desc: subflow/gateway组件
+  route:
+    inbound:
+      gateway:
+    outbound:
+      custom:
+        className: com.alatka.connection.example.example3.CustomService

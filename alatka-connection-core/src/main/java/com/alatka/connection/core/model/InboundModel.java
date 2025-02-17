@@ -1,5 +1,6 @@
 package com.alatka.connection.core.model;
 
+import com.alatka.connection.core.property.core.GatewayInboundProperty;
 import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.property.core.RedirectInboundProperty;
 import com.alatka.connection.core.property.http.HttpInboundProperty;
@@ -20,6 +21,7 @@ public enum InboundModel {
     mocker(MockerInboundProperty.class, false),
     tcp_duplex(TcpDuplexInboundProperty.class, true),
     tcp_simplex(TcpSimplexInboundProperty.class, false),
+    gateway(GatewayInboundProperty.class, true),
     http(HttpInboundProperty.class, true);
 
     /**

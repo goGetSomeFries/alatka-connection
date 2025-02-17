@@ -30,7 +30,12 @@ public abstract class AbstractComponentRegister<T extends Property, S> implement
     public final String register(T property) {
         Validator.validateByException(property);
 
-        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.componentClass(property));
+        Class<?> beanClass = this.componentClass(property);
+        if (beanClass == Void.class) {
+            return null;
+        }
+
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
         this.preDoRegister(builder, property);
         this.doRegister(builder, property);
         this.postDoRegister(builder, property);

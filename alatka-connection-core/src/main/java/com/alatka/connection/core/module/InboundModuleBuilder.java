@@ -7,6 +7,7 @@ import com.alatka.connection.core.config.DefaultConfig;
 import com.alatka.connection.core.model.HandlerModel;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.core.*;
+import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.core.util.JsonUtil;
 import org.springframework.core.Ordered;
 
@@ -88,7 +89,9 @@ public class InboundModuleBuilder extends EndpointModuleBuilder<Map<InboundModel
                 .stream()
                 .map(entry -> {
                     InboundModel inboundModel = entry.getKey();
-                    InboundProperty property = JsonUtil.convertToObject(entry.getValue(), inboundModel.getType());
+                    InboundProperty property = entry.getValue() == null ?
+                            ClassUtil.newInstance(inboundModel.getType().getName()) :
+                            JsonUtil.convertToObject(entry.getValue(), inboundModel.getType());
                     property.setInputChannel(inboundModel.isDuplex() ? AlatkaConnectionConstant.INBOUND_INPUT_CHANNEL : null);
                     property.setOutputChannel(AlatkaConnectionConstant.INBOUND_OUTPUT_CHANNEL);
                     if (property.getErrorChannel() == null && property.isErrorHandled()) {
