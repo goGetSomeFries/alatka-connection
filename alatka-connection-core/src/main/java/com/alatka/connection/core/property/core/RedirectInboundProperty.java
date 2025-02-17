@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.core;
 
-import com.alatka.connection.core.annotation.IdentityProperty;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * alatka.connection.route.inbound.redirect
@@ -9,8 +9,19 @@ import com.alatka.connection.core.annotation.IdentityProperty;
  */
 public class RedirectInboundProperty extends InboundProperty {
 
-    @IdentityProperty
+    @NotEmpty
+    private String identity;
+
+    @NotEmpty
     private String redirectChannel;
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
 
     public String getRedirectChannel() {
         return redirectChannel;

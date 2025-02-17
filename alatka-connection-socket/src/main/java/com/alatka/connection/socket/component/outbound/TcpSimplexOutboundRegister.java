@@ -15,7 +15,7 @@ public class TcpSimplexOutboundRegister extends TcpOutboundRegister<TcpSimplexOu
     }
 
     @Override
-    protected Class<TcpSendingMessageHandler> componentClass() {
+    protected Class<TcpSendingMessageHandler> componentClass(TcpSimplexOutboundProperty property) {
         return TcpSendingMessageHandler.class;
     }
 

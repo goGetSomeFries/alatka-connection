@@ -25,7 +25,7 @@ public class ConsumerEndpointRegister extends AbstractComponentRegister<Consumer
     }
 
     @Override
-    protected Class<ConsumerEndpointFactoryBean> componentClass() {
+    protected Class<ConsumerEndpointFactoryBean> componentClass(ConsumerProperty property) {
         return ConsumerEndpointFactoryBean.class;
     }
 

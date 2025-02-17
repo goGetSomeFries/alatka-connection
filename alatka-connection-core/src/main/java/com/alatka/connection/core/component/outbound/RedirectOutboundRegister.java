@@ -1,5 +1,6 @@
 package com.alatka.connection.core.component.outbound;
 
+import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.property.core.RedirectOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
@@ -13,11 +14,12 @@ public class RedirectOutboundRegister extends OutboundComponentRegister<Redirect
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, RedirectOutboundProperty property) {
-        builder.addPropertyValue("outputChannelName", property.getRedirectChannel());
+        String channelName = property.getIdentity() + AlatkaConnectionConstant.IDENTITY_SEPARATOR + property.getRedirectChannel();
+        builder.addPropertyValue("outputChannelName", channelName);
     }
 
     @Override
-    protected Class<BridgeHandler> componentClass() {
+    protected Class<BridgeHandler> componentClass(RedirectOutboundProperty property) {
         return BridgeHandler.class;
     }
 

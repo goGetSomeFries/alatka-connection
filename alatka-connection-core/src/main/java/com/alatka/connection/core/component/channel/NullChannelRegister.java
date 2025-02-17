@@ -16,7 +16,7 @@ public class NullChannelRegister extends ChannelComponentRegister<ChannelPropert
     }
 
     @Override
-    protected Class<NullChannel> componentClass() {
+    protected Class<NullChannel> componentClass(ChannelProperty property) {
         return NullChannel.class;
     }
 

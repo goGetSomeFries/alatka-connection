@@ -12,7 +12,7 @@ public class TcpDuplexOutboundRegister extends TcpOutboundRegister<TcpDuplexOutb
     }
 
     @Override
-    protected Class<TcpOutboundGateway> componentClass() {
+    protected Class<TcpOutboundGateway> componentClass(TcpDuplexOutboundProperty property) {
         return TcpOutboundGateway.class;
     }
 

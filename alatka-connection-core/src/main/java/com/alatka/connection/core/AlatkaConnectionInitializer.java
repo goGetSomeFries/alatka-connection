@@ -69,23 +69,23 @@ public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Or
 
             // alatka.connection.route.inbound
             InboundModuleBuilder inboundModuleBuilder = new InboundModuleBuilder(identity);
-            inboundModuleBuilder.build(rootModel.getRoute().getInbound());
+            inboundModuleBuilder.build(rootModel.getFlow().getInbound());
 
             // alatka.connection.route.outbound
             OutboundModuleBuilder outboundModuleBuilder = new OutboundModuleBuilder(identity);
-            outboundModuleBuilder.build(rootModel.getRoute().getOutbound());
+            outboundModuleBuilder.build(rootModel.getFlow().getOutbound());
 
             // alatka.connection.route.bypass
             BypassModuleBuilder bypassModuleBuilder = new BypassModuleBuilder(identity);
-            bypassModuleBuilder.build(rootModel.getRoute().getBypass());
+            bypassModuleBuilder.build(rootModel.getFlow().getBypass());
 
             // alatka.connection.route.processor request
             ProcessorModuleBuilder requestProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.request);
-            requestProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
+            requestProcessorModuleBuilder.build(rootModel.getFlow().getProcessors());
 
             // alatka.connection.route.processor reply
             ProcessorModuleBuilder replyProcessorModuleBuilder = new ProcessorModuleBuilder(identity, ProcessorProperty.Type.reply);
-            replyProcessorModuleBuilder.build(rootModel.getRoute().getProcessors());
+            replyProcessorModuleBuilder.build(rootModel.getFlow().getProcessors());
         }
 
         Instant end = Instant.now();

@@ -1,5 +1,7 @@
 package com.alatka.connection.core.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import java.util.Map;
 
 /**
@@ -20,9 +22,10 @@ public class RootModel {
     private String desc;
 
     /**
-     * alatka.connection.route
+     * alatka.connection.flow
      */
-    private RouteModel route;
+    @JsonAlias({"route"})
+    private FlowModel flow;
 
     /**
      * alatka.connection.definition
@@ -45,12 +48,12 @@ public class RootModel {
         this.desc = desc;
     }
 
-    public RouteModel getRoute() {
-        return route;
+    public FlowModel getFlow() {
+        return flow;
     }
 
-    public void setRoute(RouteModel route) {
-        this.route = route;
+    public void setFlow(FlowModel flow) {
+        this.flow = flow;
     }
 
     public Map<DefinitionModel, Object> getDefinition() {

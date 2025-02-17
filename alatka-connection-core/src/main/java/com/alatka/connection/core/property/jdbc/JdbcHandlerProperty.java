@@ -1,4 +1,6 @@
-package com.alatka.connection.core.property.core;
+package com.alatka.connection.core.property.jdbc;
+
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 
 public class JdbcHandlerProperty extends ChannelAdapterProperty {
 

@@ -19,7 +19,7 @@ public class TaskSchedulerRegister extends SupportComponentRegister<TaskSchedule
     }
 
     @Override
-    protected Class<ThreadPoolTaskScheduler> componentClass() {
+    protected Class<ThreadPoolTaskScheduler> componentClass(TaskSchedulerProperty property) {
         return ThreadPoolTaskScheduler.class;
     }
 

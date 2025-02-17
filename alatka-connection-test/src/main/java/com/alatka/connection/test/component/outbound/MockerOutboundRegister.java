@@ -34,7 +34,7 @@ public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutb
     }
 
     @Override
-    protected Class<ServiceActivatorFactoryBean> componentClass() {
+    protected Class<ServiceActivatorFactoryBean> componentClass(MockerOutboundProperty property) {
         return ServiceActivatorFactoryBean.class;
     }
 
@@ -46,7 +46,7 @@ public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutb
     private class InnerMockerOutboundRegister extends MessageProcessorRegister<MessageProcessorProperty> {
 
         @Override
-        protected Class<ServiceActivatorFactoryBean> componentClass() {
+        protected Class<ServiceActivatorFactoryBean> componentClass(MessageProcessorProperty property) {
             return null;
         }
 

@@ -15,6 +15,7 @@ import com.alatka.connection.core.property.test.MockerOutboundProperty;
 public enum OutboundModel {
 
     redirect(RedirectOutboundProperty.class, false),
+    subflow(SubflowOutboundProperty.class, true),
     router(RouterOutboundProperty.class, false),
     jdbc(JdbcOutboundProperty.class, false),
     custom(CustomOutboundProperty.class, true),
