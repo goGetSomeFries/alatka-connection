@@ -21,7 +21,7 @@ public class ByteArraySingleTerminatorSerializerRegister extends SupportComponen
     }
 
     @Override
-    protected Class<?> componentClass() {
+    protected Class<?> componentClass(SerializerProperty property) {
         return ByteArraySingleTerminatorSerializer.class;
     }
 

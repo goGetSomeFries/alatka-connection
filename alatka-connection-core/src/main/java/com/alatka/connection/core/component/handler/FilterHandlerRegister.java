@@ -31,7 +31,7 @@ public class FilterHandlerRegister extends MessageProcessorRegister<FilterHandle
     }
 
     @Override
-    protected Class<FilterFactoryBean> componentClass() {
+    protected Class<FilterFactoryBean> componentClass(FilterHandlerProperty property) {
         return FilterFactoryBean.class;
     }
 

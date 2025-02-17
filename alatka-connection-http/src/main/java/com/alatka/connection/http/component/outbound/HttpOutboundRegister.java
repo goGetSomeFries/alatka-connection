@@ -21,7 +21,7 @@ public class HttpOutboundRegister extends OutboundComponentRegister<HttpOutbound
     }
 
     @Override
-    protected Class<HttpRequestExecutingMessageHandler> componentClass() {
+    protected Class<HttpRequestExecutingMessageHandler> componentClass(HttpOutboundProperty property) {
         return HttpRequestExecutingMessageHandler.class;
     }
 

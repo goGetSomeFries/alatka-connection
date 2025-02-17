@@ -19,7 +19,7 @@ public class NullHandlerRegister extends MessageProcessorRegister<NullHandlerPro
     }
 
     @Override
-    protected Class<ServiceActivatorFactoryBean> componentClass() {
+    protected Class<ServiceActivatorFactoryBean> componentClass(NullHandlerProperty property) {
         return ServiceActivatorFactoryBean.class;
     }
 

@@ -60,7 +60,7 @@ public class RouterOutboundRegister extends OutboundComponentRegister<RouterOutb
     }
 
     @Override
-    protected Class<RecipientListRouter> componentClass() {
+    protected Class<RecipientListRouter> componentClass(RouterOutboundProperty property) {
         return RecipientListRouter.class;
     }
 

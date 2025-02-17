@@ -35,7 +35,7 @@ public class PollerMetadataRegister extends SupportComponentRegister<PollerMetad
     }
 
     @Override
-    protected Class<PollerMetadata> componentClass() {
+    protected Class<PollerMetadata> componentClass(PollerMetadataProperty property) {
         return PollerMetadata.class;
     }
 

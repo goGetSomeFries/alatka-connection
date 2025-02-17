@@ -31,7 +31,7 @@ public class SplitterHandlerRegister extends MessageProcessorRegister<SplitterHa
     }
 
     @Override
-    protected Class<SplitterFactoryBean> componentClass() {
+    protected Class<SplitterFactoryBean> componentClass(SplitterHandlerProperty property) {
         return SplitterFactoryBean.class;
     }
 

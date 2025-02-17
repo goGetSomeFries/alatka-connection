@@ -28,7 +28,7 @@ public class CustomOutboundRegister extends OutboundComponentRegister<CustomOutb
     }
 
     @Override
-    protected Class<ServiceActivatorFactoryBean> componentClass() {
+    protected Class<ServiceActivatorFactoryBean> componentClass(CustomOutboundProperty property) {
         return ServiceActivatorFactoryBean.class;
     }
 

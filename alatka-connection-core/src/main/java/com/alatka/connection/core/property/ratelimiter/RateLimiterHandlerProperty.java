@@ -1,4 +1,6 @@
-package com.alatka.connection.core.property.core;
+package com.alatka.connection.core.property.ratelimiter;
+
+import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 
 import javax.validation.constraints.NotNull;
 

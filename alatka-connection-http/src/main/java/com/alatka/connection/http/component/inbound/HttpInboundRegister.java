@@ -45,7 +45,7 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
     }
 
     @Override
-    protected Class<HttpRequestHandlingMessagingGateway> componentClass() {
+    protected Class<HttpRequestHandlingMessagingGateway> componentClass(HttpInboundProperty property) {
         return HttpRequestHandlingMessagingGateway.class;
     }
 

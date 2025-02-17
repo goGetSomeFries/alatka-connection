@@ -23,7 +23,7 @@ public class CustomHandlerRegister extends MessageProcessorRegister<CustomHandle
     }
 
     @Override
-    protected Class<ServiceActivatorFactoryBean> componentClass() {
+    protected Class<ServiceActivatorFactoryBean> componentClass(CustomHandlerProperty property) {
         return ServiceActivatorFactoryBean.class;
     }
 

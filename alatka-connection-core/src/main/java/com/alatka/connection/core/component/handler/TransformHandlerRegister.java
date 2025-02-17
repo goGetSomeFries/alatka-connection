@@ -23,7 +23,7 @@ public class TransformHandlerRegister extends MessageProcessorRegister<Transform
     }
 
     @Override
-    protected Class<TransformerFactoryBean> componentClass() {
+    protected Class<TransformerFactoryBean> componentClass(TransformerHandlerProperty property) {
         return TransformerFactoryBean.class;
     }
 

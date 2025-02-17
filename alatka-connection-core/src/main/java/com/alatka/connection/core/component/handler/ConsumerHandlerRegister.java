@@ -24,7 +24,7 @@ public class ConsumerHandlerRegister extends MessageProcessorRegister<ConsumerHa
     }
 
     @Override
-    protected Class<ServiceActivatorFactoryBean> componentClass() {
+    protected Class<ServiceActivatorFactoryBean> componentClass(ConsumerHandlerProperty property) {
         return ServiceActivatorFactoryBean.class;
     }
 

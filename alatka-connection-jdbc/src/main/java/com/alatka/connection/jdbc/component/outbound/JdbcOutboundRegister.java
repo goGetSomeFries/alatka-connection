@@ -23,7 +23,7 @@ public class JdbcOutboundRegister extends OutboundComponentRegister<JdbcOutbound
     }
 
     @Override
-    protected Class<JdbcMessageHandler> componentClass() {
+    protected Class<JdbcMessageHandler> componentClass(JdbcOutboundProperty property) {
         return JdbcMessageHandler.class;
     }
 

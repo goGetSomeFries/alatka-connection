@@ -46,7 +46,7 @@ public class LoggerHandlerRegister extends MessageProcessorRegister<LoggerHandle
     }
 
     @Override
-    protected Class<ServiceActivatorFactoryBean> componentClass() {
+    protected Class<ServiceActivatorFactoryBean> componentClass(LoggerHandlerProperty property) {
         return ServiceActivatorFactoryBean.class;
     }
 
