@@ -1,0 +1,12 @@
+alatka.connection:
+  enabled: true
+  desc: subflow/gateway组件
+  route:
+    inbound:
+      http:
+        paths: [ /example3/9 ]
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.model.ReqMess
+    outbound:
+      subflow:
+        identity: example3.10
