@@ -10,7 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
  * @author ybliu
  * @see ThreadPoolTaskScheduler
  */
-public class TaskSchedulerRegister extends SupportComponentRegister<TaskSchedulerProperty, Class<TaskSchedulerProperty>> {
+public class TaskSchedulerRegister extends SupportComponentRegister<TaskSchedulerProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TaskSchedulerProperty property) {

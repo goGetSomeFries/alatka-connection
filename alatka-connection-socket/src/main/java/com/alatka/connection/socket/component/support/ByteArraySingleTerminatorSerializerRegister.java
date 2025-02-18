@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author ybliu
  */
-public class ByteArraySingleTerminatorSerializerRegister extends SupportComponentRegister<SerializerProperty, Class<SerializerProperty>> {
+public class ByteArraySingleTerminatorSerializerRegister extends SupportComponentRegister<SerializerProperty> {
 
     private static final String KEY_DELIMITER = "delimiter";
 
