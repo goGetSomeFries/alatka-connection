@@ -1,0 +1,44 @@
+alatka.connection:
+  enabled: true
+  desc: aggregator组件
+  route:
+    inbound:
+      http:
+        paths: [ /example3/11 ]
+        methods: [ POST ]
+        requestType: com.alatka.connection.example.model.ReqMess
+    processors:
+      - desc: "aggregator组件"
+        type: request
+        handler:
+          aggregator:
+            messageGroupProcessor: simpleMessageGroupProcessor
+            correlationStrategy: expressionCorrelationStrategy
+            releaseStrategy: messageCountReleaseStrategy
+            messageGroupStore: simpleMessageGroupStore
+    outbound:
+      custom:
+        className: com.alatka.connection.example.service.LoggerService
+  definition:
+    messageGroupProcessors:
+      - id: simpleMessageGroupProcessor
+        type: simple
+      - id: defaultMessageGroupProcessor
+        type: fallback
+      - id: expressionMessageGroupProcessor
+        type: expression
+        params:
+          expression: "payload"
+    correlationStrategies:
+      - id: expressionCorrelationStrategy
+        type: expression
+        params:
+          expression: "payload.seq"
+    releaseStrategies:
+      - id: messageCountReleaseStrategy
+        type: messageCount
+        params:
+          threshold: 2
+    messageGroupStores:
+      - id: simpleMessageGroupStore
+        type: simple

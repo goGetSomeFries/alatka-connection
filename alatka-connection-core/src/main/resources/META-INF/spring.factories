@@ -11,11 +11,16 @@ com.alatka.connection.core.component.handler.HandlerComponentRegister=\
   com.alatka.connection.core.component.handler.FilterHandlerRegister,\
   com.alatka.connection.core.component.handler.NullHandlerRegister,\
   com.alatka.connection.core.component.handler.SplitterHandlerRegister,\
+  com.alatka.connection.core.component.handler.AggregatorHandlerRegister,\
   com.alatka.connection.core.component.handler.TransformHandlerRegister,\
   com.alatka.connection.core.component.handler.SubflowHandlerRegister,\
   com.alatka.connection.core.component.handler.ConsumerHandlerRegister,\
   com.alatka.connection.core.component.handler.CustomHandlerRegister
 com.alatka.connection.core.component.support.SupportComponentRegister=\
+  com.alatka.connection.core.component.support.MessageGroupProcessorRegister,\
+  com.alatka.connection.core.component.support.MessageGroupStoreRegister,\
+  com.alatka.connection.core.component.support.CorrelationStrategyRegister,\
+  com.alatka.connection.core.component.support.ReleaseStrategyRegister,\
   com.alatka.connection.core.component.support.PollerMetadataRegister,\
   com.alatka.connection.core.component.support.TaskExecutorRegister,\
   com.alatka.connection.core.component.support.TaskSchedulerRegister
