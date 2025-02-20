@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
 import com.alatka.connection.core.property.core.CorrelationStrategyProperty;
-import com.alatka.connection.core.support.CustomMessageHandler;
+import com.alatka.connection.core.support.CorrelationStrategyHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.integration.aggregator.CorrelationStrategy;
 import org.springframework.integration.aggregator.ExpressionEvaluatingCorrelationStrategy;
@@ -41,11 +41,11 @@ public class CorrelationStrategyRegister extends MultiTypeSupportComponentRegist
         initComponentInit(CorrelationStrategyProperty.Type.custom, (builder, params) -> {
             CorrelationStrategyProperty.Custom custom = (CorrelationStrategyProperty.Custom) params;
             Object instance = ClassUtil.newInstance(custom.getClassName());
-            if (!(instance instanceof CustomMessageHandler)) {
-                throw new IllegalArgumentException(instance + " must be an instance of " + CustomMessageHandler.class.getName());
+            if (!(instance instanceof CorrelationStrategyHandler)) {
+                throw new IllegalArgumentException(instance + " must be an instance of " + CorrelationStrategyHandler.class.getName());
             }
             builder.addConstructorArgValue(instance);
-            builder.addConstructorArgValue(CustomMessageHandler.METHOD_NAME);
+            builder.addConstructorArgValue(CorrelationStrategyHandler.METHOD_NAME);
         });
     }
 

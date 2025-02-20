@@ -21,6 +21,7 @@ com.alatka.connection.core.component.support.SupportComponentRegister=\
   com.alatka.connection.core.component.support.MessageGroupStoreRegister,\
   com.alatka.connection.core.component.support.CorrelationStrategyRegister,\
   com.alatka.connection.core.component.support.ReleaseStrategyRegister,\
+  com.alatka.connection.core.component.support.LockRegistryRegister,\
   com.alatka.connection.core.component.support.PollerMetadataRegister,\
   com.alatka.connection.core.component.support.TaskExecutorRegister,\
   com.alatka.connection.core.component.support.TaskSchedulerRegister

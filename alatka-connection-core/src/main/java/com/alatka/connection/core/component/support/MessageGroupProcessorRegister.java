@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
 import com.alatka.connection.core.property.core.MessageGroupProcessorProperty;
-import com.alatka.connection.core.support.CustomMessageHandler;
+import com.alatka.connection.core.support.MessageGroupProcessorHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.integration.aggregator.*;
 
@@ -40,11 +40,11 @@ public class MessageGroupProcessorRegister extends MultiTypeSupportComponentRegi
         initComponentInit(MessageGroupProcessorProperty.Type.custom, (builder, params) -> {
             MessageGroupProcessorProperty.Custom custom = (MessageGroupProcessorProperty.Custom) params;
             Object instance = ClassUtil.newInstance(custom.getClassName());
-            if (!(instance instanceof CustomMessageHandler)) {
-                throw new IllegalArgumentException(instance + " must be an instance of " + CustomMessageHandler.class.getName());
+            if (!(instance instanceof MessageGroupProcessorHandler)) {
+                throw new IllegalArgumentException(instance + " must be an instance of " + MessageGroupProcessorHandler.class.getName());
             }
             builder.addConstructorArgValue(instance);
-            builder.addConstructorArgValue(CustomMessageHandler.METHOD_NAME);
+            builder.addConstructorArgValue(MessageGroupProcessorHandler.METHOD_NAME);
         });
     }
 

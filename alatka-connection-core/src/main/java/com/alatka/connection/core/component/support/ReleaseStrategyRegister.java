@@ -1,7 +1,7 @@
 package com.alatka.connection.core.component.support;
 
 import com.alatka.connection.core.property.core.ReleaseStrategyProperty;
-import com.alatka.connection.core.support.CustomMessageHandler;
+import com.alatka.connection.core.support.ReleaseStrategyHandler;
 import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.integration.aggregator.ExpressionEvaluatingReleaseStrategy;
 import org.springframework.integration.aggregator.MessageCountReleaseStrategy;
@@ -41,11 +41,11 @@ public class ReleaseStrategyRegister extends MultiTypeSupportComponentRegister<R
         initComponentInit(ReleaseStrategyProperty.Type.custom, (builder, params) -> {
             ReleaseStrategyProperty.Custom custom = (ReleaseStrategyProperty.Custom) params;
             Object instance = ClassUtil.newInstance(custom.getClassName());
-            if (!(instance instanceof CustomMessageHandler)) {
-                throw new IllegalArgumentException(instance + " must be an instance of " + CustomMessageHandler.class.getName());
+            if (!(instance instanceof ReleaseStrategyHandler)) {
+                throw new IllegalArgumentException(instance + " must be an instance of " + ReleaseStrategyHandler.class.getName());
             }
             builder.addConstructorArgValue(instance);
-            builder.addConstructorArgValue(CustomMessageHandler.METHOD_NAME);
+            builder.addConstructorArgValue(ReleaseStrategyHandler.METHOD_NAME);
         });
     }
 
