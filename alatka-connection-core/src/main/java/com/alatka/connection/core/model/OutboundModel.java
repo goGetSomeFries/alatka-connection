@@ -16,6 +16,7 @@ public enum OutboundModel {
 
     redirect(RedirectOutboundProperty.class, false),
     subflow(SubflowOutboundProperty.class, true),
+    forward(ForwardOutboundProperty.class, false),
     router(RouterOutboundProperty.class, false),
     jdbc(JdbcOutboundProperty.class, false),
     custom(CustomOutboundProperty.class, true),
