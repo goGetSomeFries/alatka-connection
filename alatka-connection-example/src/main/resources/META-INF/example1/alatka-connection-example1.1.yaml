@@ -1,7 +1,7 @@
 alatka.connection:
   enabled: true
   desc: http GET请求获取url参数并响应
-  route:
+  flow:
     inbound:
       http:
         paths: [ /example1/1 ]

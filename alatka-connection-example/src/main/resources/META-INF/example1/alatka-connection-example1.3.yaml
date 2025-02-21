@@ -1,7 +1,7 @@
 alatka.connection:
   enabled: true
   desc: http 输出请求响应报文日志
-  route:
+  flow:
     inbound:
       http:
         paths:

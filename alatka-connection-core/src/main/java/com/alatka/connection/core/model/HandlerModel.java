@@ -13,6 +13,7 @@ public enum HandlerModel {
     transformer(TransformerHandlerProperty.class),
     null_(NullHandlerProperty.class),
     splitter(SplitterHandlerProperty.class),
+    aggregator(AggregatorHandlerProperty.class),
     jdbc(JdbcHandlerProperty.class),
     subflow(SubflowHandlerProperty.class),
     consumer(ConsumerHandlerProperty.class),

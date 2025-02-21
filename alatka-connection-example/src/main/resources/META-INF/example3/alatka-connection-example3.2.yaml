@@ -1,7 +1,7 @@
 alatka.connection:
   enabled: false
   desc: splitter组件拆分集合
-  route:
+  flow:
     inbound:
       mocker:
         poller: defaultPollerMetadata

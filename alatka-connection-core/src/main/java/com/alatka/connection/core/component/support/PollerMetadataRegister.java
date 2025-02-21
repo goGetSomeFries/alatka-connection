@@ -19,7 +19,7 @@ import java.util.function.Function;
  * @author ybliu
  * @see PollerMetadata
  */
-public class PollerMetadataRegister extends SupportComponentRegister<PollerMetadataProperty, Class<PollerMetadataProperty>> {
+public class PollerMetadataRegister extends SupportComponentRegister<PollerMetadataProperty> {
 
     private Map<TriggerProperty.Type, Function<Object, Trigger>> mapping;
 

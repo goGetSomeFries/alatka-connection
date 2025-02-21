@@ -1,7 +1,7 @@
 alatka.connection:
   enabled: true
   desc: outbound mocker-多用于挡板
-  route:
+  flow:
     inbound:
       http:
         paths: [ /example2/1 ]
