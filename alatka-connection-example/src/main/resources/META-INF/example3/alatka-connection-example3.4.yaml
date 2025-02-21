@@ -1,7 +1,7 @@
 alatka.connection:
   enabled: true
   desc: passthrough组件
-  route:
+  flow:
     inbound:
       http:
         paths: [ /example3/4 ]

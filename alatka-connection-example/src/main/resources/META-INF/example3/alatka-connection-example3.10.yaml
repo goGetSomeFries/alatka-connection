@@ -1,7 +1,7 @@
 alatka.connection:
   enabled: true
   desc: subflow/gateway组件
-  route:
+  flow:
     inbound:
       gateway:
     outbound:

@@ -1,7 +1,7 @@
 alatka.connection:
   enabled: false
   desc: queue channel
-  route:
+  flow:
     inbound:
       mocker:
         poller: defaultPollerMetadata
