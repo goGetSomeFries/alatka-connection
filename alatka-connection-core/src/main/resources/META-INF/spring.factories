@@ -29,6 +29,7 @@ com.alatka.connection.core.component.outbound.OutboundComponentRegister=\
   com.alatka.connection.core.component.outbound.CustomOutboundRegister,\
   com.alatka.connection.core.component.outbound.RouterOutboundRegister,\
   com.alatka.connection.core.component.outbound.SubflowOutboundRegister,\
+  com.alatka.connection.core.component.outbound.ForwardOutboundRegister,\
   com.alatka.connection.core.component.outbound.RedirectOutboundRegister
 com.alatka.connection.core.component.inbound.InboundComponentRegister=\
   com.alatka.connection.core.component.inbound.GatewayInboundRegister,\

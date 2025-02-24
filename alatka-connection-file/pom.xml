@@ -7,25 +7,16 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>alatka-connection-example</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>alatka-connection-file</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.alatka.connection</groupId>
-            <artifactId>alatka-connection-spring-boot-starter</artifactId>
+            <artifactId>alatka-connection-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.alatka.connection</groupId>
-            <artifactId>alatka-connection-http</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alatka.connection</groupId>
-            <artifactId>alatka-connection-file</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alatka.connection</groupId>
-            <artifactId>alatka-connection-test</artifactId>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-file</artifactId>
         </dependency>
     </dependencies>
 </project>
