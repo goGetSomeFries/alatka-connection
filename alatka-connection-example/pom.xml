@@ -21,6 +21,10 @@
         </dependency>
         <dependency>
             <groupId>com.alatka.connection</groupId>
+            <artifactId>alatka-connection-file</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alatka.connection</groupId>
             <artifactId>alatka-connection-test</artifactId>
         </dependency>
     </dependencies>
