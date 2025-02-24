@@ -1,0 +1,9 @@
+com.alatka.connection.core.component.inbound.InboundComponentRegister=\
+  com.alatka.connection.file.component.inbound.FileV1InboundRegister,\
+  com.alatka.connection.file.component.inbound.FileV2InboundRegister,\
+  com.alatka.connection.file.component.inbound.FileV3InboundRegister
+com.alatka.connection.core.component.outbound.OutboundComponentRegister=\
+  com.alatka.connection.file.component.outbound.FileOutboundRegister
+com.alatka.connection.core.component.handler.HandlerComponentRegister=\
+  com.alatka.connection.file.component.handler.FileTransformerHandlerRegister,\
+  com.alatka.connection.file.component.handler.FileSplitterHandlerRegister
