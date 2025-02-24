@@ -1,6 +1,8 @@
 package com.alatka.connection.core.model;
 
 import com.alatka.connection.core.property.core.*;
+import com.alatka.connection.core.property.file.FileSplitterHandlerProperty;
+import com.alatka.connection.core.property.file.FileTransformerHandlerProperty;
 import com.alatka.connection.core.property.jdbc.JdbcHandlerProperty;
 import com.alatka.connection.core.property.ratelimiter.RateLimiterHandlerProperty;
 
@@ -11,9 +13,11 @@ public enum HandlerModel {
     logger(LoggerHandlerProperty.class),
     filter(FilterHandlerProperty.class),
     transformer(TransformerHandlerProperty.class),
+    file_transformer(FileTransformerHandlerProperty.class),
     null_(NullHandlerProperty.class),
     splitter(SplitterHandlerProperty.class),
     aggregator(AggregatorHandlerProperty.class),
+    file_splitter(FileSplitterHandlerProperty.class),
     jdbc(JdbcHandlerProperty.class),
     subflow(SubflowHandlerProperty.class),
     consumer(ConsumerHandlerProperty.class),
