@@ -9,9 +9,10 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 /**
- * TODO
+ * 多类型SupportComponentRegister
  *
  * @author ybliu
+ * @see MultiTypeSupportProperty
  */
 public abstract class MultiTypeSupportComponentRegister<T extends MultiTypeSupportProperty> extends SupportComponentRegister<T> {
 

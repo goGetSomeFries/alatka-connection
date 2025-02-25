@@ -1,28 +1,27 @@
 package com.alatka.connection.socket.component.support;
 
-import com.alatka.connection.core.component.support.SupportComponentRegister;
+import com.alatka.connection.core.component.support.MultiTypeSupportComponentRegister;
 import com.alatka.connection.core.property.socket.SerializerProperty;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.integration.ip.tcp.serializer.AbstractByteArraySerializer;
 import org.springframework.integration.ip.tcp.serializer.ByteArraySingleTerminatorSerializer;
 
-import java.util.Map;
-
 /**
+ * {@link AbstractByteArraySerializer}组件注册器
+ *
  * @author ybliu
+ * @see AbstractByteArraySerializer
  */
-public class ByteArraySingleTerminatorSerializerRegister extends SupportComponentRegister<SerializerProperty> {
-
-    private static final String KEY_DELIMITER = "delimiter";
+public class ByteArraySingleTerminatorSerializerRegister extends MultiTypeSupportComponentRegister<SerializerProperty> {
 
     @Override
-    protected void doRegister(BeanDefinitionBuilder builder, SerializerProperty property) {
-        Map<String, Object> params = property.getParams();
-        builder.addConstructorArgValue(params.get(KEY_DELIMITER));
-    }
+    protected void initialize() {
+        initMap();
 
-    @Override
-    protected Class<?> componentClass(SerializerProperty property) {
-        return ByteArraySingleTerminatorSerializer.class;
+        initComponentClass(SerializerProperty.Type.singleTerminator, ByteArraySingleTerminatorSerializer.class);
+        initComponentInit(SerializerProperty.Type.singleTerminator, (builder, params) -> {
+            SerializerProperty.SingleTerminator singleTerminator = (SerializerProperty.SingleTerminator) params;
+            builder.addConstructorArgValue(singleTerminator.getDelimiter());
+        });
     }
 
     @Override

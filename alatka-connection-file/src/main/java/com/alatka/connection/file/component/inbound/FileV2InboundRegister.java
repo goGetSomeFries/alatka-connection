@@ -5,13 +5,15 @@ import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.file.FileV2InboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.file.config.FileTailInboundChannelAdapterFactoryBean;
+import org.springframework.integration.file.tail.OSDelegatingFileTailingMessageProducer;
 
 import java.io.File;
 
 /**
- * TODO
+ * {@link OSDelegatingFileTailingMessageProducer}组件注册器
  *
  * @author ybliu
+ * @see OSDelegatingFileTailingMessageProducer
  */
 public class FileV2InboundRegister extends InboundComponentRegister<FileV2InboundProperty> {
 

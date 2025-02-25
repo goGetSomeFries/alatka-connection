@@ -5,7 +5,7 @@ import com.alatka.connection.core.property.core.GatewayInboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 /**
- * TODO
+ * gateway组件注册器
  *
  * @author ybliu
  */

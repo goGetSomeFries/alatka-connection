@@ -10,9 +10,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 /**
- * TODO
+ * {@link JdbcPollingChannelAdapter}组件注册器
  *
  * @author ybliu
+ * @see JdbcPollingChannelAdapter
  */
 public class JdbcInboundRegister extends SourcePollingInboundRegister<JdbcInboundProperty> {
 

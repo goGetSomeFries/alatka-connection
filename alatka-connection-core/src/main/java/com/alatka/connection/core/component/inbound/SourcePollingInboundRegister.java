@@ -12,6 +12,12 @@ import org.springframework.integration.expression.ValueExpression;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 轮询inbound组件注册器
+ *
+ * @author whocares
+ * @see SourcePollingChannelAdapterFactoryBean
+ */
 public abstract class SourcePollingInboundRegister<T extends SourcePollingInboundProperty> extends InboundComponentRegister<T> {
 
     @Override
