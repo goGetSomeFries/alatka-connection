@@ -5,7 +5,10 @@ import com.alatka.connection.core.property.socket.TcpDuplexInboundProperty;
 import org.springframework.integration.ip.tcp.TcpInboundGateway;
 
 /**
+ * {@link TcpInboundGateway}组件注册器
+ *
  * @author ybliu
+ * @see TcpInboundGateway
  */
 public class TcpDuplexInboundRegister extends TcpInboundRegister<TcpDuplexInboundProperty> {
 

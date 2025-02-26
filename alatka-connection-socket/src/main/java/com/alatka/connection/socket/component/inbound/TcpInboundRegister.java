@@ -7,6 +7,8 @@ import com.alatka.connection.socket.component.other.TcpConnectionFactoryFactoryB
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 /**
+ * tcp组件注册器
+ *
  * @author ybliu
  */
 public abstract class TcpInboundRegister<T extends TcpInboundProperty> extends InboundComponentRegister<T> {
