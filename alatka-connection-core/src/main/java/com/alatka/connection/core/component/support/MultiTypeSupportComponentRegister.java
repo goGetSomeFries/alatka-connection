@@ -34,7 +34,8 @@ public abstract class MultiTypeSupportComponentRegister<T extends MultiTypeSuppo
         return componentClassMap.get(property.valueOf(property.getType()));
     }
 
-    protected void initMap() {
+    @Override
+    protected void initialize() {
         componentClassMap = new HashMap<>();
         componentInitMap = new HashMap<>();
     }

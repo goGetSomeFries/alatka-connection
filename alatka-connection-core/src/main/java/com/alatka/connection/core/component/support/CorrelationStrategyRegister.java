@@ -23,7 +23,7 @@ public class CorrelationStrategyRegister extends MultiTypeSupportComponentRegist
 
     @Override
     protected void initialize() {
-        initMap();
+        super.initialize();
 
         initComponentClass(CorrelationStrategyProperty.Type.header, HeaderAttributeCorrelationStrategy.class);
         initComponentInit(CorrelationStrategyProperty.Type.header, (builder, params) -> {

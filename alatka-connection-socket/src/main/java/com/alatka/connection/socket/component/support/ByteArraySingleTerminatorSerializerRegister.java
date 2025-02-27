@@ -15,7 +15,7 @@ public class ByteArraySingleTerminatorSerializerRegister extends MultiTypeSuppor
 
     @Override
     protected void initialize() {
-        initMap();
+        super.initialize();
 
         initComponentClass(SerializerProperty.Type.singleTerminator, ByteArraySingleTerminatorSerializer.class);
         initComponentInit(SerializerProperty.Type.singleTerminator, (builder, params) -> {
