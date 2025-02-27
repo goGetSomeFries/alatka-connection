@@ -1,6 +1,6 @@
 package com.alatka.connection.socket.component.other;
 
-import com.alatka.connection.core.component.AbstractComponentRegister;
+import com.alatka.connection.core.component.other.EmbeddedComponentRegister;
 import com.alatka.connection.core.property.socket.TcpConnectionProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.config.TcpConnectionFactoryFactoryBean;
@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 /**
  * @author ybliu
  */
-public class TcpConnectionFactoryFactoryBeanRegister extends AbstractComponentRegister<TcpConnectionProperty, Void> {
+public class TcpConnectionFactoryFactoryBeanRegister extends EmbeddedComponentRegister<TcpConnectionProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpConnectionProperty property) {
@@ -51,8 +51,4 @@ public class TcpConnectionFactoryFactoryBeanRegister extends AbstractComponentRe
         return "tcp-connectionFactory";
     }
 
-    @Override
-    public Void mappingKey() {
-        return null;
-    }
 }
