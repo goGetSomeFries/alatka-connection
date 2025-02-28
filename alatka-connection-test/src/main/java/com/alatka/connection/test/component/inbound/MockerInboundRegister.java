@@ -9,7 +9,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.endpoint.MessageProcessorMessageSource;
 
 /**
- * 模拟数据组件注册器
+ * 模数据拟组件注册器
  *
  * @author ybliu
  * @see InboundMocker#mockInbound()
