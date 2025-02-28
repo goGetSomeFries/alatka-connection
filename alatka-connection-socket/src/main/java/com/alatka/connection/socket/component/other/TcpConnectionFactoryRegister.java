@@ -8,8 +8,9 @@ import org.springframework.util.StringUtils;
 
 /**
  * @author ybliu
+ * @see TcpConnectionFactoryFactoryBean
  */
-public class TcpConnectionFactoryFactoryBeanRegister extends EmbeddedComponentRegister<TcpConnectionProperty> {
+public class TcpConnectionFactoryRegister extends EmbeddedComponentRegister<TcpConnectionProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, TcpConnectionProperty property) {

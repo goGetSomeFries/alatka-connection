@@ -14,13 +14,14 @@ import java.util.Map;
 @SuppressWarnings({"rawtypes"})
 public class ConsumerModuleBuilder extends AbstractModuleBuilder<ConsumerProperty, ConsumerProperty> {
 
+    private final ConsumerEndpointRegister componentRegister = new ConsumerEndpointRegister();
+
     public ConsumerModuleBuilder(String identity) {
         super(identity);
     }
 
     @Override
     protected void doBuild(ConsumerProperty property, Map<Object, ? extends ComponentRegister> mapping) {
-        ConsumerEndpointRegister componentRegister = new ConsumerEndpointRegister();
         componentRegister.register(property);
     }
 

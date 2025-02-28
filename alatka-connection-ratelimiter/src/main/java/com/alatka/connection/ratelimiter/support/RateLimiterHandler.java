@@ -12,7 +12,7 @@ public class RateLimiterHandler implements MessageProcessor<Object> {
 
     private final Logger logger = LoggerFactory.getLogger(RateLimiterHandler.class);
 
-    private RateLimiter rateLimiter;
+    private final RateLimiter rateLimiter;
 
     private boolean blocked;
 

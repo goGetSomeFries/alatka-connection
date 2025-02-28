@@ -1,0 +1,23 @@
+alatka.connection:
+  enabled: true
+  desc: socket双工
+  route:
+    inbound:
+      tcp_duplex:
+        port: 18888
+        readTimeout: 40000
+        serializer: fallback@byteArrayCrLfSerializer
+        deserializer: fallback@byteArrayCrLfSerializer
+        tcpMessageMapper: fallback@defaultTcpMessageMapper
+        taskExecutor: defaultTaskExecutor
+    outbound:
+      custom:
+        className: com.alatka.connection.example.service.LoggerService
+  definition:
+    taskExecutors:
+      - id: defaultTaskExecutor
+        corePoolSize: 2
+        maxPoolSize: 10
+        queueCapacity: 5
+        keepAliveSeconds: 60
+        threadNamePrefix: alatka-example6.1-

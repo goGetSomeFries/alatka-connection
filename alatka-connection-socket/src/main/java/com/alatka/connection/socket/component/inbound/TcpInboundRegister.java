@@ -3,7 +3,7 @@ package com.alatka.connection.socket.component.inbound;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.property.socket.TcpConnectionProperty;
 import com.alatka.connection.core.property.socket.TcpInboundProperty;
-import com.alatka.connection.socket.component.other.TcpConnectionFactoryFactoryBeanRegister;
+import com.alatka.connection.socket.component.other.TcpConnectionFactoryRegister;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
  */
 public abstract class TcpInboundRegister<T extends TcpInboundProperty> extends InboundComponentRegister<T> {
 
-    private final TcpConnectionFactoryFactoryBeanRegister componentRegister = new TcpConnectionFactoryFactoryBeanRegister();
+    private final TcpConnectionFactoryRegister componentRegister = new TcpConnectionFactoryRegister();
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, T property) {

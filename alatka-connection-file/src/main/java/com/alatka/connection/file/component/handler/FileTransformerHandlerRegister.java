@@ -8,9 +8,12 @@ import org.springframework.integration.file.transformer.FileToByteArrayTransform
 import org.springframework.integration.file.transformer.FileToStringTransformer;
 
 /**
- * TODO
+ * 文件转换组件注册器
  *
  * @author ybliu
+ * @see FileToByteArrayTransformer
+ * @see FileToStringTransformer
+ * @see com.alatka.connection.core.model.HandlerModel#file_transformer
  */
 public class FileTransformerHandlerRegister extends HandlerComponentRegister<FileTransformerHandlerProperty> {
 

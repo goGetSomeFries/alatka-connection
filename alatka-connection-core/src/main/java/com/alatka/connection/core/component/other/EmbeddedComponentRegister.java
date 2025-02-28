@@ -5,7 +5,7 @@ import com.alatka.connection.core.property.core.Property;
 import org.springframework.core.io.support.SpringFactoriesLoader;
 
 /**
- * 内嵌组件注册器，非通过{@link SpringFactoriesLoader#FACTORIES_RESOURCE_LOCATION}创建
+ * 内嵌组件注册器，直接new创建，非通过{@link SpringFactoriesLoader#FACTORIES_RESOURCE_LOCATION}创建
  *
  * @author ybliu
  */
