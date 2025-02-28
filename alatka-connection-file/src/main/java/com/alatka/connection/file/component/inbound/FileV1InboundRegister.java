@@ -12,6 +12,7 @@ import java.io.File;
  * // TODO 未实现
  *
  * @author ybliu
+ * @see InboundModel#file_v1
  */
 public class FileV1InboundRegister extends SourcePollingInboundRegister<FileV1InboundProperty> {
 

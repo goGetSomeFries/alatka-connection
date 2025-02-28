@@ -14,6 +14,7 @@ import java.io.File;
  *
  * @author ybliu
  * @see ApacheCommonsFileTailingMessageProducer
+ * @see InboundModel#file_v3
  */
 public class FileV3InboundRegister extends InboundComponentRegister<FileV3InboundProperty> {
 

@@ -16,6 +16,7 @@ import org.springframework.messaging.Message;
  *
  * @author ybliu
  * @see OutboundMocker#mockOutbound(Message)
+ * @see com.alatka.connection.core.model.OutboundModel#mocker
  */
 public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutboundProperty> {
 
@@ -43,7 +44,7 @@ public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutb
         return MockerOutboundProperty.class;
     }
 
-    private class InnerMockerOutboundRegister extends MessageProcessorRegister<MessageProcessorProperty> {
+    private static class InnerMockerOutboundRegister extends MessageProcessorRegister<MessageProcessorProperty> {
 
         @Override
         protected Class<ServiceActivatorFactoryBean> componentClass(MessageProcessorProperty property) {

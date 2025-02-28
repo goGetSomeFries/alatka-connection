@@ -9,6 +9,7 @@ import org.springframework.integration.ip.tcp.TcpInboundGateway;
  *
  * @author ybliu
  * @see TcpInboundGateway
+ * @see InboundModel#tcp_duplex
  */
 public class TcpDuplexInboundRegister extends TcpInboundRegister<TcpDuplexInboundProperty> {
 

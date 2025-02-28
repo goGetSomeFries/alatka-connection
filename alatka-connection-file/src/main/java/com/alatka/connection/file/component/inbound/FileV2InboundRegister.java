@@ -14,6 +14,7 @@ import java.io.File;
  *
  * @author ybliu
  * @see OSDelegatingFileTailingMessageProducer
+ * @see InboundModel#file_v2
  */
 public class FileV2InboundRegister extends InboundComponentRegister<FileV2InboundProperty> {
 

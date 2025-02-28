@@ -9,6 +9,7 @@ import org.springframework.integration.ip.tcp.TcpReceivingChannelAdapter;
  *
  * @author ybliu
  * @see TcpReceivingChannelAdapter
+ * @see InboundModel#tcp_simplex
  */
 public class TcpSimplexInboundRegister extends TcpInboundRegister<TcpSimplexInboundProperty> {
 

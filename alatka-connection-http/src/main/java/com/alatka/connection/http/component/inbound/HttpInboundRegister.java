@@ -23,6 +23,7 @@ import java.util.stream.Stream;
  *
  * @author ybliu
  * @see HttpRequestHandlingMessagingGateway
+ * @see InboundModel#http
  */
 public class HttpInboundRegister extends InboundComponentRegister<HttpInboundProperty> {
 

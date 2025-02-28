@@ -13,6 +13,7 @@ import org.springframework.integration.endpoint.MessageProcessorMessageSource;
  *
  * @author ybliu
  * @see InboundMocker#mockInbound()
+ * @see InboundModel#mocker
  */
 public class MockerInboundRegister extends SourcePollingInboundRegister<MockerInboundProperty> {
 

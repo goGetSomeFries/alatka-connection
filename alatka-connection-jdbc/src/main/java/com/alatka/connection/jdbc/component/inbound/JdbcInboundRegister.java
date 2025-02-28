@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
  *
  * @author ybliu
  * @see JdbcPollingChannelAdapter
+ * @see InboundModel#jdbc
  */
 public class JdbcInboundRegister extends SourcePollingInboundRegister<JdbcInboundProperty> {
 

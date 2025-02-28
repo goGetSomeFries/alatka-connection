@@ -13,6 +13,7 @@ import org.springframework.integration.handler.BridgeHandler;
  *
  * @author ybliu
  * @see BridgeHandler
+ * @see InboundModel#redirect
  */
 public class RedirectInboundRegister extends InboundComponentRegister<RedirectInboundProperty> {
 

@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.core;
 
-import javax.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 /**
  * alatka.connection.route.outbound.subflow
@@ -9,64 +9,14 @@ import javax.validation.constraints.NotEmpty;
  */
 public class SubflowOutboundProperty extends OutboundProperty {
 
-    @NotEmpty
-    private String identity;
+    @JsonUnwrapped
+    private SubflowHandlerProperty subflow;
 
-    private String requestChannel;
-
-    private String replyChannel;
-
-    private String errorChannel;
-
-    private Long requestTimeout;
-
-    private Long replyTimeout;
-
-    public String getIdentity() {
-        return identity;
+    public SubflowHandlerProperty getSubflow() {
+        return subflow;
     }
 
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
-
-    public String getRequestChannel() {
-        return requestChannel;
-    }
-
-    public void setRequestChannel(String requestChannel) {
-        this.requestChannel = requestChannel;
-    }
-
-    public String getReplyChannel() {
-        return replyChannel;
-    }
-
-    public void setReplyChannel(String replyChannel) {
-        this.replyChannel = replyChannel;
-    }
-
-    public String getErrorChannel() {
-        return errorChannel;
-    }
-
-    public void setErrorChannel(String errorChannel) {
-        this.errorChannel = errorChannel;
-    }
-
-    public Long getRequestTimeout() {
-        return requestTimeout;
-    }
-
-    public void setRequestTimeout(Long requestTimeout) {
-        this.requestTimeout = requestTimeout;
-    }
-
-    public Long getReplyTimeout() {
-        return replyTimeout;
-    }
-
-    public void setReplyTimeout(Long replyTimeout) {
-        this.replyTimeout = replyTimeout;
+    public void setSubflow(SubflowHandlerProperty subflow) {
+        this.subflow = subflow;
     }
 }

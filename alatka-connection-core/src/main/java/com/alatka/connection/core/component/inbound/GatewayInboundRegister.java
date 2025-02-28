@@ -8,6 +8,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
  * gateway组件注册器
  *
  * @author ybliu
+ * @see InboundModel#gateway
  */
 public class GatewayInboundRegister extends InboundComponentRegister<GatewayInboundProperty> {
 

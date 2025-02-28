@@ -6,6 +6,10 @@ import com.alatka.connection.core.util.ClassUtil;
 import com.alatka.connection.jdbc.support.JdbcMessageProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
+/**
+ * @author whocares
+ * @see JdbcMessageProcessor
+ */
 public class JdbcMessageProcessorRegister extends EmbeddedComponentRegister<JdbcHandlerProperty> {
 
     @Override
