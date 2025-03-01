@@ -39,7 +39,7 @@ public class MockerOutboundRegister extends OutboundComponentRegister<MockerOutb
 
         @Override
         protected Class<ServiceActivatorFactoryBean> componentClass(MessageProcessorProperty property) {
-            return ServiceActivatorFactoryBean.class;
+            return null;
         }
 
         @Override
