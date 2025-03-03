@@ -9,10 +9,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.endpoint.MessageProcessorMessageSource;
 
 /**
- * TODO
+ * 模数据拟组件注册器
  *
  * @author ybliu
  * @see InboundMocker#mockInbound()
+ * @see InboundModel#mocker
  */
 public class MockerInboundRegister extends SourcePollingInboundRegister<MockerInboundProperty> {
 

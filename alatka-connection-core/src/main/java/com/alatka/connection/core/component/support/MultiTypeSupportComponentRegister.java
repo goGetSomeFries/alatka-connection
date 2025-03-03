@@ -9,9 +9,10 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 /**
- * TODO
+ * 多类型SupportComponentRegister
  *
  * @author ybliu
+ * @see MultiTypeSupportProperty
  */
 public abstract class MultiTypeSupportComponentRegister<T extends MultiTypeSupportProperty> extends SupportComponentRegister<T> {
 
@@ -33,7 +34,8 @@ public abstract class MultiTypeSupportComponentRegister<T extends MultiTypeSuppo
         return componentClassMap.get(property.valueOf(property.getType()));
     }
 
-    protected void initMap() {
+    @Override
+    protected void initialize() {
         componentClassMap = new HashMap<>();
         componentInitMap = new HashMap<>();
     }

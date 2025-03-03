@@ -6,8 +6,6 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.AbstractStandardMessageHandlerFactoryBean;
 
 /**
- * TODO
- *
  * @author ybliu
  */
 public abstract class MessageProcessorRegister<T extends MessageProcessorProperty> extends HandlerComponentRegister<T> {

@@ -23,7 +23,7 @@ public class ReleaseStrategyRegister extends MultiTypeSupportComponentRegister<R
 
     @Override
     protected void initialize() {
-        initMap();
+        super.initialize();
 
         initComponentClass(ReleaseStrategyProperty.Type.messageCount, MessageCountReleaseStrategy.class);
         initComponentInit(ReleaseStrategyProperty.Type.messageCount, (builder, params) -> {

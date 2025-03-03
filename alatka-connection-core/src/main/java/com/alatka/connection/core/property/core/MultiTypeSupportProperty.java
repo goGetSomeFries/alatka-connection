@@ -3,7 +3,8 @@ package com.alatka.connection.core.property.core;
 import javax.validation.constraints.NotNull;
 
 /**
- * alatka.connection.definition
+ * alatka.connection.definition<br>
+ * 通过type标识不同类型，params代表类型定制化属性
  *
  * @author ybliu
  */

@@ -4,6 +4,11 @@ import com.alatka.connection.core.annotation.IdentityProperty;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * alatka.connection.flow.processors[n].handler.aggregator
+ *
+ * @author whocares
+ */
 public class AggregatorHandlerProperty extends ChannelAdapterProperty {
 
     @NotNull

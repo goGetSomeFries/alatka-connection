@@ -1,7 +1,7 @@
 package com.alatka.connection.core.property.core;
 
 /**
- * alatka.connection.route.inbound.gateway
+ * alatka.connection.flow.inbound.gateway
  *
  * @author ybliu
  */

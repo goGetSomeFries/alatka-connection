@@ -1,7 +1,7 @@
 package com.alatka.connection.core.property.socket;
 
 /**
- * alatka.connection.inbound.tcp_duplex
+ * alatka.connection.flow.inbound.tcp_duplex
  *
  * @author ybliu
  */

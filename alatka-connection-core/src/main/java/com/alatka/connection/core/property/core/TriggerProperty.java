@@ -20,7 +20,7 @@ public class TriggerProperty {
     public enum Type {
         periodic(PeriodicProperty.class), cron(CronProperty.class);
 
-        private Class<?> clazz;
+        private final Class<?> clazz;
 
         Type(Class<?> clazz) {
             this.clazz = clazz;

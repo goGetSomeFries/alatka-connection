@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
  * alatka.connection.definition.pollerMetadata
  *
  * @author ybliu
+ * @see org.springframework.integration.scheduling.PollerMetadata
  */
 public class PollerMetadataProperty extends SupportProperty {
 

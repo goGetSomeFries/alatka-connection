@@ -6,9 +6,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.file.splitter.FileSplitter;
 
 /**
- * TODO
+ * 文件拆分组件注册器
  *
  * @author ybliu
+ * @see FileSplitter
+ * @see com.alatka.connection.core.model.HandlerModel#file_splitter
  */
 public class FileSplitterHandlerRegister extends HandlerComponentRegister<FileSplitterHandlerProperty> {
 

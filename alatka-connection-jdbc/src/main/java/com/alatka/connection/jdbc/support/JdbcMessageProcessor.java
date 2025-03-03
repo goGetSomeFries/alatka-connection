@@ -1,6 +1,6 @@
 package com.alatka.connection.jdbc.support;
 
-import org.springframework.integration.handler.MessageProcessor;
+import com.alatka.connection.core.support.CustomMessageHandler;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -11,9 +11,9 @@ import org.springframework.messaging.Message;
 import javax.sql.DataSource;
 import java.util.Map;
 
-public class JdbcMessageProcessor implements MessageProcessor<Object> {
+public class JdbcMessageProcessor implements CustomMessageHandler<Object, Object> {
 
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
     private boolean multiple;
 
@@ -30,10 +30,10 @@ public class JdbcMessageProcessor implements MessageProcessor<Object> {
     }
 
     @Override
-    public Object processMessage(Message<?> message) {
+    public Object doExecute(Message<Object> message) {
         Object payload = message.getPayload();
         SqlParameterSource sqlParameterSource = payload instanceof Map ?
-                new MapSqlParameterSource((Map<String, ?>) payload) : new BeanPropertySqlParameterSource(payload);
+                new MapSqlParameterSource((Map<String, Object>) payload) : new BeanPropertySqlParameterSource(payload);
         if (multiple) {
             return resultClass == null ? jdbcTemplate.queryForList(sql, sqlParameterSource) :
                     this.jdbcTemplate.queryForList(sql, sqlParameterSource, resultClass);
@@ -53,4 +53,5 @@ public class JdbcMessageProcessor implements MessageProcessor<Object> {
     public void setResultClass(Class<?> resultClass) {
         this.resultClass = resultClass;
     }
+
 }

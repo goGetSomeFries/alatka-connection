@@ -8,9 +8,11 @@ import org.springframework.integration.gateway.GatewayMessageHandler;
 import java.util.Optional;
 
 /**
- * TODO
+ * 子流程组件注册器
  *
  * @author ybliu
+ * @see GatewayMessageHandler
+ * @see com.alatka.connection.core.model.HandlerModel#subflow
  */
 public class SubflowHandlerRegister extends HandlerComponentRegister<SubflowHandlerProperty> {
 

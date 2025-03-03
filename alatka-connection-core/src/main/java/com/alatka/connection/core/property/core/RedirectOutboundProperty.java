@@ -3,7 +3,7 @@ package com.alatka.connection.core.property.core;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * alatka.connection.route.outbound.redirect
+ * alatka.connection.flow.outbound.redirect
  *
  * @author ybliu
  */

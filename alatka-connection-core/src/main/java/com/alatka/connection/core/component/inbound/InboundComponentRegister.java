@@ -7,7 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import java.util.Optional;
 
 /**
- * TODO
+ * Inbound组件注册器
  *
  * @author ybliu
  */

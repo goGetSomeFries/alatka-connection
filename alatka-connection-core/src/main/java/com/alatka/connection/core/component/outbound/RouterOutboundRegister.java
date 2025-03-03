@@ -1,8 +1,7 @@
 package com.alatka.connection.core.component.outbound;
 
+import com.alatka.connection.core.component.channel.DirectChannelRegister;
 import com.alatka.connection.core.config.DefaultConfig;
-import com.alatka.connection.core.module.ChannelModuleBuilder;
-import com.alatka.connection.core.module.ChannelModuleBuilderAware;
 import com.alatka.connection.core.property.core.ChannelProperty;
 import com.alatka.connection.core.property.core.RouterOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -14,13 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * TODO
+ * {@link RecipientListRouter}组件注册器
  *
  * @author ybliu
+ * @see RecipientListRouter
+ * @see com.alatka.connection.core.model.OutboundModel#router
  */
-public class RouterOutboundRegister extends OutboundComponentRegister<RouterOutboundProperty> implements ChannelModuleBuilderAware {
+public class RouterOutboundRegister extends OutboundComponentRegister<RouterOutboundProperty> {
 
-    private ChannelModuleBuilder channelModuleBuilder;
+    private final DirectChannelRegister channelRegister = new DirectChannelRegister();
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, RouterOutboundProperty property) {
@@ -42,8 +43,7 @@ public class RouterOutboundRegister extends OutboundComponentRegister<RouterOutb
             ChannelProperty channel = new ChannelProperty();
             channel.setId(property.getChannel());
             channel.setType(ChannelProperty.Type.direct);
-            channelModuleBuilder.build(channel);
-            property.setChannel(channelModuleBuilder.getBeanName());
+            channelRegister.register(channel);
         }
     }
 
@@ -69,8 +69,4 @@ public class RouterOutboundRegister extends OutboundComponentRegister<RouterOutb
         return RouterOutboundProperty.class;
     }
 
-    @Override
-    public void setChannelModuleBuilder(ChannelModuleBuilder channelModuleBuilder) {
-        this.channelModuleBuilder = channelModuleBuilder;
-    }
 }

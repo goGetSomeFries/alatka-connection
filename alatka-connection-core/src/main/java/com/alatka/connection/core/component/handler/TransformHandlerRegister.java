@@ -5,11 +5,13 @@ import com.alatka.connection.core.support.TransformMessageHandler;
 import org.springframework.integration.config.TransformerFactoryBean;
 
 /**
- * TODO
+ * 转换器组件注册器
  *
  * @author ybliu
  * @see TransformMessageHandler
+ * @see com.alatka.connection.core.model.HandlerModel#transformer
  */
+@SuppressWarnings("rawtypes")
 public class TransformHandlerRegister extends MessageProcessorRegister<TransformerHandlerProperty> {
 
     @Override

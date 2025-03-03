@@ -6,6 +6,7 @@ import javax.validation.constraints.NotEmpty;
  * alatka.connection.definition.messageGroupProcessors
  *
  * @author ybliu
+ * @see org.springframework.integration.aggregator.MessageGroupProcessor
  */
 public class MessageGroupProcessorProperty extends MultiTypeSupportProperty {
 

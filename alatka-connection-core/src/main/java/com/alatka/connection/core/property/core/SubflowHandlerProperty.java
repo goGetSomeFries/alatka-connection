@@ -2,6 +2,11 @@ package com.alatka.connection.core.property.core;
 
 import javax.validation.constraints.NotEmpty;
 
+/**
+ * alatka.connection.flow.processors[n].handler.subflow
+ *
+ * @author whocares
+ */
 public class SubflowHandlerProperty extends ChannelAdapterProperty {
 
     @NotEmpty

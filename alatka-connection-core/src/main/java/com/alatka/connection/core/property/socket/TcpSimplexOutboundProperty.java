@@ -1,7 +1,7 @@
 package com.alatka.connection.core.property.socket;
 
 /**
- * alatka.connection.outbound.tcp_simplex
+ * alatka.connection.flow.outbound.tcp_simplex
  *
  * @author ybliu
  */

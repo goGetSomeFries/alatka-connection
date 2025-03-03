@@ -5,9 +5,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
 
 /**
- * TODO
+ * 透传组件注册器
  *
  * @author ybliu
+ * @see BridgeHandler
+ * @see com.alatka.connection.core.model.HandlerModel#passthrough
  */
 public class PassthroughHandlerRegister extends HandlerComponentRegister<PassthroughHandlerProperty> {
 

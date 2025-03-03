@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
  * alatka.connection.definition.taskExecutors
  *
  * @author ybliu
+ * @see org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
  */
 public class TaskExecutorProperty extends SupportProperty {
 

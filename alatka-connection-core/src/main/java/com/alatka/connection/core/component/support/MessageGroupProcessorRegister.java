@@ -20,7 +20,7 @@ public class MessageGroupProcessorRegister extends MultiTypeSupportComponentRegi
 
     @Override
     protected void initialize() {
-        initMap();
+        super.initialize();
 
         initComponentClass(MessageGroupProcessorProperty.Type.simple, SimpleMessageGroupProcessor.class);
         initComponentInit(MessageGroupProcessorProperty.Type.simple, (builder, params) -> {

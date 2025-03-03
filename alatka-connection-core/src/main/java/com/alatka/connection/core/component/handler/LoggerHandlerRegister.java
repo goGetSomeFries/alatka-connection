@@ -1,16 +1,17 @@
 package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.property.core.LoggerHandlerProperty;
-import com.alatka.connection.core.support.ConsumerMessageHandler;
 import com.alatka.connection.core.support.CustomMessageHandler;
 import com.alatka.connection.core.support.LoggerMessageHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.ServiceActivatorFactoryBean;
 
 /**
- * TODO
+ * 日志组件注册器
  *
  * @author ybliu
+ * @see LoggerMessageHandler
+ * @see com.alatka.connection.core.model.HandlerModel#logger
  */
 public class LoggerHandlerRegister extends MessageProcessorRegister<LoggerHandlerProperty> {
 
@@ -21,8 +22,8 @@ public class LoggerHandlerRegister extends MessageProcessorRegister<LoggerHandle
     }
 
     @Override
-    protected Class<ConsumerMessageHandler> handlerClass() {
-        return ConsumerMessageHandler.class;
+    protected Class<LoggerMessageHandler> handlerClass() {
+        return LoggerMessageHandler.class;
     }
 
     @Override

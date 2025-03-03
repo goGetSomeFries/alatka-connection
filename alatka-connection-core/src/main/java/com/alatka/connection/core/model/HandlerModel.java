@@ -6,6 +6,11 @@ import com.alatka.connection.core.property.file.FileTransformerHandlerProperty;
 import com.alatka.connection.core.property.jdbc.JdbcHandlerProperty;
 import com.alatka.connection.core.property.ratelimiter.RateLimiterHandlerProperty;
 
+/**
+ * alatka.connection.flow.processors[n].handler
+ *
+ * @author ybliu
+ */
 public enum HandlerModel {
 
     rateLimiter(RateLimiterHandlerProperty.class),

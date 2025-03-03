@@ -19,7 +19,7 @@ public class MessageGroupStoreRegister extends MultiTypeSupportComponentRegister
 
     @Override
     protected void initialize() {
-        initMap();
+        super.initialize();
 
         initComponentClass(MessageGroupStoreProperty.Type.simple, SimpleMessageStore.class);
         initComponentInit(MessageGroupStoreProperty.Type.simple, (builder, params) -> {

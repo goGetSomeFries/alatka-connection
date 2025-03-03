@@ -5,7 +5,7 @@ import com.alatka.connection.core.property.core.ProcessorProperty;
 import java.util.List;
 
 /**
- * alatka.connection.route.processors
+ * alatka.connection.flow.processors
  *
  * @author ybliu
  */

@@ -29,8 +29,8 @@ public class DefinitionModuleBuilder extends AbstractModuleBuilder<Map<Definitio
     }
 
     @Override
-    protected void doBuild(List<? extends SupportProperty> models, Map<Object, ? extends ComponentRegister> mapping) {
-        models.forEach(property -> {
+    protected void doBuild(List<? extends SupportProperty> model, Map<Object, ? extends ComponentRegister> mapping) {
+        model.forEach(property -> {
             ComponentRegister componentRegister = super.getComponentRegister(property.getClass(), mapping);
             componentRegister.register(property);
         });

@@ -4,7 +4,7 @@ import com.alatka.connection.core.component.AbstractComponentRegister;
 import com.alatka.connection.core.property.core.SupportProperty;
 
 /**
- * TODO
+ * definition组件注册器
  *
  * @author ybliu
  */

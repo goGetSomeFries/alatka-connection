@@ -2,6 +2,11 @@ package com.alatka.connection.core.property.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * alatka.connection.flow.processors[n].handler.logger
+ *
+ * @author whocares
+ */
 public class LoggerHandlerProperty extends MessageProcessorProperty {
 
     private String level;

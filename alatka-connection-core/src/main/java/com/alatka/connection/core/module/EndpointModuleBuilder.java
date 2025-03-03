@@ -1,10 +1,8 @@
 package com.alatka.connection.core.module;
 
-import com.alatka.connection.core.component.ComponentRegister;
 import com.alatka.connection.core.property.core.Property;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * inbound/outbound父类
@@ -15,6 +13,7 @@ import java.util.Map;
  * @see InboundModuleBuilder
  * @see OutboundModuleBuilder
  */
+@SuppressWarnings({"rawtypes"})
 public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<T, S> {
 
     protected final ChannelModuleBuilder channelModuleBuilder;
@@ -36,15 +35,6 @@ public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<
 
         this.buildInputChannel(property);
         this.buildOutputChannel(property);
-    }
-
-    @Override
-    protected ComponentRegister getComponentRegister(Object key, Map<Object, ? extends ComponentRegister> mapping) {
-        ComponentRegister componentRegister = super.getComponentRegister(key, mapping);
-        if (componentRegister instanceof ChannelModuleBuilderAware) {
-            ((ChannelModuleBuilderAware) componentRegister).setChannelModuleBuilder(channelModuleBuilder);
-        }
-        return componentRegister;
     }
 
     /**

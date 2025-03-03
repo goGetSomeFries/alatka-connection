@@ -2,6 +2,11 @@ package com.alatka.connection.core.property.file;
 
 import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 
+/**
+ * alatka.connection.flow.processors[n].handler.file_splitter
+ *
+ * @author whocares
+ */
 public class FileSplitterHandlerProperty extends ChannelAdapterProperty {
 
     private String charset;
