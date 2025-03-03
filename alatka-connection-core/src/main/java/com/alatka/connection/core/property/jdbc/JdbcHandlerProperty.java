@@ -3,6 +3,11 @@ package com.alatka.connection.core.property.jdbc;
 import com.alatka.connection.core.property.core.MessageProcessorProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * alatka.connection.flow.processors[n].handler.jdbc
+ *
+ * @author whocares
+ */
 public class JdbcHandlerProperty extends MessageProcessorProperty {
 
     private String jdbcTemplate;

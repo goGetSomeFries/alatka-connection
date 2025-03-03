@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
 /**
- * alatka.connection.route.inbound.jdbc
+ * alatka.connection.flow.inbound.jdbc
  *
  * @author ybliu
  */

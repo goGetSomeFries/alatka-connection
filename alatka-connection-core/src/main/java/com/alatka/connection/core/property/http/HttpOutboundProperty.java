@@ -4,7 +4,7 @@ import com.alatka.connection.core.property.core.OutboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
 
 /**
- * alatka.connection.route.outbound.http
+ * alatka.connection.flow.outbound.http
  *
  * @author ybliu
  */

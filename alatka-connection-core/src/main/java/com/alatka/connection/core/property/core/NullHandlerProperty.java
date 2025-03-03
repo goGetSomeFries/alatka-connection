@@ -2,6 +2,11 @@ package com.alatka.connection.core.property.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * alatka.connection.flow.processors[n].handler.null_
+ *
+ * @author whocares
+ */
 public class NullHandlerProperty extends MessageProcessorProperty {
 
     @JsonIgnore

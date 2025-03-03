@@ -4,6 +4,8 @@ import com.alatka.connection.core.annotation.IdentityProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
+ * alatka.connection.flow.processors[n].handler
+ *
  * @author ybliu
  */
 public abstract class ChannelAdapterProperty extends Property {

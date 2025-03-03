@@ -6,7 +6,7 @@ import com.alatka.connection.core.property.core.InboundProperty;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * alatka.connection.route.inbound.file_v2
+ * alatka.connection.flow.inbound.file_v2
  *
  * @author ybliu
  */

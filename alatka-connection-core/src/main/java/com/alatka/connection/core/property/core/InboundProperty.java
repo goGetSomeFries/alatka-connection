@@ -4,7 +4,7 @@ import com.alatka.connection.core.annotation.IdentityProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * alatka.connection.route.inbound
+ * alatka.connection.flow.inbound
  *
  * @author ybliu
  */

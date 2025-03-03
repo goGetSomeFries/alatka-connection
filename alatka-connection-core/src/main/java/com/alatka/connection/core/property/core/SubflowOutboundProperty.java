@@ -3,7 +3,7 @@ package com.alatka.connection.core.property.core;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 /**
- * alatka.connection.route.outbound.subflow
+ * alatka.connection.flow.outbound.subflow
  *
  * @author ybliu
  */

@@ -4,6 +4,11 @@ import com.alatka.connection.core.property.core.ChannelAdapterProperty;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * alatka.connection.flow.processors[n].handler.ratelimiter
+ *
+ * @author whocares
+ */
 public class RateLimiterHandlerProperty extends ChannelAdapterProperty {
 
     @NotNull
