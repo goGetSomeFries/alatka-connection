@@ -7,9 +7,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.ServiceActivatingHandler;
 
 /**
- * TODO
+ * 限流组件注册器
  *
  * @author ybliu
+ * @see RateLimiterHandler
+ * @see com.alatka.connection.core.model.HandlerModel#rateLimiter
  */
 public class RateLimiterHandlerRegister extends HandlerComponentRegister<RateLimiterHandlerProperty> {
 

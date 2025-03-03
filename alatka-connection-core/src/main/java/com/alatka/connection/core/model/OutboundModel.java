@@ -9,7 +9,7 @@ import com.alatka.connection.core.property.socket.TcpSimplexOutboundProperty;
 import com.alatka.connection.core.property.test.MockerOutboundProperty;
 
 /**
- * alatka.connection.route.outbound
+ * alatka.connection.flow.outbound
  *
  * @author ybliu
  */

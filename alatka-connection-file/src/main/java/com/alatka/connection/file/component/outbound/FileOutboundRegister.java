@@ -10,9 +10,11 @@ import org.springframework.integration.file.config.FileWritingMessageHandlerFact
 import org.springframework.integration.file.support.FileExistsMode;
 
 /**
- * TODO
+ * {@link org.springframework.integration.file.FileWritingMessageHandler}组件注册器
  *
  * @author ybliu
+ * @see FileWritingMessageHandlerFactoryBean
+ * @see com.alatka.connection.core.model.OutboundModel#file
  */
 public class FileOutboundRegister extends OutboundComponentRegister<FileOutboundProperty> {
 

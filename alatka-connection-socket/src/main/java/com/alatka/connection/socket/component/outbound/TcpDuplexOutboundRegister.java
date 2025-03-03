@@ -4,6 +4,13 @@ import com.alatka.connection.core.property.socket.TcpDuplexOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpOutboundGateway;
 
+/**
+ * {@link TcpOutboundGateway}组件注册器
+ *
+ * @author whocares
+ * @see TcpOutboundGateway
+ * @see com.alatka.connection.core.model.OutboundModel#tcp_duplex
+ */
 public class TcpDuplexOutboundRegister extends TcpOutboundRegister<TcpDuplexOutboundProperty> {
 
     @Override

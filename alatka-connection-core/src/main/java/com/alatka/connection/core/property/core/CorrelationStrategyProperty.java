@@ -6,6 +6,7 @@ import javax.validation.constraints.NotEmpty;
  * alatka.connection.definition.correlationStrategies
  *
  * @author ybliu
+ * @see org.springframework.integration.aggregator.CorrelationStrategy
  */
 public class CorrelationStrategyProperty extends MultiTypeSupportProperty {
 

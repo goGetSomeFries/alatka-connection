@@ -1,38 +1,49 @@
 package com.alatka.connection.core.property.socket;
 
-import com.alatka.connection.core.property.core.SupportProperty;
+import com.alatka.connection.core.property.core.MultiTypeSupportProperty;
 
-import java.util.Map;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * alatka.connection.definition.serializers
  *
  * @author ybliu
  */
-public class SerializerProperty extends SupportProperty {
+public class SerializerProperty extends MultiTypeSupportProperty {
 
-    private Type type;
+    public enum Type implements MultiTypeSupportProperty.Type {
 
-    private Map<String, Object> params;
+        singleTerminator(SingleTerminator.class);
 
-    public enum Type {
-        byteArraySingleTerminatorSerializer,
+        private final Class<? extends Params> clazz;
+
+        Type(Class<? extends Params> clazz) {
+            this.clazz = clazz;
+        }
+
+        @Override
+        public Class<? extends Params> getClazz() {
+            return clazz;
+        }
 
     }
 
-    public Type getType() {
-        return type;
+    @Override
+    public Type valueOf(String type) {
+        return Type.valueOf(type);
     }
 
-    public void setType(Type type) {
-        this.type = type;
-    }
+    public static class SingleTerminator extends Params {
 
-    public Map<String, Object> getParams() {
-        return params;
-    }
+        @NotEmpty
+        private String delimiter;
 
-    public void setParams(Map<String, Object> params) {
-        this.params = params;
+        public String getDelimiter() {
+            return delimiter;
+        }
+
+        public void setDelimiter(String delimiter) {
+            this.delimiter = delimiter;
+        }
     }
 }

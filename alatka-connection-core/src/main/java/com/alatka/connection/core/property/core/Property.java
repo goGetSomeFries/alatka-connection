@@ -4,7 +4,10 @@ import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.annotation.IdentityProperty;
 
 /**
+ * 组件注册依赖属性
+ *
  * @author ybliu
+ * @see com.alatka.connection.core.component.ComponentRegister
  */
 public abstract class Property {
 

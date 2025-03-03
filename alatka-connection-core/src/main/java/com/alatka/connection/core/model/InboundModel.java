@@ -13,7 +13,7 @@ import com.alatka.connection.core.property.socket.TcpSimplexInboundProperty;
 import com.alatka.connection.core.property.test.MockerInboundProperty;
 
 /**
- * alatka.connection.route.inbound
+ * alatka.connection.flow.inbound
  *
  * @author ybliu
  */

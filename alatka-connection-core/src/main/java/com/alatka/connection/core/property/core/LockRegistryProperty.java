@@ -4,6 +4,7 @@ package com.alatka.connection.core.property.core;
  * alatka.connection.definition.lockRegistries
  *
  * @author ybliu
+ * @see org.springframework.integration.support.locks.LockRegistry
  */
 public class LockRegistryProperty extends MultiTypeSupportProperty {
 

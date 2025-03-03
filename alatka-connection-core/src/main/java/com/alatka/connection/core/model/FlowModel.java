@@ -14,25 +14,31 @@ import java.util.Map;
 public class FlowModel {
 
     /**
-     * alatka.connection.route.inbound
+     * alatka.connection.flow.inbound
+     *
+     * @see InboundModel
      */
     @NotEmpty
     private Map<InboundModel, Object> inbound;
 
     /**
-     * alatka.connection.route.processors
+     * alatka.connection.flow.processors
+     *
+     * @see ProcessorsModel
      */
     @JsonUnwrapped
     private ProcessorsModel processors;
 
     /**
-     * alatka.connection.route.outbound
+     * alatka.connection.flow.outbound
+     *
+     * @see OutboundModel
      */
     @NotEmpty
     private Map<OutboundModel, Object> outbound;
 
     /**
-     * alatka.connection.route.bypass
+     * alatka.connection.flow.bypass
      */
     private Map<OutboundModel, Object> bypass;
 

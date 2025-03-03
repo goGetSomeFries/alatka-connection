@@ -3,7 +3,7 @@ package com.alatka.connection.core.property.test;
 import com.alatka.connection.core.property.core.SourcePollingInboundProperty;
 
 /**
- * alatka.connection.route.inbound.mocker
+ * alatka.connection.flow.inbound.mocker
  *
  * @author ybliu
  */

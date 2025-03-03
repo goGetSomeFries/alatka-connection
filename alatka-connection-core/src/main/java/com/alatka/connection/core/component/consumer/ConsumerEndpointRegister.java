@@ -1,16 +1,15 @@
 package com.alatka.connection.core.component.consumer;
 
-import com.alatka.connection.core.component.AbstractComponentRegister;
+import com.alatka.connection.core.component.other.EmbeddedComponentRegister;
 import com.alatka.connection.core.property.core.ConsumerProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.ConsumerEndpointFactoryBean;
 
 /**
- * TODO
- *
  * @author ybliu
+ * @see ConsumerEndpointFactoryBean
  */
-public class ConsumerEndpointRegister extends AbstractComponentRegister<ConsumerProperty, Class<ConsumerProperty>> {
+public class ConsumerEndpointRegister extends EmbeddedComponentRegister<ConsumerProperty> {
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, ConsumerProperty property) {
@@ -27,10 +26,5 @@ public class ConsumerEndpointRegister extends AbstractComponentRegister<Consumer
     @Override
     protected Class<ConsumerEndpointFactoryBean> componentClass(ConsumerProperty property) {
         return ConsumerEndpointFactoryBean.class;
-    }
-
-    @Override
-    public Class<ConsumerProperty> mappingKey() {
-        return ConsumerProperty.class;
     }
 }

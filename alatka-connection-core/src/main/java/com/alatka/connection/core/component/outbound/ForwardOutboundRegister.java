@@ -6,9 +6,12 @@ import org.springframework.integration.gateway.GatewayMessageHandler;
 import org.springframework.messaging.Message;
 
 /**
- * TODO
+ * forward组件注册器
  *
  * @author ybliu
+ * @see CustomGatewayMessageHandler
+ * @see SubflowOutboundRegister
+ * @see com.alatka.connection.core.model.OutboundModel#forward
  */
 public class ForwardOutboundRegister extends OutboundComponentRegister<ForwardOutboundProperty> {
 

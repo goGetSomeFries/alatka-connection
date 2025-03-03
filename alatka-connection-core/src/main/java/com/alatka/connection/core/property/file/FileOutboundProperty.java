@@ -5,7 +5,7 @@ import com.alatka.connection.core.property.core.OutboundProperty;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * alatka.connection.route.outbound.file
+ * alatka.connection.flow.outbound.file
  *
  * @author ybliu
  */

@@ -13,12 +13,17 @@ import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * {@link HttpRequestHandlingMessagingGateway}组件注册器
+ *
  * @author ybliu
+ * @see HttpRequestHandlingMessagingGateway
+ * @see InboundModel#http
  */
 public class HttpInboundRegister extends InboundComponentRegister<HttpInboundProperty> {
 
@@ -30,13 +35,18 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
             HttpMethod[] methods = Stream.of(property.getMethods()).map(HttpMethod::resolve).toArray(HttpMethod[]::new);
             requestMapping.setMethods(methods);
         }
+        builder.addPropertyValue("requestMapping", requestMapping);
 
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        builder.addPropertyValue("requestMapping", requestMapping)
-                .addPropertyValue("validator", new SpringValidatorAdapter(validator));
+        Validator validator;
+        try (ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory()) {
+            validator = validatorFactory.getValidator();
+        }
+        builder.addPropertyValue("validator", new SpringValidatorAdapter(validator));
+
         if (property.getRequestType() != null) {
             builder.addPropertyValue("requestPayloadTypeClass", property.getRequestType());
         }
+
         if (property.getHeaderExpressions() != null) {
             Map<String, Expression> expressions = property.getHeaderExpressions().entrySet().stream()
                     .collect(Collectors.toMap(Map.Entry::getKey, entry -> new SpelExpressionParser().parseExpression(entry.getValue())));

@@ -8,7 +8,10 @@ import org.springframework.integration.ip.tcp.connection.TcpMessageMapper;
 import org.springframework.integration.mapping.BytesMessageMapper;
 
 /**
+ * {@link TcpMessageMapper}组件注册器
+ *
  * @author ybliu
+ * @see TcpMessageMapper
  */
 public class TcpMessageMapperRegister extends SupportComponentRegister<TcpMessageMapperProperty> {
 

@@ -5,11 +5,13 @@ import com.alatka.connection.core.support.CustomMessageHandler;
 import org.springframework.integration.config.ServiceActivatorFactoryBean;
 
 /**
- * TODO
+ * 自定义handler组件注册器
  *
  * @author ybliu
  * @see CustomMessageHandler
+ * @see com.alatka.connection.core.model.HandlerModel#custom
  */
+@SuppressWarnings("rawtypes")
 public class CustomHandlerRegister extends MessageProcessorRegister<CustomHandlerProperty> {
 
     @Override

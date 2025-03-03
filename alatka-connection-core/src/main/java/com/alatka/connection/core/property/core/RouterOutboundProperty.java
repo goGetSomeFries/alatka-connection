@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
- * alatka.connection.route.outbound.router
+ * alatka.connection.flow.outbound.router
  *
  * @author ybliu
  */

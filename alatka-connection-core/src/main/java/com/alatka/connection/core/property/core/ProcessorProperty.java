@@ -10,8 +10,11 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
+ * alatka.connection.flow.processors
+ *
  * @author ybliu
  */
+@SuppressWarnings({"unchecked"})
 public class ProcessorProperty extends Property {
 
     private Type type;

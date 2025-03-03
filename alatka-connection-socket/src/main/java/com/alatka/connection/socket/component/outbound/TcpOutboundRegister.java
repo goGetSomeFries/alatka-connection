@@ -3,12 +3,17 @@ package com.alatka.connection.socket.component.outbound;
 import com.alatka.connection.core.component.outbound.OutboundComponentRegister;
 import com.alatka.connection.core.property.socket.TcpConnectionProperty;
 import com.alatka.connection.core.property.socket.TcpOutboundProperty;
-import com.alatka.connection.socket.component.other.TcpConnectionFactoryFactoryBeanRegister;
+import com.alatka.connection.socket.component.other.TcpConnectionFactoryRegister;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 
+/**
+ * tcp组件注册器
+ *
+ * @author ybliu
+ */
 public abstract class TcpOutboundRegister<T extends TcpOutboundProperty> extends OutboundComponentRegister<T> {
 
-    private final TcpConnectionFactoryFactoryBeanRegister componentRegister = new TcpConnectionFactoryFactoryBeanRegister();
+    private final TcpConnectionFactoryRegister componentRegister = new TcpConnectionFactoryRegister();
 
     @Override
     protected void postDoRegister(BeanDefinitionBuilder builder, T property) {

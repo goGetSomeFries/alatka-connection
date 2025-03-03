@@ -7,7 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import java.util.Collections;
 
 /**
- * TODO
+ * channel组件注册器
  *
  * @author ybliu
  */

@@ -7,7 +7,11 @@ import org.springframework.integration.expression.ValueExpression;
 import org.springframework.integration.http.outbound.HttpRequestExecutingMessageHandler;
 
 /**
+ * {@link HttpRequestExecutingMessageHandler}组件注册器
+ *
  * @author ybliu
+ * @see HttpRequestExecutingMessageHandler
+ * @see com.alatka.connection.core.model.OutboundModel#http
  */
 public class HttpOutboundRegister extends OutboundComponentRegister<HttpOutboundProperty> {
 

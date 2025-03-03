@@ -1,40 +1,22 @@
 package com.alatka.connection.core.property.core;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+
 /**
- * alatka.connection.route.outbound.custom
+ * alatka.connection.flow.outbound.custom
  *
  * @author ybliu
  */
 public class CustomOutboundProperty extends OutboundProperty {
 
-    private String expression;
+    @JsonUnwrapped
+    private CustomHandlerProperty custom;
 
-    private String beanName;
-
-    private String className;
-
-    public String getExpression() {
-        return expression;
+    public CustomHandlerProperty getCustom() {
+        return custom;
     }
 
-    public void setExpression(String expression) {
-        this.expression = expression;
+    public void setCustom(CustomHandlerProperty custom) {
+        this.custom = custom;
     }
-
-    public String getBeanName() {
-        return beanName;
-    }
-
-    public void setBeanName(String beanName) {
-        this.beanName = beanName;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
 }

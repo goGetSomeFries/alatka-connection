@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 /**
- * alatka.connection.route.inbound.http
+ * alatka.connection.flow.inbound.http
  *
  * @author ybliu
  */
