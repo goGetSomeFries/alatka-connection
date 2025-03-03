@@ -22,13 +22,16 @@ public class RootModel {
     private String desc;
 
     /**
-     * alatka.connection.flow
+     * alatka.connection.flow<br>
+     * 兼容旧版本alatka.connection.route，之后版本考虑删除
      */
     @JsonAlias({"route"})
     private FlowModel flow;
 
     /**
      * alatka.connection.definition
+     *
+     * @see DefinitionModel
      */
     private Map<DefinitionModel, Object> definition;
 

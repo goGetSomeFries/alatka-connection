@@ -6,6 +6,7 @@ import javax.validation.constraints.NotEmpty;
  * alatka.connection.definition.releaseStrategies
  *
  * @author ybliu
+ * @see org.springframework.integration.aggregator.ReleaseStrategy
  */
 public class ReleaseStrategyProperty extends MultiTypeSupportProperty {
 

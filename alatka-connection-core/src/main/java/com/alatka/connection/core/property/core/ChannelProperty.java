@@ -3,8 +3,11 @@ package com.alatka.connection.core.property.core;
 import java.util.Map;
 
 /**
+ * alatka.connection.flow.processors[n].channel
+ *
  * @author ybliu
  */
+@SuppressWarnings({"unchecked"})
 public class ChannelProperty extends Property {
 
     private Type type;

@@ -4,6 +4,7 @@ package com.alatka.connection.core.property.core;
  * alatka.connection.definition.messageGroupStores
  *
  * @author ybliu
+ * @see org.springframework.integration.store.MessageGroupStore
  */
 public class MessageGroupStoreProperty extends MultiTypeSupportProperty {
 

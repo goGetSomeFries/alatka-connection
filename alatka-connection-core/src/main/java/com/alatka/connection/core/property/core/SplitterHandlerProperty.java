@@ -2,6 +2,11 @@ package com.alatka.connection.core.property.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * alatka.connection.flow.processors[n].handler.splitter
+ *
+ * @author whocares
+ */
 public class SplitterHandlerProperty extends MessageProcessorProperty {
 
     @JsonIgnore

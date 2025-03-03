@@ -7,10 +7,10 @@ import org.springframework.messaging.Message;
  * @author whocares
  * @see com.alatka.connection.core.component.handler.NullHandlerRegister
  */
-public class NullMessageHandler implements MessageProcessor<Object> {
+public class NullMessageHandler implements CustomMessageHandler<Object, Object> {
 
     @Override
-    public Object processMessage(Message<?> message) {
+    public Object doExecute(Message<Object> message) {
         return null;
     }
 }

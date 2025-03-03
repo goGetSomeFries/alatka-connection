@@ -7,10 +7,13 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.FilterFactoryBean;
 
 /**
- * TODO
+ * 过滤器组件注册器
  *
  * @author ybliu
+ * @see FilterFactoryBean
+ * @see com.alatka.connection.core.model.HandlerModel#filter
  */
+@SuppressWarnings("rawtypes")
 public class FilterHandlerRegister extends MessageProcessorRegister<FilterHandlerProperty> {
 
     @Override

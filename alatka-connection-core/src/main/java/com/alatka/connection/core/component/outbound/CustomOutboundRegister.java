@@ -1,15 +1,16 @@
 package com.alatka.connection.core.component.outbound;
 
 import com.alatka.connection.core.component.handler.CustomHandlerRegister;
-import com.alatka.connection.core.property.core.CustomHandlerProperty;
 import com.alatka.connection.core.property.core.CustomOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.ServiceActivatorFactoryBean;
 
 /**
- * TODO
+ * 自定义组件注册器
  *
  * @author ybliu
+ * @see CustomHandlerRegister
+ * @see com.alatka.connection.core.model.OutboundModel#custom
  */
 public class CustomOutboundRegister extends OutboundComponentRegister<CustomOutboundProperty> {
 
@@ -17,14 +18,7 @@ public class CustomOutboundRegister extends OutboundComponentRegister<CustomOutb
 
     @Override
     protected void doRegister(BeanDefinitionBuilder builder, CustomOutboundProperty property) {
-        CustomHandlerProperty handler = new CustomHandlerProperty();
-        handler.setExpression(property.getExpression());
-        handler.setBeanName(property.getBeanName());
-        handler.setClassName(property.getClassName());
-        handler.setId(property.getId());
-        handler.setOrder(property.getOrder());
-        handler.setOutputChannel(property.getOutputChannel());
-        this.customHandlerRegister.doRegister(builder, handler);
+        this.customHandlerRegister.doRegister(builder, property.getCustom());
     }
 
     @Override

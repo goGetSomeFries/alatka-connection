@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * alatka.connection.route.outbound.composite
+ * alatka.connection.flow.outbound.composite
  *
  * @author ybliu
  */

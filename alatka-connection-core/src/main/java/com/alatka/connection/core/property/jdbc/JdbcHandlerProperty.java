@@ -1,8 +1,14 @@
 package com.alatka.connection.core.property.jdbc;
 
-import com.alatka.connection.core.property.core.ChannelAdapterProperty;
+import com.alatka.connection.core.property.core.MessageProcessorProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class JdbcHandlerProperty extends ChannelAdapterProperty {
+/**
+ * alatka.connection.flow.processors[n].handler.jdbc
+ *
+ * @author whocares
+ */
+public class JdbcHandlerProperty extends MessageProcessorProperty {
 
     private String jdbcTemplate;
 
@@ -52,5 +58,23 @@ public class JdbcHandlerProperty extends ChannelAdapterProperty {
 
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
+    }
+
+    @JsonIgnore
+    @Override
+    public String getExpression() {
+        return super.getExpression();
+    }
+
+    @JsonIgnore
+    @Override
+    public String getBeanName() {
+        return super.getBeanName();
+    }
+
+    @JsonIgnore
+    @Override
+    public String getClassName() {
+        return super.getClassName();
     }
 }

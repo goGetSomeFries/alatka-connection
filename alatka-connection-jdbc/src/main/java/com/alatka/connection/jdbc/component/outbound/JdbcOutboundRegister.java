@@ -6,9 +6,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.jdbc.JdbcMessageHandler;
 
 /**
- * TODO
+ * jdbc组件注册器
  *
  * @author ybliu
+ * @see JdbcMessageHandler
+ * @see com.alatka.connection.core.model.OutboundModel#jdbc
  */
 public class JdbcOutboundRegister extends OutboundComponentRegister<JdbcOutboundProperty> {
 

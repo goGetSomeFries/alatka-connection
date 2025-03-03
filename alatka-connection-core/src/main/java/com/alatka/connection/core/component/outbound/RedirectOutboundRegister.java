@@ -6,9 +6,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.handler.BridgeHandler;
 
 /**
- * TODO
+ * {@link BridgeHandler}组件注册器
  *
  * @author ybliu
+ * @see BridgeHandler
+ * @see com.alatka.connection.core.model.OutboundModel#redirect
  */
 public class RedirectOutboundRegister extends OutboundComponentRegister<RedirectOutboundProperty> {
 

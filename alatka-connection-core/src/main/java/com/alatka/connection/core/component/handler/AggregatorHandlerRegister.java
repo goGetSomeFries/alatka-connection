@@ -5,9 +5,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.aggregator.AggregatingMessageHandler;
 
 /**
- * TODO
+ * 聚合组件注册器
  *
  * @author ybliu
+ * @see AggregatingMessageHandler
+ * @see com.alatka.connection.core.model.HandlerModel#aggregator
  */
 public class AggregatorHandlerRegister extends HandlerComponentRegister<AggregatorHandlerProperty> {
 

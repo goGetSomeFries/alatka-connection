@@ -5,7 +5,11 @@ import com.alatka.connection.core.property.socket.TcpSimplexInboundProperty;
 import org.springframework.integration.ip.tcp.TcpReceivingChannelAdapter;
 
 /**
+ * {@link TcpReceivingChannelAdapter}组件注册器
+ *
  * @author ybliu
+ * @see TcpReceivingChannelAdapter
+ * @see InboundModel#tcp_simplex
  */
 public class TcpSimplexInboundRegister extends TcpInboundRegister<TcpSimplexInboundProperty> {
 

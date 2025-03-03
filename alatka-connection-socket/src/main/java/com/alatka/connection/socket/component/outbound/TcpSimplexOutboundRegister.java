@@ -4,6 +4,13 @@ import com.alatka.connection.core.property.socket.TcpSimplexOutboundProperty;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.ip.tcp.TcpSendingMessageHandler;
 
+/**
+ * {@link TcpSendingMessageHandler}组件注册器
+ *
+ * @author whocares
+ * @see TcpSendingMessageHandler
+ * @see com.alatka.connection.core.model.OutboundModel#tcp_simplex
+ */
 public class TcpSimplexOutboundRegister extends TcpOutboundRegister<TcpSimplexOutboundProperty> {
 
     @Override

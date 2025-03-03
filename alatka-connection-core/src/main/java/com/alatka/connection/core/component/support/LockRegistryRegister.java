@@ -20,7 +20,7 @@ public class LockRegistryRegister extends MultiTypeSupportComponentRegister<Lock
 
     @Override
     protected void initialize() {
-        initMap();
+        super.initialize();
 
         initComponentClass(LockRegistryProperty.Type.fallback, DefaultLockRegistry.class);
         initComponentInit(LockRegistryProperty.Type.fallback, (builder, params) -> {
