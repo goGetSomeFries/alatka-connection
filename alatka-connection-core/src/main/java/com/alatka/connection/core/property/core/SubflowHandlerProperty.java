@@ -22,6 +22,8 @@ public class SubflowHandlerProperty extends ChannelAdapterProperty {
 
     private Long replyTimeout;
 
+    private String resultAggregator;
+
     public String getIdentity() {
         return identity;
     }
@@ -68,5 +70,13 @@ public class SubflowHandlerProperty extends ChannelAdapterProperty {
 
     public void setReplyTimeout(Long replyTimeout) {
         this.replyTimeout = replyTimeout;
+    }
+
+    public String getResultAggregator() {
+        return resultAggregator;
+    }
+
+    public void setResultAggregator(String resultAggregator) {
+        this.resultAggregator = resultAggregator;
     }
 }

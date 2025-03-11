@@ -2,8 +2,11 @@ package com.alatka.connection.core.component.handler;
 
 import com.alatka.connection.core.AlatkaConnectionConstant;
 import com.alatka.connection.core.property.core.SubflowHandlerProperty;
+import com.alatka.connection.core.support.RequestReplyMessageAggregator;
+import com.alatka.connection.core.util.ClassUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.gateway.GatewayMessageHandler;
+import org.springframework.messaging.Message;
 
 import java.util.Optional;
 
@@ -36,15 +39,40 @@ public class SubflowHandlerRegister extends HandlerComponentRegister<SubflowHand
         builder.addPropertyValue("requestTimeout", Optional.ofNullable(property.getRequestTimeout()).orElse(-1L));
         builder.addPropertyValue("replyTimeout", Optional.ofNullable(property.getReplyTimeout()).orElse(-1L));
 
+        String className = property.getResultAggregator();
+        if (className != null) {
+            if (!RequestReplyMessageAggregator.class.isAssignableFrom(ClassUtil.forName(className))) {
+                throw new IllegalArgumentException(className + " must be an instance of " + RequestReplyMessageAggregator.class.getName());
+            }
+            builder.addPropertyValue("resultAggregator", ClassUtil.newInstance(className));
+        }
     }
 
     @Override
-    protected Class<GatewayMessageHandler> componentClass(SubflowHandlerProperty property) {
-        return GatewayMessageHandler.class;
+    protected Class<CustomGatewayMessageHandler> componentClass(SubflowHandlerProperty property) {
+        return CustomGatewayMessageHandler.class;
     }
 
     @Override
     public Class<SubflowHandlerProperty> mappingKey() {
         return SubflowHandlerProperty.class;
+    }
+
+    public static class CustomGatewayMessageHandler extends GatewayMessageHandler {
+
+        private RequestReplyMessageAggregator resultAggregator;
+
+        @Override
+        protected Object handleRequestMessage(Message<?> requestMessage) {
+            Message<?> replyMessage = (Message<?>) super.handleRequestMessage(requestMessage);
+            if (resultAggregator == null) {
+                return replyMessage;
+            }
+            return resultAggregator.apply(requestMessage, replyMessage);
+        }
+
+        public void setResultAggregator(RequestReplyMessageAggregator resultAggregator) {
+            this.resultAggregator = resultAggregator;
+        }
     }
 }
