@@ -1,0 +1,6 @@
+alatka:
+  connection:
+    metric:
+      trace:
+        enabled: true
+        componentPatterns: "*@inbound.*, *@outbound.*, *@bypass.*, *@channel.*, *@handler.*"

@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.alatka.connection.metric.AutoConfiguration
+com.alatka.connection.core.component.handler.HandlerComponentRegister=\
+  com.alatka.connection.metric.component.handler.TracerHandlerRegister

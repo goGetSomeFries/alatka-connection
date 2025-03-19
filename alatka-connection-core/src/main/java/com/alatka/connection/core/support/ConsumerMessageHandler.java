@@ -11,4 +11,5 @@ public interface ConsumerMessageHandler<T> extends CustomMessageHandler<T, Messa
         this.accept(message);
         return message;
     }
+
 }

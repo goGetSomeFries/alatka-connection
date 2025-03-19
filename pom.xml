@@ -24,6 +24,7 @@
         <module>alatka-connection-file</module>
         <module>alatka-connection-ratelimiter</module>
         <module>alatka-connection-example</module>
+        <module>alatka-connection-metric</module>
     </modules>
     <properties>
         <revision>0.22.0</revision>
