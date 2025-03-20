@@ -21,4 +21,10 @@ public class AutoConfiguration {
         configurer.setComponentNamePatternsString(componentPatterns);
         return configurer;
     }
+
+    @Bean
+    @ConditionalOnProperty(value = "alatka.connection.metric.graph.enabled", havingValue = "true", matchIfMissing = true)
+    public AlatkaConnectionGraphConfiguration alatkaConnectionGraphConfiguration() {
+        return new AlatkaConnectionGraphConfiguration();
+    }
 }

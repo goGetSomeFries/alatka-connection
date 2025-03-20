@@ -4,3 +4,5 @@ alatka:
       trace:
         enabled: true
         componentPatterns: "*@inbound.*, *@outbound.*, *@bypass.*, *@channel.*, *@handler.*"
+      graph:
+        enabled: true
