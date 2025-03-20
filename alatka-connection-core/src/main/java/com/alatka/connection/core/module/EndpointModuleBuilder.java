@@ -13,7 +13,6 @@ import java.util.List;
  * @see InboundModuleBuilder
  * @see OutboundModuleBuilder
  */
-@SuppressWarnings({"rawtypes"})
 public abstract class EndpointModuleBuilder<T, S> extends AbstractModuleBuilder<T, S> {
 
     protected final ChannelModuleBuilder channelModuleBuilder;

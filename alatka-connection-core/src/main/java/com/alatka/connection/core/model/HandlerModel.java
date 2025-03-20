@@ -25,6 +25,7 @@ public enum HandlerModel {
     file_splitter(FileSplitterHandlerProperty.class),
     jdbc(JdbcHandlerProperty.class),
     subflow(SubflowHandlerProperty.class),
+    branch(BranchHandlerProperty.class),
     consumer(ConsumerHandlerProperty.class),
     custom(CustomHandlerProperty.class);
 
