@@ -17,6 +17,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
+import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -152,7 +153,8 @@ public class AlatkaConnectionInitializer implements BeanFactoryPostProcessor, Or
      */
     private RootModel getRootModel(Resource resource) {
         try {
-            return YamlUtil.getObject(resource.getFile(), "alatka.connection", RootModel.class);
+            byte[] bytes = StreamUtils.copyToByteArray(resource.getInputStream());
+            return YamlUtil.getObject(bytes, "alatka.connection", RootModel.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
