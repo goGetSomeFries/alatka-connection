@@ -14,6 +14,7 @@ com.alatka.connection.core.component.handler.HandlerComponentRegister=\
   com.alatka.connection.core.component.handler.AggregatorHandlerRegister,\
   com.alatka.connection.core.component.handler.TransformHandlerRegister,\
   com.alatka.connection.core.component.handler.SubflowHandlerRegister,\
+  com.alatka.connection.core.component.handler.BranchHandlerRegister,\
   com.alatka.connection.core.component.handler.ConsumerHandlerRegister,\
   com.alatka.connection.core.component.handler.CustomHandlerRegister
 com.alatka.connection.core.component.support.SupportComponentRegister=\
