@@ -2,8 +2,7 @@ package com.alatka.connection.core.property.file;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.property.core.InboundProperty;
-
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 /**
  * alatka.connection.flow.inbound.file_v2

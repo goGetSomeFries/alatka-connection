@@ -1,8 +1,8 @@
 package com.alatka.connection.core.property.jdbc;
 
 import com.alatka.connection.core.property.core.SourcePollingInboundProperty;
+import jakarta.validation.constraints.NotBlank;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
 /**

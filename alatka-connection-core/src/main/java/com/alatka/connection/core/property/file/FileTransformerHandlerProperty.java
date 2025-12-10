@@ -1,8 +1,7 @@
 package com.alatka.connection.core.property.file;
 
 import com.alatka.connection.core.property.core.ChannelAdapterProperty;
-
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * alatka.connection.flow.processors[n].handler.file_transformer
