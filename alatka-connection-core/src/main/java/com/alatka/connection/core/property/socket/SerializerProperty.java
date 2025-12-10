@@ -1,8 +1,7 @@
 package com.alatka.connection.core.property.socket;
 
 import com.alatka.connection.core.property.core.MultiTypeSupportProperty;
-
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 /**
  * alatka.connection.definition.serializers

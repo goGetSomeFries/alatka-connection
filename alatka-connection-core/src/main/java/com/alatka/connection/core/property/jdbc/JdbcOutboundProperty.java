@@ -1,8 +1,7 @@
 package com.alatka.connection.core.property.jdbc;
 
 import com.alatka.connection.core.property.core.OutboundProperty;
-
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * alatka.connection.flow.outbound.jdbc

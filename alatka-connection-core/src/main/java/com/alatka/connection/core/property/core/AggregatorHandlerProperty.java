@@ -1,8 +1,7 @@
 package com.alatka.connection.core.property.core;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
-
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * alatka.connection.flow.processors[n].handler.aggregator
