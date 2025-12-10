@@ -2,8 +2,8 @@ package com.alatka.connection.core.property.http;
 
 import com.alatka.connection.core.property.core.InboundProperty;
 import com.alatka.connection.core.util.ClassUtil;
+import jakarta.validation.constraints.NotEmpty;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 /**

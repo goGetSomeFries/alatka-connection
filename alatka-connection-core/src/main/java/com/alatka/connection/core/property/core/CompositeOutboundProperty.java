@@ -1,8 +1,8 @@
 package com.alatka.connection.core.property.core;
 
 import com.alatka.connection.core.model.OutboundModel;
+import jakarta.validation.constraints.NotEmpty;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Map;
 

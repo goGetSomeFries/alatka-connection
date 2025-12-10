@@ -3,6 +3,9 @@ package com.alatka.connection.http.component.inbound;
 import com.alatka.connection.core.component.inbound.InboundComponentRegister;
 import com.alatka.connection.core.model.InboundModel;
 import com.alatka.connection.core.property.http.HttpInboundProperty;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
@@ -11,9 +14,6 @@ import org.springframework.integration.http.inbound.HttpRequestHandlingMessaging
 import org.springframework.integration.http.inbound.RequestMapping;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +32,7 @@ public class HttpInboundRegister extends InboundComponentRegister<HttpInboundPro
         RequestMapping requestMapping = new RequestMapping();
         requestMapping.setPathPatterns(property.getPaths());
         if (property.getMethods() != null) {
-            HttpMethod[] methods = Stream.of(property.getMethods()).map(HttpMethod::resolve).toArray(HttpMethod[]::new);
+            HttpMethod[] methods = Stream.of(property.getMethods()).map(HttpMethod::valueOf).toArray(HttpMethod[]::new);
             requestMapping.setMethods(methods);
         }
         builder.addPropertyValue("requestMapping", requestMapping);

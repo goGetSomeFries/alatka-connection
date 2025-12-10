@@ -2,8 +2,8 @@ package com.alatka.connection.core.model;
 
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import jakarta.validation.constraints.NotEmpty;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 /**

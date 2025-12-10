@@ -2,10 +2,9 @@ package com.alatka.connection.core.property.socket;
 
 import com.alatka.connection.core.annotation.IdentityProperty;
 import com.alatka.connection.core.property.core.Property;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 
 public class TcpConnectionProperty extends Property {
 

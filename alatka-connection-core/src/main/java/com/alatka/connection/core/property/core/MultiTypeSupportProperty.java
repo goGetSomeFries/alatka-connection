@@ -1,6 +1,6 @@
 package com.alatka.connection.core.property.core;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * alatka.connection.definition<br>

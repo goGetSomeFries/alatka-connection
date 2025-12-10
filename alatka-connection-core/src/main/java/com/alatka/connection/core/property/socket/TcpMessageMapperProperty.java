@@ -1,8 +1,7 @@
 package com.alatka.connection.core.property.socket;
 
 import com.alatka.connection.core.property.core.SupportProperty;
-
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * alatka.connection.definition.tcpMessageMappers
