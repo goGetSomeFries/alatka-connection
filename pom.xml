@@ -4,7 +4,7 @@
     <parent>
         <artifactId>alatka</artifactId>
         <groupId>com.alatka</groupId>
-        <version>1.44.0</version>
+        <version>1.68.0</version>
     </parent>
 
     <groupId>com.alatka.connection</groupId>
@@ -26,6 +26,30 @@
         <module>alatka-connection-example</module>
     </modules>
     <properties>
-        <revision>0.24.0</revision>
+        <revision>0.25.0</revision>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alatka</groupId>
+                <artifactId>alatka-dependencies</artifactId>
+                <version>${alatka-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <configuration>
+                    <flattenMode>defaults</flattenMode>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
