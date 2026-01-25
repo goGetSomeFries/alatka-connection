@@ -50,9 +50,10 @@
 
 ### 版本对应关系
 
-| alatka-connection | alatka-dependencies | alatka       | spring-boot |
-|-------------------|---------------------|--------------|-------------|
-| 0.24.0-jdk17      | 1.66.0-jdk17        | 1.66.0-jdk17 | 3.5.4       |
+| alatka-connection | alatka-dependencies       | alatka                    | spring-boot |
+|-------------------|---------------------------|---------------------------|-------------|
+| 0.25.0-jdk17      | 1.68.0-jdk17              | 1.68.0-jdk17              | 3.5.4       |
+| 0.24.0-jdk17      | 1.66.0-jdk17-1.67.0-jdk17 | 1.66.0-jdk17-1.67.0-jdk17 | 3.5.4       |
 
 `alatka-connection`、`alatka-dependencies`、`alatka`相关制品已上传至阿里云仓库，如需下载可进行如下配置：:point_right: [快速入门](https://gitee.com/asuka2001/alatka-connection/wikis/%E4%BA%8C%E3%80%81%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8)
 
